@@ -57,7 +57,7 @@ public class WriteDAO {
 		}
 	}
 	
-	/**커뮤니티 게시글 등록*/
+	/**커뮤니티 게시글 등록 메서드*/
 	public int insertWrite(WriteDTO dto) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -83,6 +83,42 @@ public class WriteDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**커뮤니티 본문 보기 메서드*/
+	public WriteDTO contentWrite(int idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select write_title,write_writer,write_wdate,write_content from write where write_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			rs=ps.executeQuery();
+			WriteDTO dto=null;
+			if(rs.next()) {
+				String title=rs.getString("write_title");
+				String writer=rs.getString("write_writer");
+				java.sql.Date date=rs.getDate("write_wdate");
+				String content=rs.getString("write_content");
+				
+			dto=new WriteDTO();
+			
+				dto.setWrite_content(content);
+				dto.setWrite_title(title);
+				dto.setWrite_wdate(date);
+				dto.setWrite_writer(writer);
+			}
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+			
+		}
+	}
+	/**수정하기전 본문 */
 }
 
 
