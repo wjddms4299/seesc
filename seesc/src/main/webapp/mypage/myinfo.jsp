@@ -19,8 +19,7 @@
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text"><button><span>중복검사</span></button><h4>아이디를 확인해주세요.</h4></td>
-			
+			<td><input type="text" readonly></td>
 		</tr>
 		<tr>
 			<th>닉네임</th>
