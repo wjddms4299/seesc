@@ -54,7 +54,7 @@ article table thead{
 					<th>조회수</th>
 				</tr>
 			</thead>
-			<tbody border="1">
+			<tbody >
 				<%
 				ArrayList<WriteDTO> arr=wdao.selWrite();
 				if(arr==null || arr.size()==0){
@@ -72,19 +72,37 @@ article table thead{
 					<td><%=arr.get(i).getWrite_idx() %></td>
 					<% 
 						if(arr.get(i).getWrite_open()==0){
+							
+							
+							if(arr.get(i).getWrite_cate().equals("자유게시판")){
+								%>
+								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">비밀글입니다</a></td>
+								<% 
+							}else if(arr.get(i).getWrite_cate().equals("이벤트")){
+								%>	
+								<td><a href="community_eventcontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">비밀글입니다</a></td>
+								<%
+							}
 							%>
-							<td>비밀글입니다</td>
+							
 							<% 
-						}else{
-							%>
-							<td><%=arr.get(i).getWrite_title()%></td>
-							<% 
-						}%>
+						}else {
+							if(arr.get(i).getWrite_cate().equals("자유게시판")){
+								%>
+								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">[자유게시판]<%=arr.get(i).getWrite_title()%></a></td>
+								<% 
+							}else if(arr.get(i).getWrite_cate().equals("이벤트")){
+								%>
+								<td><a href="community_eventcontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">[이벤트]<%=arr.get(i).getWrite_title() %></a></td>
+								<%
+							}else
+						%>
 						<td><%=arr.get(i).getWrite_writer() %></td>
 						<td><%=arr.get(i).getWrite_wdate() %></td>
 						<td><%=arr.get(i).getWrite_readnum() %></td>
 						</tr>
 					<%
+						}
 					}
 				}
 				%>
