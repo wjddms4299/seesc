@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.*" %>
+    <%@page import="com.esc.booking.*" %>
+    <jsp:useBean id="boodao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +27,29 @@
 			<th>예약상태</th>
 			<th>비고</th>
 		</tr>
+		<%
+	int user_idx=100; //회원정보 불러와야함@@@@@@@@@@@@@@@@@@@@@@@@
+	ArrayList<BookingDTO> arr=boodao.myBooking(user_idx);
+	if(arr==null||arr.size()==0){
+		%>
+		<tr>
+			<td colspan="5">예약정보가 없습니다.</td>
+		</tr>
+		<%
+	}else{
+		for(int i=0;i<arr.size();i++){
+			%>
+			<tr>
+				<td><%=arr.get(i).getBooking_idx() %></td>
+				<td><%=arr.get(i).getBooking_time() %></td>
+				<td><%=arr.get(i).getBooking_num() %></td>
+				<td><%=arr.get(i).getBooking_pay_ok() %></td>
+				<td><a href="<% %>"><button>취소</button></a><td>
+			</tr>
+			<%
+		}
+	}
+	%>
 		<tr>
 			<td></td>
 		</tr>

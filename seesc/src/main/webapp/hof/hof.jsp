@@ -76,6 +76,7 @@ if(arr==null||arr.size()==0){
 %>
 	</table>
 	<div>
+	<!-- 로그인정보불러와서 관리자일경우에만 보이게@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		<input type="button" value="기록올리기" onclick="openhofUpload();">
 	</div>
 </article>

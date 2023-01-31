@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.*" %>
+    <%@page import="com.esc.booking.*" %>
+    <jsp:useBean id="boodao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,11 +22,34 @@
 	<table>
 		<tr>
 			<th>No</th>
-			<th>결제날자(계좌)</th>
+			<th>예약날짜</th>
 			<th>결제금액</th>
 			<th>결제수단</th>
 			<th>결제상태</th>
 		</tr>
+		<%
+	int user_idx=100; //회원정보 불러와야함@@@@@@@@@@@@@@@@@@@@@@@@
+	ArrayList<BookingDTO> arr=boodao.myBooking(user_idx);
+	if(arr==null||arr.size()==0){
+		%>
+		<tr>
+			<td colspan="5">예약정보가 없습니다.</td>
+		</tr>
+		<%
+	}else{
+		for(int i=0;i<arr.size();i++){
+			%>
+			<tr>
+				<td><%=arr.get(i).getBooking_idx() %></td>
+				<td><%=arr.get(i).getBooking_time() %></td>
+				<td><%=arr.get(i).getBooking_money() %></td>
+				<td><%String pay= arr.get(i).getBooking_pay()>0?"무통장":"현장결제";%><%=pay %></td>
+				<td><%String pay_ok=arr.get(i).getBooking_pay_ok()>0?"결제미완료":"결제완료"; %><%=pay_ok %></td>
+			</tr>
+			<%
+		}
+	}
+	%>
 		<tr>
 			<td></td>
 		</tr>
