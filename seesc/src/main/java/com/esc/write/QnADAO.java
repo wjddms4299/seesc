@@ -1,8 +1,9 @@
 package com.esc.write;
 
-import java.sql.*;	
+import java.sql.*;		
 import java.sql.Date;
 import java.util.*;
+import com.oreilly.servlet.MultipartRequest;
 
 public class QnADAO {
 	Connection conn;
@@ -13,19 +14,30 @@ public class QnADAO {
 		// TODO Auto-generated constructor stub
 	}
 	/**QnA게시글 등록 관련 메서드*/
-	public int writeQnAupload(WriteDTO dto) {
+	public int writeQnAupload(MultipartRequest mr ) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			String sql = "insert into write values(write_write_idx.nextval,?,'qna',?,?,?,sysdate,?,?,0,0,0,0,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1,dto.getUser_idx());
-			ps.setString(2, dto.getWrite_title());
-			ps.setString(3, dto.getWrite_writer());
-			ps.setString(4, dto.getWrite_pwd());
-			ps.setString(5, dto.getWrite_filename());
-			ps.setString(6, dto.getWrite_content());
-			ps.setInt(7, dto.getWrite_open());
-			ps.setInt(8, dto.getWrite_notice());
+			
+			String filename = mr.getFilesystemName("write_filename");
+			String user_idx_s = mr.getParameter("user_idx");
+			if(user_idx_s==null || user_idx_s.equals("")){
+				user_idx_s = "0";
+			}
+			int user_idx = Integer.parseInt(user_idx_s);
+			
+			int write_open = Integer.parseInt(mr.getParameter("write_open"));
+			int notice = Integer.parseInt(mr.getParameter("write_notice"));
+			
+			ps.setInt(1,user_idx);
+			ps.setString(2, mr.getParameter("write_title"));
+			ps.setString(3, mr.getParameter("write_writer"));
+			ps.setString(4, mr.getParameter("write_pwd"));
+			ps.setString(5, filename);
+			ps.setString(6, mr.getParameter("write_content"));
+			ps.setInt(7, write_open);
+			ps.setInt(8, notice);
 			
 			int count = ps.executeUpdate();
 			return count;

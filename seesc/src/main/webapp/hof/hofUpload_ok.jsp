@@ -4,7 +4,7 @@
 <jsp:useBean id="hofdao" class="com.esc.hof.HofDAO" scope="session"></jsp:useBean>
 <%
 request.setCharacterEncoding("utf-8");
-String savepath=request.getRealPath("/write/hofimg");
+String savepath=request.getRealPath("/hof/hofimg");
 MultipartRequest mr=new MultipartRequest(request,savepath,2097152,"utf-8");
 int result=hofdao.addRecord(mr);
 String msg=result>0?"기록 업로드 성공!":"기록 업로드 실패!";
