@@ -14,6 +14,7 @@
 	<a href="mypage.jsp"><button><span>예약내역</span></button></a>
 	<a href="payment.jsp"><button><span>결제내역</span></button></a>
 	<a href="myinfo.jsp"><button><span>내정보</span></button></a>
+	<a href="mycoupon.jsp"><button><span>쿠폰함</span></button></a>
 	<a href="cafeorderinfo.jsp"><button><span>카페주문내역</span></button></a>
 	<table>
 		<tr>

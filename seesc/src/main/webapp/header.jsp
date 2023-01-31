@@ -110,7 +110,7 @@ function login_open(){
 				<ul class="dropdown-content">
 					<a href="#">공지사항</a>
 					<a href="#">이벤트</a>
-					<a href="#">질문과 답변</a>
+					<a href="/seesc/community/qna_list.jsp">QnA</a>
 					<a href="#">팀구해요</a>
 				</ul>
 			</ul>

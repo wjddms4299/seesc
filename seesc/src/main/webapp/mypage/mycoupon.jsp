@@ -19,10 +19,11 @@
 	<table>
 		<tr>
 			<th>No</th>
-			<th>결제날자(계좌)</th>
-			<th>결제금액</th>
-			<th>결제수단</th>
-			<th>결제상태</th>
+			<th>쿠폰명</th>
+			<th>할인금액</th>
+			<th>발급일</th>
+			<th>만료일</th>
+			<th>사용여부</th>
 		</tr>
 		<tr>
 			<td></td>
