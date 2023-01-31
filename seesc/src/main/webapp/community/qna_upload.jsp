@@ -52,11 +52,11 @@ margin :0px auto;
 				<input type = "hidden" name = "write_notice" value = "<%=write_notice %>">;
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="write_writer"></td>
+						<td><input type="text" name="write_writer" required = "required"></td>
 					</tr>
 					<tr>
 						<th>글제목</th>
-						<td><input type="text" name="write_title"></td>
+						<td><input type="text" name="write_title" required = "required"></td>
 					</tr>
 					<tr>
 						<th>공개여부</th>
@@ -69,11 +69,11 @@ margin :0px auto;
 					</tr>
 					<tr>
 						<th>글내용</th>
-						<td><textarea name="write_content" rows="10" cols="50"></textarea></td>
+						<td><textarea name="write_content" rows="10" cols="50" required = "required"></textarea></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" name="write_pwd"></td>
+						<td><input type="password" name="write_pwd" required = "required"></td>
 					</tr>
 					<tr>
 						<td colspan = "2" align = "center"><input type="submit" value="등록"> <input

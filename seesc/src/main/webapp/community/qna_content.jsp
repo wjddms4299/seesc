@@ -11,11 +11,13 @@ int write_idx = Integer.parseInt(write_idx_s);
 
 WriteDTO dto = qnadao.writeQnAContent(write_idx);
 
+int open = dto.getWrite_open() ;
+
 if (dto == null) {
 %>
 <script>
 	window.alert('삭제된 게시글 또는 잘못된 접근입니다.');
-	location.href = 'writeQnA_List.jsp';
+	location.href = '/seesc/community/qna_list.jsp';
 </script>
 <%
 return;
@@ -27,46 +29,70 @@ return;
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<style>
+.write_title {
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.write_table {
+	margin: 0px auto;
+	width: 600px;
+	border: 1px solid;
+}
+
+</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
-			<h2>QnA 본 문 보 기</h2>
-			<table>
+			<p class="write_title">QnA 본 문 보 기</p>
+			<table class="write_table">
 				<tbody>
 					<tr>
-						<td><%=dto.getWrite_title()%>
-						<td><%=dto.getWrite_wdate()%></td>
-					<tr>
+						<td colspan="2"><%=dto.getWrite_title()%> <td colspan="2">
+					<%=dto.getWrite_wdate()%></td><tr>
 						<td>작성자</td>
-						<td><%=dto.getWrite_writer()%></td>
+						<td colspan="3"><%=dto.getWrite_writer()%></td>
 					</tr>
 					<tr>
 						<td>파일</td>
-						<td><a href="<%=dto.getWrite_filename()%>"><%=dto.getWrite_filename()%></a></td>
+						<td colspan="3"><a href="<%=dto.getWrite_filename()%>"><%=dto.getWrite_filename()%></a></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="text"
-							value="<%=dto.getWrite_content()%>" readonly></td>
+						<td colspan="4"><textarea rows="10" cols="50"
+								name="write_content" readonly><%=dto.getWrite_content()%></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="button" value="삭제"><input
-							type="button" value="수정"><input type="button" value="목록"></td>
+						<td colspan="4"><input type="button" value="삭제"><input
+							type="button" value="수정"><input type="button" value="목록"
+							onclick="location.href = 'qna_list.jsp';"></td>
 					</tr>
-				
+
 				</tbody>
-					<hr>
+			</table>
+			<table class="write_table">
 				<tfoot>
-				<tr>
-				<td colspan="4">댓글</td>
-				</tr>
-				<tr>
-				<td>댓글작성자</td><td>댓글 내용</td><td><input type ="button" value = "삭제"></td>
-				<tr rowspan = "2"><td>댓글 쓰기</td><td><input type = "text" name ="write_writer"><input type = "password" name="write_pwd"></td>
-				</tr>
-				<tr> 
-				<input type = "text" name = "write_content"> 
+					<tr>
+						<td colspan="4">댓글</td>
+					</tr>
+					<tr>
+						<td>댓글작성자</td>
+						<td colspan="2">댓글 내용</td>
+						<td><input type="button" value="삭제"></td>
+					<tr>
+						<td rowspan="2">댓글 쓰기</td>
+						<td><input type="text" name="write_writer" placeholder="작성자">
+							<input type="password" name="write_pwd" placeholder="비밀번호"></td>
+						<td rowspan="2"><input type="button" value="등록"></td>
+					</tr>
+					<tr>
+						<td colspan="4"><textarea rows="10" cols="50"
+								name="write_content" placeholder="내용을 작성해주세요"></textarea>
+					</tr>
+				</tfoot>
 			</table>
 
 		</article>

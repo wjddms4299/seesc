@@ -55,12 +55,46 @@ public class QnADAO {
 			}
 		}
 	}
-	/**QnA 게시글 리스트 출력 메서드*/
-	public ArrayList<WriteDTO> writeQnAList(){
+	
+	/**QnA 총 게시글 수 관련 메서드  */
+	public int getTotalCnt() {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "select * from write where write_cate = 'qna' order by write_idx desc";
+			String sql = "select count(*) from write where write_cate = 'qna'";
 			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			
+			return count ==0?1:count;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+		
+	}
+	
+	/**QnA 게시글 리스트 출력 메서드*/
+	public ArrayList<WriteDTO> writeQnAList(int userpage, int writeList){
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			int start = (userpage-1)*writeList+1;
+			int end = userpage*writeList;
+			String sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' order by write_idx desc)a) where r >=? and r<=?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,start);
+			ps.setInt(2, end);
 			rs= ps.executeQuery();
 			
 			ArrayList <WriteDTO>arr = new ArrayList<WriteDTO>();
@@ -107,11 +141,31 @@ public class QnADAO {
 			}
 		}
 	}
-	
+	/**조회수 관련 메서드*/
+	public void readnumUpdate(int write_idx) {
+		try {
+			String sql = "update write set write_readnum = write_readnum+1 where write_idx =? ";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, write_idx);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+			}catch(Exception e2) {
+				
+			}
+			
+		}
+		
+	}
 	/**글 본문보기 관련 메서드*/
 	public WriteDTO writeQnAContent(int write_idx) {
 	try {
 		conn = com.esc.db.EscDB.getConn();
+		readnumUpdate(write_idx);
 		String sql = "select * from write where write_idx = ?";
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, write_idx);
