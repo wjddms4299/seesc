@@ -1,0 +1,132 @@
+@charset "UTF-8";
+* {
+	margin: 0px auto;
+	padding: 0px;
+}
+
+ul {
+	list-style: none;
+}
+
+header a {
+	text-decoration: none;
+	color: white;
+}
+
+header {
+	width: 1200px;
+	height: 150px;
+	background-color: black;
+	margin: 0px auto;
+	position: relative;
+}
+
+#mainlogin {
+	position: absolute;
+	top: 10px;
+	right: 50px;
+	color: white;
+	margin: 0px auto;
+}
+
+#mainlogin a {
+	color: white;
+}
+
+#mainlogo {
+	position: absolute;
+	bottom: 30px;
+	left: 70px;
+	margin: 0px auto;
+	width : 140px;
+	height : 110px;
+
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	top: 90px; left : 300px;
+	margin: 0px auto;
+
+}
+
+.dropbtn {
+	border-radius: 3px;
+	font-weight: bold;
+	color: white;
+	padding: 10px;
+	width: 110px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 20px;
+	margin: 0px auto;
+	color: white;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1; /*다른 요소들보다 앞에 배치*/
+	font-weight: 400;
+	background-color: black;
+	min-width: 110px;
+	text-align: center;
+	margin: 0px auto;
+}
+
+.dropdown-content a {
+	display: block;
+	text-decoration: none;
+	color: white;
+	font-size: 15px;
+	padding: 15px 20px;
+	text-align: center;
+}
+
+.dropdown-content a:hover {
+	background-color: pink;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+#button {
+	position: fixed;
+	right: 78px;
+	bottom: 19px;
+
+}
+
+#topbutton {
+	position: fixed;
+	right: 78px;
+	bottom: 50px;
+
+}
+section {
+width: 1200px;
+margin: 0px auto;
+}
+footer {
+	width: 1200px;
+	height: 200px;
+	background-color: black;
+	opacity : 80%;
+	margin: 0px auto;
+	position: relative;
+	color: white;
+}
+
+footer a {
+	text-decoration: none;
+	color: white;
+}
+
+#footlogo {
+	position: absolute;
+	top: 20px;
+	right: 70px;
+	margin: 0px auto;
+}
