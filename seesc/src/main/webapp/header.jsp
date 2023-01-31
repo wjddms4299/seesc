@@ -7,6 +7,62 @@ position: fixed;
 right: 78px;
 bottom: 19px;
 }
+.w-btn {
+    
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-outline {
+    
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+.w-btn-brown {
+    background-color: #ce6d39;
+    color: #ffeee4;
+}
+
+.w-btn-brown-outline {
+    border: 3px solid #ce6d39;
+    color: #b8b8b8;
+}
+
+.w-btn-brown-outline:hover {
+    background-color: #ce6d39;
+    color: #ffeee4;
+}
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn-outline:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn:active {
+    transform: scale(1.5);
+}
+
+.w-btn-outline:active {
+    transform: scale(1.5);
+}
 
 #topbutton{
 position: fixed;
@@ -27,9 +83,9 @@ function login_open(){
 
 <!-- ------------------------------------------------------ -->
 		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img
-			src="/seesc/logo.png" alt="로고" style ="width :140px; height : 110px;"></a></span> <span
-			id="mainlogin"><a href="#">로그인</a> <a href="#"><img
-				src="/seesc/login_main.png" alt="마이페이지"></a> </span>
+			src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> <span
+			id="mainlogin"><a href="#">로그인</a> <a href="/seesc/mypage/mypage.jsp"><img
+				src="/seesc/img/login_main.png" alt="마이페이지"></a> </span>
 
 
 		<span id="mainmenu">
@@ -54,7 +110,7 @@ function login_open(){
 				<ul class="dropdown-content">
 					<a href="#">공지사항</a>
 					<a href="#">이벤트</a>
-					<a href="#">질문과 답변</a>
+					<a href="/seesc/community/qna_list.jsp">QnA</a>
 					<a href="#">팀구해요</a>
 				</ul>
 			</ul>
@@ -63,14 +119,14 @@ function login_open(){
 			</ul>
 			</ul>
 			<ul class="dropdown">
-				<li class="dropbtn"><a href="#">명예의 전당</a></li>
+				<li class="dropbtn"><a href="/seesc/hof/hof.jsp">명예의 전당</a></li>
 			</ul>
 		</span>
 		<button id="button" type="button">
 			<span>카페주문하기</span>
 
 <!-- ---------------------------------------------- -->
-<button id="button" type="button" ><span>카페주문하기</span></button>
+<button id="button" type="button" class="w-btn w-btn-brown"><span>카페주문하기</span></button>
 <a href="#top"><button id="topbutton" type="button"><span>▲</span></button></a>
 
 </header>
