@@ -4,6 +4,7 @@ import java.util.*;
 
 public class BookingDTO {
 	private int booking_idx;
+
 	private int time_idx;
 	private int thema_idx;
 	private int coupon_idx;
@@ -24,6 +25,13 @@ public class BookingDTO {
 		super();
 	}
 
+	public BookingDTO(int booking_idx, Date booking_time, int booking_pay_ok, int booking_num) {
+		super();
+		this.booking_idx = booking_idx;
+		this.booking_time = booking_time;
+		this.booking_pay_ok = booking_pay_ok;
+		this.booking_num = booking_num;
+	}
 	public BookingDTO(int booking_idx, int time_idx, int thema_idx, int coupon_idx, int user_idx, String booking_name,
 			String booking_tel, String booking_pwd, Date booking_time, Date time_date, int time_ptime, int booking_pay,
 			int booking_pay_ok, String booking_msg, int booking_num, int booking_money) {
