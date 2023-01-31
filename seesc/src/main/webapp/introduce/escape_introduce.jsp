@@ -50,9 +50,9 @@ h2{font-size:25px;}
 	 <h2>누구를 위한 게임인가요?</h2>
 	 <table align="center" border="1" cellspacing="0" cellpadding="10">
 	 <tr height="150">
-			 <td align="center">&nbsp;</td>
-			 <td align="center">&nbsp;</td>
-			 <td align="center">&nbsp;</td>
+			 <td align="center"><img src="/seesc/img/e_intro_005.png" alt="05" width="150" height="150"></td>
+			 <td align="center"><img src="/seesc/img/e_intro_006.png" alt="06" width="150" height="150"></td>
+			 <td align="center"><img src="/seesc/img/e_intro_007.png" alt="07" width="150" height="150"></td>
 		 </tr>
 		 <tr height="25">
 			 <td align="center"><b>가족, 친구, 직장동료, 연인</b></td>
@@ -70,6 +70,7 @@ h2{font-size:25px;}
 		 <li class="d1">10분이상 늦으실 경우 다음 팀의 플레이에 지장이 생기므로 예약은 자동으로 취소됩니다.</li>
 		 <li class="d1">반드시 정해진 시간을 지켜주시기 바랍니다.</li>
 	 </ul>
+  <br>
   <hr width="950">
 	 <h2>주의사항</h2>
 	 <ul>

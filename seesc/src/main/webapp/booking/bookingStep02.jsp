@@ -67,9 +67,9 @@ section{width:1200px;margin:0px auto;}
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
  			<select>
- 				<option value="1">1</option>
- 				<option value="2">2</option>
- 				<option value="3">3</option>
+ 				<option value="1">1,000원 할인쿠폰</option>
+ 				<option value="2">2,000원 할인쿠폰</option>
+ 				<option value="3">3,000원 할인쿠폰</option>
  			</select>
  		</td>
  	</tr>
@@ -137,7 +137,7 @@ section{width:1200px;margin:0px auto;}
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="button" value="취소"> <input type="button" value="예약하기">
+ 			<a href="bookingStep01.jsp"><input type="button" value="취소"></a> <a href="bookingStep03.jsp"><input type="button" value="예약하기"></a>
  		</td>
  	</tr>
  </table>
