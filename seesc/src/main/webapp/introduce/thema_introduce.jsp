@@ -21,13 +21,13 @@ section{
 	width:1200px;
 }
 </style>
-<!-- 링크 들어갈 곳 -->
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <body>
-<!-- header 들어갈 곳 -->
+<%@include file="/header.jsp" %>
 <section>
 
 	<article>
-		<div><img alt="자물쇠 이미지" src="/seesc/thema_img/lock.jpg"></div>
+		<div><img alt="자물쇠 이미지" src="/seesc/thema_img/lock.png"></div>
 		<h2>방 목록</h2>
 		<table>
 			<tr>
@@ -77,6 +77,6 @@ section{
 		</table>
 	</article>
 </section>
-<!-- footer 들어갈 곳 -->
+<%@include file="/footer.jsp" %>
 </body>
 </html>

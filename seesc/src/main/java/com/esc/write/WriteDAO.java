@@ -18,7 +18,7 @@ public class WriteDAO {
 	public ArrayList<WriteDTO> selWrite(){
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="select * from write order by idx desc";
+			String sql="select * from write order by write_idx desc";
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			ArrayList<WriteDTO> arr=new ArrayList<WriteDTO>();
@@ -34,7 +34,7 @@ public class WriteDAO {
 				String content=rs.getString("write_content");
 				int readnum=rs.getInt("write_readnum");
 				int ref=rs.getInt("write_ref");
-				int lev=rs.getInt("lev");
+				int lev=rs.getInt("write_lev");
 				int step=rs.getInt("write_step");
 				int open=rs.getInt("write_open");
 				int notice=rs.getInt("write_notice");
