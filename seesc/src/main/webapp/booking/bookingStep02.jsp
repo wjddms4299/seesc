@@ -75,13 +75,13 @@ section{width:1200px;margin:0px auto;}
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b>44,000원</b> [예약금: 20,000원]</td>
+ 		<td>&nbsp;&nbsp;<b>44,000원</b></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>결제방식</b></td>
  		<td>&nbsp;&nbsp;
- 			<input type="radio" name="booking_pay" value="현장결제">현장결제&nbsp;&nbsp;&nbsp;&nbsp;
- 			<input type="radio" name="booking_pay" value="무통장입금">무통장입금
+ 			<input type="radio" name="booking_pay" value="0">현장결제&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="radio" name="booking_pay" value="1">무통장입금
  		</td>
  	</tr>
  	<tr height="40">
