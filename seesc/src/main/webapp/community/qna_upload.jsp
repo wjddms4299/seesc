@@ -2,12 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.esc.write.*"%>
 <%
-String User_idx_s = (String) session.getAttribute("User_idx");
+String user_idx_s = (String) session.getAttribute("user_idx");
 
-if (User_idx_s == null) {
-	User_idx_s = "0";
+if (user_idx_s == null) {
+	user_idx_s = "0";
 }
-int User_idx = Integer.parseInt(User_idx_s);
+int user_idx = Integer.parseInt(user_idx_s);
+
+String manager_s = (String) session.getAttribute("manager");
+if (manager_s == null) {
+	manager_s = "0";
+}
+int write_notice = Integer.parseInt(manager_s);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +48,8 @@ margin :0px auto;
 				<h2 class="write_title">질문과 답변 글쓰기</h2>
 				<feldset>
 				<table class=" write_table ">
-				<input type = "hidden" name = "User_idx" value ="<%=User_idx%>">
+				<input type = "hidden" name = "user_idx" value ="<%=user_idx%>">
+				<input type = "hidden" name = "write_notice" value = "<%=write_notice %>">;
 					<tr>
 						<th>작성자</th>
 						<td><input type="text" name="write_writer"></td>
