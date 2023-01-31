@@ -65,7 +65,7 @@ margin :0px auto;
 					%>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
-						<td><a href = "#" class ="anono"><%=arr.get(i).getWrite_title()%></a></td>
+						<td><a href = "qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>" class ="anono"><%=arr.get(i).getWrite_title()%></a></td>
 						<td><%=arr.get(i).getWrite_writer()%></td>
 						<td><%=arr.get(i).getWrite_wdate()%></td>
 						<td><%=arr.get(i).getWrite_readnum()%></td>

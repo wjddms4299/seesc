@@ -44,10 +44,10 @@ margin :0px auto;
 <%@include file="/header.jsp" %>
 <section>
 		<article>
-			<form name = "qna_upload" action ="qna_upload_ok.jsp" enctype="multipart/form-data">
+			<form name = "qna_upload" action ="qna_upload_ok.jsp" method ="post" enctype="multipart/form-data">
 				<h2 class="write_title">질문과 답변 글쓰기</h2>
 				<feldset>
-				<table class=" write_table ">
+				<table class="write_table">
 				<input type = "hidden" name = "user_idx" value ="<%=user_idx%>">
 				<input type = "hidden" name = "write_notice" value = "<%=write_notice %>">;
 					<tr>

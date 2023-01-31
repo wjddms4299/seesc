@@ -109,12 +109,12 @@ public class QnADAO {
 	}
 	
 	/**글 본문보기 관련 메서드*/
-	public WriteDTO writeQnAContent(int idx) {
+	public WriteDTO writeQnAContent(int write_idx) {
 	try {
 		conn = com.esc.db.EscDB.getConn();
-		String sql = "select * from write where idx = ?";
+		String sql = "select * from write where write_idx = ?";
 		ps = conn.prepareStatement(sql);
-		ps.setInt(1, idx);
+		ps.setInt(1, write_idx);
 		rs = ps.executeQuery();
 		WriteDTO dto = null;
 		
