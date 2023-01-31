@@ -7,11 +7,13 @@ position: fixed;
 right: 78px;
 bottom: 19px;
 }
+
 #topbutton{
 position: fixed;
 right: 78px;
 bottom: 50px;
 }
+
 </style>
 <script>
 function login_open(){
@@ -25,9 +27,9 @@ function login_open(){
 
 <!-- ------------------------------------------------------ -->
 		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img
-			src="/myweb3/mainTest/mainimg/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> <span
+			src="/seesc/logo.png" alt="로고" style ="width :140px; height : 110px;"></a></span> <span
 			id="mainlogin"><a href="#">로그인</a> <a href="#"><img
-				src="/myweb3/mainTest/mainimg/login_main.png" alt="마이페이지"></a> </span>
+				src="/seesc/login_main.png" alt="마이페이지"></a> </span>
 
 
 		<span id="mainmenu">
@@ -68,7 +70,7 @@ function login_open(){
 			<span>카페주문하기</span>
 
 <!-- ---------------------------------------------- -->
-<button id="button" type="button"><span>카페주문하기</span></button>
+<button id="button" type="button" ><span>카페주문하기</span></button>
 <a href="#top"><button id="topbutton" type="button"><span>▲</span></button></a>
 
 </header>
