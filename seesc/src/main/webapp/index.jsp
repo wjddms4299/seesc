@@ -7,6 +7,17 @@
 <title>Insert title here</title>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 </head>
+<style>
+h1{
+text-align: center;
+}
+section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+</style>
 <body>
 <%@include file="header.jsp" %>
 <h1>"숨겨진 단서를 찾아라!"</h1>

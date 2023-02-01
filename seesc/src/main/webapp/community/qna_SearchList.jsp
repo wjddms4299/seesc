@@ -33,11 +33,14 @@ ul {
 
 </head>
 <%
-int totalqna = qnadao.getTotalCnt();
-if(totalqna ==0){
+
+String serchList= request.getParameter("listname");
+String content = request.getParameter("search_Content");
+
+int totalqna = qnadao.getTotal_SearchList(serchList, content);
+if(totalqna == 0){
 	totalqna = 1;
 }
-
 String writeList_s = request.getParameter("listSize");
 if (writeList_s == null || writeList_s.equals("")) {
 	writeList_s = "10";
@@ -70,11 +73,12 @@ if(userpage%pageList == 0){
 			<p class="write_title">
 				질문과 답변
 			</p>
-			
 			<table class="write_table">
 				<thead>
 					<tr>
-						<td colspan="4" align="left">전체글 : <%=qnadao.getTotalCnt()%>개
+						<td align="left">검색결과 : <%=qnadao.getTotal_SearchList(serchList, content)%>개
+						</td>
+						<td colspan="3" align="left">검색 내용: <%=content %>
 						</td>
 						<td align="right"><select name="writeList"
 							onChange="window.location.href=this.value">
@@ -97,7 +101,7 @@ if(userpage%pageList == 0){
 				</thead>
 				<tbody>
 					<%
-					ArrayList<WriteDTO> arr = qnadao.writeQnAList(userpage,writeList);
+					ArrayList<WriteDTO> arr = qnadao.writeQnA_ReList(userpage, writeList, serchList, content);
 					if (arr == null || arr.size() == 0) {
 					%>
 					<tr>
@@ -134,7 +138,6 @@ if(userpage%pageList == 0){
 
 				</tbody>
 				<tfoot>
-				
 				<form name = "reList" action="qna_SearchList.jsp">
 					<tr>
 						<td colspan="4" align="center"><select name= "listname">
@@ -150,14 +153,14 @@ if(userpage%pageList == 0){
 					<tr>
 						<td colspan="5" align="center">
 						<%if(pagegroup!=0){
-							%><a href = "qna_list.jsp?userpage=<%=1 %>&listSize=<%=writeList%>">&lt;&lt;</a>
-							<a href = "qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%>&listSize=<%=writeList%>">이전</a>
+							%><a href = "qna_Serchlist.jsp?userpage=<%=1 %>&listSize=<%=writeList%>">&lt;&lt;</a>
+							<a href = "qna_Serchlistlist.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%>&listSize=<%=writeList%>">이전</a>
 							<%} 	
 						
 						
 							for(int i=pagegroup*pageList+1;i<=pagegroup*pageList+pageList;i++){
 								%>
-								&nbsp;&nbsp;<a href = "qna_list.jsp?userpage=<%=i%>&listSize=<%=writeList%>"><%=i%></a>&nbsp;&nbsp;
+								&nbsp;&nbsp;<a href = "qna_Serchlistlist.jsp?userpage=<%=i%>&listSize=<%=writeList%>"><%=i%></a>&nbsp;&nbsp;
 								
 								<%
 							if(i==totalpage)break;
@@ -165,8 +168,8 @@ if(userpage%pageList == 0){
 							
 							if(pagegroup!=(totalpage/pageList-(totalpage%pageList==0?1:0))){
 								%>
-								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1 %>&listSize=<%=writeList%>">다음</a>
-								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%>&listSize=<%=writeList%>">&gt;&gt;</a>
+								<a href = "qna_Serchlistlist.jsp?userpage=<%=(pagegroup+1)*pageList+1 %>&listSize=<%=writeList%>">다음</a>
+								&nbsp;<a href = "qna_Serchlistlist.jsp?userpage=<%=totalpage%>&listSize=<%=writeList%>">&gt;&gt;</a>
 							<%}
 							%>
 				</tfoot>
