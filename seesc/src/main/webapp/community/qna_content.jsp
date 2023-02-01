@@ -11,17 +11,18 @@ int write_idx = Integer.parseInt(write_idx_s);
 
 WriteDTO dto = qnadao.writeQnAContent(write_idx);
 
-int open = dto.getWrite_open() ;
-
 if (dto == null) {
 %>
 <script>
 	window.alert('삭제된 게시글 또는 잘못된 접근입니다.');
 	location.href = '/seesc/community/qna_list.jsp';
 </script>
+
 <%
 return;
 }
+
+int open = dto.getWrite_open();
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +42,6 @@ return;
 	width: 600px;
 	border: 1px solid;
 }
-
 </style>
 </head>
 <body>
@@ -52,8 +52,9 @@ return;
 			<table class="write_table">
 				<tbody>
 					<tr>
-						<td colspan="2"><%=dto.getWrite_title()%> <td colspan="2">
-					<%=dto.getWrite_wdate()%></td><tr>
+						<td colspan="2"><%=dto.getWrite_title()%>
+						<td colspan="2"><%=dto.getWrite_wdate()%></td>
+					<tr>
 						<td>작성자</td>
 						<td colspan="3"><%=dto.getWrite_writer()%></td>
 					</tr>
@@ -65,12 +66,19 @@ return;
 						<td colspan="4"><textarea rows="10" cols="50"
 								name="write_content" readonly><%=dto.getWrite_content()%></textarea></td>
 					</tr>
+					<form name = "qna_delete" action = "qna_delete_ok.jsp">
 					<tr>
-						<td colspan="4"><input type="button" value="삭제"><input
-							type="button" value="수정"><input type="button" value="목록"
+						<td>글을 삭제할 경우 비밀번호를 입력해주세요.</td>
+						<td><input type="password" name="userinput_pwd" required = "required"></td>
+					</tr>
+					<tr>
+						<td colspan="4">
+						<input type="submit" value="삭제"> 
+						<input type="button"value="수정">
+						<input type="button" value="목록"
 							onclick="location.href = 'qna_list.jsp';"></td>
 					</tr>
-
+					</form>
 				</tbody>
 			</table>
 			<table class="write_table">
