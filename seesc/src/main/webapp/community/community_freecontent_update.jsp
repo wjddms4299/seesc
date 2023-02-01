@@ -14,7 +14,7 @@
 </head>
 <style>
 h3{
- text-align: center;
+	text-align: center;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
@@ -22,8 +22,8 @@ h3{
 <%@include file="/header.jsp" %>
 <section>
 	<article>
-		<h3>이벤트게시판 본문</h3>
-		<form name="update" action="community_eventcontent_update.jsp" method="get">
+		<h3>수정하기</h3>
+		<form name="writeupdate2" action="community_freecontent_update_ok.jsp" method="post">
 		<table>
 		<%
 		WriteDTO dto=wdao.contentWrite(idx);
@@ -31,31 +31,27 @@ h3{
 			<thead>
 				<tr>
 					<th>제목</th>
-					<th>글쓴이</th>
-					<th>작성일</th>
 				</tr>
 				<tr>
-					<th><%=dto.getWrite_title() %></th>
-					<th><%=dto.getWrite_writer() %></th>
-					<th><%=dto.getWrite_wdate() %></th>
+					<th><input type="text" name="title" value="<%=dto.getWrite_title()%>"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="4"><textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
+					<td><textarea cols="50" rows="20" name="content" ></textarea></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="4" align="right">
-					<input type="hidden" name="idx" value="<%=dto.getWrite_idx() %>">
+					<td>
 						<input type="submit" value="수정하기">
-						<input type="button" value="목록으로" onclick="location.href='community.jsp'">
-						
+						<input type="reset" value="다시쓰기">
+						<input type="button" value="돌아가기" onclick="location.href='community_eventcontent.jsp'">
 					</td>
 				</tr>
 			</tfoot>
 		</table>
+			<input type="hidden" name="idx" value="<%=idx %>">
 		</form>
 	</article>
 </section>
