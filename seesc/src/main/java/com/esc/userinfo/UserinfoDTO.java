@@ -1,5 +1,5 @@
 package com.esc.userinfo;
-import java.util.*;
+import java.sql.*;
 
 public class UserinfoDTO {
 	private int user_idx;
