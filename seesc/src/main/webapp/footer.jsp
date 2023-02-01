@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
-
+<div class="footerback">
 <footer>
 <hr>
 <div>(주)탈출탈출<br>
@@ -20,3 +20,4 @@ www.ezenac.co.kr<br>
 <span id="footlogo"> <a href = "/seesc/index.jsp"><img
 src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> 
 </footer>
+</div>

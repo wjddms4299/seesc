@@ -28,7 +28,7 @@
 			<th>결제상태</th>
 		</tr>
 		<%
-	int user_idx=100; //회원정보 불러와야함@@@@@@@@@@@@@@@@@@@@@@@@
+	int user_idx=(int)session.getAttribute("user_idx");
 	ArrayList<BookingDTO> arr=boodao.myBooking(user_idx);
 	if(arr==null||arr.size()==0){
 		%>

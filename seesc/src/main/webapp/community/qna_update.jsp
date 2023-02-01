@@ -48,7 +48,7 @@ int open = dto.getWrite_open();
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
-			<p class="write_title">QnA 본 문 보 기</p>
+			<p class="write_title">QnA 글 수정하기</p>
 			<table class="write_table">
 				<tbody>
 					<tr>
@@ -64,7 +64,7 @@ int open = dto.getWrite_open();
 					</tr>
 					<tr>
 						<td colspan="4"><textarea rows="10" cols="50"
-								name="write_content" readonly><%=dto.getWrite_content()%></textarea></td>
+								name="write_content"><%=dto.getWrite_content()%></textarea></td>
 					</tr>
 					<form name = "qna_delete" action = "qna_delete_ok.jsp">
 					<input type = "hidden" name = "write_idx" value = "<%=write_idx%>">

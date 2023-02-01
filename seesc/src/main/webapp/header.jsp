@@ -69,8 +69,6 @@ position: fixed;
 right: 78px;
 bottom: 70px;
 }
-
-
 </style>
 <script>
 function login_open(){
@@ -79,15 +77,27 @@ function login_open(){
 
 
 </script>
+<%
+    String sid=(String)session.getAttribute("sid");
+%>
+<div class="headerback">
 <header>
 <a id="top"></a>
 
 <!-- ------------------------------------------------------ -->
-		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img
-			src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> <span
-			id="mainlogin"><a href="javascript:login_open();">로그인</a> <a href="/seesc/mypage/mypage.jsp"><img
-				src="/seesc/img/login_main.png" alt="마이페이지"></a> </span>
-
+		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> 
+		<%
+		if(sid==null||sid==""){
+			%>
+			<span id="mainlogin"><a href="javascript:login_open();">로그인</a> <a href="javascript:login_open();"><img src="/seesc/img/login_main.png" alt="마이페이지"></a> </span>
+			<%
+		}else{
+			%>
+			<span id="mainlogin"><a href="/seesc/member/logout.jsp">로그아웃</a> <a href="/seesc/mypage/mypage.jsp"><img src="/seesc/img/login_main.png" alt="마이페이지"></a> </span>
+			<%
+		}
+		
+		%>
 
 		<span id="mainmenu">
 			<div class="dropdown">
@@ -128,3 +138,4 @@ function login_open(){
 
 
 </header>
+</div>

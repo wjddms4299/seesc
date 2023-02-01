@@ -12,11 +12,13 @@ header a {
 	text-decoration: none;
 	color: white;
 }
-
+.headerback{
+	background-color: black;
+}
 header {
 	width: 1200px;
 	height: 150px;
-	background-color: black;
+	
 	margin: 0px auto;
 	position: relative;
 }
@@ -96,11 +98,15 @@ section {
 width: 1200px;
 margin: 0px auto;
 }
-
+.footerback{
+	background-color: black;
+	
+}
 footer {
+	position: relative;
 	width: 1200px;
 	height: 200px;
-	background-color: black;
+	
 	margin: 0px auto;
 	color: white;
 }
