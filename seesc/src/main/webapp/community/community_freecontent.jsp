@@ -22,8 +22,8 @@ h3{
 <%@include file="/header.jsp" %>
 <section>
 	<article>
-		<h3>이벤트게시판 본문</h3>
-		<form name="update" action="community_eventcontent_update.jsp" method="get">
+		<h3>자유게시판 본문</h3>
+		<form name="update2" action="community_freecontent_update.jsp" method="get">
 		<table>
 		<%
 		WriteDTO dto=wdao.contentWrite(idx);

@@ -24,6 +24,7 @@ article table thead{
 	border-bottom: 3px double dark;
 	border-top: 3px double dark;
 }
+
 </style>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 </head>
@@ -33,11 +34,11 @@ article table thead{
 	<article>
 		<h2>커뮤니티</h2>
 		<div>
-			<input type="button" value="자유 게시판">
+			<input type="button" value="커뮤니티" onclick="location.href='community.jsp'">
+			<input type="button" value="자유 게시판" onclick="location.href='freenoticeboard.jsp'">
 			<input type="button" value="이벤트">
 			<input type="button" value="공지사항">
-			<input type="button" value="질문과 답변">
-			<select name="sort">
+			<select name="sort" >
 				<option value="정렬순">정렬 순
 				<option value="조회수 순">조회수 순
 				<option value="작성일 순">작성일 순
