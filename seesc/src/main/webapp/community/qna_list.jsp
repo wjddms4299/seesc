@@ -113,7 +113,7 @@ if(userpage%pageList == 0){
 						<form name = "rr" method = "post">
 						<a
 							href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> "
-							class="anono"><%=arr.get(i).getWrite_title()%>[비밀글]
+							class="anono"><%=arr.get(i).getWrite_title()%>&#128274;
 							<%}else{%>
 							<a
 							href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>"

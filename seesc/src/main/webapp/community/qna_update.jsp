@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.esc.write.*"%>
+
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 <%
 String write_idx_s = request.getParameter("write_idx");
@@ -40,7 +41,6 @@ int open = dto.getWrite_open();
 .write_table {
 	margin: 0px auto;
 	width: 600px;
-
 }
 </style>
 </head>
@@ -50,13 +50,31 @@ int open = dto.getWrite_open();
 		<article>
 			<p class="write_title">QnA 글 수정하기</p>
 			<table class="write_table">
+				<form name="qna_update" action="qna_update_ok.jsp" method="post">
+					<input type="hidden" name="write_idx" value="<%=write_idx%>">
+					<input type="hidden" name="write_pwd"
+						value="<%=dto.getWrite_pwd()%>">
 				<tbody>
+
 					<tr>
-						<td colspan="2"><%=dto.getWrite_title()%>
+						<td colspan="2"><input type="text" name="write_title"
+							value="<%=dto.getWrite_title()%>">
 						<td colspan="2"><%=dto.getWrite_wdate()%></td>
 					<tr>
 						<td>작성자</td>
 						<td colspan="3"><%=dto.getWrite_writer()%></td>
+					</tr>
+					<tr>
+						<th>공개여부</th>
+
+						<td><input type="radio" name="write_open" value="0"
+							<%if (dto.getWrite_open() == 0) {
+	out.print("checked");
+}%>>비밀글
+							<input type="radio" name="write_open" value="1"
+							<%if (dto.getWrite_open() == 1) {
+	out.print("checked");
+}%>>공개글</td>
 					</tr>
 					<tr>
 						<td>파일</td>
@@ -66,47 +84,21 @@ int open = dto.getWrite_open();
 						<td colspan="4"><textarea rows="10" cols="50"
 								name="write_content"><%=dto.getWrite_content()%></textarea></td>
 					</tr>
-					<form name = "qna_delete" action = "qna_delete_ok.jsp">
-					<input type = "hidden" name = "write_idx" value = "<%=write_idx%>">
-					<input type = "hidden" name = "write_pwd" value = "<%=dto.getWrite_pwd() %>">
-					<tr>
-						<td>글을 삭제할 경우 비밀번호를 입력해주세요.</td>
-						<td><input type="password" name="userinput_pwd" required = "required"></td>
-					</tr>
-					<tr>
-						<td colspan="4">
-						<input type="submit" value="삭제"> 
-						</form>
 
-						<input type="submit"value="수정" onclick = "location.href = 'qna_update.jsp'">
-					
-						<input type="button" value="목록"
-							onclick="location.href = 'qna_list.jsp';">
-							</td>
+
+					<tr>
+						<td>작성시 입력했던 비밀번호를 입력해주세요.</td>
+						<td><input type="password" name="userinput_pwd"
+							required="required"></td>
 					</tr>
-					
+					<tr>
+						<td colspan="4"><input type="submit" value="수정"> <input
+							type="button" value="목록"
+							onclick="location.href = 'qna_list.jsp';"></td>
+					</tr>
+
 				</tbody>
-			</table>
-			<table class="write_table">
-				<tfoot>
-					<tr>
-						<td colspan="4">댓글</td>
-					</tr>
-					<tr>
-						<td>댓글작성자</td>
-						<td colspan="2">댓글 내용</td>
-						<td><input type="button" value="삭제"></td>
-					<tr>
-						<td rowspan="2">댓글 쓰기</td>
-						<td><input type="text" name="write_writer" placeholder="작성자">
-							<input type="password" name="write_pwd" placeholder="비밀번호"></td>
-						<td rowspan="2"><input type="button" value="등록"></td>
-					</tr>
-					<tr>
-						<td colspan="4"><textarea rows="10" cols="50"
-								name="write_content" placeholder="내용을 작성해주세요"></textarea>
-					</tr>
-				</tfoot>
+				</form>
 			</table>
 
 		</article>

@@ -149,7 +149,7 @@ public class QnADAO {
 		}
 	}
 
-	/** 조회수 관련 메서드 */
+	/** qna조회수 관련 메서드 */
 	public void readnumUpdate(int write_idx) {
 		try {
 			String sql = "update write set write_readnum = write_readnum+1 where write_idx =? ";
@@ -171,7 +171,7 @@ public class QnADAO {
 
 	}
 
-	/** 특정 게시글 총 게시글 수 */
+	/** qna특정 게시글 총 게시글 수 */
 	public int getTotal_SearchList(String Listname, String content) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -217,7 +217,7 @@ public class QnADAO {
 
 	}
 
-	/** 특정 게시글 출력 메서드 */
+	/** qna특정 게시글 출력 메서드 */
 	public ArrayList<WriteDTO> writeQnA_ReList(int userpage, int writeList, String Listname, String content) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -289,7 +289,7 @@ public class QnADAO {
 		}
 	}
 
-	/** 글 본문보기 관련 메서드 */
+	/** qna글 본문보기 관련 메서드 */
 	public WriteDTO writeQnAContent(int write_idx) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -338,13 +338,41 @@ public class QnADAO {
 		}
 	}
 
-	/** 게시물 삭제 관련 메서드 */
+	/** qna게시물 삭제 관련 메서드 */
 	public int qna_delete(int write_idx) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			String sql = "delete from write where write_idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);
+			int count = ps.executeUpdate();
+			return count;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+	
+	/**qna 게시물 수정 관련 메서드 */
+	public int qna_update(WriteDTO dto) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "update write set write_title = ?, write_content =?,write_open = ? where write_idx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, dto.getWrite_title());
+		ps.setString(2, dto.getWrite_content());
+		ps.setInt(3, dto.getWrite_open());
+		ps.setInt(4, dto.getWrite_idx());
 			int count = ps.executeUpdate();
 			return count;
 
