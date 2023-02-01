@@ -3,8 +3,7 @@
 <%@ page import="com.esc.write.*" %>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
 <%
-	String idx_s=request.getParameter("idx");
-	int idx=Integer.parseInt(idx_s);
+	int idx=Integer.parseInt(request.getParameter("idx"));
 %>
 <!DOCTYPE html>
 <html>
