@@ -27,7 +27,6 @@ select{margin:0px 950px;}
 </head>
 <body>
 <%@include file="/header.jsp"%>
-
 <section>
  <article>
  <h2 id="a1">테마 예약하기</h2>
@@ -117,6 +116,13 @@ select{margin:0px 950px;}
  <%
  ThemaDTO dto[]=new ThemaDTO[7];
  dto[0]=thdao.themaInfo(1);
+ 
+ if(dto[0]==null){
+	 %>
+	 <h2>등록된 테마가 없습니다</h2>
+	 <%
+	 return;
+ }
  %>
  <h3 class="a2-0"><%=dto[0].getThema_name()%></h3>
  <div class="a2-0">난이도:<%

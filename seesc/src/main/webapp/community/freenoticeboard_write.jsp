@@ -25,7 +25,7 @@ textarea{
 <section>
 	<h3>글쓰기</h3>
 	<article>
-		<form name="community" action="community_write_ok.jsp" method="get">
+		<form name="freenotice" action="freenoticeboard_write_ok.jsp" method="get">
 			<table>
 					<tr>
 						<th>작성자<input type="text" name="write_writer"></th>
@@ -47,7 +47,7 @@ textarea{
 					</tr>
 			</table>
 				<div id="select">
-					<input type="button" value="취소하기" onclick="location.href='community.jsp'">
+					<input type="button" value="취소하기" onclick="location.href='freenoticeboard.jsp'">
 					<input type="submit" value="글쓰기">
 				</div>
 		</form>
