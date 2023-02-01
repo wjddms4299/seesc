@@ -19,5 +19,5 @@ String msg=result>0?"회원가입완료!":"회원가입실패!";
 
 <script>
 window.alert('<%=msg%>');
-location.href=('/escape/mainpage.jsp')
+location.href=('/seesc/index.jsp')
 </script>
