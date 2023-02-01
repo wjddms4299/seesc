@@ -23,23 +23,18 @@ textarea{
 <body>
 <%@include file="/header.jsp" %>
 <section>
-	<h3>글쓰기</h3>
+	<h3> 자유게시판 글쓰기</h3>
 	<article>
 		<form name="community" action="community_write_ok.jsp" method="get">
+					<input type="hidden" name="write_cate" value="free">
 			<table>
 					<tr>
 						<th>작성자<input type="text" name="write_writer"></th>
-						<th>카테고리
-						<select name="write_cate">	
-							<option  value="자유게시판">자유게시판</option>
-							<option  value="멤버모집">멤버모집</option>
-						</select>
-						</th>
 						<th>비밀번호<input type="password" name="write_pwd"></th>
 					</tr>
 					<tr>
 						<th>제목<input type="text" name="write_title" ></th>
-
+						<th><input type="checkbox" name="member" value="[멤버모집]" >멤버 모집</th>
 					</tr>
 					<tr>
 						<th colspan="3"><textarea rows="20" cols="75" name="write_content"></textarea></th>

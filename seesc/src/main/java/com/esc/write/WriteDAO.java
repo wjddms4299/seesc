@@ -14,11 +14,18 @@ public class WriteDAO {
 	}
 
 	/** 커뮤니티 게시판 보이는 메서드 */
-	public ArrayList<WriteDTO> selWrite() {
+	public ArrayList<WriteDTO> selWrite(int ls,int cp) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "select * from write order by write_idx desc";
+			//String sql = "select * from write order by write_idx desc";
+			int start=(cp-1)*ls+1;
+			int end=cp*ls;
+			String sql="select * from (select rownum as rnum, a.* from  "
+					+ "(select * from write order by write_idx desc)a)b  "
+					+ "where rnum>=? and rnum<=?";
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
 			while (rs.next()) {
@@ -203,19 +210,27 @@ public class WriteDAO {
 		}
 	}
 
-	/**조회수 증가 관련 메서드*/
-	public int readnum(String title) {
+	
+	/**총게시물수 관련 메서드*/
+	public int getTotalCnt() {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="select write_readnum from write where write_title=?";
+			String sql="select count(*) from write";
 			ps=conn.prepareStatement(sql);
-			
+			rs=ps.executeQuery();
+			rs.next();
+			int count=rs.getInt(1);
+			return count==0?1:count;
 		}catch(Exception e) {
-			
+			e.printStackTrace();
+			return 1;
 		}finally {
 			try {
-		}catch(Exception e2) {
-			
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
 		}
 	}
+	
 }

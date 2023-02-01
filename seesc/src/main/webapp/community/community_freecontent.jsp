@@ -11,13 +11,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 h3{
  text-align: center;
 }
 </style>
-<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+</head>
+
+<%
+int totalCnt=wdao.getTotalCnt();//DB로 부터 가져올 정보
+int listSize=5;//사용자 마음
+int pageSize=5;//사용자 마음
+
+String cp_s=request.getParameter("cp");
+if(cp_s==null||cp_s.equals("")){
+	cp_s="1";
+}
+int cp=Integer.parseInt(cp_s);//핵심요소 사용자로부터 가져와야하는 정보
+
+int totalPage=totalCnt/listSize+1;
+if(totalCnt%listSize==0)totalPage--;
+
+int userGroup=cp/pageSize;
+if(cp%pageSize==0)userGroup--;
+%>
 <body>
 <%@include file="/header.jsp" %>
 <section>
