@@ -38,4 +38,26 @@ public class BookingDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
+	/**예약하기 관련 메서드*/
+	public int booking(int thema_idx,int count_idx,int user_idx,String booking_name,String booking_tel,String booking_pwd,String time_date,int booking_pay,String booking_msg,int booking_num,int booking_money) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="insert into booking values(booking_booking_idx.nextval,?,?,?,?,?,?,sysdate,?,?,?,1,?,?,?)";
+			ps=conn.prepareStatement(sql);
+			
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 }

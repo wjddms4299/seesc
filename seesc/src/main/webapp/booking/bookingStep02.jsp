@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.esc.thema.*"%>
+<jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
+<%
+String thema_idx_s=request.getParameter("thema_idx");
+int thema_idx=Integer.parseInt(thema_idx_s);
+
+String time_date=request.getParameter("time_date");
+
+String time_ptime_s=request.getParameter("time_ptime");
+int time_ptime=Integer.parseInt(time_ptime_s);
+%>
 <!DOCTYPE html>
 <html>
 <head>

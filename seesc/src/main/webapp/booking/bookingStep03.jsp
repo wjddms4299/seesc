@@ -87,7 +87,7 @@ section{width:1200px;margin:0px auto;}
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="button" value="예약 취소하기"> <a href="/seesc/index.jsp"><input type="button" value="돌아가기"></a> <a href="#"><input type="button" value="카페 주문하기"></a>
+ 			<input type="button" value="예약 취소하기"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
  		</td>
  	</tr>
  </table>
