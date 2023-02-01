@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 section{width:1200px;margin:0px auto;}
 #a1{margin:0px 100px;}
@@ -16,9 +17,10 @@ section{width:1200px;margin:0px auto;}
 </style>
 </head>
 <body>
+<%@include file="/header.jsp"%>
 <section>
-<hr width="1100">
  <article>
+ <br><br>
  <h2 id="a1">예약완료</h2>
  <br>
  <h4 align="center">STEP01 날짜/테마 선택 &nbsp; STEP02 정보입력 &nbsp; <label id="a1-0">STEP03 예약확인</label></h4>
@@ -91,7 +93,8 @@ section{width:1200px;margin:0px auto;}
  </table>
  <br>
  </article>
- <hr width="1100">
 </section>
+<hr width="1200">
+<%@include file="/footer.jsp"%>
 </body>
 </html>
