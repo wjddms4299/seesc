@@ -8,7 +8,7 @@ right: 78px;
 bottom: 19px;
 }
 .w-btn {
-    
+    z-index: 1;
     border: none;
     display: inline-block;
     padding: 15px 30px;
@@ -21,7 +21,7 @@ bottom: 19px;
 }
 
 .w-btn-outline {
-    
+    z-index: 1;
     padding: 15px 30px;
     border-radius: 15px;
     font-family: "paybooc-Light", sans-serif;
@@ -67,8 +67,9 @@ bottom: 19px;
 #topbutton{
 position: fixed;
 right: 78px;
-bottom: 50px;
+bottom: 70px;
 }
+
 
 </style>
 <script>
@@ -94,19 +95,19 @@ function login_open(){
 				<div class="dropdown-content">
 					<a href="#">방탈출 소개</a>
 					<a href="#">테마 소개</a>
-					<a href="#">오시는 길</a>
+					<a href ="/seesc/introduce/map.jsp">오시는 길</a>
 				</div>
 			</div>
 			<ul class="dropdown">
 				<li class="dropbtn"><a href="#">예약</a></li>
 				<ul class="dropdown-content">
-					<a href="#">예약하기</a>
-					<a href="#">예약 확인</a>
+					<a href="/seesc/booking/bookingStep01.jsp">예약하기</a>
+					<a href="/seesc/booking/b_bookingcheck.jsp">예약 확인</a>
 
 				</ul>
 			</ul>
 			<ul class="dropdown">
-				<li class="dropbtn"><a href="#">커뮤니티</a></li>
+				<li class="dropbtn"><a href="/seesc/community/community.jsp">커뮤니티</a></li>
 				<ul class="dropdown-content">
 					<a href="#">공지사항</a>
 					<a href="#">이벤트</a>
@@ -128,5 +129,6 @@ function login_open(){
 <!-- ---------------------------------------------- -->
 <button id="button" type="button" class="w-btn w-btn-brown"><span>카페주문하기</span></button>
 <a href="#top"><button id="topbutton" type="button"><span>▲</span></button></a>
+
 
 </header>

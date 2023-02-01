@@ -10,6 +10,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+table{
+text-align: center;
+}
+</style>
 <script>
 function openhofUpload(){
 	window.open('hofUpload.jsp','upload','width=550,height=700');
@@ -20,15 +25,15 @@ function openhofUpload(){
 <section>
 <h1>명예의 전당</h1>
 <article>
-	<ul>
-		<li><a href="hof.jsp?thema=이젠401"><button><span>이젠401</span></button></a></li>
-		<li><a href="hof.jsp?thema=이젠402"><button><span>이젠402</span></button></a></li>
-		<li><a href="hof.jsp?thema=이젠403"><button><span>이젠403</span></button></a></li>
-		<li><a href="hof.jsp?thema=이젠404"><button><span>이젠404</span></button></a></li>
-		<li><a href="hof.jsp?thema=이젠405"><button><span>이젠405</span></button></a></li>
-		<li><a href="hof.jsp?thema=이젠406"><button><span>이젠406</span></button></a></li>
-		<li><a href="hof.jsp?thema=이젠407"><button><span>이젠407</span></button></a></li>
-	</ul>
+	<div>
+		<a href="hof.jsp?thema=이젠401"><button><span>이젠401</span></button></a>
+		<a href="hof.jsp?thema=이젠402"><button><span>이젠402</span></button></a>
+		<a href="hof.jsp?thema=이젠403"><button><span>이젠403</span></button></a>
+		<a href="hof.jsp?thema=이젠404"><button><span>이젠404</span></button></a>
+		<a href="hof.jsp?thema=이젠405"><button><span>이젠405</span></button></a>
+		<a href="hof.jsp?thema=이젠406"><button><span>이젠406</span></button></a>
+		<a href="hof.jsp?thema=이젠407"><button><span>이젠407</span></button></a>
+	</div>
 </article>
 <article>
 	<table>
@@ -58,7 +63,7 @@ if(arr==null||arr.size()==0){
 		<th><%=i+1 %>위</th>
 		<td>
 		<div>
-		<img src="/escape/write/hofimg/<%=arr.get(i).getHof_imgname()%>"><br>
+		<img src="/seesc/hof/hofimg/<%=arr.get(i).getHof_imgname()%>" width="200" height="300"><br>
 		<%=arr.get(i).getHof_name() %><br>
 		<%=arr.get(i).getHof_date() %><br>
 		<%
