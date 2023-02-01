@@ -100,7 +100,9 @@ th{
 						<select name="month">
 						<option value="">--선택--</option>
 						<%
-						for(int i=1;i<=12;i++){	
+						for(int i=1;i<=12;i++){
+					
+	
 							%>
 						<option value="<%=i%>"><%=i %></option>
 							<%

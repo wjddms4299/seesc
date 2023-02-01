@@ -10,6 +10,9 @@
 table {
 	text-align:center;
 }
+th{
+	text-size:30;
+}
 </style>
 </head>
 <body>
