@@ -35,10 +35,9 @@ article table thead{
 	<article>
 		<h2>자유게시판</h2>
 			<div>
-				<input type="button" value="커뮤니티" onclick="location.href='community.jsp'">
 				<input type="button" value="자유 게시판" onclick="location.href='freenoticeboard.jsp'">
-				<input type="button" value="이벤트">
-				<input type="button" value="공지사항">
+				<input type="button" value="멤버모집">
+			
 				<select name="sort">
 					<option value="정렬순">정렬 순
 					<option value="조회수 순">조회수 순
