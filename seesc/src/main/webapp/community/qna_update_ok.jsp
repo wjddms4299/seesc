@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <% request.setCharacterEncoding("utf-8");%>
+    <% request.setCharacterEncoding("utf-8");%>
 <jsp:useBean id="qnadto" class ="com.esc.write.WriteDTO" scope = "request"></jsp:useBean>
 <jsp:setProperty property="*" name="qnadto"/>
-    <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
+<jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 
 <%
 
 String userinput_pwd = request.getParameter("userinput_pwd");
-
 if(userinput_pwd.equals(qnadto.getWrite_pwd())){
-	int result = qnadao.qna_delete(qnadto.getWrite_idx());
+	int result = qnadao.qna_update(qnadto);
 
 		if(result<0){
 			%>
@@ -22,7 +21,7 @@ if(userinput_pwd.equals(qnadto.getWrite_pwd())){
 		}else{
 			%>
 			<script>
-			window.alert('삭제 완료하였습니다.');
+			window.alert('수정을 완료하였습니다.');
 			location.href = 'qna_list.jsp';
 			</script>
 			
@@ -32,8 +31,8 @@ if(userinput_pwd.equals(qnadto.getWrite_pwd())){
 }else{
 	%>
 	<script>
-	window.alert('비밀번호가 일치하지 않아 삭제할 수 없습니다.');
-	location.href = 'qna_content.jsp?write_idx=<%=qnadto.getWrite_idx()%>';
+	window.alert('비밀번호가 일치하지 않습니다.다시 입력해주세요.');
+	location.href = 'qna_update.jsp?write_idx=<%=qnadto.getWrite_idx()%>';
 	</script>
 	
 	<%
