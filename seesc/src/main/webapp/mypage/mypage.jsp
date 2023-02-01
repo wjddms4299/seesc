@@ -11,6 +11,17 @@
 </head>
 <body>
 <%@include file="/header.jsp" %>
+<%
+    if(sid==null){
+    	%>
+    	<script>
+    	window.alert('로그인 후 이용가능하십니다.');
+    	location.href='/seesc/index.jsp';
+    	</script>
+    	<%
+    	return;
+    }
+    %>
 <section>
 <h1>마이페이지</h1>
 <article>
@@ -28,7 +39,7 @@
 			<th>비고</th>
 		</tr>
 		<%
-	int user_idx=100; //회원정보 불러와야함@@@@@@@@@@@@@@@@@@@@@@@@
+	int user_idx=(int)session.getAttribute("user_idx");
 	ArrayList<BookingDTO> arr=boodao.myBooking(user_idx);
 	if(arr==null||arr.size()==0){
 		%>

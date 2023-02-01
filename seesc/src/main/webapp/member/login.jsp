@@ -20,11 +20,11 @@ function join_open(){
 		<table>
 			<tr>
 				<th>ID</th>
-				<td><input type="text" placeholder="아이디"></td>
+				<td><input type="text" placeholder="아이디" name="userid"></td>
 			</tr>
 			<tr>
 				<th>PWD</th>
-				<td><input type="password" placeholder="비밀번호"></td>
+				<td><input type="password" placeholder="비밀번호" name="userpwd"></td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="saveid" value="on">ID기억</td>
