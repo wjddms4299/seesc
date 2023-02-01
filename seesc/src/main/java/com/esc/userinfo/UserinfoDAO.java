@@ -11,9 +11,10 @@ public class UserinfoDAO {
 	public UserinfoDAO() {
 		// TODO Auto-generated constructor stub
 	}
-	public int memberJoin(UserinfoDTO dto) {
+	public int memberJoin(UserinfoDTO dto,String user_birth) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
+			user_birth="to_date('"+user_birth+"',YYYYMMDDHH24MISS)";
 			String sql="insert into userinfo values (user_idx.nextval,0,?,?,?,?,?,?,?,?,sysdate)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, dto.getUser_id());
@@ -21,7 +22,7 @@ public class UserinfoDAO {
 			ps.setString(3, dto.getUser_nic());
 			ps.setInt(4, dto.getUser_se());
 			ps.setString(5, dto.getUser_name());
-			ps.setDate(6, dto.getUser_birth());
+			ps.setString(6, user_birth);
 			ps.setString(7, dto.getUser_tel());
 			ps.setString(8, dto.getUser_email());
 			int count=ps.executeUpdate();

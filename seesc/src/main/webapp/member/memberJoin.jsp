@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/write_table.css">
+<link rel="stylesheet" type="text/css" href="../css/mainLayout.css">
 <script>
 function open_idCheck(){
 	window.open('idCheck.jsp','idCheck','width=450,height=200')
@@ -100,7 +100,7 @@ th{
 						<select name="month">
 						<option value="">--선택--</option>
 						<%
-						for(int i=1;i<=12;i++){
+						for(int i=1;i<=12;i++){	
 							%>
 						<option value="<%=i%>"><%=i %></option>
 							<%
