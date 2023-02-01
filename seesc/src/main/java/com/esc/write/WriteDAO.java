@@ -99,7 +99,7 @@ public class WriteDAO {
 				String content=rs.getString("write_content");
 				
 			dto=new WriteDTO();
-			
+				dto.setWrite_idx(idx);
 				dto.setWrite_content(content);
 				dto.setWrite_title(title);
 				dto.setWrite_wdate(date);
@@ -118,7 +118,83 @@ public class WriteDAO {
 			
 		}
 	}
-	/**수정하기전 본문 */
+	/**본문 수정하기 관련 메서드*/
+	public int updateWrite(int idx, String title, String content) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="update write set write_title=?, write_content=?,write_wdate=sysdate where write_idx=?";
+			ps=conn.prepareStatement(sql);
+				ps.setString(1, title);
+			ps.setString(2, content);
+			ps.setInt(3, idx);
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2){
+				
+			}
+		}
+	}
+	/**자유게시판 보기 관련 메서드*/
+	public ArrayList<WriteDTO> freeWrite(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from write where write_cate='자유게시판'";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<WriteDTO> arr=new ArrayList<WriteDTO>();
+			while(rs.next()) {
+				int idx=rs.getInt("write_idx");
+				int uidx=rs.getInt("user_idx");
+				String cate=rs.getString("write_cate");
+				String title=rs.getString("write_title");
+				String writer=rs.getString("write_writer");
+				String pwd=rs.getString("write_pwd");
+				java.sql.Date wdate=rs.getDate("write_wdate");
+				String filename=rs.getString("write_filename");
+				String content=rs.getString("write_content");
+				int readnum=rs.getInt("write_readnum");
+				int ref=rs.getInt("write_ref");
+				int lev=rs.getInt("write_lev");
+				int step=rs.getInt("write_step");
+				int open=rs.getInt("write_open");
+				int notice=rs.getInt("write_notice");
+				
+				WriteDTO dto=new WriteDTO(idx, uidx, cate, title, writer, pwd, wdate, filename, content, readnum, ref, lev, step, open, notice);
+				
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**조회수 증가 관련 메서드*/
+	public int readnum(String title) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select write_readnum from write where write_title=?";
+			ps=conn.prepareStatement(sql);
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+		}catch(Exception e2) {}
+	}
 }
 
 

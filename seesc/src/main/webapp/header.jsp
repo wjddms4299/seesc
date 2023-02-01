@@ -74,7 +74,7 @@ bottom: 70px;
 </style>
 <script>
 function login_open(){
-	window.open('login.jsp','login','width=450,height=250');
+	window.open('/seesc/member/login.jsp','login','width=450,height=250');
 }
 
 
@@ -85,7 +85,7 @@ function login_open(){
 <!-- ------------------------------------------------------ -->
 		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img
 			src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> <span
-			id="mainlogin"><a href="#">로그인</a> <a href="/seesc/mypage/mypage.jsp"><img
+			id="mainlogin"><a href="javascript:login_open();">로그인</a> <a href="/seesc/mypage/mypage.jsp"><img
 				src="/seesc/img/login_main.png" alt="마이페이지"></a> </span>
 
 
@@ -110,24 +110,20 @@ function login_open(){
 				<li class="dropbtn"><a href="/seesc/community/community.jsp">커뮤니티</a></li>
 				<ul class="dropdown-content">
 					<a href="#">공지사항</a>
-					<a href="#">이벤트</a>
 					<a href="/seesc/community/qna_list.jsp">QnA</a>
 					<a href="#">팀구해요</a>
 				</ul>
 			</ul>
-			<ul class="dropdown">
-				<li class="dropbtn"><a href="#">카페</a></li>
-			</ul>
-			</ul>
+			
 			<ul class="dropdown">
 				<li class="dropbtn"><a href="/seesc/hof/hof.jsp">명예의 전당</a></li>
+				</ul>
 			</ul>
 		</span>
-		<button id="button" type="button">
-			<span>카페주문하기</span>
+		
 
 <!-- ---------------------------------------------- -->
-<button id="button" type="button" class="w-btn w-btn-brown"><span>카페주문하기</span></button>
+<a href="seesc/cafe/cafeOrder.jsp"><button id="button" type="button" class="w-btn w-btn-brown"><span>카페주문하기</span></button></a>
 <a href="#top"><button id="topbutton" type="button"><span>▲</span></button></a>
 
 

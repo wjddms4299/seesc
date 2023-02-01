@@ -14,8 +14,7 @@ public class UserinfoDAO {
 	public int memberJoin(UserinfoDTO dto,String user_birth) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			user_birth="to_date('"+user_birth+"',YYYYMMDDHH24MISS)";
-			String sql="insert into userinfo values (user_idx.nextval,0,?,?,?,?,?,?,?,?,sysdate)";
+			String sql="insert into userinfo values (userinfo_user_idx.nextval,0,?,?,?,?,?,?,?,?,sysdate)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, dto.getUser_id());
 			ps.setString(2, dto.getUser_pwd());

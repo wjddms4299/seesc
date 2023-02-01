@@ -23,7 +23,7 @@ h3{
 <section>
 	<article>
 		<h3>수정하기</h3>
-		<form name="writeupdate" action="community_eventcontent_update_ok.jsp">
+		<form name="writeupdate" action="community_eventcontent_update_ok.jsp" method="get">
 		<table>
 		<%
 		WriteDTO dto=wdao.contentWrite(idx);
@@ -31,21 +31,19 @@ h3{
 			<thead>
 				<tr>
 					<th>제목</th>
-					<th>글쓴이</th>
 				</tr>
 				<tr>
-					<th><input type="text" value="<%=dto.getWrite_title()%>"></th>
-					<th><input type="text" value="<%=dto.getWrite_writer()%>"></th>	
+					<th><input type="text" name="title" value="<%=dto.getWrite_title()%>"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="2"><textarea cols="50" rows="20"></textarea></td>
+					<td><textarea cols="50" rows="20" name="content" ></textarea></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2">
+					<td>
 						<input type="submit" value="수정하기">
 						<input type="reset" value="다시쓰기">
 						<input type="button" value="돌아가기" onclick="location.href='community_eventcontent.jsp'">
@@ -53,6 +51,7 @@ h3{
 				</tr>
 			</tfoot>
 		</table>
+			<input type="hidden" name="idx" value="<%=idx %>">
 		</form>
 	</article>
 </section>
