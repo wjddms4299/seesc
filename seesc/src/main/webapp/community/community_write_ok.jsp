@@ -5,8 +5,12 @@
 <jsp:useBean id="wdto" class="com.esc.write.WriteDTO"></jsp:useBean>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
 <jsp:setProperty property="*" name="wdto"/>
+<%
+String member=request.getParameter("member");
+%>
 
 <%
+	wdto.setWrite_title(member+wdto.getWrite_title());
 	int result=wdao.insertWrite(wdto);
 
 	String msg=result>0?"글 작성을 성공하셨습니다!":"글 작성을 실패하셨습니다1";

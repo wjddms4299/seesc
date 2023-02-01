@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>\
+<%@ page import="java.util.*" %>
 <%@ page import="com.esc.write.*" %>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
 <!DOCTYPE html>
@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 section{
 	width:1200px;
@@ -26,22 +27,36 @@ article table thead{
 }
 
 </style>
-<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 </head>
+<%
+int totalCnt=wdao.getTotalCnt();//DB로 부터 가져올 정보
+int listSize=5;//사용자 마음
+int pageSize=5;//사용자 마음
+
+String cp_s=request.getParameter("cp");
+if(cp_s==null||cp_s.equals("")){
+	cp_s="1";
+}
+int cp=Integer.parseInt(cp_s);//핵심요소 사용자로부터 가져와야하는 정보
+
+int totalPage=totalCnt/listSize+1;
+if(totalCnt%listSize==0)totalPage--;
+
+int userGroup=cp/pageSize;
+if(cp%pageSize==0)userGroup--;
+%>
 <body>
 <%@include file="/header.jsp" %>
 <section>
 	<article>
 		<h2>커뮤니티</h2>
 		<div>
-			<input type="button" value="커뮤니티" onclick="location.href='community.jsp'">
 			<input type="button" value="자유 게시판" onclick="location.href='freenoticeboard.jsp'">
-			<input type="button" value="이벤트">
-			<input type="button" value="공지사항">
+			<input type="button" value="멤버모집">
 			<select name="sort" >
-				<option value="정렬순">정렬 순
-				<option value="조회수 순">조회수 순
-				<option value="작성일 순">작성일 순
+				<option name="정렬순" value="0">정렬 순
+				<option name="조회수 순" value="1">조회수 순
+				<option name="작성일 순" value="2">작성일 순
 				<!-- 기능 구현할곳 -->
 			</select>
 		</div>
@@ -57,61 +72,65 @@ article table thead{
 			</thead>
 			<tbody >
 				<%
-				ArrayList<WriteDTO> arr=wdao.selWrite();
-				if(arr==null || arr.size()==0){
-					%>
-					<tr>
-					<td colspan="5" align="center">
-					등록된 게시물이 없습니다.</td>
-					</tr>
-					<% 
-				}else{
-					
-					for(int i=0;i<arr.size();i++){
-					%>
-					<tr>
-					<td><%=arr.get(i).getWrite_idx() %></td>
-					<% 
-						if(arr.get(i).getWrite_open()==0){
-							
-							
-							if(arr.get(i).getWrite_cate().equals("자유게시판")){
-								%>
-								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">비밀글입니다</a></td>
-								<% 
-							}else if(arr.get(i).getWrite_cate().equals("이벤트")){
-								%>	
-								<td><a href="community_eventcontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">비밀글입니다</a></td>
-								<%
-							}
-							%>
-							
-							<% 
-						}else {
-							if(arr.get(i).getWrite_cate().equals("자유게시판")){
-								%>
-								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">[자유게시판]<%=arr.get(i).getWrite_title()%></a></td>
-								<% 
-							}else if(arr.get(i).getWrite_cate().equals("이벤트")){
-								%>
-								<td><a href="community_eventcontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>">[이벤트]<%=arr.get(i).getWrite_title() %></a></td>
-								<%
-							}else
+				ArrayList<WriteDTO> arr=wdao.selWrite(listSize, cp);
+				for(int i=0;i<arr.size();i++){			
+					if(arr==null || arr.size()==0){
 						%>
-						<td><%=arr.get(i).getWrite_writer() %></td>
-						<td><%=arr.get(i).getWrite_wdate() %></td>
-						<td><%=arr.get(i).getWrite_readnum() %></td>
+						<tr>
+						<td colspan="5" align="center">
+						등록된 게시물이 없습니다.</td>
 						</tr>
-					<%
-						}
+						<% 
+					}else{
+						%>
+						<tr>
+							<td><%=arr.get(i).getWrite_idx() %></td> 
+							<%
+							
+								
+					
+								
+							%>
+								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title() %></a></td>
+								<% 
+							
+						%>
+							<td><%=arr.get(i).getWrite_writer() %></td>
+							<td><%=arr.get(i).getWrite_wdate() %></td>
+							<td><%=arr.get(i).getWrite_readnum() %>
+						</tr>
+						<%
 					}
-				}
+				}	
 				%>
 			</tbody>
 			<tfoot>
 			<tr>
-				<td colspan="4"><!-- 페이징 들어갈 영역 --></td>
-				<td><input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"></td>	
+				<td colspan="5" align="right">
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" align="center"><!-- 페이징 들어갈 영역 -->
+				<%
+if(userGroup!=0){
+	%><a href="community.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+}
+%>
+
+<%
+for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
+	%>&nbsp;&nbsp;<a href="community.jsp?cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<% 
+	if(i==totalPage)break;
+}
+%>
+<%
+if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
+	%><a href="community.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
+}
+
+%>
+				</td>
 			</tr>
 			</tfoot>
 		</table>

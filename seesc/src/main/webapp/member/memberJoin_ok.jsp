@@ -6,7 +6,11 @@
 <%
 String year=request.getParameter("year");
 String month=request.getParameter("month");
+int month_1=Integer.parseInt(month);
+if(month_1<10){month="0"+month;}
 String day=request.getParameter("day");
+int day_1=Integer.parseInt(day);
+if(day_1<10){day="0"+day;}
 String user_birth=year+month+day;
 %>
 <jsp:useBean id="udto" class="com.esc.userinfo.UserinfoDTO"></jsp:useBean>

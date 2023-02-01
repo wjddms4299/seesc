@@ -29,7 +29,7 @@
 			<th>사용여부</th>
 		</tr>
 		<%
-		int user_idx=100;//로그인정보에서 회원번호 가져와야함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		int user_idx=(int)session.getAttribute("user_idx");
 		ArrayList<CouponDTO> arr=coudao.myCoupon(user_idx);
 		if(arr==null||arr.size()==0){
 			%>
