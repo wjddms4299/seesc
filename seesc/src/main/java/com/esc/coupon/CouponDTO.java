@@ -27,8 +27,9 @@ public class CouponDTO {
 		this.coupon_use = coupon_use;
 	}
 	
-	public CouponDTO(String coupon_name, int coupon_dc) {
+	public CouponDTO(int coupon_idx, String coupon_name, int coupon_dc) {
 		super();
+		this.coupon_idx = coupon_idx;
 		this.coupon_name = coupon_name;
 		this.coupon_dc = coupon_dc;
 	}
