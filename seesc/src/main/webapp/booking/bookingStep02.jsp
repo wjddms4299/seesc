@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
+<%@ page import="com.esc.userinfo.*"%>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <%
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
@@ -10,6 +12,20 @@ String time_date=request.getParameter("time_date");
 
 String time_ptime_s=request.getParameter("time_ptime");
 int time_ptime=Integer.parseInt(time_ptime_s);
+
+////////////////////////////////////////////////////////////////////////
+
+int user_idx;
+String user_idx_s=(String)session.getAttribute("user_idx");
+if(user_idx_s!=null){
+	user_idx=Integer.parseInt(user_idx_s);
+}else{
+	user_idx=0;
+}
+
+UserinfoDTO dto=udao.bookingUserInfo(user_idx);
+String user_name=dto.getUser_name;
+String user_tel=dto.getUser_tel;
 %>
 <!DOCTYPE html>
 <html>
@@ -55,7 +71,7 @@ function changeMoney(){
  		<%
  		ThemaDTO dto=thdao.themaInfo(thema_idx); %>
  		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="500">&nbsp;&nbsp;<%=dto.getThema_name()%></td>
+ 		<td width="500">&nbsp;&nbsp;<%=dto.getThema_name()%><input type="hidden" name="thema_name" value="<%=dto.getThema_name()%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
@@ -75,7 +91,7 @@ function changeMoney(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>게임시간</b></td>
- 		<td>&nbsp;&nbsp;<%=dto.getThema_time()%>분</td>
+ 		<td>&nbsp;&nbsp;<%=dto.getThema_time()%>분<input type="hidden" name="thema_time" value="<%=dto.getThema_time()%>분"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>

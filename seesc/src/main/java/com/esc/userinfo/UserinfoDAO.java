@@ -271,5 +271,34 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
+	/**예약시 로그인 정보 불러오기*/
+	public UserinfoDTO bookingUserInfo(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="select user_name,user_tel from userinfo where user_id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, user_idx);
+			rs=ps.executeQuery();
+			
+			UserinfoDTO dto=null;
+			if(rs.next()) {
+				String user_name=rs.getString("user_name");
+				String user_tel=rs.getString("user_tel");
+				dto=new UserinfoDTO(user_name,user_tel);
+			}
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 
 }
