@@ -17,6 +17,16 @@ if(booking_agree==null || booking_agree.equals("1")){
 	return;
 }
 
+String thema_name=request.getParameter("thema_name");
+String thema_time=request.getParameter("thema_time");
+String booking_num=request.getParameter("booking_num");
+String booking_name=request.getParameter("booking_name");
+String booking_tel=request.getParameter("booking_tel");
+String coupon_name=request.getParameter("coupon_name");
+String booking_pay=request.getParameter("booking_pay");
+String booking_pwd=request.getParameter("booking_pwd");
+String booking_msg=request.getParameter("booking_msg");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -48,35 +58,49 @@ section{width:1200px;margin:0px auto;}
  <table id="a1-1" border="1" cellspacing="0">
  	<tr height="40">
  		<td width="200" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="600">&nbsp;&nbsp;테마 이름</td>
+ 		<td width="600">&nbsp;&nbsp;<%=thema_name%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
- 		<td>&nbsp;&nbsp;2023-01-30 월요일</td>
+ 		<td>&nbsp;&nbsp;<%=time_date%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약시간</b></td>
- 		<td>&nbsp;&nbsp;12:00</td>
+ 		<td>&nbsp;&nbsp;<%
+ 		int time_ptime_i=Integer.parseInt(time_ptime);
+ 		switch(time_ptime_i){
+	 		case 1:out.print("10:00");break;
+	 		case 2:out.print("12:00");break;
+	 		case 3:out.print("14:00");break;
+	 		case 4:out.print("16:00");break;
+	 		case 5:out.print("18:00");break;
+	 		case 6:out.print("20:00");
+ 		}%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>게임시간</b></td>
- 		<td>&nbsp;&nbsp;100분</td>
+ 		<td>&nbsp;&nbsp;<%=thema_time%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
- 		<td>&nbsp;&nbsp;2명 (44,000원)</td>
+ 		<td>&nbsp;&nbsp;<%=booking_num%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약자</b></td>
- 		<td>&nbsp;&nbsp;김둘리</td>
+ 		<td>&nbsp;&nbsp;<%=booking_name%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>연락처</b></td>
- 		<td>&nbsp;&nbsp;010-1111-1111</td>
+ 		<td>&nbsp;&nbsp;<%=booking_tel%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
- 		<td>&nbsp;&nbsp;할인금액 1,000원</td>
+ 		<td>&nbsp;&nbsp;<%
+ 		switch(coupon_name){
+	 		case "1,000":out.print("할인금액 1,000원");break;
+	 		case "2,000":out.print("할인금액 2,000원");break;
+	 		case "3,000":out.print("할인금액 3,000원");
+ 		}%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
@@ -84,15 +108,20 @@ section{width:1200px;margin:0px auto;}
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>결제방식</b></td>
- 		<td>&nbsp;&nbsp;현장결제</td>
+ 		<td>&nbsp;&nbsp;<%
+ 		int booking_pay_i=Integer.parseInt(booking_pay);
+ 		switch(booking_pay_i){
+	 		case 0:out.print("현장결제");break;
+	 		case 1:out.print("무통장입금");
+ 		}%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약 비밀번호</b></td>
- 		<td>&nbsp;&nbsp;1234</td>
+ 		<td>&nbsp;&nbsp;<%=booking_pwd%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>전달메세지</b></td>
- 		<td>&nbsp;&nbsp;10분 전에 도착할 것 같아요~</td>
+ 		<td>&nbsp;&nbsp;<%=booking_msg%></td>
  	</tr>
  </table>
  </article>

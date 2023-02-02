@@ -3,6 +3,7 @@
 <%@page import="com.esc.write.*"%>
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 <%
+
 String write_idx_s = request.getParameter("write_idx");
 if (write_idx_s == null || write_idx_s.equals("")) {
 	write_idx_s = "0";

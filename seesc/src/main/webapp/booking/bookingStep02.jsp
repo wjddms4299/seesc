@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
+<%@ page import="com.esc.userinfo.*"%>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
+<%@ page import="com.esc.coupon.*"%>
+<jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
@@ -10,6 +15,18 @@ String time_date=request.getParameter("time_date");
 
 String time_ptime_s=request.getParameter("time_ptime");
 int time_ptime=Integer.parseInt(time_ptime_s);
+
+////////////////////////////////////////////////////////////////////////
+
+Integer user_idx=(Integer)session.getAttribute("user_idx");
+
+UserinfoDTO udto=udao.bookingUserinfo(user_idx);
+String user_name=udto.getUser_name();
+String user_tel=udto.getUser_tel();
+
+///////////////////////////////////////////////////////////////////////
+
+ArrayList<CouponDTO> cpdto=cpdao.bookingCoupon(user_idx);
 %>
 <!DOCTYPE html>
 <html>
@@ -53,9 +70,9 @@ function changeMoney(){
  <table class="a1-1" border="1" cellspacing="0">
  	<tr height="40">
  		<%
- 		ThemaDTO dto=thdao.themaInfo(thema_idx); %>
+ 		ThemaDTO thdto=thdao.themaInfo(thema_idx); %>
  		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="500">&nbsp;&nbsp;<%=dto.getThema_name()%></td>
+ 		<td width="500">&nbsp;&nbsp;<%=thdto.getThema_name()%><input type="hidden" name="thema_name" value="<%=thdto.getThema_name()%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
@@ -75,16 +92,17 @@ function changeMoney(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>게임시간</b></td>
- 		<td>&nbsp;&nbsp;<%=dto.getThema_time()%>분</td>
+ 		<td>&nbsp;&nbsp;<%=thdto.getThema_time()%>분<input type="hidden" name="thema_time" value="<%=thdto.getThema_time()%>분"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
  		<td>&nbsp;&nbsp;
  			<select name="booking_num">
  				<%
- 				for(int i=dto.getThema_people_min();i<=dto.getThema_people_max();i++){
+ 				for(int i=thdto.getThema_people_min();i<=thdto.getThema_people_max();i++){
  					%>
- 					<option value="<%=i%>명 (<%=i*dto.getThema_price()%>원)"><%=i%>명 (<%=i*dto.getThema_price()%>원)</option>
+ 					<option value="<%=i%>명 (<%
+ 							String booking_money_b=String.valueOf((i*thdto.getThema_price())).length();%>원)"><%=i%>명 (<%=i*thdto.getThema_price()%>원)</option>
  					<%
  				}
  				%>
@@ -93,25 +111,29 @@ function changeMoney(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약자</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_name"></td>
+ 		<td>&nbsp;&nbsp;<input type="text" name="booking_name" value="<%if(user_idx!=0){out.print(user_name);}%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>연락처</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_tel"></td>
+ 		<td>&nbsp;&nbsp;<input type="text" name="booking_tel" value="<%if(user_idx!=0){out.print(user_tel);}%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
- 			<select  name="coupon_idx">
- 				<option value="1">1,000원 할인쿠폰</option>
- 				<option value="2">2,000원 할인쿠폰</option>
- 				<option value="3">3,000원 할인쿠폰</option>
+ 			<select  name="coupon_name">
+ 				<%
+ 				for(int i=0;i<cpdto.size();i++){
+ 					%>
+ 					<option value="<%=cpdto.get(i).getCoupon_name()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>
+ 					<%
+ 				}
+ 				%>
  			</select>
  		</td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b>44,000원</b></td>
+ 		<td>&nbsp;&nbsp;<b>44,000원</b></td>               <!-- cpdto.get(i).getCoupon_dc() -->
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2" ><b>결제방식</b></td>

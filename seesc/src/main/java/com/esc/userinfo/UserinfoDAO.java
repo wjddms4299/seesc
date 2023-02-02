@@ -18,7 +18,7 @@ public class UserinfoDAO {
 		// TODO Auto-generated constructor stub
 	}
 	/**회원가입*/
-	public int memberJoin(UserinfoDTO dto,String user_birth) {
+	public int memberJoin(UserinfoDTO dto,String user_birth,String user_tel) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			String sql="insert into userinfo values (userinfo_user_idx.nextval,0,?,?,?,?,?,?,?,?,sysdate)";
@@ -29,7 +29,7 @@ public class UserinfoDAO {
 			ps.setInt(4, dto.getUser_se());
 			ps.setString(5, dto.getUser_name());
 			ps.setString(6, user_birth);
-			ps.setString(7, dto.getUser_tel());
+			ps.setString(7, user_tel);
 			ps.setString(8, dto.getUser_email());
 			int count=ps.executeUpdate();
 			return count;
@@ -268,6 +268,35 @@ public class UserinfoDAO {
 		}finally {
 			try {
 				
+			}catch(Exception e2) {}
+		}
+	}
+	
+	/**예약시 로그인 정보 불러오기*/
+	public UserinfoDTO bookingUserinfo(Integer user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="select user_name,user_tel from userinfo where user_id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			rs=ps.executeQuery();
+			
+			UserinfoDTO dto=null;
+			if(rs.next()) {
+				String user_name=rs.getString("user_name");
+				String user_tel=rs.getString("user_tel");
+				dto=new UserinfoDTO(user_name,user_tel);
+			}
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
 			}catch(Exception e2) {}
 		}
 	}

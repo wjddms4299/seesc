@@ -23,6 +23,7 @@ if(manager<1){
 %>
 <body>
 <section>
+<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
 <table>
 <tr>
 	<th>회원번호</th>

@@ -80,7 +80,7 @@ th{
 						<th>휴대전화</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="user_tel" placeholder="핸드폰 번호를 입력해주세요."></td>
+						<td><input type="text" name="user_tel1" placeholder="핸드폰 번호를 입력해주세요." maxlength="3">-<input type="text" name="user_tel2" maxlength="4">-<input type="text" name="user_tel3" maxlength="4"></td>
 					</tr>
 					<tr>
 						<th>생년월일

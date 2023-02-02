@@ -3,7 +3,7 @@ package com.esc.write;
 import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.*;
-import com.oreilly.servlet.MultipartRequest;
+//import com.oreilly.servlet.MultipartRequest;
 
 public class WriteDAO {
 

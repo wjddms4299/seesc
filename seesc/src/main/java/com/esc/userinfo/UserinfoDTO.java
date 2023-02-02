@@ -33,6 +33,12 @@ public class UserinfoDTO {
 		this.user_email = user_email;
 		this.user_date = user_date;
 	}
+	
+	public UserinfoDTO(String user_name,String user_tel) {
+		super();
+		this.user_name = user_name;
+		this.user_tel = user_tel;
+	}
 
 	public int getUser_idx() {
 		return user_idx;
