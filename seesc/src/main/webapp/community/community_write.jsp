@@ -25,7 +25,7 @@ textarea{
 <section>
 	<h3> 자유게시판 글쓰기</h3>
 	<article>
-		<form name="community" action="community_write_ok.jsp" method="get">
+		<form name="community" action="community_write_ok.jsp" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="write_cate" value="free">
 			<table>
 					<tr>
@@ -33,7 +33,10 @@ textarea{
 						<th>비밀번호<input type="password" name="write_pwd"></th>
 					</tr>
 					<tr>
-						<th>제목<input type="text" name="write_title" ></th>
+						<th colspan="2">제목<input type="text" name="write_title" size="60"></th>
+					</tr>
+					<tr>
+						<th><input type="file" name="write_filename">
 						<th><input type="checkbox" name="member" value="[멤버모집]" >멤버 모집</th>
 					</tr>
 					<tr>

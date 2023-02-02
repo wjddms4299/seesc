@@ -43,37 +43,17 @@ UserinfoDTO dto = userdao.userInfo(sid);
 %>
 	<section>
 		<article>
-			<form name="qna_upload" action="qna_upload_ok.jsp" method="post"
+			<form name="qna_noticeUpload" action="qna_noticeUpload_ok.jsp" method="post"
 				enctype="multipart/form-data">
-				<h2 class="write_title">질문과 답변 글쓰기<% %></h2>
+				<h2 class="write_title">공지글 작성<% %></h2>
 				<fieldset>
 					<table class="write_table">
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">
-						<input type="hidden" name="write_notice"
-							value="<%=write_notice%>">
 						
-						<tr>
-							<th>작성자</th>
-							<td><input type="text" name="write_writer"
-								required="required" value="<%
-								String value = user_idx==0?"":dto.getUser_nic();
-								out.println(value);
-								%>"
-								<%
-								String readonly =user_idx==0?"":"readonly";
-								out.println(readonly);
-								%>
-								></td>
-						</tr>
 						<tr>
 							<th>글제목</th>
 							<td><input type="text" name="write_title"
 								required="required"></td>
-						</tr>
-						<tr>
-							<th>공개여부</th>
-							<td><input type="radio" name="write_open" value="0" checked>비밀글
-								<input type="radio" name="write_open" value="1">공개글</td>
 						</tr>
 						<tr>
 							<th>파일첨부</th>
@@ -84,11 +64,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 							<td><textarea name="write_content" rows="10" cols="50"
 									required="required"></textarea></td>
 						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td><input type="password" name="write_pwd"
-								required="required"></td>
-						</tr>
+
 						<tr>
 							<td colspan="2" align="center"><input type="submit"
 								value="등록"> <input type="reset" value="다시 작성"> <input

@@ -1,9 +1,16 @@
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.esc.write.*" %>
+<%@ page import="com.oreilly.servlet.multipart.*" %>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
 <%
-	String idx_s=request.getParameter("idx");
+
+	String savePath=request.getRealPath("/img");
+	MultipartRequest mr=
+	new MultipartRequest(request,savePath,2097152,"utf-8");
+	
+	String idx_s=mr.getParameter("idx");
 	int idx=Integer.parseInt(idx_s);
 %>
 <!DOCTYPE html>
@@ -23,17 +30,17 @@ h3{
 <section>
 	<article>
 		<h3>수정하기</h3>
-		<form name="writeupdate2" action="community_freecontent_update_ok.jsp" method="post">
+		<form name="writeupdate2" action="community_freecontent_update_ok.jsp" method="post" enctype="multipart/form-data">
 		<table>
 		<%
 		WriteDTO dto=wdao.contentWrite(idx);
 		%>
 			<thead>
 				<tr>
-					<th>제목</th>
+					<th>제목<input type="text" name="title" value="<%=dto.getWrite_title()%>"></th>
 				</tr>
 				<tr>
-					<th><input type="text" name="title" value="<%=dto.getWrite_title()%>"></th>
+					<th>파일<input type="file" name="filename" value="<%=dto.getWrite_filename() %>">
 				</tr>
 			</thead>
 			<tbody>
@@ -46,7 +53,7 @@ h3{
 					<td>
 						<input type="submit" value="수정하기">
 						<input type="reset" value="다시쓰기">
-						<input type="button" value="돌아가기" onclick="location.href='community_eventcontent.jsp'">
+						<input type="button" value="돌아가기" onclick="location.href='community.jsp'">
 					</td>
 				</tr>
 			</tfoot>
