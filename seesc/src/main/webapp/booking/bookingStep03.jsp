@@ -22,7 +22,7 @@ String thema_time=request.getParameter("thema_time");
 String booking_num=request.getParameter("booking_num");
 String booking_name=request.getParameter("booking_name");
 String booking_tel=request.getParameter("booking_tel");
-String coupon_idx=request.getParameter("coupon_idx");
+String coupon_name=request.getParameter("coupon_name");
 String booking_pay=request.getParameter("booking_pay");
 String booking_pwd=request.getParameter("booking_pwd");
 String booking_msg=request.getParameter("booking_msg");
@@ -96,11 +96,10 @@ section{width:1200px;margin:0px auto;}
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;<%
- 		int coupon_idx_i=Integer.parseInt(coupon_idx);
- 		switch(coupon_idx_i){
-	 		case 1:out.print("할인금액 1000원");break;
-	 		case 2:out.print("할인금액 2000원");break;
-	 		case 3:out.print("할인금액 3000원");
+ 		switch(coupon_name){
+	 		case "1,000":out.print("할인금액 1,000원");break;
+	 		case "2,000":out.print("할인금액 2,000원");break;
+	 		case "3,000":out.print("할인금액 3,000원");
  		}%></td>
  	</tr>
  	<tr height="40">
