@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
+String write_title = request.getParameter("write_title");
+String write_ref = request.getParameter("write_ref");
+String write_lev = request.getParameter("write_lev");
+String write_step = request.getParameter("write_step");
+
 
 
 String user_idx_s = (String) session.getAttribute("user_idx");
@@ -15,6 +21,7 @@ if (manager_s == null) {
 	manager_s = "0";
 }
 int write_notice = Integer.parseInt(manager_s);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -53,6 +60,9 @@ ul {
 				<table class="write_table">
 					<input type="hidden" name="user_idx" value="<%=user_idx%>">
 					<input type="hidden" name="write_notice" value="<%=write_notice%>">
+					<input type ="hidden" name = "write_ref" value = "<%=write_ref%>">
+					<input type = "hidden" name = "write_step" value = "<%=write_step%>">
+					<input type = "hidden" name = "write_lev" value = "<%=write_lev%>">
 					<tr>
 						<th>작성자</th>
 						<td><input type="text" name="write_writer"
@@ -60,7 +70,7 @@ ul {
 					</tr>
 					<tr>
 						<th>글제목</th>
-						<td><input type="text" name="write_title" required="required"></td>
+						<td><input type="text" name="write_title" required="required" value = "Re:)<%=write_title%>"></td>
 					</tr>
 					<tr>
 						<th>공개여부</th>
@@ -74,7 +84,7 @@ ul {
 					<tr>
 						<th>글내용</th>
 						<td><textarea name="write_content" rows="10" cols="50"
-								required="required"></textarea></td>
+								required="required"><%=write_title %></textarea></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>

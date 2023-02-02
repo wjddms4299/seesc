@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
+<%@ page import="com.esc.userinfo.*"%>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <%
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
@@ -10,6 +12,20 @@ String time_date=request.getParameter("time_date");
 
 String time_ptime_s=request.getParameter("time_ptime");
 int time_ptime=Integer.parseInt(time_ptime_s);
+
+////////////////////////////////////////////////////////////////////////
+
+int user_idx;
+String user_idx_s=(String)session.getAttribute("user_idx");
+if(user_idx_s!=null){
+	user_idx=Integer.parseInt(user_idx_s);
+}else{
+	user_idx=0;
+}
+
+UserinfoDTO dto=udao.bookingUserInfo(user_idx);
+String user_name=dto.getUser_name;
+String user_tel=dto.getUser_tel;
 %>
 <!DOCTYPE html>
 <html>
@@ -27,10 +43,21 @@ section{width:1200px;margin:0px auto;}
 #d1{margin:40px 220px;}
 #d2{margin:0px auto;}
 </style>
+<script>
+var money;
+
+function changeMoney(){
+	money=document.getElementByld('select_people');
+}
+</script>
 </head>
 <body>
 <%@include file="/header.jsp"%>
 <section>
+<form name="bookingStep02" action="bookingStep03.jsp">
+<input type="hidden" name="thema_idx" value="<%=thema_idx%>">
+<input type="hidden" name="time_date" value="<%=time_date%>">
+<input type="hidden" name="time_ptime" value="<%=time_ptime%>">
  <article>
  <br><br>
  <h2 id="a1">예약하기</h2>
@@ -41,30 +68,42 @@ section{width:1200px;margin:0px auto;}
  <article>
  <table class="a1-1" border="1" cellspacing="0">
  	<tr height="40">
- 		<td width="200" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="600">&nbsp;&nbsp;테마 이름</td>
+ 		<%
+ 		ThemaDTO dto=thdao.themaInfo(thema_idx); %>
+ 		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
+ 		<td width="500">&nbsp;&nbsp;<%=dto.getThema_name()%><input type="hidden" name="thema_name" value="<%=dto.getThema_name()%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
- 		<td>&nbsp;&nbsp;2023-01-30 월요일</td>
+ 		<td>&nbsp;&nbsp;<%=time_date%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약시간</b></td>
- 		<td>&nbsp;&nbsp;12:00</td>
+ 		<td>&nbsp;&nbsp;<%
+ 		switch(time_ptime){
+	 		case 1:out.print("10:00");break;
+	 		case 2:out.print("12:00");break;
+	 		case 3:out.print("14:00");break;
+	 		case 4:out.print("16:00");break;
+	 		case 5:out.print("18:00");break;
+	 		case 6:out.print("20:00");
+ 		}%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>게임시간</b></td>
- 		<td>&nbsp;&nbsp;100분</td>
+ 		<td>&nbsp;&nbsp;<%=dto.getThema_time()%>분<input type="hidden" name="thema_time" value="<%=dto.getThema_time()%>분"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
  		<td>&nbsp;&nbsp;
- 			<select>
- 				<option value="2명 (44,000원)">2명 (44,000원)</option>
- 				<option value="3명 (66,000원)">3명 (66,000원)</option>
- 				<option value="4명 (88,000원)">4명 (88,000원)</option>
- 				<option value="5명 (110,000원)">5명 (110,000원)</option>
- 				<option value="6명 (132,000원)">6명 (132,000원)</option>
+ 			<select name="booking_num">
+ 				<%
+ 				for(int i=dto.getThema_people_min();i<=dto.getThema_people_max();i++){
+ 					%>
+ 					<option value="<%=i%>명 (<%=i*dto.getThema_price()%>원)"><%=i%>명 (<%=i*dto.getThema_price()%>원)</option>
+ 					<%
+ 				}
+ 				%>
  			</select>
  		</td>
  	</tr>
@@ -79,7 +118,7 @@ section{width:1200px;margin:0px auto;}
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
- 			<select>
+ 			<select  name="coupon_idx">
  				<option value="1">1,000원 할인쿠폰</option>
  				<option value="2">2,000원 할인쿠폰</option>
  				<option value="3">3,000원 할인쿠폰</option>
@@ -91,7 +130,7 @@ section{width:1200px;margin:0px auto;}
  		<td>&nbsp;&nbsp;<b>44,000원</b></td>
  	</tr>
  	<tr height="40">
- 		<td align="center" class="a2"><b>결제방식</b></td>
+ 		<td align="center" class="a2" ><b>결제방식</b></td>
  		<td>&nbsp;&nbsp;
  			<input type="radio" name="booking_pay" value="0">현장결제&nbsp;&nbsp;&nbsp;&nbsp;
  			<input type="radio" name="booking_pay" value="1">무통장입금
@@ -141,8 +180,8 @@ section{width:1200px;margin:0px auto;}
  <tr>
  <td>
  이용약관 및 개인정보취급방침에 동의합니까?&nbsp;&nbsp;
- <input type="radio" name="booking_agree" value="동의함">동의함&nbsp;&nbsp;&nbsp;&nbsp;
- <input type="radio" name="booking_agree" value="동의안함">동의안함
+ <input type="radio" name="booking_agree" value="0">동의함&nbsp;&nbsp;&nbsp;&nbsp;
+ <input type="radio" name="booking_agree" value="1">동의안함
  </td>
  </tr>
  </table>
@@ -150,12 +189,13 @@ section{width:1200px;margin:0px auto;}
  <table id="a2-1">
  	<tr>
  		<td>
- 			<a href="bookingStep01.jsp"><input type="button" value="취소"></a> <a href="bookingStep03.jsp"><input type="button" value="예약하기"></a>
+ 			<a href="bookingStep01.jsp"><input type="button" value="취소"></a> <input type="submit" value="예약하기">
  		</td>
  	</tr>
  </table>
  <br>
  </article>
+</form>
 </section>
 <hr width="1200">
 <%@include file="/footer.jsp"%>

@@ -1,6 +1,7 @@
 package com.esc.userinfo;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class UserinfoDAO {
@@ -16,6 +17,7 @@ public class UserinfoDAO {
 	public UserinfoDAO() {
 		// TODO Auto-generated constructor stub
 	}
+	/**회원가입*/
 	public int memberJoin(UserinfoDTO dto,String user_birth) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -41,7 +43,7 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	
+	/**아이디 중복확인*/
 	public boolean idCheck(String id) {
 	try {
 		conn=com.esc.db.EscDB.getConn();
@@ -62,7 +64,7 @@ public class UserinfoDAO {
 	}	
 	
 	}
-	
+	/**닉네임 중복 확인*/
 	public boolean nicCheck(String nicname) {
 	try {
 		conn=com.esc.db.EscDB.getConn();
@@ -83,6 +85,7 @@ public class UserinfoDAO {
 	}
 			
 	}
+	/**로그인 아이디 비밀번호 확인*/
 	public int loginCheck(String userid,String userpwd) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -113,6 +116,7 @@ public class UserinfoDAO {
 			}
 		}
 	}
+	/**회원번호 가져오기*/
 	public int userNum(String userid) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -134,6 +138,7 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**관리자 가져오기*/
 	public int mngnum(String userid) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -156,7 +161,7 @@ public class UserinfoDAO {
 		}
 	}
 	
-	
+	/**내정보 불러오기*/
 	public UserinfoDTO userInfo(String userid) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -189,18 +194,107 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	
+	/**내정보 업데이트*/
 	public int userUpdate(String user_id,String user_nic,String user_name,String tel,String user_email,String user_pwd) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="update";
+			String sql="update userinfo set user_nic=? , user_name=? ,user_tel=?,user_email=?,user_pwd=? where user_id=?";
 			ps=conn.prepareStatement(sql);
+			ps.setString(1, user_nic);
+			ps.setString(2, user_name);
+			ps.setString(3, tel);
+			ps.setString(4, user_email);
+			ps.setString(5, user_pwd);
+			ps.setString(6, user_id);
+			int count=ps.executeUpdate();
+			return count;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return -1;
 		}finally {
 			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**모든 회원정보 가져오기*/
+	public ArrayList<UserinfoDTO> alluserinfo(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from userinfo order by user_idx asc";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<UserinfoDTO> arr=new ArrayList<UserinfoDTO>();
+			while(rs.next()) {
+				int user_idx=rs.getInt("user_idx");
+				int manager=rs.getInt("manager");
+				String user_id=rs.getString("user_id");
+				String user_pwd=rs.getString("user_pwd");
+				String user_nic=rs.getString("user_nic");
+				int user_se=rs.getInt("user_se");
+				String user_name=rs.getString("user_name");
+				Date user_birth=rs.getDate("user_birth");
+				String user_tel=rs.getString("user_tel");
+				String user_email=rs.getString("user_email");
+				Date user_date=rs.getDate("user_date");
+				UserinfoDTO dto=new UserinfoDTO(user_idx, manager, user_id, user_pwd, user_nic, user_se, user_name, user_birth, user_tel, user_email, user_date);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				
+			}catch(Exception e2) {}
+		}
+	}
+	/**회원권한 관리*/
+	public int managepower(int manager,int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="update userinfo set manager=? where user_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, manager);
+			ps.setInt(2, user_idx);
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				
+			}catch(Exception e2) {}
+		}
+	}
+	
+	/**예약시 로그인 정보 불러오기*/
+	public UserinfoDTO bookingUserInfo(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="select user_name,user_tel from userinfo where user_id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			rs=ps.executeQuery();
+			
+			UserinfoDTO dto=null;
+			if(rs.next()) {
+				String user_name=rs.getString("user_name");
+				String user_tel=rs.getString("user_tel");
+				dto=new UserinfoDTO(user_name,user_tel);
+			}
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			}catch(Exception e2) {}

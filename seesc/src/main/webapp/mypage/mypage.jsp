@@ -21,6 +21,14 @@
     	<%
     	return;
     }
+	int manager=(int)session.getAttribute("manager");
+	if(manager>0){
+		%>
+		<script>
+		location.href='/seesc/mypage/manage/managepage.jsp';
+		</script>
+		<%
+	}
     %>
 <section>
 <h1>마이페이지</h1>
