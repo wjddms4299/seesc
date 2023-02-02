@@ -3,36 +3,40 @@
     <%@page import="com.esc.hof.HofDTO" %>
     <%@page import="java.util.*" %>
     <jsp:useBean id="hofdao" class="com.esc.hof.HofDAO" scope="session"></jsp:useBean>
-	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <style>
 table{
 text-align: center;
 }
+
+
 </style>
 <script>
 function openhofUpload(){
 	window.open('hofUpload.jsp','upload','width=550,height=700');
 }
 </script>
+	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
+	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
 <%@include file="../header.jsp" %>
 <section>
 <h1>명예의 전당</h1>
 <article>
 	<div>
-		<a href="hof.jsp?thema=이젠401"><button><span>이젠401</span></button></a>
-		<a href="hof.jsp?thema=이젠402"><button><span>이젠402</span></button></a>
-		<a href="hof.jsp?thema=이젠403"><button><span>이젠403</span></button></a>
-		<a href="hof.jsp?thema=이젠404"><button><span>이젠404</span></button></a>
-		<a href="hof.jsp?thema=이젠405"><button><span>이젠405</span></button></a>
-		<a href="hof.jsp?thema=이젠406"><button><span>이젠406</span></button></a>
-		<a href="hof.jsp?thema=이젠407"><button><span>이젠407</span></button></a>
+		<a href="hof.jsp?thema=이젠401"><button class="tbutton"><span>이젠401</span></button></a>
+		<a href="hof.jsp?thema=이젠402"><button class="tbutton"><span>이젠402</span></button></a>
+		<a href="hof.jsp?thema=이젠403"><button class="tbutton"><span>이젠403</span></button></a>
+		<a href="hof.jsp?thema=이젠404"><button class="tbutton"><span>이젠404</span></button></a>
+		<a href="hof.jsp?thema=이젠405"><button class="tbutton"><span>이젠405</span></button></a>
+		<a href="hof.jsp?thema=이젠406"><button class="tbutton"><span>이젠406</span></button></a>
+		<a href="hof.jsp?thema=이젠407"><button class="tbutton"><span>이젠407</span></button></a>
 	</div>
 </article>
 <article>

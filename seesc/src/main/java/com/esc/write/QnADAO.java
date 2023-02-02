@@ -1,6 +1,6 @@
 package com.esc.write;
 
-import java.sql.*;
+import java.sql.*;	
 import java.sql.Date;
 import java.util.*;
 import com.oreilly.servlet.MultipartRequest;
@@ -131,12 +131,11 @@ public class QnADAO {
 				
 				int write_open = 
 						mr.getParameter("write_open")==null||mr.getParameter("write_open").equals("")?0:Integer.parseInt(mr.getParameter("write_open"));
-				int write_notice = 
-						mr.getParameter("write_notice")==null||mr.getParameter("write_notice").equals("")?0:Integer.parseInt(mr.getParameter("write_notice"));
+				
 				
 				setUpdate_step(write_ref,write_step+1);
 				
-				String sql = "insert into write values(write_write_idx.nextval,?,'qna',?,?,?,sysdate,?,?,0,?,?,?,?,?)";
+				String sql = "insert into write values(write_write_idx.nextval,?,'qna',?,?,?,sysdate,?,?,0,?,?,?,?,0)";
 				ps = conn.prepareStatement(sql);
 
 
@@ -151,7 +150,6 @@ public class QnADAO {
 				ps.setInt(8, write_lev+1);
 				ps.setInt(9, write_step+1);
 				ps.setInt(10, write_open);
-				ps.setInt(11, write_notice);
 
 				int count = ps.executeUpdate();
 				return count;
@@ -283,6 +281,7 @@ public class QnADAO {
 		}
 
 	}
+	/**공지글 출력 관련 메서드*/
 	public ArrayList<WriteDTO> qna_noticelist(){
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -384,21 +383,38 @@ public class QnADAO {
 
 			String sql = "";
 			switch (Listname) {
+			case "0":
+				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_title like ? or write_content like ? order by write_idx desc)a) where r >=? and r<=?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+				ps.setString(2, "%" + content + "%");
+				ps.setInt(3, start);
+				ps.setInt(4, end);
+				break;
 			case "1":
 				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_title like ? order by write_idx desc)a) where r >=? and r<=?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+				ps.setInt(2, start);
+				ps.setInt(3, end);
 				break;
 			case "2":
 				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_content like ? order by write_idx desc)a) where r >=? and r<=?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+				ps.setInt(2, start);
+				ps.setInt(3, end);
 				break;
 			case "3":
 				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_writer like ? order by write_idx desc)a) where r >=? and r<=?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+				ps.setInt(2, start);
+				ps.setInt(3, end);
 				break;
 			}
 
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, "%" + content + "%");
-			ps.setInt(2, start);
-			ps.setInt(3, end);
+		
 			rs = ps.executeQuery();
 
 			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
@@ -548,4 +564,53 @@ public class QnADAO {
 			}
 		}
 	}
+	
+	
+/*---------------------------------------관리자--------------------------------------------------------------*/
+	
+	/**관리자 공지글 등록관련 메서드*/
+	public int qna_noticeUpload(MultipartRequest mr) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			int maxref = getMaxWrite_Ref();
+			String filename = mr.getFilesystemName("write_filename");
+			String user_idx_s = mr.getParameter("user_idx");
+			if (user_idx_s == null || user_idx_s.equals("")) {
+				user_idx_s = "0";
+			}
+			int user_idx = Integer.parseInt(user_idx_s);
+			
+			String sql = "insert into write values(write_write_idx.nextval,?,'qna',?,'관리자',?,sysdate,?,?,0,?,0,0,1,1)";
+			ps = conn.prepareStatement(sql);
+
+
+
+			ps.setInt(1, user_idx);
+			ps.setString(2, mr.getParameter("write_title"));
+			ps.setString(3, mr.getParameter(""));
+			ps.setString(4, filename);
+			ps.setString(5, mr.getParameter("write_content"));
+			ps.setInt(6, maxref+1);
+	
+
+			int count = ps.executeUpdate();
+			return count;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+
+			}
+		}
+	}
+	
+	
 }

@@ -54,9 +54,9 @@ if(cp%pageSize==0)userGroup--;
 			<input type="button" value="자유 게시판" onclick="location.href='community.jsp'">
 			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
 			<select name="sort" >
-				<option name="정렬순" value="0">정렬 순
-				<option name="조회수 순" value="1">조회수 순
-				<option name="작성일 순" value="2">작성일 순
+				<option  value="0">정렬 순
+				<option  value="1">조회수 순
+				<option  value="2">작성일 순
 				<!-- 기능 구현할곳 -->
 			</select>
 		</div>
@@ -70,7 +70,7 @@ if(cp%pageSize==0)userGroup--;
 					<th>조회수</th>
 				</tr>
 			</thead>
-			<tbody >
+			<tbody>
 				<%
 				ArrayList<WriteDTO> arr=wdao.selWrite(listSize, cp);
 				for(int i=0;i<arr.size();i++){			
@@ -86,10 +86,6 @@ if(cp%pageSize==0)userGroup--;
 						<tr>
 							<td><%=arr.get(i).getWrite_idx() %></td> 
 							<%
-							
-								
-					
-								
 							%>
 								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title() %></a></td>
 								<% 

@@ -40,21 +40,23 @@ public class CouponDAO {
 		}
 	}
 	
+	/**예약시 쿠폰 정보 불러오기*/
 	public ArrayList<CouponDTO> bookingCoupon(Integer user_idx){
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			
-			String sql="select coupon_name,coupon_dc from coupon where user_idx=? and coupon_use=1";
+			String sql="select coupon_idx,coupon_name,coupon_dc from coupon where user_idx=? and coupon_use=1";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, user_idx);
 			rs=ps.executeQuery();
 			
 			ArrayList<CouponDTO> arr=new ArrayList<CouponDTO>();
-			if(rs.next()) {
+			while(rs.next()) {
+				int coupon_idx=rs.getInt("coupon_idx");
 				String coupon_name=rs.getString("coupon_name");
 				int coupon_dc=rs.getInt("coupon_dc");
 				
-				CouponDTO dto=new CouponDTO(coupon_name,coupon_dc);
+				CouponDTO dto=new CouponDTO(coupon_idx,coupon_name,coupon_dc);
 				arr.add(dto);
 			}
 			return arr;
@@ -69,4 +71,7 @@ public class CouponDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
+	/**예약완료시 쿠폰 사용여부 변경하기*/
+	
 }
