@@ -6,9 +6,7 @@
 <%
 
 int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
-
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
-
 int write_notice = manager;
 %>
 <!DOCTYPE html>
@@ -53,6 +51,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">
 						<input type="hidden" name="write_notice"
 							value="<%=write_notice%>">
+						
 						<tr>
 							<th>작성자</th>
 							<td><input type="text" name="write_writer"
