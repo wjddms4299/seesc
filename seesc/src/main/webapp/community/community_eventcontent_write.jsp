@@ -1,19 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@page import="com.esc.write.*"%>
+<%@page import ="com.esc.userinfo.*" %>
+<jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
 <%
-String user_idx_s = (String) session.getAttribute("user_idx");
-
-if (user_idx_s == null) {
-	user_idx_s = "0";
-}
-int user_idx = Integer.parseInt(user_idx_s);
-
-String manager_s = (String) session.getAttribute("manager");
-if (manager_s == null) {
-	manager_s = "0";
-}
-int write_notice = Integer.parseInt(manager_s);
+int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
+int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+int write_notice = manager;
 %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +26,10 @@ section{
 </head>
 <body>
 <%@include file="/header.jsp" %>
+<%
+sid= (String) session.getAttribute("sid");
+UserinfoDTO dto = userdao.userInfo(sid);
+%>
 <section>
 	<article>
 	<br>
@@ -41,7 +38,16 @@ section{
 		<table>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" placeholder="작성자입력" name="write_writer" required="required"></td>
+				<td><input type="text" name="write_writer"
+								required="required" value="<%
+								String value = user_idx==0?"":dto.getUser_nic();
+								out.println(value);
+								%>"
+								<%
+								String readonly =user_idx==0?"":"readonly";
+								out.println(readonly);
+								%>"
+								></td>
 				<th>비밀번호</th>
 				<td><input type="password" placeholder="비밀번호입력" name="write_pwd" required="required"></td>
 			</tr>
