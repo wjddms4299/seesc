@@ -27,7 +27,6 @@ ul {
 .write_table {
 	margin: 0px auto;
 	width: 600px;
-	text-align : center;
 }
 </style>
 
@@ -141,6 +140,7 @@ if(userpage%pageList == 0){
 				<form name = "reList" action="qna_SearchList.jsp">
 					<tr>
 						<td colspan="4" align="center"><select name= "listname">
+								<option value ="0">제목+내용</option>
 								<option value="1">글제목</option>
 								<option value="2">내용</option>
 								<option value="3">작성자</option>

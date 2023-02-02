@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.esc.write.*"%>
+<%@page import ="com.esc.userinfo.*" %>
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
+<jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
 <%
+int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
+int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+
 
 String write_idx_s = request.getParameter("write_idx");
 if (write_idx_s == null || write_idx_s.equals("")) {
@@ -57,6 +62,9 @@ text-decoration: none;
 </head>
 <body>
 	<%@include file="/header.jsp"%>
+	
+	<%sid= (String) session.getAttribute("sid");
+UserinfoDTO udto = userdao.userInfo(sid); %>
 	<section>
 		<article>
 			<p class="write_title">QnA 본 문 보 기</p>
@@ -96,11 +104,12 @@ text-decoration: none;
 						<input type="button"value="수정" onclick = "location.href = 'qna_update.jsp?write_idx=<%=write_idx%>'">
 						<input type="button" value="목록"
 							onclick="location.href = 'qna_list.jsp';">
+							<%if(dto.getWrite_notice()!=1){ %>
 							<input type="button" value="답글"
 							onclick="location.href =
 							'qna_repWrite.jsp?write_title=<%=dto.getWrite_title()%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=dto.getWrite_lev()%>&write_step=<%=dto.getWrite_step()%>'">
 						
-							
+							<%} %>
 						</div>
 
 					<hr>
