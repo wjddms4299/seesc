@@ -18,7 +18,7 @@ public class UserinfoDAO {
 		// TODO Auto-generated constructor stub
 	}
 	/**회원가입*/
-	public int memberJoin(UserinfoDTO dto,String user_birth) {
+	public int memberJoin(UserinfoDTO dto,String user_birth,String user_tel) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			String sql="insert into userinfo values (userinfo_user_idx.nextval,0,?,?,?,?,?,?,?,?,sysdate)";
@@ -29,7 +29,7 @@ public class UserinfoDAO {
 			ps.setInt(4, dto.getUser_se());
 			ps.setString(5, dto.getUser_name());
 			ps.setString(6, user_birth);
-			ps.setString(7, dto.getUser_tel());
+			ps.setString(7, user_tel);
 			ps.setString(8, dto.getUser_email());
 			int count=ps.executeUpdate();
 			return count;

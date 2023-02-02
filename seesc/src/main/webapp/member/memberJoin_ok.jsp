@@ -21,7 +21,7 @@ String user_birth=year+month+day;
 <jsp:setProperty property="*" name="udto" />
 <jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO"></jsp:useBean>
 <%
-int result=udao.memberJoin(udto,user_birth);
+int result=udao.memberJoin(udto,user_birth,user_tel);
 String msg=result>0?"회원가입완료!":"회원가입실패!";
 %>
 
