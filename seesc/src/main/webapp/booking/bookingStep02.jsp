@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <%@ page import="com.esc.userinfo.*"%>
 <jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
+<%@ page import="com.esc.coupon.*"%>
+<jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
@@ -17,9 +20,13 @@ int time_ptime=Integer.parseInt(time_ptime_s);
 
 Integer user_idx=(Integer)session.getAttribute("user_idx");
 
-UserinfoDTO udto=udao.bookingUserInfo(user_idx);
+UserinfoDTO udto=udao.bookingUserinfo(user_idx);
 String user_name=udto.getUser_name();
 String user_tel=udto.getUser_tel();
+
+///////////////////////////////////////////////////////////////////////
+
+ArrayList<CouponDTO> cpdto=cpdao.bookingCoupon(user_idx);
 %>
 <!DOCTYPE html>
 <html>
@@ -94,7 +101,8 @@ function changeMoney(){
  				<%
  				for(int i=thdto.getThema_people_min();i<=thdto.getThema_people_max();i++){
  					%>
- 					<option value="<%=i%>명 (<%=i*thdto.getThema_price()%>원)"><%=i%>명 (<%=i*thdto.getThema_price()%>원)</option>
+ 					<option value="<%=i%>명 (<%
+ 							String booking_money_b=String.valueOf((i*thdto.getThema_price())).length();%>원)"><%=i%>명 (<%=i*thdto.getThema_price()%>원)</option>
  					<%
  				}
  				%>
@@ -113,15 +121,19 @@ function changeMoney(){
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
  			<select  name="coupon_name">
- 				<option value="1,000원 할인쿠폰">1,000원 할인쿠폰</option>
- 				<option value="2,000원 할인쿠폰">2,000원 할인쿠폰</option>
- 				<option value="3,000원 할인쿠폰">3,000원 할인쿠폰</option>
+ 				<%
+ 				for(int i=0;i<cpdto.size();i++){
+ 					%>
+ 					<option value="<%=cpdto.get(i).getCoupon_name()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>
+ 					<%
+ 				}
+ 				%>
  			</select>
  		</td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b>44,000원</b></td>
+ 		<td>&nbsp;&nbsp;<b>44,000원</b></td>               <!-- cpdto.get(i).getCoupon_dc() -->
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2" ><b>결제방식</b></td>
