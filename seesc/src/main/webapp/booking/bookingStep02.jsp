@@ -103,25 +103,19 @@ function changeMoney(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약자</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_name"><%
- 			if(user_idx!=0){
- 				out.print(user_name);
- 			}%></td>
+ 		<td>&nbsp;&nbsp;<input type="text" name="booking_name" value="<%if(user_idx!=0){out.print(user_name);}%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>연락처</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_tel"><%
- 			if(user_idx!=0){
- 				out.print(user_tel);
- 			}%></td>
+ 		<td>&nbsp;&nbsp;<input type="text" name="booking_tel" value="<%if(user_idx!=0){out.print(user_tel);}%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
- 			<select  name="coupon_idx">
- 				<option value="1">1,000원 할인쿠폰</option>
- 				<option value="2">2,000원 할인쿠폰</option>
- 				<option value="3">3,000원 할인쿠폰</option>
+ 			<select  name="coupon_name">
+ 				<option value="1,000원 할인쿠폰">1,000원 할인쿠폰</option>
+ 				<option value="2,000원 할인쿠폰">2,000원 할인쿠폰</option>
+ 				<option value="3,000원 할인쿠폰">3,000원 할인쿠폰</option>
  			</select>
  		</td>
  	</tr>
