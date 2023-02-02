@@ -2,7 +2,7 @@ package com.esc.write;
 
 import java.sql.*;
 import java.util.*;
-import com.oreilly.servlet.MultipartRequest;
+//import com.oreilly.servlet.MultipartRequest;
 
 public class WriteDAO {
 
