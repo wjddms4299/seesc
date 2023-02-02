@@ -22,11 +22,9 @@ if(manager<1){
 <section>
 <h1>관리자페이지</h1>
 <article>
-	<a href="managepage.jsp"><button><span>예약내역</span></button></a>
-	<a href="#"><button><span>결제내역</span></button></a>
+	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
 	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
 	<a href="/seesc/mypage/myinfo.jsp"><button><span>내정보</span></button></a>
-	<a href="#"><button><span>쿠폰관리</span></button></a>
 	<a href="#"><button><span>카페주문내역</span></button></a>
 </article>
 </section>
