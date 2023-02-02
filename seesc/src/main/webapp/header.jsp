@@ -104,7 +104,7 @@ function login_open(){
 				<div class="dropbtn"><a href="#">소개</a></div>
 				<div class="dropdown-content">
 					<a href="#">방탈출 소개</a>
-					<a href="#">테마 소개</a>
+					<a href="/seesc/introduce/thema_introduce.jsp">테마 소개</a>
 					<a href ="/seesc/introduce/map.jsp">오시는 길</a>
 				</div>
 			</div>
