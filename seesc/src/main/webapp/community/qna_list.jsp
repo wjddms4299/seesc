@@ -97,13 +97,30 @@ if(userpage%pageList == 0){
 					</tr>
 				</thead>
 				<tbody>
+					
 					<%
+					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
+					for(int n=0;n<notice.size();n++){
+						if(notice!=null||!notice.equals("")){%>
+						<tr>
+						<td>공 지</td>
+						<td>
+						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"><%=notice.get(n).getWrite_title()%></a></td>
+						<td><%=notice.get(n).getWrite_writer()%></td>
+						<td><%=notice.get(n).getWrite_wdate()%></td>
+						<td><%=notice.get(n).getWrite_readnum()%></td>
+					</tr>
+						<%}
+					}
+					
+					
 					ArrayList<WriteDTO> arr = qnadao.writeQnAList(userpage,writeList);
 					if (arr == null || arr.size() == 0) {
 					%>
 					<tr>
 						<td colspan="5">등록된 게시글이 없습니다.</td>
 					</tr>
+					
 					<%
 					} else {
 					for (int i = 0; i < arr.size(); i++) {

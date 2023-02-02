@@ -25,13 +25,13 @@ section {
 <section>
 <div>
 <h2>공지사항</h2>
-<img>
+<img src="/seesc/img/notice.png" width="550" height="600">
 </div>
 <div>
 <h2>이벤트</h2>
 <button><span>◀◀이전</span></button>
 <button><span>다음▶▶</span></button>
-<a><img></a>
+<a><img src="/seesc/img/moningdc.png" width="550" height="600"></a>
 <a><img></a>
 </div>
 </section>

@@ -176,7 +176,7 @@ public class QnADAO {
 	public int getTotalCnt() {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "select count(*) from write where write_cate = 'qna'";
+			String sql = "select count(*) from write where write_cate = 'qna' and write_notice = 0";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			rs.next();
@@ -209,7 +209,7 @@ public class QnADAO {
 			conn = com.esc.db.EscDB.getConn();
 			int start = (userpage - 1) * writeList + 1;
 			int end = userpage * writeList;
-			String sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' order by write_ref desc,write_step asc)a) where r >=? and r<=?";
+			String sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna'and write_notice = 0 order by write_ref desc,write_step asc)a) where r >=? and r<=?";
 
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, start);
@@ -283,7 +283,52 @@ public class QnADAO {
 		}
 
 	}
+	public ArrayList<WriteDTO> qna_noticelist(){
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "select * from write where write_cate = 'qna' and write_notice=1 order by write_idx desc";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
 
+			while (rs.next()) {
+				int write_idx = rs.getInt("write_idx");
+				int user_idx = rs.getInt("user_idx");
+				String write_cate = rs.getString("write_cate");
+				String write_title = rs.getString("write_title");
+				String write_writer = rs.getString("write_writer");
+				String write_pwd = rs.getString("write_pwd");
+				Date write_wdate = rs.getDate("write_wdate");
+				String write_filename = rs.getString("write_filename");
+				String write_content = rs.getString("write_content");
+				int write_readnum = rs.getInt("write_readnum");
+				int write_ref = rs.getInt("write_ref");
+				int write_lev = rs.getInt("write_lev");
+				int write_step = rs.getInt("write_step");
+				int write_open = rs.getInt("write_open");
+				int write_notice = rs.getInt("write_notice");
+
+				WriteDTO dto = new WriteDTO(write_idx, user_idx, write_cate, write_title, write_writer, write_pwd,
+						write_wdate, write_filename, write_content, write_readnum, write_ref, write_lev, write_step,
+						write_open, write_notice);
+
+				arr.add(dto);
+			}
+
+			return arr;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				
+			}catch(Exception e2) {
+				
+			}
+		}
+		
+	}
 	/** qna특정 게시글 총 게시글 수 */
 	public int getTotal_SearchList(String Listname, String content) {
 		try {

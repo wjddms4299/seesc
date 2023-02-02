@@ -35,7 +35,7 @@ if(result==userdao.LOGIN_OK){
 	%>
 	<script>
 	window.alert('아이디 또는 비밀번호가 틀렸습니다.');
-	location.href='/seesc/index.jsp';
+	location.href='/seesc/member/login.jsp';
 	</script>
 	<%
 }else if(result==userdao.ERROR){
