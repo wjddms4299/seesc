@@ -15,17 +15,11 @@ int time_ptime=Integer.parseInt(time_ptime_s);
 
 ////////////////////////////////////////////////////////////////////////
 
-int user_idx;
-String user_idx_s=(String)session.getAttribute("user_idx");
-if(user_idx_s!=null){
-	user_idx=Integer.parseInt(user_idx_s);
-}else{
-	user_idx=0;
-}
+Integer user_idx=(Integer)session.getAttribute("user_idx");
 
-UserinfoDTO dto=udao.bookingUserInfo(user_idx);
-String user_name=dto.getUser_name;
-String user_tel=dto.getUser_tel;
+UserinfoDTO udto=udao.bookingUserInfo(user_idx);
+String user_name=udto.getUser_name();
+String user_tel=udto.getUser_tel();
 %>
 <!DOCTYPE html>
 <html>
@@ -69,9 +63,9 @@ function changeMoney(){
  <table class="a1-1" border="1" cellspacing="0">
  	<tr height="40">
  		<%
- 		ThemaDTO dto=thdao.themaInfo(thema_idx); %>
+ 		ThemaDTO thdto=thdao.themaInfo(thema_idx); %>
  		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="500">&nbsp;&nbsp;<%=dto.getThema_name()%><input type="hidden" name="thema_name" value="<%=dto.getThema_name()%>"></td>
+ 		<td width="500">&nbsp;&nbsp;<%=thdto.getThema_name()%><input type="hidden" name="thema_name" value="<%=thdto.getThema_name()%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
@@ -91,16 +85,16 @@ function changeMoney(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>게임시간</b></td>
- 		<td>&nbsp;&nbsp;<%=dto.getThema_time()%>분<input type="hidden" name="thema_time" value="<%=dto.getThema_time()%>분"></td>
+ 		<td>&nbsp;&nbsp;<%=thdto.getThema_time()%>분<input type="hidden" name="thema_time" value="<%=thdto.getThema_time()%>분"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
  		<td>&nbsp;&nbsp;
  			<select name="booking_num">
  				<%
- 				for(int i=dto.getThema_people_min();i<=dto.getThema_people_max();i++){
+ 				for(int i=thdto.getThema_people_min();i<=thdto.getThema_people_max();i++){
  					%>
- 					<option value="<%=i%>명 (<%=i*dto.getThema_price()%>원)"><%=i%>명 (<%=i*dto.getThema_price()%>원)</option>
+ 					<option value="<%=i%>명 (<%=i*thdto.getThema_price()%>원)"><%=i%>명 (<%=i*thdto.getThema_price()%>원)</option>
  					<%
  				}
  				%>
@@ -109,11 +103,17 @@ function changeMoney(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약자</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_name"></td>
+ 		<td>&nbsp;&nbsp;<input type="text" name="booking_name"><%
+ 			if(user_idx!=0){
+ 				out.print(user_name);
+ 			}%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>연락처</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_tel"></td>
+ 		<td>&nbsp;&nbsp;<input type="text" name="booking_tel"><%
+ 			if(user_idx!=0){
+ 				out.print(user_tel);
+ 			}%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
