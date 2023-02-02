@@ -109,8 +109,8 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
     		  <%
     	 }
         %>
-           <td align="center"><img src="img/<%=arr.get(i).getWrite_filename()%>">
-           <br><%=arr.get(i).getWrite_idx() %>
+           <td align="center"><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+           <br>No. <%=arr.get(i).getWrite_idx() %>
            <br>제목: <%=arr.get(i).getWrite_title() %>
            <br><%=arr.get(i).getWrite_writer() %>
            <br><%=arr.get(i).getWrite_wdate() %>

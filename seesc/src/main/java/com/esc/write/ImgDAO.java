@@ -113,6 +113,100 @@ public class ImgDAO {
 			}
 		}
 	}
+	/** event글 본문보기 관련 메서드 */
+	public WriteDTO writeEventContent(int write_idx) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			readnumUpdate(write_idx);
+			String sql = "select * from write where write_idx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, write_idx);
+			rs = ps.executeQuery();
+			WriteDTO dto = null;
+
+			if (rs.next()) {
+				int user_idx = rs.getInt("user_idx");
+				String write_cate = rs.getString("write_cate");
+				String write_title = rs.getString("write_title");
+				String write_writer = rs.getString("write_writer");
+				String write_pwd = rs.getString("write_pwd");
+				Date write_wdate = rs.getDate("write_wdate");
+				String write_filename = rs.getString("write_filename");
+				String write_content = rs.getString("write_content");
+				int write_readnum = rs.getInt("write_readnum");
+				int write_ref = rs.getInt("write_ref");
+				int write_lev = rs.getInt("write_lev");
+				int write_step = rs.getInt("write_step");
+				int write_open = rs.getInt("write_open");
+				int write_notice = rs.getInt("write_notice");
+				dto = new WriteDTO(write_notice, user_idx, write_cate, write_title, write_writer, write_pwd,
+						write_wdate, write_filename, write_content, write_readnum, write_ref, write_lev, write_step,
+						write_open, write_notice);
+			}
+			return dto;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+	
+	/** event조회수 관련 메서드 */
+	public void readnumUpdate(int write_idx) {
+		try {
+			String sql = "update write set write_readnum = write_readnum+1 where write_idx =? ";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, write_idx);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (Exception e2) {
+
+			}
+
+		}
+
+	}
+	/**ref*/
+	public int getMaxWrite_Ref() {
+		try {
+			String sql = "select max(write_ref) from write";
+			ps=conn.prepareStatement(sql);
+			rs= ps.executeQuery();
+			int max = 0;
+			if(rs.next()) {
+				max = rs.getInt(1);
+			}
+			return max;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+		
+	}
 
 }
 
