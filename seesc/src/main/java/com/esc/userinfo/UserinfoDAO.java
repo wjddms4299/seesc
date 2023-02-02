@@ -279,7 +279,7 @@ public class UserinfoDAO {
 			
 			String sql="select user_name,user_tel from userinfo where user_id=?";
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, user_idx);
+			ps.setInt(1, user_idx);
 			rs=ps.executeQuery();
 			
 			UserinfoDTO dto=null;

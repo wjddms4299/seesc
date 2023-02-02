@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@page import="com.esc.userinfo.*" %>
     <jsp:useBean id="userdto" class="com.esc.userinfo.UserinfoDTO"></jsp:useBean>
-    <jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO"></jsp:useBean>
+    <jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
