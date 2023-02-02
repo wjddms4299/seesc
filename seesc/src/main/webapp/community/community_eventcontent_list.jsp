@@ -14,9 +14,6 @@ h3{
  text-align: center;
 }
 table{
-   width:550px;
-   border-top:3px double darkblue;
-   border-bottom: 3px double darkblue;
    border-spacing: 0px;
    margin:0px auto;
 }

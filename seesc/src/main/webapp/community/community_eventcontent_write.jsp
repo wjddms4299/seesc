@@ -6,7 +6,7 @@
 <%
 int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
-int write_notice = manager;
+int write_notice = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -35,6 +35,9 @@ UserinfoDTO dto = userdao.userInfo(sid);
 	<br>
 		<h2>이벤트게시판 글쓰기</h2>
 		<form name="community_eventcontent_write" action="community_eventcontent_write_ok.jsp" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="user_idx" value="<%=user_idx%>">
+		<input type="hidden" name="write_notice" value="<%=write_notice%>">
+							
 		<table>
 			<tr>
 				<th>작성자</th>
