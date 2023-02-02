@@ -10,8 +10,10 @@ int result=userdao.loginCheck(userid, userpwd);
 
 if(result==userdao.LOGIN_OK){
 	int user_idx=userdao.userNum(userid);
+	int manager=userdao.mngnum(userid);
 	session.setAttribute("sid", userid);
 	session.setAttribute("user_idx", user_idx);
+	session.setAttribute("manager", manager);
 	if(saveid==null){
 		Cookie ck=new Cookie("saveid",userid);
 		ck.setMaxAge(0);
