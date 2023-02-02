@@ -102,23 +102,27 @@ public class WriteDAO {
 	public WriteDTO contentWrite(int idx) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "select write_title,write_writer,write_wdate,write_content from write where write_idx=?";
+			String sql = "select write_title,write_writer,write_wdate,write_content,write_readnum from write where write_idx=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
 			rs = ps.executeQuery();
 			WriteDTO dto = null;
+			
 			if (rs.next()) {
 				String title = rs.getString("write_title");
 				String writer = rs.getString("write_writer");
 				java.sql.Date date = rs.getDate("write_wdate");
 				String content = rs.getString("write_content");
-
+				int readnum=rs.getInt("write_readnum");
+				readnum(idx, readnum+1);
+				
 				dto = new WriteDTO();
 				dto.setWrite_idx(idx);
 				dto.setWrite_content(content);
 				dto.setWrite_title(title);
 				dto.setWrite_wdate(date);
 				dto.setWrite_writer(writer);
+				dto.setWrite_readnum(readnum);
 			}
 			return dto;
 		} catch (Exception e) {
@@ -164,7 +168,7 @@ public class WriteDAO {
 		}
 	}
 
-	/** 자유게시판 보기 관련 메서드 */
+	/** 자유게시판 보기 관련 메서드 안쓰는 DAO*/  
 	public ArrayList<WriteDTO> freeWrite() {
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -233,7 +237,28 @@ public class WriteDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	
-	
-	
+/**조회수 증가 관련 메서드*/
+	public int readnum(int idx,int readnum) {
+		try {
+			String sql="update write set write_readnum=? where write_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, readnum);
+			ps.setInt(2, idx);
+			int count=ps.executeUpdate();
+			
+			return count;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				
+			}catch(Exception e2) {}
+		}
+	}
+	/**멤버모집 게시글만 보여주는 게시판 관련 메서드*/
+	public WriteDTO member() {
+		
+	}
 }

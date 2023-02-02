@@ -134,6 +134,29 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	public int mngnum(String userid) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select manager from userinfo where user_id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, userid);
+			rs=ps.executeQuery();
+			rs.next();
+			int manager=rs.getInt("manager");
+			return manager;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	
+	
 	public UserinfoDTO userInfo(String userid) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
