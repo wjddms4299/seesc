@@ -1,8 +1,6 @@
 package com.esc.write;
 
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
 import com.oreilly.servlet.MultipartRequest;
 
 public class ImgDAO {
@@ -16,7 +14,7 @@ public class ImgDAO {
 	}
 	
 	/** 이벤트 게시글 등록 관련 메서드 */
-	public int writeQnAupload(MultipartRequest mr) {
+	public int eventwriteupload(MultipartRequest mr) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			String sql = "insert into write values(write_write_idx.nextval,?,'event',?,?,?,sysdate,?,?,0,0,0,0,?,0)";
@@ -28,7 +26,6 @@ public class ImgDAO {
 				user_idx_s = "0";
 			}
 			int user_idx = Integer.parseInt(user_idx_s);
-
 			int write_open = Integer.parseInt(mr.getParameter("write_open"));
 			int notice = Integer.parseInt(mr.getParameter("write_notice"));
 
