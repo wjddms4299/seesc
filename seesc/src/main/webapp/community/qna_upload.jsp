@@ -49,8 +49,6 @@ UserinfoDTO dto = userdao.userInfo(sid);
 				<fieldset>
 					<table class="write_table">
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">
-						<input type="hidden" name="write_notice"
-							value="<%=write_notice%>">
 						
 						<tr>
 							<th>작성자</th>
@@ -72,8 +70,8 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						</tr>
 						<tr>
 							<th>공개여부</th>
-							<td><input type="radio" name="write_open" value="0" <%out.println(manager==0?"checked":"");%>>비밀글
-								<input type="radio" name="write_open" value="1" <%out.println(manager==1?"checked":"");%>>공개글</td>
+							<td><input type="radio" name="write_open" value="0" checked>비밀글
+								<input type="radio" name="write_open" value="1">공개글</td>
 						</tr>
 						<tr>
 							<th>파일첨부</th>

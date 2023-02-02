@@ -102,8 +102,9 @@ if(userpage%pageList == 0){
 					
 					<%
 					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
+					if(notice!=null||!notice.equals("")){
 					for(int n=0;n<notice.size();n++){
-						if(notice!=null||!notice.equals("")){%>
+					%>
 						<tr class = "notice">
 						<td>공 지</td>
 						<td>
