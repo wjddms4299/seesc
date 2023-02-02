@@ -39,4 +39,34 @@ public class CouponDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
+	public ArrayList<CouponDTO> bookingCoupon(Integer user_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="select coupon_name,coupon_dc from coupon where user_idx=? and coupon_use=1";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			rs=ps.executeQuery();
+			
+			ArrayList<CouponDTO> arr=new ArrayList<CouponDTO>();
+			if(rs.next()) {
+				String coupon_name=rs.getString("coupon_name");
+				int coupon_dc=rs.getInt("coupon_dc");
+				
+				CouponDTO dto=new CouponDTO(coupon_name,coupon_dc);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 }

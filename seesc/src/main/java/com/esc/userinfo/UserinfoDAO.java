@@ -273,7 +273,7 @@ public class UserinfoDAO {
 	}
 	
 	/**예약시 로그인 정보 불러오기*/
-	public UserinfoDTO bookingUserInfo(int user_idx) {
+	public UserinfoDTO bookingUserinfo(Integer user_idx) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			
