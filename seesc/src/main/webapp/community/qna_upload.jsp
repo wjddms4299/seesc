@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.esc.write.*"%>
+<%@page import ="com.esc.userinfo.*" %>
+<jsp:useBean id="userdao" class = "com.esc.userinfo.UserinfoDAO"></jsp:useBean>>
 <%
+UserinfoDTO dto = userdao.
 String user_idx_s = (String) session.getAttribute("user_idx");
 
 if (user_idx_s == null) {
