@@ -20,10 +20,14 @@ int write_notice = Integer.parseInt(manager_s);
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/myweb/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 h2{
    text-align: center;
+}
+section{
+	width:1200px;
+
 }
 </style>
 </head>
@@ -34,7 +38,7 @@ h2{
 	<br>
 		<h2>이벤트게시판 글쓰기</h2>
 		<form name="community_eventcontent_write" action="community_eventcontent_write_ok.jsp" method="post" enctype="multipart/form-data">
-		<table align="center">
+		<table>
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" placeholder="작성자입력" name="write_writer" required="required"></td>
@@ -59,9 +63,9 @@ h2{
 			<div align="center"><input type="submit" value=" 등록 ">
 			<input type="button" value=" 취소 " onclick="location.href='community_eventcontent_list.jsp'"></div>
 		</form>
+		<br>
 	</article>	
 </section>
-<br>
 <%@include file="/footer.jsp" %>
 </body>
 </html>
