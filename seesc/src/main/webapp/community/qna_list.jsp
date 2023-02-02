@@ -30,6 +30,8 @@ ul {
 	width: 600px;
 
 }
+.notice{
+color : red;}
 </style>
 
 </head>
@@ -102,10 +104,10 @@ if(userpage%pageList == 0){
 					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
 					for(int n=0;n<notice.size();n++){
 						if(notice!=null||!notice.equals("")){%>
-						<tr>
+						<tr class = "notice">
 						<td>공 지</td>
 						<td>
-						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"><%=notice.get(n).getWrite_title()%></a></td>
+						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"class = "notice"><%=notice.get(n).getWrite_title()%></a></td>
 						<td><%=notice.get(n).getWrite_writer()%></td>
 						<td><%=notice.get(n).getWrite_wdate()%></td>
 						<td><%=notice.get(n).getWrite_readnum()%></td>
