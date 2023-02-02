@@ -2,6 +2,7 @@ package com.esc.write;
 
 import java.sql.*;
 import java.util.*;
+import com.oreilly.servlet.MultipartRequest;
 
 public class WriteDAO {
 
@@ -232,5 +233,7 @@ public class WriteDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
+	
 	
 }

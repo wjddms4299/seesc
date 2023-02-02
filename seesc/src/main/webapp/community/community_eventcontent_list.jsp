@@ -56,10 +56,12 @@ if(cp%pageSize==0)userGroup--;
 <%@include file="/header.jsp" %>
 <section>
 	<article>
+	<br>
 		<h3>이벤트게시판</h3>
 		<table>
 			<thead>
 				<tr>
+					<th>번호</th>
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
@@ -68,7 +70,7 @@ if(cp%pageSize==0)userGroup--;
       </thead>
       <tfoot>
       	<tr>
-      		<td colspan="3" align="center">
+      		<td colspan="4" align="center">
       			<!-- -------------------------------------- -->
       			<%
 if(userGroup!=0){
@@ -89,7 +91,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
 %>
       			<!-- -------------------------------------- -->
       		</td>
-      		<td align="center"><input type="button" value="글쓰기" onclick="location.href='community.jsp'"></td>
+      		<td align="center"><input type="button" value="글쓰기" onclick="location.href='community_eventcontent_write.jsp'"></td>
       	</tr>
       </tfoot>
       <tbody>
@@ -98,7 +100,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
      if(arr==null||arr.size()==0){  
         %>
         <tr>
-           <td colspan="4" align="center">
+           <td colspan="5" align="center">
            <br>
            등록된 글이 없습니다
            <br>
@@ -122,6 +124,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
    </table>
    </article>
 </section>
+<br>
 <%@include file="/footer.jsp" %>
 </body>
 </html>
