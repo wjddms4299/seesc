@@ -16,12 +16,12 @@ if(time_date==null || time_date==""){
 	String ww="";
 	
 	switch(ww_i){
-	case 1:ww="일요일";
-	case 2:ww="월요일";
-	case 3:ww="화요일";
-	case 4:ww="수요일";
-	case 5:ww="목요일";
-	case 6:ww="금요일";
+	case 1:ww="일요일";break;
+	case 2:ww="월요일";break;
+	case 3:ww="화요일";break;
+	case 4:ww="수요일";break;
+	case 5:ww="목요일";break;
+	case 6:ww="금요일";break;
 	case 7:ww="토요일";
 	}
 	

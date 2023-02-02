@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.esc.write.*"%>
+<jsp:useBean id="qnadto" class ="com.esc.write.WriteDTO" scope = "request"></jsp:useBean>
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -27,7 +28,7 @@ ul {
 .write_table {
 	margin: 0px auto;
 	width: 600px;
-	text-align : center;
+
 }
 </style>
 
@@ -109,18 +110,22 @@ if(userpage%pageList == 0){
 					%>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
-						<td><%if(arr.get(i).getWrite_open()==0){ %>
-						<form name = "rr" method = "post">
-						<a
-							href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> "
-							class="anono"><%=arr.get(i).getWrite_title()%>&#128274;
+						<td><%
+						for(int z=0; z<arr.get(i).getWrite_lev();z++){
+							out.println("&nbsp;&nbsp;");
+							}
+						if(arr.get(i).getWrite_lev()>0){
+							out.println("&#8627;");
+						}
+						if(arr.get(i).getWrite_open()==0){ %>
+					
+						<a href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> ">
+							<%=arr.get(i).getWrite_title()%>&#128274;</a>
 							<%}else{%>
-							<a
-							href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>"
-							class="anono">
-								<%=arr.get(i).getWrite_title()%>
-							<%} %></a>
-												</form>
+							<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
+								<%=arr.get(i).getWrite_title()%></a>
+							<%} %></td>
+
 						<td><%=arr.get(i).getWrite_writer()%></td>
 						<td><%=arr.get(i).getWrite_wdate()%></td>
 						<td><%=arr.get(i).getWrite_readnum()%></td>
