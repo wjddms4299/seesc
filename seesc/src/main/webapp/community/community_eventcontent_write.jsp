@@ -55,7 +55,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 				<td><input type="password" placeholder="비밀번호입력" name="write_pwd" required="required"></td>
 			</tr>
 			<tr>
-				<th align="left" colspan="2">파일첨부 : <input type="file" value="파일첨부"></th>
+				<th align="left" colspan="2">파일첨부 : <input type="file" name="write_filename"></th>
 				<th>공개여부</th>
 				<td><input type="radio" name="write_open" value="0" checked>비밀글
 				<input type="radio" name="write_open" value="1">공개글</td>

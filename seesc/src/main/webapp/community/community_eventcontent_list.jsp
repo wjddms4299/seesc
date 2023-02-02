@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.esc.write.*" %>
-<jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
+<jsp:useBean id="wdao" class="com.esc.write.WriteDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="idao" class="com.esc.write.ImgDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,31 +12,25 @@
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 h3{
- text-align: center;
+	text-align: center;
+	font-size: 30px;
 }
 table{
-   border-spacing: 0px;
-   margin:0px auto;
-}
-table thead th{
-   background-color: skyblue;
-}
-section div{
-   text-align: right;
-}
-section div input{
-   margin-right:80px;
+	width: 660px;
+	margin: 0px auto;
 }
 section img{
-   width:80px;
-   height:80px;
+   width:250px;
+   height:250px;
 }
 </style>
 </head>
 <%
-int totalCnt=wdao.getTotalCnt(); //DB
-int listSize=10; //내맘
-int pageSize=5; //내맘
+int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
+int manager=session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+int totalCnt=wdao.getTotalCnt();
+int listSize=12; 
+int pageSize=5; 
 
 String cp_s=request.getParameter("cp");
 if(cp_s==null || cp_s.equals("")){
@@ -55,14 +50,15 @@ if(cp%pageSize==0)userGroup--;
 	<article>
 	<br>
 		<h3>이벤트게시판</h3>
+	<br>
 		<table>
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
       </thead>
       <tfoot>
@@ -77,13 +73,13 @@ if(userGroup!=0){
 %>
 <%
 for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-	%>&nbsp;&nbsp;<a href="community_eventcontent.jsp?cp=<%=i%>"><%=i %>&nbsp;&nbsp;<%
+	%>&nbsp;&nbsp;<a href="community_eventcontent_list.jsp?cp=<%=i%>"><%=i %>&nbsp;&nbsp;<%
 	if(i==totalPage)break;
 }
 %>
 <%
 if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-	%><a href="community_eventcontent.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
+	%><a href="community_eventcontent_list.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
 }
 %>
       			<!-- -------------------------------------- -->
@@ -93,7 +89,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
       </tfoot>
       <tbody>
      <%
-     ArrayList<WriteDTO> arr=wdao.selWrite(listSize,cp);
+     ArrayList<WriteDTO> arr=idao.writeEventList(listSize,cp);
      if(arr==null||arr.size()==0){  
         %>
         <tr>
@@ -106,17 +102,24 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
         <% 
      }else{
         for(int i=0;i<arr.size();i++){
-           %>
-           <tr>
-              <td><%=arr.get(i).getWrite_title() %></td>
-              <td></td>
-              <td></td>
-              <td></td>
-           </tr>
-           <% 
-        }
-     } 
-     %>
+       	 if(i%4==0){
+    		 %>
+    		</tr>
+    		<tr>
+    		  <%
+    	 }
+        %>
+           <td align="center"><img src="img/<%=arr.get(i).getWrite_filename()%>">
+           <br><%=arr.get(i).getWrite_idx() %>
+           <br>제목: <%=arr.get(i).getWrite_title() %>
+           <br><%=arr.get(i).getWrite_writer() %>
+           <br><%=arr.get(i).getWrite_wdate() %>
+           <br><%=arr.get(i).getWrite_readnum() %></td>
+        
+        <%  
+     }
+  }
+  %>
       </tbody>
    </table>
    </article>
