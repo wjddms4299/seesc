@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String booking_agree=request.getParameter("booking_agree");
+
+String thema_idx=request.getParameter("thema_idx");
+String time_date=request.getParameter("time_date");
+String time_ptime=request.getParameter("time_ptime");
+
+if(booking_agree==null || booking_agree.equals("1")){
+	%>
+	<script>
+	window.alert("이용약관 및 개인정보취급방침에 동의해주세요.");
+	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	</script>
+	<%
+	return;
+}
+
+%>
 <!DOCTYPE html>
 <html>
 <head>

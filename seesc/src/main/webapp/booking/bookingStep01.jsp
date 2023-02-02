@@ -8,10 +8,24 @@ String time_date=request.getParameter("time_date");
 
 if(time_date==null || time_date==""){
 	Calendar now=Calendar.getInstance();
+	
 	int yy=now.get(Calendar.YEAR);
 	int mm=now.get(Calendar.MONTH)+1;
 	int dd=now.get(Calendar.DATE);
-	time_date=yy+"-"+mm+"-"+dd;
+	int ww_i=now.get(Calendar.DAY_OF_WEEK);
+	String ww="";
+	
+	switch(ww_i){
+	case 1:ww="일요일";
+	case 2:ww="월요일";
+	case 3:ww="화요일";
+	case 4:ww="수요일";
+	case 5:ww="목요일";
+	case 6:ww="금요일";
+	case 7:ww="토요일";
+	}
+	
+	time_date=yy+"-"+mm+"-"+dd+" "+ww;
 }
 %>
 <!DOCTYPE html>
@@ -97,8 +111,19 @@ select{margin:0px 950px;}
  		y[z]=now.get(Calendar.YEAR);
  		m[z]=now.get(Calendar.MONTH)+1;
  		d[z]=now.get(Calendar.DATE);
+		w_i[z]=now.get(Calendar.DAY_OF_WEEK);
  		
- 		ymd[z]=y[z]+"-"+m[z]+"-"+d[z];
+ 		switch(w_i[z]){
+ 			case 1:w[z]="일요일";break;
+	 		case 2:w[z]="월요일";break;
+	 		case 3:w[z]="화요일";break;
+	 		case 4:w[z]="수요일";break;
+	 		case 5:w[z]="목요일";break;
+	 		case 6:w[z]="금요일";break;
+	 		case 7:w[z]="토요일";
+ 		}
+ 		
+ 		ymd[z]=y[z]+"-"+m[z]+"-"+d[z]+" "+w[z];
  		
  		if(w_i[z]==1){
  			%>
