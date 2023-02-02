@@ -51,8 +51,8 @@ if(cp%pageSize==0)userGroup--;
 	<article>
 		<h2>커뮤니티</h2>
 		<div>
-			<input type="button" value="자유 게시판" onclick="location.href='freenoticeboard.jsp'">
-			<input type="button" value="멤버모집">
+			<input type="button" value="자유 게시판" onclick="location.href='community.jsp'">
+			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
 			<select name="sort" >
 				<option name="정렬순" value="0">정렬 순
 				<option name="조회수 순" value="1">조회수 순

@@ -45,6 +45,7 @@ if(cp%pageSize==0)userGroup--;
 		<table>
 		<%
 		WriteDTO dto=wdao.contentWrite(idx);
+		 
 		%>
 			<thead>
 				<tr>
