@@ -11,6 +11,25 @@ public class BookingDTO {
 	private String booking_tel;
 	private String booking_pwd;
 	private Date booking_time;
+	public BookingDTO(int booking_idx, int thema_idx, int user_idx, String booking_name, String booking_tel,
+			Date booking_time, Date time_date, int time_ptime, int booking_pay, int booking_pay_ok, String booking_msg,
+			int booking_num, int booking_money) {
+		super();
+		this.booking_idx = booking_idx;
+		this.thema_idx = thema_idx;
+		this.user_idx = user_idx;
+		this.booking_name = booking_name;
+		this.booking_tel = booking_tel;
+		this.booking_time = booking_time;
+		this.time_date = time_date;
+		this.time_ptime = time_ptime;
+		this.booking_pay = booking_pay;
+		this.booking_pay_ok = booking_pay_ok;
+		this.booking_msg = booking_msg;
+		this.booking_num = booking_num;
+		this.booking_money = booking_money;
+	}
+
 	private Date time_date;
 	private int time_ptime;
 	private int booking_pay;
