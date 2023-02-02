@@ -41,7 +41,7 @@ if(cp%pageSize==0)userGroup--;
 <section>
 	<article>
 		<h3>자유게시판 본문</h3>
-		<form name="update2" action="community_freecontent_update.jsp" method="get">
+		<form name="update2" action="community_freecontent_update.jsp" method="post" enctype="multipart/form-data">
 		<table>
 		<%
 		WriteDTO dto=wdao.contentWrite(idx);
@@ -61,16 +61,19 @@ if(cp%pageSize==0)userGroup--;
 			</thead>
 			<tbody>
 				<tr>
+					<td><img alt="등록 이미지" src="/seesc/img/<%=dto.getWrite_filename() %>"></td>
+				</tr>
+				<tr>
 					<td colspan="4"><textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
 					<td colspan="4" align="right">
-					<input type="hidden" name="idx" value="<%=dto.getWrite_idx() %>">
+						<input type="hidden" name="idx" value="<%=dto.getWrite_idx()%>">
 						<input type="submit" value="수정하기">
 						<input type="button" value="목록으로" onclick="location.href='community.jsp'">
-						
+						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'">				
 					</td>
 				</tr>
 			</tfoot>
