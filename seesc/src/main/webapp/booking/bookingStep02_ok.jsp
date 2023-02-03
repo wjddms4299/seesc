@@ -15,11 +15,36 @@ if(booking_name==null || booking_name==""){
 	return;
 }
 
-String booking_tel=request.getParameter("booking_tel");
-if(booking_tel==null || booking_tel==""){
+String booking_tel1=request.getParameter("booking_tel1");
+String booking_tel2_s=request.getParameter("booking_tel2");
+String booking_tel3_s=request.getParameter("booking_tel3");
+if(booking_tel1==null || booking_tel2_s==null || booking_tel3_s==null || booking_tel1=="" || booking_tel2_s=="" || booking_tel3_s==""){
 	%>
 	<script>
 	window.alert("연락처를 입력해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+try{
+	int booking_tel2=Integer.parseInt(booking_tel2_s);
+	int booking_tel3=Integer.parseInt(booking_tel3_s);
+}catch(NumberFormatException e){
+	%>
+	<script>
+	window.alert("연락처는 '숫자'만 입력해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+if(booking_tel2_s.length()!=4 || booking_tel3_s.length()!=4){
+	%>
+	<script>
+	window.alert("연락처는 각각 '4개'의 숫자만 입력해주세요.");
 	history.back();
 	</script>
 	<%
@@ -73,6 +98,8 @@ String booking_num_t=request.getParameter("booking_num");
 String booking_num_s=booking_num_t.substring(0,1);
 int booking_num=Integer.parseInt(booking_num_s);
 String booking_msg=request.getParameter("booking_msg");
+
+String booking_tel=booking_tel1+"-"+booking_tel2_s+"-"+booking_tel3_s;
 
 int coupon_idx=0;
 if(user_idx!=null){
