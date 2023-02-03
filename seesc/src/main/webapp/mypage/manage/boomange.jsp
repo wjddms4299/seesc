@@ -12,12 +12,11 @@
 <body>
 <section>
 <article>
-<h1>예약관리</h1>
+<h1>예약내역관리</h1>
 	<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
 	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
 	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
 	<a href="/seesc/mypage/myinfo.jsp"><button><span>내정보</span></button></a>
-	<a href="#"><button><span>카페주문내역</span></button></a>
 <table>
 	<tr>
 		<th>예약번호</th>
