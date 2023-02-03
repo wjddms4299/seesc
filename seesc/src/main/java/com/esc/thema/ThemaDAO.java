@@ -40,5 +40,30 @@ public class ThemaDAO {
 			}
 		}
 	}
+	/**테마 이름만 불러오기*/
+	public String themaName(int thema_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select thema_name from thema where thema_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,thema_idx);
+			rs=ps.executeQuery();
+			rs.next();
+			String thema_name = rs.getString(1);
+			return thema_name;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 
 }
