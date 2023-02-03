@@ -21,11 +21,16 @@ int time_ptime=Integer.parseInt(time_ptime_s);
 Integer user_idx=(Integer)session.getAttribute("user_idx");
 
 String user_name="";
-String user_tel="";
+String user_tel1="";
+String user_tel2="";
+String user_tel3="";
 if(user_idx!=null){
 	UserinfoDTO udto=udao.bookingUserinfo(user_idx);
 	user_name=udto.getUser_name();
-	user_tel=udto.getUser_tel();
+	String user_tel=udto.getUser_tel();
+	user_tel1=user_tel.substring(0, 3);
+	user_tel2=user_tel.substring(4, 8);
+	user_tel3=user_tel.substring(9,user_tel.length());
 }
 ///////////////////////////////////////////////////////////////////////
 
@@ -120,7 +125,16 @@ function changeMoney(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>연락처</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_tel" value="<%=user_tel%>"></td>
+ 		<td>&nbsp;&nbsp;<select name="booking_tel1">
+ 					<option value = "010">010
+ 					<option value = "016">016
+ 					<option value = "017">017
+ 					<option value = "018">018
+ 					<option value = "019">019
+ 				</select>
+ 					- <input type="text" name="booking_tel2" value="<%=user_tel2%>">
+ 					- <input type="text" name="booking_tel3" value="<%=user_tel3%>">
+ 		</td>
  	</tr>
  	<%if(user_idx!=null){%>
  	<tr height="40">
