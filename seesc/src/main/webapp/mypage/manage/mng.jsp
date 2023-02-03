@@ -10,6 +10,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+*{
+background-color: #FFEB46;
+margin: 0px auto;
+text-align: center;
+}
+
+</style>
 <%
 int manager=(int)session.getAttribute("manager");
 if(manager<1){

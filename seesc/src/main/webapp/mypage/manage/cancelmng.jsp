@@ -9,6 +9,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+*{
+background-color: #66EC66;
+margin: 0px auto;
+text-align: center;
+}
+
+</style>
 <body>
 <section>
 <h1>예약취소관리</h1>

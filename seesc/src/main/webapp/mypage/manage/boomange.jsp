@@ -9,6 +9,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+*{
+background-color: #3CFBFF;
+margin: 0px auto;
+text-align: center;
+}
+
+</style>
 <body>
 <section>
 <article>
