@@ -29,7 +29,7 @@ section {
 }
 
 ul.img{
-	padding: 0;
+	padding: 0;d
 	margin: 0;
 }
 ul.img li{

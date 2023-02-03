@@ -39,7 +39,6 @@
 	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
 	<a href="myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
 	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
-	<a href="cafeorderinfo.jsp"><button class="tbutton"><span>카페주문내역</span></button></a>
 	<table>
 		<tr>
 			<th>No</th>
@@ -58,14 +57,29 @@
 		</tr>
 		<%
 	}else{
+		String pay_ok=null;
 		for(int i=0;i<arr.size();i++){
 			%>
 			<tr>
 				<td><%=arr.get(i).getBooking_idx() %></td>
 				<td><%=arr.get(i).getBooking_time() %></td>
 				<td><%=arr.get(i).getBooking_num() %></td>
-				<td><%=arr.get(i).getBooking_pay_ok() %></td>
-				<td><a href="<% %>"><button>취소</button></a><td>
+				<%
+				if(arr.get(i).getBooking_pay_ok()>0){
+					pay_ok="결제미완료";
+				}else{
+					pay_ok="결제완료";
+				}
+				%>
+				<td><%=pay_ok %></td>
+				<%
+				if(pay_ok.equals("결제완료")){
+					%><td><a href="/seesc/booking/bookingCancle.jsp?user_idx=<%=user_idx %>&booking_idx=<%=arr.get(i).getBooking_idx()%>"><button>취소</button></a><td><%
+				}else{
+					%><td><td><%
+				}
+				%>
+				
 			</tr>
 			<%
 		}

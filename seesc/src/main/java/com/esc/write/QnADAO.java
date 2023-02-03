@@ -565,7 +565,80 @@ public class QnADAO {
 		}
 	}
 	
+/*----------------------------댓글---------------------------------------------------------------*/
+	/**댓글 등록 관련 메서드*/
+	public int comment_write(CommentDTO dto) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "insert into comments values(comments_comm_idx.nextval,?,?,?,?,?,sysdate,0,0,0,0)";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, dto.getWrite_idx());
+			ps.setInt(2, dto.getUser_idx());
+			ps.setString(3, dto.getComm_writer());
+			ps.setString(4, dto.getComm_pwd());
+			ps.setString(5, dto.getComm_content());
 	
+			int count = ps.executeUpdate();
+			return count;
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
+	/**댓글 출력 관련 메서드*/
+	public ArrayList<CommentDTO> commentList(int write_idx){
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "select * from comments where write_idx = ? order by comm_idx desc";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, write_idx);
+			
+			rs = ps.executeQuery();
+			ArrayList<CommentDTO> arr = new ArrayList<CommentDTO>();
+			while(rs.next()) {
+				int comm_idx = rs.getInt("comm_idx");
+				int user_idx = rs.getInt("user_idx");
+				String comm_writer = rs.getString("comm_writer");
+				String comm_pwd = rs.getString("comm_pwd");
+				String comm_content = rs.getString("comm_content");
+				Date comm_date = rs.getDate("comm_date");
+				int comm_like = rs.getInt("comm_like");
+				int comm_ref = rs.getInt("comm_ref");
+				int comm_lev = rs.getInt("comm_lev");
+				int comm_step = rs.getInt("comm_step");
+				
+				CommentDTO dto = new CommentDTO(comm_idx, write_idx, user_idx, comm_writer, comm_pwd, comm_content, comm_date, comm_like, comm_ref, comm_lev, comm_step);
+				
+				arr.add(dto);
+			}
+			return arr;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+		
+	}
 /*---------------------------------------관리자--------------------------------------------------------------*/
 	
 	/**관리자 공지글 등록관련 메서드*/
@@ -612,5 +685,6 @@ public class QnADAO {
 		}
 	}
 	
+
 	
 }

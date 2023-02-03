@@ -111,7 +111,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					
 					<%
 					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
-					if(notice!=null||!notice.equals("")){
+					if(notice!=null&&notice.size()!=0){
 					for(int n=0;n<notice.size();n++){
 					%>
 						<tr class = "notice">
@@ -180,7 +180,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							type="submit" value="검색" ></td>
 						
 						<td>
-						<% String wbutton = user_idx==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
+						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
 						<input type="button" value="글작성" onclick= "location.href = '<%=wbutton%>'"></td>
 					<tr>
 					</form>

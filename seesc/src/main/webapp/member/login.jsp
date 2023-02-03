@@ -31,11 +31,11 @@ if(cks!=null){
 		<table>
 			<tr>
 				<th>ID</th>
-				<td><input type="text" placeholder="아이디" name="userid" value="<%=saveid%>"></td>
+				<td><input type="text" placeholder="아이디" name="userid" value="<%=saveid%>" required></td>
 			</tr>
 			<tr>
 				<th>PWD</th>
-				<td><input type="password" placeholder="비밀번호" name="userpwd"></td>
+				<td><input type="password" placeholder="비밀번호" name="userpwd" required></td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="saveid"value="on" <%=saveid.equals("")?"":"checked" %>>ID기억</td>
