@@ -603,10 +603,11 @@ public class QnADAO {
 			String sql = "select * from comments where write_idx = ? order by comm_idx desc";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);
+			
 			rs = ps.executeQuery();
 			ArrayList<CommentDTO> arr = new ArrayList<CommentDTO>();
 			while(rs.next()) {
-				int comm_idx = rs.getInt("comment_idx");
+				int comm_idx = rs.getInt("comm_idx");
 				int user_idx = rs.getInt("user_idx");
 				String comm_writer = rs.getString("comm_writer");
 				String comm_pwd = rs.getString("comm_pwd");
