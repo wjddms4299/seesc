@@ -1,8 +1,9 @@
 package com.esc.write;
 
+import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.*;
-import com.oreilly.servlet.MultipartRequest;
+//import com.oreilly.servlet.MultipartRequest;
 
 public class WriteDAO {
 
@@ -15,29 +16,17 @@ public class WriteDAO {
 	}
 
 	/** 커뮤니티 게시판 보이는 메서드 */
-	public ArrayList<WriteDTO> selWrite(int ls, int cp,String number) {
+	public ArrayList<WriteDTO> selWrite(int ls, int cp) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			// String sql = "select * from write order by write_idx desc";
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			if(number.equals("0")){
-				String sql="select * from (select rownum as rnum, a.* from  "
-						+ "(select * from write order by write_idx desc)a)b  where rnum>=? and rnum<=?";
-						ps=conn.prepareStatement(sql);
-			}else if(number.equals("1")) {
-				String sql="select * from (select rownum as rnum, a.* from  "
-						+ "(select * from write order by write_readnum desc)a)b  where rnum>=? and rnum<=?";
-				ps = conn.prepareStatement(sql);
-			}else if(number.equals("2")) {
-				String sql="select * from (select rownum as rnum, a.* from  "
-						+ "(select * from write order by write_wdate desc)a)b  where rnum>=? and rnum<=?";
-				ps = conn.prepareStatement(sql);
-			}
-			
-				
-				ps.setInt(1, start);
-				ps.setInt(2, end);
+			String sql = "select * from (select rownum as rnum, a.* from  "
+					+ "(select * from write order by write_idx desc)a)b  " + "where rnum>=? and rnum<=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
 			while (rs.next()) {
@@ -61,9 +50,7 @@ public class WriteDAO {
 						lev, step, open, notice);
 				arr.add(dto);
 			}
-			
 			return arr;
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -416,6 +403,6 @@ public class WriteDAO {
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			}catch(Exception e2) {}
-		}*/
-
+		}
+	}*/
 }
