@@ -9,14 +9,41 @@ public class BookingDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	private ResultSet rs;
-	
-	/**마이페이지 예약정보불러오기*/
-	public ArrayList<BookingDTO> myBooking(int user_idx){
+
+	/**마이페이지 예약정보 페이징*/
+	public int getTotalCnt(int user_idx) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="select * from booking where user_idx=? order by booking_idx desc";
+			String sql="select count(*) from booking where user_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, user_idx);
+			rs=ps.executeQuery();
+			rs.next();
+			int count =rs.getInt(1);
+			return count==0?1:count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+		
+	}
+	/**마이페이지 예약정보불러오기*/
+	public ArrayList<BookingDTO> myBooking(int user_idx,int ls,int cp){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			int start=(cp-1)*ls+1;
+			int end=cp*ls;
+			String sql="select * from (select rownum as rnum, a.* from (select * from booking where user_idx=? order by booking_idx desc)a)b where rnum>=? and rnum<=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs=ps.executeQuery();
 			ArrayList<BookingDTO> arr=new ArrayList<BookingDTO>();
 			while(rs.next()) {
@@ -39,6 +66,7 @@ public class BookingDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
 	
 	/**예약하기 관련 메서드*/
 	public int booking(int thema_idx,int coupon_idx,Integer user_idx,String booking_name,String booking_tel,String booking_pwd,
@@ -76,6 +104,38 @@ public class BookingDAO {
 			}
 		}
 	}
+
+	/**예약취소에 필요한 예약번호 찾기*/
+	public int bookingIdx(int thema_idx,String time_date,int time_ptime) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+				
+			String sql="select booking_idx from booking where thema_idx=? and time_date=? and time_ptime=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,thema_idx);
+			ps.setString(2,time_date);
+			ps.setInt(3,time_ptime);
+			rs=ps.executeQuery();
+			
+			int booking_idx=0;
+			if(rs.next()) {
+				booking_idx=rs.getInt("booking_idx");
+			}
+			return booking_idx;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
 	/**모든 내역 불러오기 관리자*/
 	public ArrayList<BookingDTO> boomanage(){
 		try {
@@ -215,7 +275,6 @@ public class BookingDAO {
 			}
 		}
 	}
-	
 	
 	/**선택한 회원 예약 정보 조회하기*/
 	public BookingDTO one_bookingList(int booking_idx) {

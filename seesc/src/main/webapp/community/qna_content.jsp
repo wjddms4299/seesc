@@ -130,7 +130,13 @@ a {
 					<input type="submit" value="삭제"> <input type="button"
 						value="수정"
 						onclick="location.href = 'qna_update.jsp?write_idx=<%=write_idx%>'">
+									<%
+					}
+					%>
 					<input type="button" value="목록"
+				<%
+			if (dto.getWrite_notice() != 1) {
+			%>
 						onclick="location.href = 'qna_list.jsp';"> <input
 						type="button" value="답글"
 						onclick="location.href =
@@ -159,6 +165,7 @@ a {
 				<label><%=arr.get(i).getComm_date() %></label><br>
 				<label><a href = "comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>">댓글쓰기</a>
 				<a href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>">&#10060;</a></label>
+				<br><br>
 				</div>
 				</li>
 				</ul>

@@ -54,12 +54,15 @@ if(cp%pageSize==0)userGroup--;
 			<input type="button" value="자유 게시판" onclick="location.href='community.jsp'">
 			<input type="button" value="이벤트 게시판" onclick="location.href='community_eventcontent_list.jsp'">
 			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
-			<select name="sort" >
-				<option  value="0">정렬 순
+			<select name="sort" onchange=>
+				<option  value="0">번호순
 				<option  value="1">조회수 순
 				<option  value="2">작성일 순
+			
 				<!-- 기능 구현할곳 -->
+				
 			</select>
+		
 		</div>
 		<table>
 			<thead>
