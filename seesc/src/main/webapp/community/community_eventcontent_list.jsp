@@ -54,13 +54,14 @@ if(cp%pageSize==0)userGroup--;
 		<table>
 			<thead>
 				<tr>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
+					<th>No</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>날짜</th>
+					<th>조회수</th>
 				</tr>
-      </thead>
+      		</thead>
+      		
       <tfoot>
       	<tr>
       		<td colspan="4" align="center">
