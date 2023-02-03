@@ -4,7 +4,6 @@
 <%@ page import="com.esc.write.*"%>
 <%@page import ="com.esc.userinfo.*" %>
 <jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
-<jsp:useBean id="qnadto" class ="com.esc.write.WriteDTO" scope = "request"></jsp:useBean>
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -38,8 +37,8 @@ color : red;}
 
 </head>
 <%
-int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
-int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
 
 String listname = request.getParameter("listname");
 if(listname==null||listname.equals("")){
@@ -90,7 +89,11 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 			<table class="write_table">
 				<thead>
 					<tr>
-						<td colspan="4" align="left">전체글 : <%=qnadao.getTotalCnt(listname,content)%>개
+						<td colspan="4" align="left">
+						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.getTotalCnt(listname,content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+qnadao.getTotalCnt(listname,content)+"개");
+						%>
+						
+						<%=searchmsg %>
 						</td>
 						<td align="right"><select name="writeList"
 							onChange="window.location.href=this.value">
@@ -156,10 +159,10 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						if(arr.get(i).getWrite_open()==0){ %>
 					
 						<a href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> ">
-							<%=arr.get(i).getWrite_title()%>&#128274;</a>
+							<%=arr.get(i).getWrite_title()%>[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]  &#128274;</a>
 							<%}else{%>
 							<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-								<%=arr.get(i).getWrite_title()%></a>
+								<%=arr.get(i).getWrite_title()%>[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
 							<%} %></td>
 
 						<td><%=arr.get(i).getWrite_writer()%></td>
@@ -174,6 +177,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					%>
 
 				</tbody>
+				<!-- -----------------------------검색-------------------------------------------------------------- -->
 				<tfoot>
 					<tr>
 					<form name = "search_list" action = "qna_list.jsp">
@@ -189,8 +193,14 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						</form>
 						<td>
 						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
-						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'"></td>
-					<tr>
+						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'">
+						<input type="button" value="목록" onclick= "location.href ='qna_list.jsp'"></td>
+						
+					</tr>
+						<!-- ------------------------------------------------------------------------------------------- -->
+						
+						
+						<!-- ---------------------------------------페이징---------------------------------------------------- -->
 					<tr>
 						<td colspan="5" align="center">
 						<%if(pagegroup!=0){

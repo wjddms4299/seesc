@@ -1,9 +1,9 @@
 package com.esc.write;
 
-import java.lang.reflect.Array;
+
 import java.sql.*;
 import java.util.*;
-//import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.MultipartRequest;
 
 public class WriteDAO {
 
@@ -22,11 +22,15 @@ public class WriteDAO {
 			// String sql = "select * from write order by write_idx desc";
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			String sql = "select * from (select rownum as rnum, a.* from  "
-					+ "(select * from write order by write_idx desc)a)b  " + "where rnum>=? and rnum<=?";
-			ps = conn.prepareStatement(sql);
+			String free="free";
+				String sql = "select * from (select rownum as rnum, a.* from  "
+						+ "(select * from write order by write_idx desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
+				ps=conn.prepareStatement(sql);
+			
+				
 			ps.setInt(1, start);
 			ps.setInt(2, end);
+			ps.setString(3, free);
 			rs = ps.executeQuery();
 			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
 			while (rs.next()) {
@@ -72,7 +76,8 @@ public class WriteDAO {
 	public int insertWrite(MultipartRequest mr) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "insert into write values(write_write_idx.nextval,0,?,?,?,?,sysdate,?,?,0,0,0,0,1,0)";
+			int max=getMaxRef();
+			String sql = "insert into write values(write_write_idx.nextval,0,?,?,?,?,sysdate,?,?,0,?,0,0,1,0)";
 			ps = conn.prepareStatement(sql);
 			String cate=mr.getParameter("write_cate");
 			String writer=mr.getParameter("write_writer");
@@ -94,7 +99,7 @@ public class WriteDAO {
 			ps.setString(4, pwd);
 			ps.setString(5,filename);
 			ps.setString(6, content); 
-			
+			ps.setInt(7, max+1);
 		
 			int count = ps.executeUpdate();
 
@@ -359,50 +364,47 @@ public class WriteDAO {
 		}
 		
 	}
-	/*조회수 순 눌렀을때 테이블 바뀜 관련 메서드**/
-	/*public ArrayList<WriteDTO> readnumber(int ls, int cp){
+		/**마지막 ref 구하기 관련 메서드*/
+	public int getMaxRef() { 
 		try {
-			conn=com.esc.db.EscDB.getConn();
-			String sql="select * from (select rownum as rnum, a.* from  "
-					+ "(select * from write order by write_readnum desc)a)b  " + "where rnum>=? and rnum<=?";
-			ps = conn.prepareStatement(sql);
-			int start = (cp - 1) * ls + 1;
-			int end = cp * ls;
-			ps.setInt(1, start);
-			ps.setInt(2, end);
-			rs = ps.executeQuery();
-			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
-			while (rs.next()) {
-				int idx = rs.getInt("write_idx");
-				int uidx = rs.getInt("user_idx");
-				String cate = rs.getString("write_cate");
-				String title = rs.getString("write_title");
-				String writer = rs.getString("write_writer");
-				String pwd = rs.getString("write_pwd");
-				java.sql.Date wdate = rs.getDate("write_wdate");
-				String filename = rs.getString("write_filename");
-				String content = rs.getString("write_content");
-				int readnum = rs.getInt("write_readnum");
-				int ref = rs.getInt("write_ref");
-				int lev = rs.getInt("write_lev");
-				int step = rs.getInt("write_step");
-				int open = rs.getInt("write_open");
-				int notice = rs.getInt("write_notice");
-
-				WriteDTO dto = new WriteDTO(idx, uidx, cate, title, writer, pwd, wdate, filename, content, readnum, ref,
-						lev, step, open, notice);
-				arr.add(dto);
+			String sql="select max(ref) from write";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			int max=0;
+			if(rs.next()) {
+				max=rs.getInt(1);
 			}
-			return arr;
+			return max;
 		}catch(Exception e) {
 			e.printStackTrace();
-			return null;
+			return 0;
 		}finally {
 			try {
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
-			}catch(Exception e2) {}
+			}catch(Exception e2) {
+				
+			}
 		}
-	}*/
+	}
+	/*댓글 달기 관련 메서드**/
+	public int underWrite() {
+		c
+	}
+	/**순서 변경 관련 메서드*/
+	public void setUpdatestep() {
+		try {
+			String sql="update write set write_step=write_step+1 where write_ref=? and write_lev=?";
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			try {
+				
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 }

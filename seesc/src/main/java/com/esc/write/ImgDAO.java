@@ -207,6 +207,90 @@ public class ImgDAO {
 		}
 		
 	}
+	
+	/**관리자 공지등록*/
+	public int event_noticeUpload(MultipartRequest mr) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			int maxref=getMaxWrite_Ref();
+			String filename=mr.getFilesystemName("write_filename");
+			String user_idx_s=mr.getParameter("user_idx");
+			if(user_idx_s==null || user_idx_s.equals("")) {
+				user_idx_s="0";
+			}
+			int user_idx=Integer.parseInt(user_idx_s);
+			String sql="insert into write values(write_write_idx.nextval,?,'event',?,관리자,?,sysdate,?,?,0,?,0,0,1,1)";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			ps.setString(2, mr.getParameter("write_title"));
+			ps.setString(3, mr.getParameter(""));
+			ps.setString(4, filename);
+			ps.setString(5, mr.getParameter("write_content"));
+			ps.setInt(6, maxref+1);
+			
+			int count=ps.executeUpdate();
+			return count;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+/**이벤트 게시물 수정 관련 메서드 */
+public int event_update(WriteDTO dto) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "update write set write_title = ?, write_content =?,write_open = ? where write_idx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, dto.getWrite_title());
+		ps.setString(2, dto.getWrite_content());
+		ps.setInt(3, dto.getWrite_open());
+		ps.setInt(4, dto.getWrite_idx());
+			int count = ps.executeUpdate();
+			return count;
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+/** 이벤트게시물 삭제 관련 메서드 */
+public int event_delete(int write_idx) {
+	try {
+		conn = com.esc.db.EscDB.getConn();
+		String sql = "delete from write where write_idx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, write_idx);
+		int count = ps.executeUpdate();
+		return count;
+
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return -1;
+	} finally {
+		try {
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
+		} catch (Exception e2) {
+		}
+	}
+}
 }
 

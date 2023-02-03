@@ -18,9 +18,8 @@ int write_notice = 0;
 h2{
    text-align: center;
 }
-section{
-	width:1200px;
-
+table {
+	margin: 0px auto;
 }
 </style>
 </head>
