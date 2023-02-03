@@ -44,7 +44,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 	<section>
 		<article>
 			<form name="qna_upload" action="qna_upload_ok.jsp" method="post"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" accept=".jpg,.jpeg,.png,.gif,.bmp">
 				<h2 class="write_title">질문과 답변 글쓰기<% %></h2>
 				<fieldset>
 					<table class="write_table">
