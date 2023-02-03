@@ -111,7 +111,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					
 					<%
 					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
-					if(notice!=null||!notice.equals("")){
+					if(notice!=null&&notice.size()!=0){
 					for(int n=0;n<notice.size();n++){
 					%>
 						<tr class = "notice">

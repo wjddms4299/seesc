@@ -10,4 +10,5 @@ String msg = result>0?"성공":"실패";
 %>
 <script>
 window.alert('<%=msg%>');
+location.href = 'qna_content.jsp?write_idx=<%=comdto.getWrite_idx()%>';
 </script>
