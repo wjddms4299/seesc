@@ -39,7 +39,6 @@
 	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
 	<a href="myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
 	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
-	<a href="cafeorderinfo.jsp"><button class="tbutton"><span>카페주문내역</span></button></a>
 	<table>
 		<tr>
 			<th>No</th>
@@ -65,7 +64,7 @@
 				<td><%=arr.get(i).getBooking_time() %></td>
 				<td><%=arr.get(i).getBooking_num() %></td>
 				<td><%=arr.get(i).getBooking_pay_ok() %></td>
-				<td><a href="<% %>"><button>취소</button></a><td>
+				<td><a href="/seesc/booking/bookingCancle.jsp?user_idx=<%=user_idx %>&booking_idx=<%=arr.get(i).getBooking_idx()%>"><button>취소</button></a><td>
 			</tr>
 			<%
 		}

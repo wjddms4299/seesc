@@ -2,7 +2,7 @@ package com.esc.booking;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class BookingDAO {
 	
@@ -258,6 +258,61 @@ public class BookingDAO {
 			}catch(Exception e2) {
 				
 			}
+		}
+	}
+	/**관리자 취소조회*/
+	public ArrayList<CancelDTO> cancelmng(){
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql="select * from cancel order by cancel_ok desc, cancel_idx desc";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<CancelDTO> arr=new ArrayList<CancelDTO>();
+			CancelDTO dto=null;
+			while(rs.next()) {
+				int cancel_idx=rs.getInt("cancel_idx");
+				int booking_idx=rs.getInt("booking_idx");
+				int user_idx=rs.getInt("user_idx");
+				String booking_name=rs.getString("booking_name");
+				String booking_tel=rs.getString("booking_tel");
+				int booking_pay=rs.getInt("booking_pay");
+				int booking_pay_ok=rs.getInt("booking_pay_ok");
+				String cancel_banknum=rs.getString("cancel_banknum");
+				Date cancel_time=rs.getDate("cancel_time");
+				int booking_money=rs.getInt("booking_money");
+				int cancel_ok=rs.getInt("cancel_ok"); 
+				dto=new CancelDTO(cancel_idx, booking_idx, user_idx, booking_name, booking_tel, booking_pay, booking_pay_ok, cancel_banknum, cancel_time, booking_money, cancel_ok);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**환불정보업데이트*/
+	public int payUpdate(int booking_idx) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql="update cancel set cancel_ok=1 where booking_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, booking_idx);
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2){}
 		}
 	}
 }

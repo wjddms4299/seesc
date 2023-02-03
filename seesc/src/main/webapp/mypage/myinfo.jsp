@@ -20,7 +20,6 @@
 	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
 	<a href="myinfo.jsp"><button class="rbutton"><span>내정보</span></button></a>
 	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
-	<a href="cafeorderinfo.jsp"><button class="tbutton"><span>카페주문내역</span></button></a>
 	<%
 	int user_idx=(int)session.getAttribute("user_idx");
 	UserinfoDTO dto=userdao.userInfo(sid);
