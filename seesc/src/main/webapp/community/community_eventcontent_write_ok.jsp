@@ -7,7 +7,7 @@
 String savepath = request.getRealPath("/community/img");
 MultipartRequest mr = 
 	new MultipartRequest(request,savepath,2097152,"UTF-8");
-int result = imgdao.writeQnAupload(mr);
+int result = imgdao.eventwriteupload(mr);
 String msg = result>0?"글등록 성공": "글등록 실패";
 %>
 
