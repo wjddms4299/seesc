@@ -9,59 +9,9 @@ String time_date=request.getParameter("time_date");
 String time_ptime=request.getParameter("time_ptime");
 
 String booking_name=request.getParameter("booking_name");
-if(booking_name==null || booking_name==""){
-	%>
-	<script>
-	window.alert("예약자 성함을 입력해주세요.");
-	history.back();
-	</script>
-	<%
-	return;
-}
-
 String booking_tel=request.getParameter("booking_tel");
-if(booking_tel==null || booking_tel==""){
-	%>
-	<script>
-	window.alert("연락처를 입력해주세요.");
-	history.back();
-	</script>
-	<%
-	return;
-}
-
 String booking_pay=request.getParameter("booking_pay");
-if(booking_pay==null){
-	%>
-	<script>
-	window.alert("결제방식을 선택해주세요.");
-	history.back();
-	</script>
-	<%
-	return;
-}
-
 String booking_pwd=request.getParameter("booking_pwd");
-if(booking_pwd==null || booking_pwd==""){
-	%>
-	<script>
-	window.alert("예약 비밀번호를 입력해주세요.");
-	history.back();
-	</script>
-	<%
-	return;
-}
-
-String booking_agree=request.getParameter("booking_agree");
-if(booking_agree==null || booking_agree.equals("1")){
-	%>
-	<script>
-	window.alert("이용약관 및 개인정보취급방침에 동의해주세요.");
-	history.back();
-	</script>
-	<%
-	return;
-}
 
 String thema_name=request.getParameter("thema_name");
 String thema_time=request.getParameter("thema_time");
@@ -171,7 +121,6 @@ section{width:1200px;margin:0px auto;}
  		<td align="center" class="a2"><b>결제방식</b></td>
  		<td>&nbsp;&nbsp;<%
  		int booking_pay_i=Integer.parseInt(booking_pay);
- 		int booking_pay_ok=0;
  		switch(booking_pay_i){
 	 		case 0:out.print("무통장입금");break;
 	 		case 1:out.print("현장결제");

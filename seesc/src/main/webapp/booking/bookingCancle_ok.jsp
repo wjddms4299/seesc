@@ -8,7 +8,7 @@ request.setCharacterEncoding("utf-8");
 <jsp:useBean id="boodao" class="com.esc.booking.BookingDAO"
 	scope="session"></jsp:useBean>
 <%
-String cancle_banknum = request.getParameter("bank") + "-" + request.getParameter("cacle_banknum") + "-"
+String cancel_banknum = request.getParameter("bank") + "-" + request.getParameter("cacle_banknum") + "-"
 		+ request.getParameter("depositor");
 
 String booking_idx_s = request.getParameter("booking_idx");
@@ -25,7 +25,7 @@ BookingDTO dto = new BookingDTO();
 dto = boodao.one_bookingList(booking_idx);
 
 if (inputpwd.equals(booking_pwd)) {
-	int result = boodao.bookingDelete(booking_idx, dto, cancle_banknum);
+	int result = boodao.bookingDelete(booking_idx, dto, cancel_banknum);
 
 	if (result < 0) {
 %>
