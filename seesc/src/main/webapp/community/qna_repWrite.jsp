@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.esc.write.*"%>
+<%@page import ="com.esc.userinfo.*" %>
+<jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
 
 <%
 String write_title = request.getParameter("write_title");
@@ -7,20 +10,9 @@ String write_ref = request.getParameter("write_ref");
 String write_lev = request.getParameter("write_lev");
 String write_step = request.getParameter("write_step");
 
-
-
-String user_idx_s = (String) session.getAttribute("user_idx");
-
-if (user_idx_s == null) {
-	user_idx_s = "0";
-}
-int user_idx = Integer.parseInt(user_idx_s);
-
-String manager_s = (String) session.getAttribute("manager");
-if (manager_s == null) {
-	manager_s = "0";
-}
-int write_notice = Integer.parseInt(manager_s);
+int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
+int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+int write_notice = 0;
 
 %>
 <!DOCTYPE html>
@@ -51,6 +43,10 @@ ul {
 </head>
 <body>
 	<%@include file="/header.jsp"%>
+<%
+sid= (String) session.getAttribute("sid");
+UserinfoDTO dto = userdao.userInfo(sid);
+%>
 	<section>
 		<article>
 			<form name="qna_repWrite" action="qna_repWrite_ok.jsp" method="post"
@@ -59,14 +55,21 @@ ul {
 				<fieldset>
 				<table class="write_table">
 					<input type="hidden" name="user_idx" value="<%=user_idx%>">
-					<input type="hidden" name="write_notice" value="<%=write_notice%>">
 					<input type ="hidden" name = "write_ref" value = "<%=write_ref%>">
 					<input type = "hidden" name = "write_step" value = "<%=write_step%>">
 					<input type = "hidden" name = "write_lev" value = "<%=write_lev%>">
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="write_writer"
-							required="required"></td>
+							<td><input type="text" name="write_writer"
+								required="required" value="<%
+								String value = user_idx==0?"":dto.getUser_nic();
+								out.println(value);
+								%>"
+								<%
+								String readonly =user_idx==0?"":"readonly";
+								out.println(readonly);
+								%>
+								></td>
 					</tr>
 					<tr>
 						<th>글제목</th>

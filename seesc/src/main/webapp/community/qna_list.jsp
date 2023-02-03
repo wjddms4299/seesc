@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.esc.write.*"%>
+<%@page import ="com.esc.userinfo.*" %>
+<jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
 <jsp:useBean id="qnadto" class ="com.esc.write.WriteDTO" scope = "request"></jsp:useBean>
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
@@ -36,6 +38,11 @@ color : red;}
 
 </head>
 <%
+int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
+int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+
+
+
 int totalqna = qnadao.getTotalCnt();
 if(totalqna ==0){
 	totalqna = 1;
@@ -68,6 +75,8 @@ if(userpage%pageList == 0){
 %>
 <body>
 	<%@include file="/header.jsp"%>
+	<%sid= (String) session.getAttribute("sid");
+UserinfoDTO udto = userdao.userInfo(sid); %>
 	<section>
 		<article>
 			<p class="write_title">
@@ -163,13 +172,16 @@ if(userpage%pageList == 0){
 				<form name = "reList" action="qna_SearchList.jsp">
 					<tr>
 						<td colspan="4" align="center"><select name= "listname">
+							<option value ="0">제목+내용</option>
 								<option value="1">글제목</option>
 								<option value="2">내용</option>
 								<option value="3">작성자</option>
 						</select> <input type="text" name="search_Content" placeholder="내용입력" required = "required"> <input
 							type="submit" value="검색" ></td>
-						<td><input type="button" value="글작성"
-							onclick="location.href ='qna_upload.jsp'"></td>
+						
+						<td>
+						<% String wbutton = user_idx==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
+						<input type="button" value="글작성" onclick= "location.href = '<%=wbutton%>'"></td>
 					<tr>
 					</form>
 					<tr>

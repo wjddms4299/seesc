@@ -1,12 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String booking_agree=request.getParameter("booking_agree");
+Integer user_idx=(Integer)session.getAttribute("user_idx");
 
 String thema_idx=request.getParameter("thema_idx");
 String time_date=request.getParameter("time_date");
 String time_ptime=request.getParameter("time_ptime");
 
+String booking_name=request.getParameter("booking_name");
+if(booking_name==null || booking_name==""){
+	%>
+	<script>
+	window.alert("예약자 성함을 입력해주세요.");
+	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	</script>
+	<%
+	return;
+}
+
+String booking_tel=request.getParameter("booking_tel");
+if(booking_tel==null || booking_tel==""){
+	%>
+	<script>
+	window.alert("연락처를 입력해주세요.");
+	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	</script>
+	<%
+	return;
+}
+
+String booking_pay=request.getParameter("booking_pay");
+if(booking_pay==null){
+	%>
+	<script>
+	window.alert("결제방식을 선택해주세요.");
+	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	</script>
+	<%
+	return;
+}
+
+String booking_pwd=request.getParameter("booking_pwd");
+if(booking_pwd==null || booking_pwd==""){
+	%>
+	<script>
+	window.alert("예약 비밀번호를 입력해주세요.");
+	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	</script>
+	<%
+	return;
+}
+
+String booking_agree=request.getParameter("booking_agree");
 if(booking_agree==null || booking_agree.equals("1")){
 	%>
 	<script>
@@ -20,13 +65,8 @@ if(booking_agree==null || booking_agree.equals("1")){
 String thema_name=request.getParameter("thema_name");
 String thema_time=request.getParameter("thema_time");
 String booking_num=request.getParameter("booking_num");
-String booking_name=request.getParameter("booking_name");
-String booking_tel=request.getParameter("booking_tel");
 String coupon_name=request.getParameter("coupon_name");
-String booking_pay=request.getParameter("booking_pay");
-String booking_pwd=request.getParameter("booking_pwd");
 String booking_msg=request.getParameter("booking_msg");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -93,18 +133,21 @@ section{width:1200px;margin:0px auto;}
  		<td align="center" class="a2"><b>연락처</b></td>
  		<td>&nbsp;&nbsp;<%=booking_tel%></td>
  	</tr>
+ 	<%if(user_idx!=null){%>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;<%
  		switch(coupon_name){
 	 		case "1,000":out.print("할인금액 1,000원");break;
 	 		case "2,000":out.print("할인금액 2,000원");break;
-	 		case "3,000":out.print("할인금액 3,000원");
+	 		case "3,000":out.print("할인금액 3,000원");break;
+	 		default:out.print("사용안함");
  		}%></td>
  	</tr>
+ 	<%}%>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b>43,000원</b> [예약금: 20,000원]</td>
+ 		<td>&nbsp;&nbsp;<b>43,000원</b></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>결제방식</b></td>

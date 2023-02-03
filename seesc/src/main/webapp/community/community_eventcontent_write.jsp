@@ -6,7 +6,7 @@
 <%
 int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
-int write_notice = manager;
+int write_notice = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -35,6 +35,9 @@ UserinfoDTO dto = userdao.userInfo(sid);
 	<br>
 		<h2>이벤트게시판 글쓰기</h2>
 		<form name="community_eventcontent_write" action="community_eventcontent_write_ok.jsp" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="user_idx" value="<%=user_idx%>">
+		<input type="hidden" name="write_notice" value="<%=write_notice%>">
+							
 		<table>
 			<tr>
 				<th>작성자</th>
@@ -52,7 +55,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 				<td><input type="password" placeholder="비밀번호입력" name="write_pwd" required="required"></td>
 			</tr>
 			<tr>
-				<th align="left" colspan="2">파일첨부 : <input type="file" value="파일첨부"></th>
+				<th align="left" colspan="2">파일첨부 : <input type="file" name="write_filename"></th>
 				<th>공개여부</th>
 				<td><input type="radio" name="write_open" value="0" checked>비밀글
 				<input type="radio" name="write_open" value="1">공개글</td>

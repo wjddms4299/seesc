@@ -61,7 +61,7 @@
 			String tel=dto.getUser_tel();
 			String tel1=tel.substring(0, 3);
 			String tel2=tel.substring(4, 8);
-			String tel3=tel.substring(9, 13);
+			String tel3=tel.substring(9, tel.length());
 			%>
 			<td><input type="text" value="<%=tel1%>" name="tel1">-<input type="text" value="<%=tel2%>" name="tel2">-<input type="text" value="<%=tel3%>" name="tel3"></td>
 		</tr>
