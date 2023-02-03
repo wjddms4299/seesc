@@ -22,6 +22,12 @@ function openhofUpload(){
 	window.open('hofUpload.jsp','upload','width=550,height=700');
 }
 </script>
+<%
+String thema=request.getParameter("thema");
+if(thema==null||thema==""){
+	thema="이젠401";
+}
+%>
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
@@ -30,22 +36,50 @@ function openhofUpload(){
 <h1>명예의 전당</h1>
 <article>
 	<div>
-		<a href="hof.jsp?thema=이젠401"><button class="tbutton"><span>이젠401</span></button></a>
-		<a href="hof.jsp?thema=이젠402"><button class="tbutton"><span>이젠402</span></button></a>
-		<a href="hof.jsp?thema=이젠403"><button class="tbutton"><span>이젠403</span></button></a>
-		<a href="hof.jsp?thema=이젠404"><button class="tbutton"><span>이젠404</span></button></a>
-		<a href="hof.jsp?thema=이젠405"><button class="tbutton"><span>이젠405</span></button></a>
-		<a href="hof.jsp?thema=이젠406"><button class="tbutton"><span>이젠406</span></button></a>
-		<a href="hof.jsp?thema=이젠407"><button class="tbutton"><span>이젠407</span></button></a>
+		<%if(thema.equals("이젠401")){
+			%><a href="hof.jsp?thema=이젠401"><button class="rbutton"><span>이젠401</span></button></a><%
+		}else{
+			%><a href="hof.jsp?thema=이젠401"><button class="tbutton"><span>이젠401</span></button></a><%
+		} %>
+		<%if(thema.equals("이젠402")){
+			%><a href="hof.jsp?thema=이젠402"><button class="rbutton"><span>이젠402</span></button></a><%
+		}else{
+			%><a href="hof.jsp?thema=이젠402"><button class="tbutton"><span>이젠402</span></button></a><%
+		} %>
+		<%if(thema.equals("이젠403")){
+			%><a href="hof.jsp?thema=이젠403"><button class="rbutton"><span>이젠403</span></button></a><%
+		}else{
+			%><a href="hof.jsp?thema=이젠403"><button class="tbutton"><span>이젠403</span></button></a><%
+		} %>
+		<%if(thema.equals("이젠404")){
+			%><a href="hof.jsp?thema=이젠404"><button class="rbutton"><span>이젠404</span></button></a><%
+		}else{
+			%><a href="hof.jsp?thema=이젠404"><button class="tbutton"><span>이젠404</span></button></a><%
+		} %>
+		<%if(thema.equals("이젠405")){
+			%><a href="hof.jsp?thema=이젠405"><button class="rbutton"><span>이젠405</span></button></a><%
+		}else{
+			%><a href="hof.jsp?thema=이젠405"><button class="tbutton"><span>이젠405</span></button></a><%
+		} %>
+		<%if(thema.equals("이젠406")){
+			%><a href="hof.jsp?thema=이젠406"><button class="rbutton"><span>이젠406</span></button></a><%
+		}else{
+			%><a href="hof.jsp?thema=이젠406"><button class="tbutton"><span>이젠406</span></button></a><%
+		} %>
+		<%if(thema.equals("이젠407")){
+			%><a href="hof.jsp?thema=이젠407"><button class="rbutton"><span>이젠407</span></button></a><%
+		}else{
+			%><a href="hof.jsp?thema=이젠407"><button class="tbutton"><span>이젠407</span></button></a><%
+		} %>
+		
+		
+		
 	</div>
 </article>
 <article>
 	<table>
 <%
-String thema=request.getParameter("thema");
-if(thema==null||thema==""){
-	thema="이젠401";
-}
+
 ArrayList<HofDTO> arr=hofdao.hofList(thema); 
 if(arr==null||arr.size()==0){
 	%>

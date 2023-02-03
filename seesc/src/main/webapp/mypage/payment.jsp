@@ -9,16 +9,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
+	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
 <%@include file="/header.jsp" %>
 <section>
 <h1>마이페이지</h1>
 <article>
-	<a href="mypage.jsp"><button><span>예약내역</span></button></a>
-	<a href="payment.jsp"><button><span>결제내역</span></button></a>
-	<a href="myinfo.jsp"><button><span>내정보</span></button></a>
-	<a href="mycoupon.jsp"><button><span>쿠폰함</span></button></a>
-	<a href="cafeorderinfo.jsp"><button><span>카페주문내역</span></button></a>
+	<a href="mypage.jsp"><button class="tbutton"><span>예약내역</span></button></a>
+	<a href="payment.jsp"><button class="rbutton"><span>결제내역</span></button></a>
+	<a href="myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
+	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
+	<a href="cafeorderinfo.jsp"><button class="tbutton"><span>카페주문내역</span></button></a>
 	<table>
 		<tr>
 			<th>No</th>
