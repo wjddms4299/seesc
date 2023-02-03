@@ -52,13 +52,14 @@ if(cp%pageSize==0)userGroup--;
 		<h2>커뮤니티</h2>
 		<div>
 			<input type="button" value="자유 게시판" onclick="location.href='community.jsp'">
-			<input type="button" value="이벤트 게시판" onclick="seesc/community/community_eventcontent_list.jsp">
+			<input type="button" value="이벤트 게시판" onclick="location.href='community_eventcontent_list.jsp'">
 			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
-			<select name="sort" >
-				<option  value="0">정렬 순
-				<option  value="1">조회수 순
-				<option  value="2">작성일 순
+			<select name="sort" onchange="location.href=this.value">
+				<option value="community.jsp?sort=0">번호순
+				<option  value="community.jsp?sort=1" >조회수 순
+				<option  value="community.jsp?sort=2" >작성일 순
 				<!-- 기능 구현할곳 -->
+				<%String sort=request.getParameter("sort");%>
 			</select>
 		</div>
 		<table>
@@ -73,7 +74,7 @@ if(cp%pageSize==0)userGroup--;
 			</thead>
 			<tbody>
 				<%
-				ArrayList<WriteDTO> arr=wdao.selWrite(listSize, cp);
+				ArrayList<WriteDTO> arr=wdao.selWrite(listSize, cp, sort);
 				for(int i=0;i<arr.size();i++){			
 					if(arr==null || arr.size()==0){
 						%>
@@ -111,19 +112,19 @@ if(cp%pageSize==0)userGroup--;
 				<td colspan="5" align="center"><!-- 페이징 들어갈 영역 -->
 				<%
 if(userGroup!=0){
-	%><a href="community.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+	%><a href="community.jsp?sort=<%=sort %>&cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
 }
 %>
 
 <%
 for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-	%>&nbsp;&nbsp;<a href="community.jsp?cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<% 
+	%>&nbsp;&nbsp;<a href="community.jsp?sort=<%=sort %>&cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<% 
 	if(i==totalPage)break;
 }
 %>
 <%
 if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-	%><a href="community.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
+	%><a href="community.jsp?<%=sort %>&cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
 }
 
 %>
