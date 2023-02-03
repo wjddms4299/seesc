@@ -125,26 +125,4 @@ public class CouponDAO {
 		}
 	}
 	
-	/**예약취소시 쿠폰 사용여부 변경하기*/
-	public void bookingCouponUse_R(int coupon_idx){
-		try {
-			conn=com.esc.db.EscDB.getConn();
-			
-			String sql="update coupon set coupon_use=1 where coupon_idx=?";
-			ps=conn.prepareStatement(sql);
-			ps.setInt(1, coupon_idx);
-			
-			ps.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
-			}catch(Exception e2) {
-				
-			}
-		}
-	}
-	
 }

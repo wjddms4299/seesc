@@ -3,6 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="bdao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
 <%
 String time_date=request.getParameter("time_date");
 
@@ -181,12 +182,25 @@ select{margin:0px 950px;}
  <label class="a2-1" id="a2-2">#사내연애 #운명 #로맨스</label><br><br>
  <label class="a2-1"><div class="a2-3">대학생 철수와 직장인 유리의 만남은 결코 우연이 아니었다!!!</div>
 				<div class="a2-3">그들의 운명적인 만남 이야기</div></label><br>
- <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=1"><input type="button" value="10:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=2"><input type="button" value="12:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=3"><input type="button" value="14:00 예약마감"></a><br>
- <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=4"><input type="button" value="16:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=5"><input type="button" value="18:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=6"><input type="button" value="20:00 예약마감"></a><br><br><br><br><br><br><br><br><br>
+  <%
+ StringBuffer time_date_b=new StringBuffer(time_date);
+ time_date_b.delete(time_date_b.length()-4,time_date_b.length());
+ String time_date_in=time_date_b.toString();
+ 
+ int booking_idx[]=new int[42];
+ booking_idx[0]=bdao.bookingIdx(1,time_date_in,1);
+ booking_idx[1]=bdao.bookingIdx(1,time_date_in,2);
+ booking_idx[2]=bdao.bookingIdx(1,time_date_in,3);
+ booking_idx[3]=bdao.bookingIdx(1,time_date_in,4);
+ booking_idx[4]=bdao.bookingIdx(1,time_date_in,5);
+ booking_idx[5]=bdao.bookingIdx(1,time_date_in,6);
+ %>
+ <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[0]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[1]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[2]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+ <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[3]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[4]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=1&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[5]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
 
 <article>
@@ -209,12 +223,20 @@ select{margin:0px 950px;}
  <label class="a2-1" id="a2-2">#괴물 #할로윈 #공포</label><br><br>
  <label class="a2-1"><div class="a2-3">할로윈의 밤 수많은 괴물들이 깨어나는 시간</div>
 				<div class="a2-3">괴물들이 당신을 맞이할 것입니다.!</div></label><br>
- <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=1"><input type="button" value="10:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=2"><input type="button" value="12:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=3"><input type="button" value="14:00 예약마감"></a><br>
- <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=4"><input type="button" value="16:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=5"><input type="button" value="18:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=6"><input type="button" value="20:00 예약마감"></a><br><br><br><br><br><br><br><br><br>
+ <%
+ booking_idx[6]=bdao.bookingIdx(2,time_date_in,1);
+ booking_idx[7]=bdao.bookingIdx(2,time_date_in,2);
+ booking_idx[8]=bdao.bookingIdx(2,time_date_in,3);
+ booking_idx[9]=bdao.bookingIdx(2,time_date_in,4);
+ booking_idx[10]=bdao.bookingIdx(2,time_date_in,5);
+ booking_idx[11]=bdao.bookingIdx(2,time_date_in,6);
+ %>
+ <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[6]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[7]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[8]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+ <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[9]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[10]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=2&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[11]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
 
 <article>
@@ -238,12 +260,20 @@ select{margin:0px 950px;}
  <label class="a2-1"><div class="a2-3">중학생 철수는 순조로운 학창생활을 하고 있었는데</div>
 				<div class="a2-3">갑자기 폭행 사건에 휘말려 가해자가 되고 마는데,</div>
 				<div class="a2-3">철수를 도와 철수의 누명을 풀어주자!</div></label><br>
- <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=1"><input type="button" value="10:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=2"><input type="button" value="12:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=3"><input type="button" value="14:00 예약마감"></a><br>
- <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=4"><input type="button" value="16:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=5"><input type="button" value="18:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=6"><input type="button" value="20:00 예약마감"></a><br><br><br><br><br><br><br><br><br>
+ <%
+ booking_idx[12]=bdao.bookingIdx(3,time_date_in,1);
+ booking_idx[13]=bdao.bookingIdx(3,time_date_in,2);
+ booking_idx[14]=bdao.bookingIdx(3,time_date_in,3);
+ booking_idx[15]=bdao.bookingIdx(3,time_date_in,4);
+ booking_idx[16]=bdao.bookingIdx(3,time_date_in,5);
+ booking_idx[17]=bdao.bookingIdx(3,time_date_in,6);
+ %>
+ <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[12]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[13]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[14]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+ <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[15]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[16]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=3&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[17]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
 
 <article>
@@ -266,12 +296,20 @@ select{margin:0px 950px;}
  <label class="a2-1" id="a2-2">#탐정 #미스터리 #추리</label><br><br>
  <label class="a2-1"><div class="a2-3">당신이 셜록홈즈가 되어</div>
 				<div class="a2-3">미스터리한 사건을 해결하자!!</div></label><br>
- <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=1"><input type="button" value="10:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=2"><input type="button" value="12:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=3"><input type="button" value="14:00 예약마감"></a><br>
- <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=4"><input type="button" value="16:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=5"><input type="button" value="18:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=6"><input type="button" value="20:00 예약마감"></a><br><br><br><br><br><br><br><br><br>
+ <%
+ booking_idx[18]=bdao.bookingIdx(4,time_date_in,1);
+ booking_idx[19]=bdao.bookingIdx(4,time_date_in,2);
+ booking_idx[20]=bdao.bookingIdx(4,time_date_in,3);
+ booking_idx[21]=bdao.bookingIdx(4,time_date_in,4);
+ booking_idx[22]=bdao.bookingIdx(4,time_date_in,5);
+ booking_idx[23]=bdao.bookingIdx(4,time_date_in,6);
+ %>
+ <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[18]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[19]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[20]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+ <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[21]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[22]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=4&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[23]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
 
 <article>
@@ -294,12 +332,20 @@ select{margin:0px 950px;}
  <label class="a2-1" id="a2-2">#재판 #두뇌싸움 #분별력</label><br><br>
  <label class="a2-1"><div class="a2-3">당신은 청소년 재판의 재판관이 되어</div>
 				<div class="a2-3">분별력 있는 판결로 재판을 끝내주세요!!</div></label><br>
- <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=1"><input type="button" value="10:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=2"><input type="button" value="12:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=3"><input type="button" value="14:00 예약마감"></a><br>
- <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=4"><input type="button" value="16:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=5"><input type="button" value="18:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=6"><input type="button" value="20:00 예약마감"></a><br><br><br><br><br><br><br><br><br>
+ <%
+ booking_idx[24]=bdao.bookingIdx(5,time_date_in,1);
+ booking_idx[25]=bdao.bookingIdx(5,time_date_in,2);
+ booking_idx[26]=bdao.bookingIdx(5,time_date_in,3);
+ booking_idx[27]=bdao.bookingIdx(5,time_date_in,4);
+ booking_idx[28]=bdao.bookingIdx(5,time_date_in,5);
+ booking_idx[29]=bdao.bookingIdx(5,time_date_in,6);
+ %>
+ <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[24]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[25]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[26]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+ <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[27]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[28]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=5&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[29]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
 
 <article>
@@ -323,12 +369,20 @@ select{margin:0px 950px;}
  <label class="a2-1"><div class="a2-3">사랑을 해본 적 없는 은지와 철수는</div>
 				<div class="a2-3">서로 썸을 타고 있지만 서로에게 먼저 말을 건네기 어려운데</div>
 				<div class="a2-3">그들의 징검다리가 되어 사랑을 이어주자!</div></label><br>
- <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=1"><input type="button" value="10:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=2"><input type="button" value="12:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=3"><input type="button" value="14:00 예약마감"></a><br>
- <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=4"><input type="button" value="16:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=5"><input type="button" value="18:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=6"><input type="button" value="20:00 예약마감"></a><br><br><br><br><br><br><br><br><br>
+ <%
+ booking_idx[30]=bdao.bookingIdx(6,time_date_in,1);
+ booking_idx[31]=bdao.bookingIdx(6,time_date_in,2);
+ booking_idx[32]=bdao.bookingIdx(6,time_date_in,3);
+ booking_idx[33]=bdao.bookingIdx(6,time_date_in,4);
+ booking_idx[34]=bdao.bookingIdx(6,time_date_in,5);
+ booking_idx[35]=bdao.bookingIdx(6,time_date_in,6);
+ %>
+ <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[30]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[31]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[32]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+ <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[33]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[34]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=6&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[35]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
 
 <article>
@@ -351,12 +405,20 @@ select{margin:0px 950px;}
  <label class="a2-1" id="a2-2">#바이러스 #좀비 #공포</label><br><br>
  <label class="a2-1"><div class="a2-3">2023년 갑자기 좀비바이러스가 퍼진다</div>
 				<div class="a2-3">쉘터의 마지막 생존자가 된 당신 어떻게 살아남을 것인가!</div></label><br>
- <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=1"><input type="button" value="10:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=2"><input type="button" value="12:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=3"><input type="button" value="14:00 예약마감"></a><br>
- <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=4"><input type="button" value="16:00 예약마감" class="a2-1"></a>
- <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=5"><input type="button" value="18:00 예약마감"></a>
- <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=6"><input type="button" value="20:00 예약마감"></a><br><br><br><br><br><br><br><br><br>
+ <%
+ booking_idx[36]=bdao.bookingIdx(7,time_date_in,1);
+ booking_idx[37]=bdao.bookingIdx(7,time_date_in,2);
+ booking_idx[38]=bdao.bookingIdx(7,time_date_in,3);
+ booking_idx[39]=bdao.bookingIdx(7,time_date_in,4);
+ booking_idx[40]=bdao.bookingIdx(7,time_date_in,5);
+ booking_idx[41]=bdao.bookingIdx(7,time_date_in,6);
+ %>
+ <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[36]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[37]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[38]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+ <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[39]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a>
+ <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[40]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a>
+ <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[41]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
 </section>
 <hr width="1200">

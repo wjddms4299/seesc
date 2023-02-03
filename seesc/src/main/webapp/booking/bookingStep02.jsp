@@ -52,13 +52,6 @@ section{width:1200px;margin:0px auto;}
 #d1{margin:40px 220px;}
 #d2{margin:0px auto;}
 </style>
-<script>
-var money;
-
-function changeMoney(){
-	money=document.getElementByld('select_people');
-}
-</script>
 </head>
 <body>
 <%@include file="/header.jsp"%>
@@ -146,7 +139,7 @@ function changeMoney(){
  				if(cpdto!=null){
 	 				for(int i=0;i<cpdto.size();i++){
 	 					%>
-	 					<option value="<%=cpdto.get(i).getCoupon_idx()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>             <!-- cpdto.get(i).getCoupon_idx() -->
+	 					<option value="<%=cpdto.get(i).getCoupon_idx()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>
 	 					<%
 	 				}
  				}
@@ -157,7 +150,7 @@ function changeMoney(){
  	<%}%>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b>44,000원</b></td>               <!-- cpdto.get(i).getCoupon_dc() -->
+ 		<td>&nbsp;&nbsp;<b><input name="booking_money" value=></b></td>               <!-- cpdto.get(i).getCoupon_dc() -->
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2" ><b>결제방식</b></td>

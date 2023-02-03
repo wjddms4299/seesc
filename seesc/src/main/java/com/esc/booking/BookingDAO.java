@@ -105,7 +105,7 @@ public class BookingDAO {
 		}
 	}
 
-	/**예약취소에 필요한 예약번호 찾기*/
+	/**예약취소(+예약여부 확인)에 필요한 예약번호 찾기*/
 	public int bookingIdx(int thema_idx,String time_date,int time_ptime) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -128,6 +128,57 @@ public class BookingDAO {
 		}finally {
 			try {
 				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
+	/**예약취소시 예약번호로 쿠폰번호 불러오기*/
+	public int bookingCouponIdx(int booking_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="select coupon_idx from booking where booking_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, booking_idx);
+			rs=ps.executeQuery();
+			
+			int coupon_idx=0;
+			if(rs.next()) {
+				coupon_idx=rs.getInt("coupon_idx");
+			}
+			return coupon_idx;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
+	/**예약취소시 쿠폰 사용여부 변경하기*/
+	public void bookingCouponUse_R(int coupon_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="update coupon set coupon_use=1 where coupon_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, coupon_idx);
+			
+			ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			}catch(Exception e2) {

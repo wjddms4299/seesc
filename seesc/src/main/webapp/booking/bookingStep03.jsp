@@ -154,7 +154,7 @@ function popup_open(){
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="button" value="예약 취소하기" onclick="popup_open();"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
+ 			<input type="submit" value="예약 취소하기" onclick="popup_open();"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
  		</td>
  	</tr>
  </table>
