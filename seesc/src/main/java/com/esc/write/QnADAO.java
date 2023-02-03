@@ -187,7 +187,6 @@ public class QnADAO {
 				sql = "select count(*) from write where write_cate = 'qna' and write_title like ?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
-
 				rs = ps.executeQuery();
 				rs.next();
 				count = rs.getInt(1);
@@ -221,6 +220,7 @@ public class QnADAO {
 				rs.next();
 				
 				count = rs.getInt(1);
+				break;
 			}
 
 			return count;
@@ -289,7 +289,7 @@ public class QnADAO {
 				ps.setString(2, "%" + content + "%");
 				ps.setInt(3, start);
 				ps.setInt(4, end);
-
+				break;
 			}
 
 			rs = ps.executeQuery();
@@ -401,7 +401,12 @@ public class QnADAO {
 			return null;
 		} finally {
 			try {
-
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
 			} catch (Exception e2) {
 
 			}
@@ -609,7 +614,12 @@ public class QnADAO {
 			return 0;
 		}finally {
 			try {
-				
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
 			}catch(Exception e2) {
 				
 			}

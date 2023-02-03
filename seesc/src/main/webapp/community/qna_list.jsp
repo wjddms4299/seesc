@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	        <% request.setCharacterEncoding("utf-8");%>
+	
 <%@ page import="java.util.*"%>
 <%@ page import="com.esc.write.*"%>
 <%@page import ="com.esc.userinfo.*" %>
@@ -159,10 +161,10 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						if(arr.get(i).getWrite_open()==0){ %>
 					
 						<a href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> ">
-							<%=arr.get(i).getWrite_title()%>[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]  &#128274;</a>
+								&#128274;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
 							<%}else{%>
 							<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-								<%=arr.get(i).getWrite_title()%>[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+								<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
 							<%} %></td>
 
 						<td><%=arr.get(i).getWrite_writer()%></td>
@@ -180,7 +182,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<!-- -----------------------------검색-------------------------------------------------------------- -->
 				<tfoot>
 					<tr>
-					<form name = "search_list" action = "qna_list.jsp">
+					<form name = "search_list" action = "qna_list.jsp" method = "post">
 					<input type = "hidden" name = "listsize" value = "<%=writeList %>">
 					<input type = "hidden" name = "userpage" value = "<%=userpage %>">
 						<td colspan="4" align="center"><select name= "listname">

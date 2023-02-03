@@ -20,6 +20,12 @@ if (write_idx_s == null || write_idx_s.equals("")) {
 }
 int write_idx = Integer.parseInt(write_idx_s);
 
+String comm_idx_s = request.getParameter("comm_idx");
+if (comm_idx_s == null || comm_idx_s.equals("")) {
+	comm_idx_s = "0";
+}
+int comm_idx = Integer.parseInt(comm_idx_s);
+
 WriteDTO dto = qnadao.writeQnAContent(write_idx);
 
 if (dto == null) {
@@ -116,6 +122,7 @@ a {
 			%>
 			<hr>
 			<form name="qna_delete" action="qna_delete_ok.jsp" method="post">
+				<input type = "hidden" name = "write_idx" value = "<%=write_idx %>" >
 				<ul>
 					<li><input type="hidden" name="write_idx"
 						value="<%=write_idx%>"> <input type="hidden"
@@ -130,14 +137,12 @@ a {
 					<input type="submit" value="삭제"> <input type="button"
 						value="수정"
 						onclick="location.href = 'qna_update.jsp?write_idx=<%=write_idx%>'">
-									<%
+					<%
 					}
 					%>
-					<input type="button" value="목록"
-				<%
-			if (dto.getWrite_notice() != 1) {
-			%>
-						onclick="location.href = 'qna_list.jsp';"> <input
+					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp';"> 
+						<%if (dto.getWrite_notice() != 1) {%>
+						<input
 						type="button" value="답글"
 						onclick="location.href =
 							'qna_repWrite.jsp?write_title=<%=dto.getWrite_title()%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=dto.getWrite_lev()%>&write_step=<%=dto.getWrite_step()%>'">
@@ -152,33 +157,50 @@ a {
 		</article>
 		<article>
 			<fieldset>
-			<legend>댓글</legend>
-			<%
+				<legend>댓글</legend>
+				<%
 				ArrayList<CommentDTO> arr = qnadao.commentList(write_idx);
-				
-				if (arr!=null && arr.size()!=0){
+
+				if (arr != null && arr.size() != 0) {
 					for (int i = 0; i < arr.size(); i++) {
 				%>
 				<ul>
-				<li><div><label><%=arr.get(i).getComm_writer()%></label><br>
-				<label><%=arr.get(i).getComm_content()%></label><br>
-				<label><%=arr.get(i).getComm_date() %></label><br>
-				<label><a href = "comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>">댓글쓰기</a>
-				<a href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>">&#10060;</a></label>
-				<br><br>
-				</div>
-				</li>
+					<li><div>
+							<label><%=arr.get(i).getComm_writer()%></label><br> <label><%=arr.get(i).getComm_content()%></label><br>
+							<label><%=arr.get(i).getComm_date()%></label><br> <label><a
+								href="qna_content.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>">&#9993;</a>
+								<a
+								href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>">&#10060;</a></label>
+							<%
+							if (comm_idx == arr.get(i).getComm_idx()) {
+							%>
+							<form name="comment" action="comment_ok.jsp" method="post">
+								<input type="hidden" name="write_idx" value="<%=write_idx%>">
+								<input type="hidden" name=user_idx " value=<%=user_idx%>>
+								<li><label>댓글 쓰기</label> <input type="text"
+									name="comm_writer" placeholder="작성자"> <input
+									type="password" name="comm_pwd" placeholder="비밀번호"></li>
+								<li><textarea rows="10" cols="50" name="comm_content"
+										placeholder="내용을 작성해주세요"></textarea> <input type="submit"
+									value="등록"></li>
+							</form>
+							<%
+							}
+							%>
+							<br>
+							<br>
+						</div></li>
 				</ul>
-			<%
-					}
+				<%
+				}
 				}
 				%>
-			
+
 			</fieldset>
 			<hr>
 			<form name="comment" action="comment_ok.jsp" method="post">
-			<input type = "hidden" name = "write_idx" value = "<%=write_idx %>">
-			<input type = "hidden" name = user_idx" value = <%=user_idx %>>
+				<input type="hidden" name="write_idx" value="<%=write_idx%>">
+				<input type="hidden" name=user_idx " value=<%=user_idx%>>
 				<li><label>댓글 쓰기</label> <input type="text" name="comm_writer"
 					placeholder="작성자"> <input type="password" name="comm_pwd"
 					placeholder="비밀번호"></li>
