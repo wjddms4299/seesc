@@ -1,0 +1,99 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<jsp:useBean id="bdao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
+<%
+Integer user_idx=(Integer)session.getAttribute("user_idx");
+
+String booking_name=request.getParameter("booking_name");
+if(booking_name==null || booking_name==""){
+	%>
+	<script>
+	window.alert("예약자 성함을 입력해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+String booking_tel=request.getParameter("booking_tel");
+if(booking_tel==null || booking_tel==""){
+	%>
+	<script>
+	window.alert("연락처를 입력해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+String booking_pay_s=request.getParameter("booking_pay");
+if(booking_pay_s==null){
+	%>
+	<script>
+	window.alert("결제방식을 선택해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+String booking_pwd=request.getParameter("booking_pwd");
+if(booking_pwd==null || booking_pwd==""){
+	%>
+	<script>
+	window.alert("예약 비밀번호를 입력해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+String booking_agree=request.getParameter("booking_agree");
+if(booking_agree==null || booking_agree.equals("1")){
+	%>
+	<script>
+	window.alert("이용약관 및 개인정보취급방침에 동의해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+String thema_idx_s=request.getParameter("thema_idx");
+int thema_idx=Integer.parseInt(thema_idx_s);
+String time_date=request.getParameter("time_date");
+String time_ptime_s=request.getParameter("time_ptime");
+int time_ptime=Integer.parseInt(time_ptime_s);
+String thema_name=request.getParameter("thema_name");
+String thema_time=request.getParameter("thema_time");
+String booking_num_s=request.getParameter("booking_num");
+booking_num_s.substring(0,1);
+int booking_num=Integer.parseInt(booking_num_s);
+String booking_msg=request.getParameter("booking_msg");
+
+int coupon_idx=0;
+if(user_idx!=null){
+	String coupon_idx_s=request.getParameter("coupon_idx");
+	coupon_idx=Integer.parseInt(coupon_idx_s);
+}
+
+int booking_pay=Integer.parseInt(booking_pay_s);
+int booking_pay_ok=0;
+switch(booking_pay){
+	case 0:booking_pay_ok=0;break;
+	case 1:booking_pay_ok=1;
+}
+		
+int result=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
+		time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
+		
+if(result==1){%>
+	<script>
+	location.href="bookingStep03.jsp";
+	</script>
+<%}else{%>
+	<script>
+	window.alert('예약하기에 실패하였습니다.');
+	location.href="bookingStep02.jsp";
+	</script>
+<%}%>

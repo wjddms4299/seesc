@@ -41,11 +41,12 @@ public class BookingDAO {
 	}
 	
 	/**예약하기 관련 메서드*/
-	public int booking(int thema_idx,int coupon_idx,int user_idx,String booking_name,String booking_tel,String booking_pwd,
-			String time_date,int time_ptime,int booking_pay,String booking_msg,int booking_num,int booking_money) {
+	public int booking(int thema_idx,int coupon_idx,Integer user_idx,String booking_name,String booking_tel,String booking_pwd,
+			String time_date,int time_ptime,int booking_pay,int booking_pay_ok,String booking_msg,int booking_num) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="insert into booking values(booking_booking_idx.nextval,?,?,?,?,?,?,sysdate,to_date(?,'yy-mm-dd'),?,?,1,?,?,?)";
+				
+			String sql="insert into booking values(booking_booking_idx.nextval,?,?,?,?,?,?,sysdate,to_date(?,'yy-mm-dd'),?,?,?,?,?,10000)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1,thema_idx);
 			ps.setInt(2,coupon_idx);
@@ -56,9 +57,10 @@ public class BookingDAO {
 			ps.setString(7,time_date);
 			ps.setInt(8,time_ptime);
 			ps.setInt(9,booking_pay);
-			ps.setString(10,booking_msg);
-			ps.setInt(11,booking_num);
-			ps.setInt(12,booking_money);
+			ps.setInt(10,booking_pay_ok);
+			ps.setString(11,booking_msg);
+			ps.setInt(12,booking_num);
+			//ps.setInt(13,booking_money);
 			
 			int count=ps.executeUpdate();
 			return count;

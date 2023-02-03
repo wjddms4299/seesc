@@ -68,10 +68,63 @@ public class CouponDAO {
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
-			}catch(Exception e2) {}
+			}catch(Exception e2) {
+				
+			}
 		}
 	}
 	
 	/**예약완료시 쿠폰 사용여부 변경하기*/
+	public int bookingCouponUse(int coupon_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="update coupon set coupon_use=0 where coupon_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, coupon_idx);
+			
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
+	/**예약확인시 쿠폰번호로 쿠폰이름 불러오기*/
+	public String bookingCouponName(int coupon_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="select coupon_name from coupon where coupon_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, coupon_idx);
+			rs=ps.executeQuery();
+			
+			String coupon_name=null;
+			if(rs.next()) {
+				coupon_name=rs.getString("coupon_name");
+			}
+			return coupon_name;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 	
 }
