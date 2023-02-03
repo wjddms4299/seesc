@@ -17,6 +17,76 @@ section {
   display: flex;
   align-items: center;
 }
+.slider{
+	width: 550px;
+	height: 600px;
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.slider input[type=radio]{
+	display: none;
+}
+
+ul.img{
+	padding: 0;
+	margin: 0;
+}
+ul.img li{
+	position: absolute;
+	left: 700px;
+	trasition-delay: 1s;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.bullets{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 20px;
+	z-index: 2;
+}
+.bullets label {
+	display: inline-block;
+	border-radius: 50%;
+	background-color: white;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+.slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
+	background-color: #464646;
+}
+.slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
+	background-color: #464646;
+}
+.slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
+	background-color: #464646;
+}
+.slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
+	background-color: #464646;
+}
+.slider input[type=radio]:nth-child(1):checked~ul.img>li:nth-child(1){
+	left: 0;
+	transition: 0.5s;
+	z-index:1;
+}
+.slider input[type=radio]:nth-child(2):checked~ul.img>li:nth-child(2){
+	left: 0;
+	transition: 0.5s;
+	z-index:1;
+}
+.slider input[type=radio]:nth-child(3):checked~ul.img>li:nth-child(3){
+	left: 0;
+	transition: 0.5s;
+	z-index:1;
+}
+.slider input[type=radio]:nth-child(4):checked~ul.img>li:nth-child(4){
+	left: 0;
+	transition: 0.5s;
+	z-index:1;
+}
 </style>
 <body>
 <%@include file="header.jsp" %>
@@ -27,12 +97,23 @@ section {
 <h2>공지사항</h2>
 <img src="/seesc/img/notice.png" width="550" height="600">
 </div>
-<div>
-<h2>이벤트</h2>
-<button><span>◀◀이전</span></button>
-<button><span>다음▶▶</span></button>
-<a><img src="/seesc/img/moningdc.png" width="550" height="600"></a>
-<a><img></a>
+<div class="slider" style="float: right; text-align: center; padding: 20px;">
+	<input type="radio" name="slide" id="slide1" checked>
+	<input type="radio" name="slide" id="slide2">
+	<input type="radio" name="slide" id="slide3">
+
+	<ul class="img">
+		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/moningdc.png" width="550" height="600"></a></li>
+		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/event1.png" width="550" height="600"></a></li>
+		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/event2.png" width="550" height="600"></a></li>
+	</ul>
+	<div class="bullets">
+		<label for="slide1"></label>
+		<label for="slide2"></label>
+		<label for="slide3"></label>
+	</div>
+
+
 </div>
 </section>
 <%@include file="footer.jsp" %>

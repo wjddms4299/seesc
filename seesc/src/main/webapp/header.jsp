@@ -119,7 +119,7 @@ function login_open(){
 			<ul class="dropdown">
 				<li class="dropbtn"><a href="/seesc/community/community.jsp">커뮤니티</a></li>
 				<ul class="dropdown-content">
-					<a href="#">공지사항</a>
+					<a href="/seesc/community/community_eventcontent_list.jsp">공지사항</a>
 					<a href="/seesc/community/qna_list.jsp">QnA</a>
 					<a href="#">팀구해요</a>
 				</ul>

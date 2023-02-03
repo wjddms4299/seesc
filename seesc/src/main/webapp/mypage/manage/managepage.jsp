@@ -24,6 +24,7 @@ if(manager<1){
 <article>
 	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
 	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
+	<a href="canclemng.jsp"><button><span>예약취소관리</span></button></a>
 	<a href="/seesc/mypage/myinfo.jsp"><button><span>내정보</span></button></a>
 	<a href="#"><button><span>카페주문내역</span></button></a>
 </article>
