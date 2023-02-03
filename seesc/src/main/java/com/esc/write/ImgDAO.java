@@ -241,6 +241,56 @@ public class ImgDAO {
 			}catch(Exception e2) {}
 		}
 	}
+/**이벤트 게시물 수정 관련 메서드 */
+public int event_update(WriteDTO dto) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "update write set write_title = ?, write_content =?,write_open = ? where write_idx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, dto.getWrite_title());
+		ps.setString(2, dto.getWrite_content());
+		ps.setInt(3, dto.getWrite_open());
+		ps.setInt(4, dto.getWrite_idx());
+			int count = ps.executeUpdate();
+			return count;
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+/** 이벤트게시물 삭제 관련 메서드 */
+public int event_delete(int write_idx) {
+	try {
+		conn = com.esc.db.EscDB.getConn();
+		String sql = "delete from write where write_idx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, write_idx);
+		int count = ps.executeUpdate();
+		return count;
+
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return -1;
+	} finally {
+		try {
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
+		} catch (Exception e2) {
+		}
+	}
+}
 }
 

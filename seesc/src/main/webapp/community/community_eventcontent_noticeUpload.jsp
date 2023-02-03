@@ -13,6 +13,7 @@ int write_notice=0;
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 </head>
 <body>
 	<%@include file="/header.jsp"%>
@@ -24,7 +25,7 @@ UserinfoDTO dto = udao.userInfo(sid);
 		<article>
 			<form name="community_eventcontent_noticeUpload.jsp" action="community_eventcontent_noticeUpload_ok.jsp" method="post"
 				enctype="multipart/form-data">
-				<h2>공지글쓰기<% %></h2>
+				<h2>공지글쓰기</h2>
 				<fieldset>
 					<table>
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">

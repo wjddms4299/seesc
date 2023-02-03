@@ -33,7 +33,7 @@ int open = dto.getWrite_open();
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
-h3 {
+h2 {
 	text-align: center;
 	font-size: 30px;
 }
@@ -52,6 +52,9 @@ ul {
 li {
 	liste-style: none;
 }
+th {
+	float:left;
+}
 </style>
 </head>
 <body>
@@ -61,34 +64,52 @@ li {
 	UserinfoDTO udto = udao.userInfo(sid); %>
 	<section>
 		<article>
-			<h3>이벤트 본문보기</h3>
+			<h2>이벤트 본문보기</h2>
 			<table>
 				<tbody>
 					<tr>
-						<td>제목:</td>
+						<th>제목:</th>
 						<td><%=dto.getWrite_title()%>
-						<td>날짜:</td>
+						<th>날짜:</th>
 						<td><%=dto.getWrite_wdate()%></td>
 					<tr>
-						<td>작성자:</td>
+						<th>작성자:</th>
 						<td colspan="3"><%=dto.getWrite_writer()%></td>
 					</tr>
 					<tr>
-						<td>파일이름:</td>
-						<td colspan="3"><a href="<%=dto.getWrite_filename()%>"><%=dto.getWrite_filename()%></a></td>
+						<th>파일이름:</th>
+						<%
+						if (dto.getWrite_filename() != null) {
+						%>
+						<td colspan="3"><a href="/seesc/community/img/<%=dto.getWrite_filename()%>"
+							target="_blank"><%=dto.getWrite_filename()%></a></td>
 					</tr>
 					<tr>
-						<td colspan="4"><textarea rows="10" cols="50"
+						<td><img
+							src="/seesc/community/userFile/<%=dto.getWrite_filename()%>"></td>
+						<%
+						} else {
+						%><td>파일 없음</td>
+						<%
+						}
+						%>
+					</tr>
+					<tr>
+						<td colspan="4"><textarea rows="10" cols="90"
 								name="write_content" readonly><%=dto.getWrite_content()%></textarea></td>
 					</tr>
-				</tbody>
-				<hr>
-					<form name = "qna_delete" action = "community_eventcontant_delete_ok.jsp" method = "post">
+					</tbody>
+			  		 </table>
+			  		<%
+					if (dto.getWrite_notice() != 1) {
+					%>	
+					<hr>
+					<form name = "community_eventcontent_delete" action = "community_eventcontent_delete_ok.jsp" method = "post">
 					
 					<input type = "hidden" name = "write_idx" value = "<%=write_idx%>">
 					<input type = "hidden" name = "write_pwd" value = "<%=dto.getWrite_pwd() %>">
-					</form>
-					</table>
+					
+					
 					
 					
 						비밀번호 <input type="password" name="userinput_pwd" required = "required">
@@ -96,16 +117,15 @@ li {
 					<div align="center">
 						<br>
 						<input type="submit" value=" 삭제 "> 
-						<input type="button"value=" 수정 " onclick = "location.href = 'community_eventcontant_update.jsp?write_idx=<%=write_idx%>'">
+						<input type="button"value=" 수정 " onclick = "location.href = 'community_eventcontent_update.jsp?write_idx=<%=write_idx%>'">
 						<input type="button" value=" 목록 "
 							onclick="location.href = 'community_eventcontent_list.jsp';">
-							<%if(dto.getWrite_notice()!=1){ %>
-							<input type="button" value=" 답글 "
-							onclick="location.href ='community_eventcontant_re.jsp?write_title=<%=dto.getWrite_title()%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=dto.getWrite_lev()%>&write_step=<%=dto.getWrite_step()%>'">
-						
-							<%} %>
+							<input type="button" value=" 답글 " onclick="location.href ='community_eventcontant_re.jsp?write_title=<%=dto.getWrite_title()%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=dto.getWrite_lev()%>&write_step=<%=dto.getWrite_step()%>'">
+							<%
+							}
+							%>
 						</div>
-
+					</form>
 					<hr>
 					</article>
 	</section>
