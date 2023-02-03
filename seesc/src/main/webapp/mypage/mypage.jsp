@@ -9,6 +9,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+int user_idx=(int)session.getAttribute("user_idx");
+int totalCnt=boodao.getTotalCnt(user_idx);
+int listSize=5;
+int pageSize=5;
+
+String cp_s=request.getParameter("cp");
+if(cp_s==null||cp_s.equals("")){
+	cp_s="1";
+}
+int cp=Integer.parseInt(cp_s);
+
+int totalPage=totalCnt/listSize+1;
+if(totalCnt%listSize==0)totalPage--;
+
+
+int userGroup=cp/pageSize;
+if(cp%pageSize==0)userGroup--;
+%>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
@@ -39,8 +58,31 @@
 	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
 	<a href="myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
 	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
-	<a href="cafeorderinfo.jsp"><button class="tbutton"><span>카페주문내역</span></button></a>
 	<table>
+	<tfoot>
+			<tr>
+				<td colspan="4" align="center">
+				<!-- ---------------- -->
+				<%
+				if(userGroup!=0){
+					%><a href="mypage.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+				}
+				%>
+				<%
+				for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
+					%>&nbsp;&nbsp;<a href="mypage.jsp?cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<%
+					if(i==totalPage)break;
+				}
+				%>
+				<%
+				if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
+					%><a href="mypage.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
+				}
+				%>
+				<!-- ---------------- -->
+				</td>
+			</tr>
+		</tfoot>
 		<tr>
 			<th>No</th>
 			<th>예약날짜</th>
@@ -49,8 +91,7 @@
 			<th>비고</th>
 		</tr>
 		<%
-	int user_idx=(int)session.getAttribute("user_idx");
-	ArrayList<BookingDTO> arr=boodao.myBooking(user_idx);
+	ArrayList<BookingDTO> arr=boodao.myBooking(user_idx,listSize,cp);
 	if(arr==null||arr.size()==0){
 		%>
 		<tr>
@@ -58,14 +99,29 @@
 		</tr>
 		<%
 	}else{
+		String pay_ok=null;
 		for(int i=0;i<arr.size();i++){
 			%>
 			<tr>
 				<td><%=arr.get(i).getBooking_idx() %></td>
 				<td><%=arr.get(i).getBooking_time() %></td>
 				<td><%=arr.get(i).getBooking_num() %></td>
-				<td><%=arr.get(i).getBooking_pay_ok() %></td>
-				<td><a href="<% %>"><button>취소</button></a><td>
+				<%
+				if(arr.get(i).getBooking_pay_ok()>0){
+					pay_ok="결제미완료";
+				}else{
+					pay_ok="결제완료";
+				}
+				%>
+				<td><%=pay_ok %></td>
+				<%
+				if(pay_ok.equals("결제완료")){
+					%><td><a href="/seesc/booking/bookingCancle.jsp?user_idx=<%=user_idx %>&booking_idx=<%=arr.get(i).getBooking_idx()%>"><button>취소</button></a><td><%
+				}else{
+					%><td><td><%
+				}
+				%>
+				
 			</tr>
 			<%
 		}
@@ -80,3 +136,5 @@
 <%@include file="/footer.jsp" %>
 </body>
 </html>
+
+

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="bdao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
 Integer user_idx=(Integer)session.getAttribute("user_idx");
 
@@ -15,11 +16,36 @@ if(booking_name==null || booking_name==""){
 	return;
 }
 
-String booking_tel=request.getParameter("booking_tel");
-if(booking_tel==null || booking_tel==""){
+String booking_tel1=request.getParameter("booking_tel1");
+String booking_tel2_s=request.getParameter("booking_tel2");
+String booking_tel3_s=request.getParameter("booking_tel3");
+if(booking_tel1==null || booking_tel2_s==null || booking_tel3_s==null || booking_tel1=="" || booking_tel2_s=="" || booking_tel3_s==""){
 	%>
 	<script>
 	window.alert("연락처를 입력해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+try{
+	int booking_tel2=Integer.parseInt(booking_tel2_s);
+	int booking_tel3=Integer.parseInt(booking_tel3_s);
+}catch(NumberFormatException e){
+	%>
+	<script>
+	window.alert("연락처는 '숫자'만 입력해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
+
+if(booking_tel2_s.length()!=4 || booking_tel3_s.length()!=4){
+	%>
+	<script>
+	window.alert("연락처는 각각 '4개'의 숫자만 입력해주세요.");
 	history.back();
 	</script>
 	<%
@@ -61,6 +87,7 @@ if(booking_agree==null || booking_agree.equals("1")){
 
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
+String time_date_t=request.getParameter("time_date");
 StringBuffer time_date_b=new StringBuffer(request.getParameter("time_date"));
 time_date_b.delete(time_date_b.length()-4,time_date_b.length());
 String time_date=time_date_b.toString();
@@ -72,6 +99,8 @@ String booking_num_t=request.getParameter("booking_num");
 String booking_num_s=booking_num_t.substring(0,1);
 int booking_num=Integer.parseInt(booking_num_s);
 String booking_msg=request.getParameter("booking_msg");
+
+String booking_tel=booking_tel1+"-"+booking_tel2_s+"-"+booking_tel3_s;
 
 int coupon_idx=0;
 if(user_idx!=null){
@@ -85,13 +114,17 @@ switch(booking_pay){
 	case 0:booking_pay_ok=0;break;
 	case 1:booking_pay_ok=1;
 }
+
 if(user_idx!=null){		
-	int result=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
+	int result_1=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
 			time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
+	int result_2=cpdao.bookingCouponUse(coupon_idx);
+	
+	if(result_1==1 && result_2==1){
+		int booking_idx=bdao.bookingIdx(thema_idx,time_date,time_ptime);%>
 		
-	if(result==1){%>
 		<script>
-		location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_b%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&booking_num=<%=booking_num_s%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
+		location.href="bookingStep03.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
 		</script>
 	<%}else{%>
 		<script>
@@ -100,18 +133,19 @@ if(user_idx!=null){
 		</script>
 	<%}
 }else{
-	int result=bdao.booking(thema_idx,coupon_idx,0,booking_name,booking_tel,booking_pwd,
+	int result_1=bdao.booking(thema_idx,coupon_idx,0,booking_name,booking_tel,booking_pwd,
 			time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
 	
-	if(result==1){%>
-	<script>
-	location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&booking_num=<%=booking_num_s%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
-	</script>
-	<%}else{%>
-	<script>
-	window.alert('예약하기에 실패하였습니다.');
-	location.href="bookingStep01.jsp";
-	</script>
-	<%}
+	if(result_1==1){
+		int booking_idx=bdao.bookingIdx(thema_idx,time_date,time_ptime);%>
 	
+		<script>
+		location.href="bookingStep03.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
+		</script>
+		<%}else{%>
+		<script>
+		window.alert('예약하기에 실패하였습니다.');
+		location.href="bookingStep01.jsp";
+		</script>
+	<%}
 }%>

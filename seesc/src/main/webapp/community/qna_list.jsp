@@ -41,12 +41,16 @@ color : red;}
 int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
 
+String listname = request.getParameter("listname");
+if(listname==null||listname.equals("")){
+	listname = "0";
+};
+String content = request.getParameter("content");
+if(content==null||content.equals("")){
+	content = "0";
+};
 
-
-int totalqna = qnadao.getTotalCnt();
-if(totalqna ==0){
-	totalqna = 1;
-}
+int totalqna = qnadao.getTotalCnt(listname,content);
 
 String writeList_s = request.getParameter("listSize");
 if (writeList_s == null || writeList_s.equals("")) {
@@ -86,15 +90,15 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 			<table class="write_table">
 				<thead>
 					<tr>
-						<td colspan="4" align="left">전체글 : <%=qnadao.getTotalCnt()%>개
+						<td colspan="4" align="left">전체글 : <%=qnadao.getTotalCnt(listname,content)%>개
 						</td>
 						<td align="right"><select name="writeList"
 							onChange="window.location.href=this.value">
 								<option>리스트수</option>
-								<option value="qna_list.jsp?listSize=5">5개씩</option>
-								<option value="qna_list.jsp?listSize=10">10개씩</option>
-								<option value="qna_list.jsp?listSize=15">15개씩</option>
-								<option value="qna_list.jsp?listSize=30">30개씩</option>
+								<option value="qna_list.jsp?listSize=5&listname=<%=listname%>&content=<%=content%>">5개씩</option>
+								<option value="qna_list.jsp?listSize=10&listname=<%=listname%>&content=<%=content%>">10개씩</option>
+								<option value="qna_list.jsp?listSize=15&listname=<%=listname%>&content=<%=content%>">15개씩</option>
+								<option value="qna_list.jsp?listSize=30&listname=<%=listname%>&content=<%=content%>">30개씩</option>
 
 						</select></td>
 
@@ -108,10 +112,10 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					</tr>
 				</thead>
 				<tbody>
-					
+					<!-- --------------------------------------공지 ----------------------------------------------- -->
 					<%
 					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
-					if(notice!=null||!notice.equals("")){
+					if(notice!=null&&notice.size()!=0){
 					for(int n=0;n<notice.size();n++){
 					%>
 						<tr class = "notice">
@@ -123,10 +127,13 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						<td><%=notice.get(n).getWrite_readnum()%></td>
 					</tr>
 						<%}
-					}
+					}%>
 					
-					
-					ArrayList<WriteDTO> arr = qnadao.writeQnAList(userpage,writeList);
+					<!-- -------------------------------------- ----------------------------------------------- -->
+				
+					<!-- --------------------------------------게시물 리스트 출력 ----------------------------------------------- -->
+					<%
+					ArrayList<WriteDTO> arr = qnadao.writeQnAList(userpage,writeList,listname,content);
 					if (arr == null || arr.size() == 0) {
 					%>
 					<tr>
@@ -168,33 +175,33 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 
 				</tbody>
 				<tfoot>
-				
-				<form name = "reList" action="qna_SearchList.jsp">
 					<tr>
+					<form name = "search_list" action = "qna_list.jsp">
+					<input type = "hidden" name = "listsize" value = "<%=writeList %>">
+					<input type = "hidden" name = "userpage" value = "<%=userpage %>">
 						<td colspan="4" align="center"><select name= "listname">
-							<option value ="0">제목+내용</option>
+							<option value ="4">제목+내용</option>
 								<option value="1">글제목</option>
 								<option value="2">내용</option>
 								<option value="3">작성자</option>
-						</select> <input type="text" name="search_Content" placeholder="내용입력" required = "required"> <input
-							type="submit" value="검색" ></td>
-						
+						</select> <input type="text" name="content" placeholder="내용입력" required = "required"> 
+						<input type="submit" value="검색" ></td>
+						</form>
 						<td>
-						<% String wbutton = user_idx==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
-						<input type="button" value="글작성" onclick= "location.href = '<%=wbutton%>'"></td>
+						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
+						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'"></td>
 					<tr>
-					</form>
 					<tr>
 						<td colspan="5" align="center">
 						<%if(pagegroup!=0){
-							%><a href = "qna_list.jsp?userpage=<%=1 %>&listSize=<%=writeList%>">&lt;&lt;</a>
-							<a href = "qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%>&listSize=<%=writeList%>">이전</a>
+							%><a href = "qna_list.jsp?userpage=<%=1 %>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">&lt;&lt;</a>
+							<a href = "qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">이전</a>
 							<%} 	
 						
 						
 							for(int i=pagegroup*pageList+1;i<=pagegroup*pageList+pageList;i++){
 								%>
-								&nbsp;&nbsp;<a href = "qna_list.jsp?userpage=<%=i%>&listSize=<%=writeList%>"><%=i%></a>&nbsp;&nbsp;
+								&nbsp;&nbsp;<a href = "qna_list.jsp?userpage=<%=i%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>"><%=i%></a>&nbsp;&nbsp;
 								
 								<%
 							if(i==totalpage)break;
@@ -202,8 +209,8 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							
 							if(pagegroup!=(totalpage/pageList-(totalpage%pageList==0?1:0))){
 								%>
-								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1 %>&listSize=<%=writeList%>">다음</a>
-								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%>&listSize=<%=writeList%>">&gt;&gt;</a>
+								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">다음</a>
+								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">&gt;&gt;</a>
 							<%}
 							%>
 				</tfoot>

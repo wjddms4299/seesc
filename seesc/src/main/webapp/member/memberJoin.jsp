@@ -48,13 +48,13 @@ th{
 						<th>비밀번호</th>
 					</tr>
 					<tr>
-						<td><input type="password" name="user_pwd" placeholder="비밀번호를 입력해주세요."></td>
+						<td><input type="password" name="user_pwd" placeholder="비밀번호를 입력해주세요." required></td>
 					</tr>
 					<tr>
 						<th>이름</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="user_name" placeholder="이름을 입력해주세요."></td>
+						<td><input type="text" name="user_name" placeholder="이름을 입력해주세요." required></td>
 					</tr>
 					<tr>
 						<th>닉네임</th>
@@ -74,13 +74,13 @@ th{
 						<th>이메일</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="user_email" placeholder="이메일을 입력해주세요."></td>
+						<td><input type="text" name="user_email" placeholder="이메일을 입력해주세요." required></td>
 					</tr>
 					<tr>
 						<th>휴대전화</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="user_tel1" placeholder="핸드폰 번호를 입력해주세요." maxlength="3">-<input type="text" name="user_tel2" maxlength="4">-<input type="text" name="user_tel3" maxlength="4"></td>
+						<td><input type="text" name="user_tel1" placeholder="핸드폰 번호를 입력해주세요." maxlength="3" required>-<input type="text" name="user_tel2" maxlength="4" required>-<input type="text" name="user_tel3" maxlength="4" required></td>
 					</tr>
 					<tr>
 						<th>생년월일
