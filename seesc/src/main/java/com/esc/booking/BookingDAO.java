@@ -46,7 +46,7 @@ public class BookingDAO {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 				
-			String sql="insert into booking values(booking_booking_idx.nextval,?,?,?,?,?,?,sysdate,to_date(?,'yy-mm-dd'),?,?,?,?,?,10000)";
+			String sql="insert into booking values(booking_booking_idx.nextval,?,?,?,?,?,?,sysdate,?,?,?,?,?,?,10000)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1,thema_idx);
 			ps.setInt(2,coupon_idx);
@@ -161,7 +161,7 @@ public class BookingDAO {
 		}
 	}
 	/**예약 취소시 db에 추가 메서드 */
-	public void input_CancleList(int booking_idx,BookingDTO dto,String cancle_banknum) {
+	public void input_CancelList(int booking_idx,BookingDTO dto,String cancel_banknum) {
 		try {
 			String sql = "insert into cancel values(cancel_cancel_idx.nextval,?,?,?,?,?,?,?,sysdate,?,?)";
 			
@@ -172,7 +172,7 @@ public class BookingDAO {
 			ps.setString(4, dto.getBooking_tel());
 			ps.setInt(5, dto.getBooking_pay());
 			ps.setInt(6, dto.getBooking_pay_ok());
-			ps.setString(7, cancle_banknum);
+			ps.setString(7, cancel_banknum);
 			ps.setInt(8, dto.getBooking_money());
 			ps.setInt(9, dto.getBooking_pay_ok());
 			ps.executeUpdate();
@@ -191,10 +191,10 @@ public class BookingDAO {
 	}
 	
 	/**예약 취소 관련 메서드 */
-	public int bookingDelete(int booking_idx,BookingDTO dto,String cancle_banknum) {
+	public int bookingDelete(int booking_idx,BookingDTO dto,String cancel_banknum) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			input_CancleList(booking_idx, dto, cancle_banknum);
+			input_CancelList(booking_idx, dto, cancel_banknum);
 			String sql = "delete from booking where booking_idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, booking_idx);
