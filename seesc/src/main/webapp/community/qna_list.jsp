@@ -180,7 +180,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							type="submit" value="검색" ></td>
 						
 						<td>
-						<% String wbutton = user_idx==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
+						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
 						<input type="button" value="글작성" onclick= "location.href = '<%=wbutton%>'"></td>
 					<tr>
 					</form>

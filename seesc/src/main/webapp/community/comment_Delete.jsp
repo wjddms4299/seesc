@@ -157,12 +157,16 @@ a {
 				<li><div><label><%=arr.get(i).getComm_writer()%></label><br>
 				<label><%=arr.get(i).getComm_content()%></label><br>
 				<label><%=arr.get(i).getComm_date() %></label><br>
-				<label><a href = "comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>">댓글쓰기</a>
-				<a href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>">&#10060;</a></label>
-				</div>
-				</li>
-				</ul>
-			<%
+				<label><%if(arr.get(i).getComm_idx()==Integer.parseInt(request.getParameter("comm_idx"))){
+					%><a href = "comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%></a>">댓글쓰기</a><a href="#">&#10060;</a></label>
+					<input type="password" name="comm_pwd"
+						placeholder="비밀번호"></li>
+					</div>
+					</li>
+					</ul>
+				<%
+				}
+				
 					}
 				}
 				%>
