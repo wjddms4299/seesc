@@ -126,13 +126,13 @@ function changeMoney(){
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
- 			<select name="coupon_name">
- 				<option value="사용안함">사용안함</option>
+ 			<select name="coupon_idx">
+ 				<option value="0">사용안함</option>
  				<%
  				if(cpdto!=null){
 	 				for(int i=0;i<cpdto.size();i++){
 	 					%>
-	 					<option value="<%=cpdto.get(i).getCoupon_name()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>             <!-- cpdto.get(i).getCoupon_idx() -->
+	 					<option value="<%=cpdto.get(i).getCoupon_idx()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>             <!-- cpdto.get(i).getCoupon_idx() -->
 	 					<%
 	 				}
  				}
@@ -148,8 +148,8 @@ function changeMoney(){
  	<tr height="40">
  		<td align="center" class="a2" ><b>결제방식</b></td>
  		<td>&nbsp;&nbsp;
- 			<input type="radio" name="booking_pay" value="0">현장결제&nbsp;&nbsp;&nbsp;&nbsp;
- 			<input type="radio" name="booking_pay" value="1">무통장입금
+ 			<input type="radio" name="booking_pay" value="0">무통장입금&nbsp;&nbsp;&nbsp;&nbsp;
+ 			<input type="radio" name="booking_pay" value="1">현장결제
  		</td>
  	</tr>
  	<tr height="40">

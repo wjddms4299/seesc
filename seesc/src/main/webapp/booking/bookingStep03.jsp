@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
 Integer user_idx=(Integer)session.getAttribute("user_idx");
 
@@ -12,7 +13,7 @@ if(booking_name==null || booking_name==""){
 	%>
 	<script>
 	window.alert("예약자 성함을 입력해주세요.");
-	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	history.back();
 	</script>
 	<%
 	return;
@@ -23,7 +24,7 @@ if(booking_tel==null || booking_tel==""){
 	%>
 	<script>
 	window.alert("연락처를 입력해주세요.");
-	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	history.back();
 	</script>
 	<%
 	return;
@@ -34,7 +35,7 @@ if(booking_pay==null){
 	%>
 	<script>
 	window.alert("결제방식을 선택해주세요.");
-	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	history.back();
 	</script>
 	<%
 	return;
@@ -45,7 +46,7 @@ if(booking_pwd==null || booking_pwd==""){
 	%>
 	<script>
 	window.alert("예약 비밀번호를 입력해주세요.");
-	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	history.back();
 	</script>
 	<%
 	return;
@@ -56,7 +57,7 @@ if(booking_agree==null || booking_agree.equals("1")){
 	%>
 	<script>
 	window.alert("이용약관 및 개인정보취급방침에 동의해주세요.");
-	location.href="bookingStep02.jsp?thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>";
+	history.back();
 	</script>
 	<%
 	return;
@@ -65,7 +66,6 @@ if(booking_agree==null || booking_agree.equals("1")){
 String thema_name=request.getParameter("thema_name");
 String thema_time=request.getParameter("thema_time");
 String booking_num=request.getParameter("booking_num");
-String coupon_name=request.getParameter("coupon_name");
 String booking_msg=request.getParameter("booking_msg");
 %>
 <!DOCTYPE html>
@@ -133,18 +133,36 @@ section{width:1200px;margin:0px auto;}
  		<td align="center" class="a2"><b>연락처</b></td>
  		<td>&nbsp;&nbsp;<%=booking_tel%></td>
  	</tr>
- 	<%if(user_idx!=null){%>
- 	<tr height="40">
- 		<td align="center" class="a2"><b>쿠폰 사용</b></td>
- 		<td>&nbsp;&nbsp;<%
- 		switch(coupon_name){
-	 		case "1,000":out.print("할인금액 1,000원");break;
-	 		case "2,000":out.print("할인금액 2,000원");break;
-	 		case "3,000":out.print("할인금액 3,000원");break;
-	 		default:out.print("사용안함");
- 		}%></td>
- 	</tr>
- 	<%}%>
+ 	<%
+ 	try{
+	 	if(user_idx!=null){%>
+	 	<tr height="40">
+	 		<td align="center" class="a2"><b>쿠폰 사용</b></td>
+	 		<td>&nbsp;&nbsp;<%
+			String coupon_idx_s=request.getParameter("coupon_idx");
+			int coupon_idx=Integer.parseInt(coupon_idx_s);
+			
+	 		String coupon_name="0";
+	 		if(coupon_idx!=0){
+	 			coupon_name=cpdao.bookingCouponName(coupon_idx);
+	 		}
+	 		switch(coupon_name){
+		 		case "1,000":out.print("할인금액 1,000원");break;
+		 		case "2,000":out.print("할인금액 2,000원");break;
+		 		case "3,000":out.print("할인금액 3,000원");break;
+		 		default:out.print("사용안함");
+	 		}%></td>
+	 	</tr>
+	 	<%
+	 	}
+ 	}catch(Exception e){
+ 		%>
+		<script>
+		window.alert('잘못된 접근입니다.');
+		location.href='/seesc/index.jsp';
+		</script>
+		<%
+	}%>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
  		<td>&nbsp;&nbsp;<b>43,000원</b></td>
@@ -153,9 +171,10 @@ section{width:1200px;margin:0px auto;}
  		<td align="center" class="a2"><b>결제방식</b></td>
  		<td>&nbsp;&nbsp;<%
  		int booking_pay_i=Integer.parseInt(booking_pay);
+ 		int booking_pay_ok=0;
  		switch(booking_pay_i){
-	 		case 0:out.print("현장결제");break;
-	 		case 1:out.print("무통장입금");
+	 		case 0:out.print("무통장입금");break;
+	 		case 1:out.print("현장결제");
  		}%></td>
  	</tr>
  	<tr height="40">
