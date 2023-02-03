@@ -37,7 +37,10 @@ h2 {
 	text-align: center;
 	font-size: 30px;
 }
-
+section img{
+   width:250px;
+   height:250px;
+}
 table {
 	width: 660px;
 	margin: 0px auto;
@@ -74,7 +77,9 @@ th {
 						<td><%=dto.getWrite_wdate()%></td>
 					<tr>
 						<th>작성자:</th>
-						<td colspan="3"><%=dto.getWrite_writer()%></td>
+						<td><%=dto.getWrite_writer()%></td>
+						<th>조회수:</th>
+						<td><%=dto.getWrite_readnum() %></td>
 					</tr>
 					<tr>
 						<th>파일이름:</th>
@@ -85,11 +90,11 @@ th {
 							target="_blank"><%=dto.getWrite_filename()%></a></td>
 					</tr>
 					<tr>
-						<td><img
-							src="/seesc/community/userFile/<%=dto.getWrite_filename()%>"></td>
+						<td colspan="4" align="center">
+						<img src="/seesc/community/img/<%=dto.getWrite_filename()%>"></td>
 						<%
 						} else {
-						%><td>파일 없음</td>
+						%><td colspan="4">파일 없음</td>
 						<%
 						}
 						%>
@@ -120,7 +125,7 @@ th {
 						<input type="button"value=" 수정 " onclick = "location.href = 'community_eventcontent_update.jsp?write_idx=<%=write_idx%>'">
 						<input type="button" value=" 목록 "
 							onclick="location.href = 'community_eventcontent_list.jsp';">
-							<input type="button" value=" 답글 " onclick="location.href ='community_eventcontant_re.jsp?write_title=<%=dto.getWrite_title()%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=dto.getWrite_lev()%>&write_step=<%=dto.getWrite_step()%>'">
+							<input type="button" value=" 댓글 " onclick="location.href ='community_eventcontant_re.jsp?write_title=<%=dto.getWrite_title()%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=dto.getWrite_lev()%>&write_step=<%=dto.getWrite_step()%>'">
 							<%
 							}
 							%>
