@@ -1,12 +1,23 @@
+<%@page import="java.time.Instant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	        <% request.setCharacterEncoding("utf-8");%>
-	
 <%@ page import="java.util.*"%>
 <%@ page import="com.esc.write.*"%>
 <%@page import ="com.esc.userinfo.*" %>
 <jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
+
+<%
+Calendar now=Calendar.getInstance();
+
+int yy=now.get(Calendar.YEAR);
+int mm=now.get(Calendar.MONTH)+1;
+int dd=now.get(Calendar.DATE);
+String today = ""+yy+mm+dd;
+;
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +41,7 @@ ul {
 
 .write_table {
 	margin: 0px auto;
-	width: 600px;
+	width: 800px;
 
 }
 .notice{
@@ -45,11 +56,11 @@ int manager = session.getAttribute("manager")==null||session.getAttribute("manag
 String listname = request.getParameter("listname");
 if(listname==null||listname.equals("")){
 	listname = "0";
-};
+}
 String content = request.getParameter("content");
 if(content==null||content.equals("")){
 	content = "0";
-};
+}
 
 int totalqna = qnadao.getTotalCnt(listname,content);
 
@@ -68,6 +79,7 @@ if(userpage_s==null||userpage_s.equals("")){
 int userpage = Integer.parseInt(userpage_s);
 
 int totalpage = totalqna/writeList+1;
+
 if(totalqna%writeList==0){
 	totalpage --;
 }
@@ -76,8 +88,11 @@ if(userpage%pageList == 0){
 	pagegroup --;
 }
 
+String data = "&listSize="+writeList+"&listname="+listname+"&content="+content;
 
+String notice_open = request.getParameter("notice_open");
 %>
+
 <body>
 	<%@include file="/header.jsp"%>
 	<%sid= (String) session.getAttribute("sid");
@@ -85,7 +100,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 	<section>
 		<article>
 			<p class="write_title">
-				질문과 답변
+				질문과 답변 <%=today %>
 			</p>
 			
 			<table class="write_table">
@@ -97,7 +112,9 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						
 						<%=searchmsg %>
 						</td>
-						<td align="right"><select name="writeList"
+						<td align="right">
+
+						<select name="writeList"
 							onChange="window.location.href=this.value">
 								<option>리스트수</option>
 								<option value="qna_list.jsp?listSize=5&listname=<%=listname%>&content=<%=content%>">5개씩</option>
@@ -185,7 +202,8 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					<form name = "search_list" action = "qna_list.jsp" method = "post">
 					<input type = "hidden" name = "listsize" value = "<%=writeList %>">
 					<input type = "hidden" name = "userpage" value = "<%=userpage %>">
-						<td colspan="4" align="center"><select name= "listname">
+					
+					<td colspan="4" align="center"><select name= "listname">
 							<option value ="4">제목+내용</option>
 								<option value="1">글제목</option>
 								<option value="2">내용</option>
@@ -206,14 +224,14 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					<tr>
 						<td colspan="5" align="center">
 						<%if(pagegroup!=0){
-							%><a href = "qna_list.jsp?userpage=<%=1 %>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">&lt;&lt;</a>
-							<a href = "qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">이전</a>
+							%><a href = "qna_list.jsp?userpage=<%=1 %><%=data%>">&lt;&lt;</a>
+							<a href = "qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%><%=data%>">이전</a>
 							<%} 	
 						
 						
 							for(int i=pagegroup*pageList+1;i<=pagegroup*pageList+pageList;i++){
 								%>
-								&nbsp;&nbsp;<a href = "qna_list.jsp?userpage=<%=i%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>"><%=i%></a>&nbsp;&nbsp;
+								&nbsp;&nbsp;<a href = "qna_list.jsp?userpage=<%=i%><%=data%>"><%=i%></a>&nbsp;&nbsp;
 								
 								<%
 							if(i==totalpage)break;
@@ -221,8 +239,8 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							
 							if(pagegroup!=(totalpage/pageList-(totalpage%pageList==0?1:0))){
 								%>
-								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">다음</a>
-								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%>&listSize=<%=writeList%>&listname=<%=listname%>&content=<%=content%>">&gt;&gt;</a>
+								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%><%=data%>">다음</a>
+								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%><%=data%>">&gt;&gt;</a>
 							<%}
 							%>
 				</tfoot>

@@ -517,17 +517,99 @@ public class QnADAO {
 	}
 
 	/*----------------------------댓글---------------------------------------------------------------*/
+	
+	/**댓글 ref 그룹구하기 관련 메서드 */
+	public int getCommMaxRef() {
+		try {
+			String sql = "select max(comm_ref) from comments";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			int max =0;
+			if(rs.next()) {
+				max = rs.getInt(1);
+			}
+			return max;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+			
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			}catch(Exception e2) {
+			}
+		}
+	}
+	/**댓글 순서 변경 관련 메서드*/
+	public void setUpdateCommStep(int write_ref,int write_step) {
+		try {
+			String sql = "update comments set comm_step = comm_step+1 where comm_ref=? and comm_step>=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, write_ref);
+			ps.setInt(2, write_step);
+			
+			ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+			}catch(Exception e2) {
+			}
+			
+		}
+		
+	}
 	/** 댓글 등록 관련 메서드 */
 	public int comment_write(CommentDTO dto) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "insert into comments values(comments_comm_idx.nextval,?,?,?,?,?,sysdate,0,0,0,0)";
+			int maxref = getCommMaxRef();
+			String sql = "insert into comments values(comments_comm_idx.nextval,?,?,?,?,?,sysdate,0,?,0,0)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, dto.getWrite_idx());
 			ps.setInt(2, dto.getUser_idx());
 			ps.setString(3, dto.getComm_writer());
 			ps.setString(4, dto.getComm_pwd());
 			ps.setString(5, dto.getComm_content());
+			ps.setInt(6, maxref+1);
+
+			int count = ps.executeUpdate();
+			return count;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+
+			}
+		}
+	}
+/**대댓글 등록 관련 메서드*/
+	public int comment_repwrite(CommentDTO dto) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			setUpdateCommStep(dto.getComm_ref(), dto.getComm_step()+1);
+			String sql = "insert into comments values(comments_comm_idx.nextval,?,?,?,?,?,sysdate,0,?,?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, dto.getWrite_idx());
+			ps.setInt(2, dto.getUser_idx());
+			ps.setString(3, dto.getComm_writer());
+			ps.setString(4, dto.getComm_pwd());
+			ps.setString(5, dto.getComm_content());
+			ps.setInt(6, dto.getComm_ref());
+			ps.setInt(7, dto.getComm_lev()+1);
+			ps.setInt(8, dto.getComm_step()+1);
 
 			int count = ps.executeUpdate();
 			return count;
@@ -548,11 +630,14 @@ public class QnADAO {
 		}
 	}
 
+	
+	
 	/** 댓글 출력 관련 메서드 */
 	public ArrayList<CommentDTO> commentList(int write_idx) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "select * from comments where write_idx = ? order by comm_idx desc";
+			String sql = "select * from comments where write_idx = ? order by comm_ref desc,comm_step asc";
+
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);
 
@@ -627,9 +712,34 @@ public class QnADAO {
 		
 	}
 	
+	/**댓글 삭제 관련 메서드*/
+	public int comment_Delete(int comm_idx) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "delete from comments where comm_idx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, comm_idx);
+			
+			int count = ps.executeUpdate();
+			return count;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 	
-	
-	
+
 	/*---------------------------------------관리자--------------------------------------------------------------*/
 
 	/** 관리자 공지글 등록관련 메서드 */
