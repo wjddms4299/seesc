@@ -86,33 +86,20 @@ switch(booking_pay){
 	case 0:booking_pay_ok=0;break;
 	case 1:booking_pay_ok=1;
 }
-if(user_idx!=null){		
-	int result=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
+
+if(user_idx==null){		
+	user_idx=0;
+}
+int result=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
 			time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
-		
-	if(result==1){%>
-		<script>
-		location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
-		</script>
-	<%}else{%>
-		<script>
-		window.alert('예약하기에 실패하였습니다.');
-		location.href="bookingStep01.jsp";
-		</script>
-	<%}
-}else{
-	int result=bdao.booking(thema_idx,coupon_idx,0,booking_name,booking_tel,booking_pwd,
-			time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
-	
-	if(result==1){%>
+
+if(result==1){%>
 	<script>
 	location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
 	</script>
-	<%}else{%>
+<%}else{%>
 	<script>
 	window.alert('예약하기에 실패하였습니다.');
 	location.href="bookingStep01.jsp";
 	</script>
-	<%}
-	
-}%>
+<%}%>
