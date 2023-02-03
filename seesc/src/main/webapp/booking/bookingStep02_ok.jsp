@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="bdao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
 Integer user_idx=(Integer)session.getAttribute("user_idx");
 
@@ -114,19 +115,37 @@ switch(booking_pay){
 	case 1:booking_pay_ok=1;
 }
 
-if(user_idx==null){		
-	user_idx=0;
-}
-int result=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
+if(user_idx!=null){		
+	int result_1=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
 			time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
-
-if(result==1){%>
-	<script>
-	location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
-	</script>
-<%}else{%>
-	<script>
-	window.alert('예약하기에 실패하였습니다.');
-	location.href="bookingStep01.jsp";
-	</script>
-<%}%>
+	int result_2=cpdao.bookingCouponUse(coupon_idx);
+	
+	if(result_1==1 && result_2==1){
+		int booking_idx=bdao.bookingIdx(thema_idx,time_date,time_ptime);%>
+		
+		<script>
+		location.href="bookingStep03.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
+		</script>
+	<%}else{%>
+		<script>
+		window.alert('예약하기에 실패하였습니다.');
+		location.href="bookingStep01.jsp";
+		</script>
+	<%}
+}else{
+	int result_1=bdao.booking(thema_idx,coupon_idx,0,booking_name,booking_tel,booking_pwd,
+			time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
+	
+	if(result_1==1){
+		int booking_idx=bdao.bookingIdx(thema_idx,time_date,time_ptime);%>
+	
+		<script>
+		location.href="bookingStep03.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
+		</script>
+		<%}else{%>
+		<script>
+		window.alert('예약하기에 실패하였습니다.');
+		location.href="bookingStep01.jsp";
+		</script>
+	<%}
+}%>

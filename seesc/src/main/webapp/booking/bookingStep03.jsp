@@ -17,6 +17,10 @@ String thema_name=request.getParameter("thema_name");
 String thema_time=request.getParameter("thema_time");
 String booking_num=request.getParameter("booking_num");
 String booking_msg=request.getParameter("booking_msg");
+
+String booking_idx=request.getParameter("booking_idx");
+String booking_pay_ok_s=request.getParameter("booking_pay_ok");
+int booking_pay_ok=Integer.parseInt(booking_pay_ok_s);
 %>
 <!DOCTYPE html>
 <html>
@@ -47,8 +51,8 @@ section{width:1200px;margin:0px auto;}
  <article>
  <table id="a1-1" border="1" cellspacing="0">
  	<tr height="40">
- 		<td width="200" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="600">&nbsp;&nbsp;<%=thema_name%></td>
+ 		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
+ 		<td width="500">&nbsp;&nbsp;<%=thema_name%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
@@ -145,7 +149,7 @@ section{width:1200px;margin:0px auto;}
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="button" value="예약 취소하기"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
+ 			<a href="/seesc/booking/cancle_popup.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>"><input type="button" value="예약 취소하기"></a> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
  		</td>
  	</tr>
  </table>
