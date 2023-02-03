@@ -60,7 +60,7 @@ width : 800px;
 				</tr>
 				<%for(int i=0;i<arr.size();i++){
 					%><tr><td><%=arr.get(i).getBooking_idx() %>
-					<td><%=thdao.themaName(arr.get(i).getThema_idx())%>
+					<td><%= thdao.themaName(arr.get(i).getThema_idx())%></td>
 					<td><%=arr.get(i).getTime_date() %></td>
 					<td><%=arr.get(i).getBooking_num() %></td>
 					<%StringBuffer returnMoney=new StringBuffer(String.valueOf(arr.get(i).getBooking_money()));
