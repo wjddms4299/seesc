@@ -277,7 +277,7 @@ public class UserinfoDAO {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			
-			String sql="select user_name,user_tel from userinfo where user_id=?";
+			String sql="select user_name,user_tel from userinfo where user_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, user_idx);
 			rs=ps.executeQuery();

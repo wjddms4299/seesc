@@ -75,7 +75,7 @@ public class CouponDAO {
 	}
 	
 	/**예약완료시 쿠폰 사용여부 변경하기*/
-	public int bookingCouponUse(int coupon_idx){
+	public void bookingCouponUse(int coupon_idx){
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			
@@ -83,11 +83,9 @@ public class CouponDAO {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, coupon_idx);
 			
-			int count=ps.executeUpdate();
-			return count;
+			ps.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
-			return -1;
 		}finally {
 			try {
 				if(ps!=null)ps.close();
@@ -119,6 +117,28 @@ public class CouponDAO {
 		}finally {
 			try {
 				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
+	/**예약취소시 쿠폰 사용여부 변경하기*/
+	public void bookingCouponUse_R(int coupon_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="update coupon set coupon_use=1 where coupon_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, coupon_idx);
+			
+			ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			}catch(Exception e2) {

@@ -37,6 +37,11 @@ section{width:1200px;margin:0px auto;}
 #a2-1{margin:0px auto;}
 #d1{margin:40px 270px;}
 </style>
+<script>
+function popup_open(){
+	window.open('/seesc/booking/cancle_popup.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>','cancle_popup.jsp','width=550,height=300,top=100,left=300');
+}
+</script>
 </head>
 <body>
 <%@include file="/header.jsp"%>
@@ -149,7 +154,7 @@ section{width:1200px;margin:0px auto;}
  <table id="a2-1">
  	<tr>
  		<td>
- 			<a href="/seesc/booking/cancle_popup.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>"><input type="button" value="예약 취소하기"></a> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
+ 			<input type="button" value="예약 취소하기" onclick="popup_open();"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
  		</td>
  	</tr>
  </table>

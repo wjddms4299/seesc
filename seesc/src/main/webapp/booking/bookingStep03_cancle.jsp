@@ -13,11 +13,14 @@ int result=bdao.bookingDelete(booking_idx,dto,cancel_banknum);
 if (result==1) {%>
 	<script>
 	window.alert('취소가 완료되었습니다.');
-	location.href='bookingStep01.jsp';
+	window.opener.location.href='bookingStep01.jsp';
+	window.self.close();
+	
 	</script>
 <%}else {%>
 	<script>
 	window.alert('예약취소에 실패하였습니다.');
-	location.href = 'bookingStep01.jsp';
+	window.opener.location.href='bookingStep01.jsp';
+	window.self.close();
 	</script>
 <%}%>
