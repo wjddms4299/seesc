@@ -7,7 +7,7 @@
 String user_tel_r1=request.getParameter("user_tel1");
 String user_tel_r2=request.getParameter("user_tel2");
 String user_tel_r3=request.getParameter("user_tel3");
-String user_tel=user_tel_r1+"-"+user_tel_r2+"-"+user_tel_r1;
+String user_tel=user_tel_r1+"-"+user_tel_r2+"-"+user_tel_r3;
 String year=request.getParameter("year");
 String month=request.getParameter("month");
 int month_1=Integer.parseInt(month);
