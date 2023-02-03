@@ -141,13 +141,14 @@ a {
 				<li><label>댓글작성자 댓글내용 <a href="#">&#10060;</a></label></li>
 
 				<hr>
-				<li><label>댓글 쓰기</label> <input type="text" name="write_writer"
-					placeholder="작성자"> <input type="password" name="write_pwd"
+				<form name = "comment" action = "comment_ok.jsp" method = "post">
+				<li><label>댓글 쓰기</label> <input type="text" name="comm_writer"
+					placeholder="작성자"> <input type="password" name="comm_pwd"
 					placeholder="비밀번호"></li>
-				<li><textarea rows="10" cols="50" name="write_content"
-						placeholder="내용을 작성해주세요"></textarea> <input type="button"
-					value="등록" onclick="location.href='qna_comment.jsp'"></li>
-
+				<li><textarea rows="10" cols="50" name="comm_content"
+						placeholder="내용을 작성해주세요"></textarea> <input type="submit"
+					value="등록" ></li>
+				</form>
 			</ul>
 
 		</article>
