@@ -61,6 +61,7 @@ if(booking_agree==null || booking_agree.equals("1")){
 
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
+String time_date_t=request.getParameter("time_date");
 StringBuffer time_date_b=new StringBuffer(request.getParameter("time_date"));
 time_date_b.delete(time_date_b.length()-4,time_date_b.length());
 String time_date=time_date_b.toString();
@@ -91,7 +92,7 @@ if(user_idx!=null){
 		
 	if(result==1){%>
 		<script>
-		location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_b%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&booking_num=<%=booking_num_s%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
+		location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
 		</script>
 	<%}else{%>
 		<script>
@@ -105,7 +106,7 @@ if(user_idx!=null){
 	
 	if(result==1){%>
 	<script>
-	location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&booking_num=<%=booking_num_s%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
+	location.href="bookingStep03.jsp?booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
 	</script>
 	<%}else{%>
 	<script>
