@@ -46,7 +46,7 @@ public class BookingDAO {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 				
-			String sql="insert into booking values(booking_booking_idx.nextval,?,?,?,?,?,?,sysdate,to_date(?,'yy-mm-dd'),?,?,?,?,?,10000)";
+			String sql="insert into booking values(booking_booking_idx.nextval,?,?,?,?,?,?,sysdate,?,?,?,?,?,?,10000)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1,thema_idx);
 			ps.setInt(2,coupon_idx);

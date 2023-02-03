@@ -58,7 +58,7 @@ function changeMoney(){
 <body>
 <%@include file="/header.jsp"%>
 <section>
-<form name="bookingStep02" action="bookingStep03.jsp">
+<form name="bookingStep02" action="bookingStep02_ok.jsp">
 <input type="hidden" name="thema_idx" value="<%=thema_idx%>">
 <input type="hidden" name="time_date" value="<%=time_date%>">
 <input type="hidden" name="time_ptime" value="<%=time_ptime%>">
