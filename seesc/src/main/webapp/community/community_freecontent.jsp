@@ -16,6 +16,9 @@
 h3{
  text-align: center;
 }
+h4{
+	text-align: center;
+}
 </style>
 </head>
 
@@ -73,10 +76,29 @@ if(cp%pageSize==0)userGroup--;
 						<input type="hidden" name="idx" value="<%=dto.getWrite_idx()%>">
 						<input type="submit" value="수정하기">
 						<input type="button" value="목록으로" onclick="location.href='community.jsp'">
-						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'">				
+						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'">
+								
 					</td>
 				</tr>
 			</tfoot>
+		</table>
+		</form>
+		<hr>
+		<form name="underwrite" action="community+freecontent_ok2.jsp">
+		<h4>댓글 달기</h4>
+			<table>
+		<thead>
+			<tr>
+				<th>작성자 : <input type="text" name="write_writer"></th>
+				<th>비밀번호 : <input type="password" name="write_pwd"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="2">댓글 : <input type="text" name="write_content" size="60" ></td>
+				<td><input type="submit" value="댓글 등록하기"></td>	
+			</tr>
+		</tbody>	
 		</table>
 		</form>
 	</article>
