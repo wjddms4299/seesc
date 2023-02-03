@@ -52,7 +52,7 @@ if(cp%pageSize==0)userGroup--;
 		<h2>커뮤니티</h2>
 		<div>
 			<input type="button" value="자유 게시판" onclick="location.href='community.jsp'">
-			<input type="button" value="이벤트 게시판" onclick="seesc/community/community_eventcontent_list.jsp">
+			<input type="button" value="이벤트 게시판" onclick="location.href='community_eventcontent_list.jsp'">
 			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
 			<select name="sort" >
 				<option  value="0">정렬 순
