@@ -116,8 +116,8 @@ public class QnADAO {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 
-			int write_idx = mr.getParameter("write_idx") == null || mr.getParameter("write_idx").equals("") ? 0
-					: Integer.parseInt(mr.getParameter("write_idx"));
+			int user_idx = mr.getParameter("user_idx") == null || mr.getParameter("user_idx").equals("") ? 0
+					: Integer.parseInt(mr.getParameter("user_idx"));
 
 			int write_ref = mr.getParameter("write_ref") == null || mr.getParameter("write_ref").equals("") ? 0
 					: Integer.parseInt(mr.getParameter("write_ref"));
@@ -139,7 +139,7 @@ public class QnADAO {
 			String sql = "insert into write values(write_write_idx.nextval,?,'qna',?,?,?,sysdate,?,?,0,?,?,?,?,0)";
 			ps = conn.prepareStatement(sql);
 
-			ps.setInt(1, write_idx);
+			ps.setInt(1, user_idx);
 			ps.setString(2, mr.getParameter("write_title"));
 			ps.setString(3, mr.getParameter("write_writer"));
 			ps.setString(4, mr.getParameter("write_pwd"));
@@ -419,6 +419,7 @@ public class QnADAO {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			readnumUpdate(write_idx);
+			
 			String sql = "select * from write where write_idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);

@@ -41,7 +41,9 @@ ul, li {
 a {
 	text-decoration: none;
 }
-
+.td td{
+  background : gray;
+}
 </style>
 </head>
 <body>
@@ -77,7 +79,7 @@ a {
 					</tr>
 					<% if(dto.getWrite_filename()!=null){%>
 					<tr>
-					<td colspan ="2"><img src="/seesc/community/userFile/<%=dto.getWrite_filename()%>"></td>
+					<td colspan ="2"><img src="/seesc/community/userFile/<%=dto.getWrite_filename()%>" alt = "사용자업로드이미지 "></td>
 					</tr>
 					<%} %>
 					<tr>
@@ -97,24 +99,25 @@ a {
 				<% }else if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%> <!-- 관리자 또는 작성자 본인이면 바로 삭제 할 수 있는 기능  -->
 				<tr>
 					<td colspan="2">
-						<form name ="comment" action = "qna_repWrite.jsp" method = "post">
-						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
-						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
-						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
 						<input type="button" value="삭제" onclick ="location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'">
 						<input type="button" value="수정" onclick="location.href = 'qna_update.jsp?flag=userUpdate&write_idx=<%=write_idx%>'">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
-						<input type = "submit" value = "답글">
+				
+						<form name = "qna_rewrite" action="qna_repWrite.jsp" method ="post">
+						<input type="hidden" name="write_idx" value="<%=write_idx%>">
+						<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
+						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
+						<input type ="hidden" name = "write_ref" value = "<%=dto.getWrite_ref()%>">
+						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
+						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
+						<input type="submit" value="답글">
 						</form>
 					</td>
 				</tr>
 				<%}else {%> <!-- 비회원이면 비밀번호 입력후 수정과 삭제 가능하게 -->
 				<tr>
-					<td td colspan="2">
+					<td colspan="2">
 						<form name="qna_wdu" method="post">
-						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
-						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
-						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
 						글을 삭제하거나 수정할 경우 비밀번호를 입력해주세요.<br>
@@ -122,7 +125,16 @@ a {
 						<input type="submit" value="삭제" onclick="javascript:qna_wdu.action='qna_delete_ok.jsp';">
 						<input type="submit" value="수정" onclick="javascript:qna_wdu.action='qna_update.jsp';">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
-						<input type="submit" value="답글"onclick="javascript:qna_wdu.action='qna_repWrite.jsp';">
+						</form>
+						
+						<form name = "qna_rewrite" action="qna_repWrite.jsp" method ="post">
+						<input type="hidden" name="write_idx" value="<%=write_idx%>">
+						<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
+						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
+						<input type ="hidden" name = "write_ref" value = "<%=dto.getWrite_ref()%>">
+						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
+						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
+						<input type = "submit" value ="답글">
 						</form>
 					</td>
 				</tr>
@@ -138,15 +150,16 @@ a {
 		<article>
 			<fieldset>
 				<legend>댓글</legend>
-				<table>
+				<table class = "tb">
 				
 				<%
 				ArrayList<CommentDTO> arr = qnadao.commentList(write_idx);
+				String flag = request.getParameter("flag");
 				if (arr != null && arr.size() != 0) {
 					for (int i = 0; i < arr.size(); i++) {
 				%>
 				<tr>
-				<td onclick="location.href = 'qna_content.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>'">
+				<td onclick="location.href = 'qna_content.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=commentwrite'">
 					<%
 					for (int z = 0; z < arr.get(i).getComm_lev(); z++) {
 						out.print("&nbsp;&nbsp;");
@@ -156,53 +169,103 @@ a {
 					}
 					%>
 					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%>
-					<a
-						href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>">&#10060;</a>
-
-				</td>
-				</tr>
-				<%
-				if (comm_idx == arr.get(i).getComm_idx()) {
-				%>
-					<tr>
-					<form name="co_comment" action="comenRe_ok.jsp" method="post">
-						<input type="hidden" name="write_idx" value="<%=write_idx%>">
-						<input type="hidden" name=user_idx value="<%=user_idx%>">
-						<input type="hidden" name="comm_ref"value="<%=arr.get(i).getComm_ref()%>">
-						<input type="hidden" name="comm_lev" value="<%=arr.get(i).getComm_lev()%>">
-						<input type="hidden" name="comm_step" value="<%=arr.get(i).getComm_step()%>"> 
-						
-					<td>➥
-						
-				<%if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
-					<input type="hidden" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
-						<%=udto.getUser_nic()%>
-						</td>
 					
-					<%}else{%>
-						<input type="text" name="comm_writer" placeholder="작성자" required>
-						<input type="password" name="comm_pwd" placeholder="비밀번호" required>
-						</td>
-					<%} %>
-					</tr>
-					<tr>
-						<td><textarea rows="2" cols="40" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
-						<input type="submit" value="등록"><input type="button"value="닫기"
-							onclick="location.href = 'qna_content.jsp?write_idx=<%=write_idx%>'"></td>
-						
-					</tr>
-					</form>
-				</table>
+					<%if(manager==1){%>
+					<a href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=commdel">
+					<img src="/seesc/img/s_delete.gif" alt = "댓글삭제">
+					</a>
+					</td>
+							<%}else if(user_idx == dto.getUser_idx()&&user_idx!=0&&arr.get(i).getUser_idx()==user_idx){%>
+								<a href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=commdel">
+								<img src="/seesc/img/s_delete.gif" alt = "댓글삭제">
+								</a>
+							<%}else{%>
+							
+							<a href="qna_content.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=delete">
+							<img src="/seesc/img/s_delete.gif" alt = "댓글삭제">
+							</a>
+							</td>
+							</tr>
+							<tr>
+						<%
+				
+						if (comm_idx == arr.get(i).getComm_idx()&flag!=null&&flag.equals("delete")) {%>	
+							<td>
+							<form name= "commentdelete" action = "comment_Delete.jsp">
+							<input type="password" name="userinputpwd" placeholder="비밀번호" required>
+							<input type="hidden" name="comm_pwd" value="<%=arr.get(i).getComm_pwd()%>">
+							<input type="hidden" name="comm_idx" value="<%=arr.get(i).getComm_idx()%>">
+							<input type="hidden" name="write_idx" value="<%=write_idx%>">
+							<input type="submit" value="삭제">
+							<input type="button"value="닫기" onclick="location.href = 'qna_content.jsp?write_idx=<%=write_idx%>'">
+							</form>
+							</td>
+							</tr>
+					<%}
+					}%>
+
+				<!-- -------대댓글달기 ------- -->
 				<%
-				}
-				}
+				if (comm_idx == arr.get(i).getComm_idx()&&flag!=null&&flag.equals("commentwrite")) {
+					if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
+						<tr>
+						<td>➥<%=udto.getUser_nic()%></td>
+						</tr>
+								<form name="co_comment" action="comenRe_ok.jsp" method="post">
+									<tr>
+									<td>
+									<input type="hidden" name="write_idx" value="<%=write_idx%>">
+									<input type="hidden" name="user_idx" value="<%=user_idx%>">
+									<input type="hidden" name="comm_ref"value="<%=arr.get(i).getComm_ref()%>">
+									<input type="hidden" name="comm_lev" value="<%=arr.get(i).getComm_lev()%>">
+									<input type="hidden" name="comm_step" value="<%=arr.get(i).getComm_step()%>"> 
+									<input type="hidden" name="comm_writer" value = "<%=udto.getUser_nic()%>">
+									</td>
+									</tr>
+									<tr>
+									<td>
+									<textarea rows="2" cols="40" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
+									<input type="submit" value="등록">
+									<input type="button"value="닫기" onclick="location.href = 'qna_content.jsp?write_idx=<%=write_idx%>'">
+									</td>
+									</tr>								
+								</form>
+						<%}else{%>
+							<form name="co_comment" action="comenRe_ok.jsp" method="post">
+							<tr>
+							<td>
+							➥
+							<input type="text" name="comm_writer" placeholder="작성자" required>
+							<input type="password" name="comm_pwd" placeholder="비밀번호" required>
+							<input type="hidden" name="write_idx" value="<%=write_idx%>">
+							<input type="hidden" name=user_idx value="<%=user_idx%>">
+							<input type="hidden" name="comm_ref"value="<%=arr.get(i).getComm_ref()%>">
+							<input type="hidden" name="comm_lev" value="<%=arr.get(i).getComm_lev()%>">
+							<input type="hidden" name="comm_step" value="<%=arr.get(i).getComm_step()%>"> 
+							<input type="hidden" name="flag" value = "commentwrite">
+							
+							</td>
+							</tr>
+							<tr>
+							<td>
+							<textarea rows="2" cols="40" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
+							<input type="submit" value="등록">
+							<input type="button"value="닫기" onclick="location.href = 'qna_content.jsp?write_idx=<%=write_idx%>'">
+							</td>
+						</tr>
+							</form>
+
+				<%
+							}	
+						}
+					}
 				}
 				%>
-
-			</fieldset>
 
 			</table>
-			<!-- ----------------댓글 작성 -------------------------------------------->
+			</fieldset>
+
+			<!-- ----------------본문에 대한 댓글 작성 -------------------------------------------->
 			<form name="comment" action="comment_ok.jsp" method="post">
 				<input type="hidden" name="write_idx" value="<%=write_idx%>">
 				<input type="hidden" name="user_idx" value=<%=user_idx%>>

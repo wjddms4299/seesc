@@ -49,6 +49,7 @@ ul {
 }
 .notice{
 color : red;}
+
 </style>
 
 
@@ -149,6 +150,11 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					} else {
 					for (int i = 0; i < arr.size(); i++) {
 					%>
+					<!-- a태그 post방식으로 보내기 -->
+					<form  id = "open_pwd" action = "qnaOpen_pwd.jsp" method = "post">
+									<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
+									<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
+									</form>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
 						<td>
@@ -163,20 +169,18 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								/**관리자나 본인이 쓴글이면 비밀번호 필요 없음*/
 								if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
 									<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-									&#128274;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+									<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
 								<%}else{%>
-									<form  name = "open_pwd" action = "qnaOpen_pwd" method = "post">
-									<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
-									<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
-									</form><!-- 제발 수정하고 싶다...post로 -->
-									<a href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> ">
-								&#128274;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+									
+									<a href="#" onclick="document.getElementById('open_pwd').submit();">
+								<img src="/seesc/img/ico_lock.gif" alt = "비밀글">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
 								<%}
 							}else{%>
-								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
+								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">&nbsp;
 								<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
-							<%} %></td>
-						
+							
+							<%} %>
+							</td>
 							<td><%=arr.get(i).getWrite_writer()%></td>
 							<td><%=arr.get(i).getWrite_wdate()%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>
