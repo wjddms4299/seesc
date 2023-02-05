@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.*"%>
 <%@page import="com.esc.write.*"%>
 <%@page import ="com.esc.userinfo.*" %>
 <jsp:useBean id="idao" class="com.esc.write.ImgDAO" scope="session"></jsp:useBean>
@@ -20,8 +22,12 @@ if (dto == null || dto.equals("")) {
 <%
 return;
 }
-
-int open = dto.getWrite_open();
+//오늘 날짜 표시
+Date nowDate = new Date();
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+String today = simpleDateFormat.format(nowDate); 
+String dbdate= simpleDateFormat.format(dto.getWrite_wdate());
+String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
 %>
 <!DOCTYPE html>
 <html>
@@ -34,7 +40,7 @@ h2 {
 	text-align: center;
 	font-size: 30px;
 }
-section img{
+.msrc{
    width:250px;
    height:250px;
 }
@@ -88,7 +94,7 @@ th {
 					</tr>
 					<tr>
 						<td colspan="4" align="center">
-						<img src="/seesc/community/img/<%=dto.getWrite_filename()%>"></td>
+						<img src="/seesc/community/img/<%=dto.getWrite_filename()%>" class="msrc"></td>
 						<%
 						} else {
 						%><td colspan="4">파일 없음</td>
@@ -126,20 +132,20 @@ th {
 						</form>
 					</td>
 				</tr>
-				<%}else {%>
+				<%}else {%> <!--비회원 비밀번호 입력후 수정과 삭제-->
 				<tr>
 					<td colspan="4">
 						<form name="event_wdu" method="post">
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
-						글을 삭제하거나 수정할 경우 비밀번호를 입력해주세요.<br>
+						[삭제] [수정]을 원하시면 비밀번호를 입력해주세요:
 						<input type="password" name="userinput_pwd" required>
 						<input type="submit" value="삭제" onclick="javascript:event_wdu.action='community_eventcontent_delete_ok.jsp';">
 						<input type="submit" value="수정" onclick="javascript:event_wdu.action='community_eventcontent_update.jsp';">
 						<input type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
 						</form>
 						
-						<form name = "event_rewrite" action="community_eventcontent_re.jsp" method ="post">
+						<form name = "event_re" action="community_eventcontent_re.jsp" method ="post">
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
 						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
@@ -158,6 +164,34 @@ th {
 				<%if(dto.getWrite_notice()!=1){ %> 	<!-- 공지 댓글작성 막기 -->
 				
 		<article>
+			<!--본문 댓글-->
+			<form name="cm" action="community_eventcontent_contentRe.jsp" method="post">
+				<input type="hidden" name="write_idx" value="<%=write_idx%>">
+				<input type="hidden" name="user_idx" value=<%=user_idx%>>
+				<fieldset>
+				<legend>댓글작성</legend>
+				<table>
+				<%if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
+					<tr>
+					<td><input type="hidden" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
+					<%=udto.getUser_nic()%></td>
+					
+					
+				<%}else{%>
+					<tr>
+						<td>
+						<input type="text" name="comm_writer" placeholder="작성자" required>
+						<input type="password" name="comm_pwd" placeholder="비밀번호" required>
+						</td>
+					</tr>
+					<%} %>
+					<tr>
+						<td><textarea rows="3" cols="50" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
+						<input type="submit" value="등록"></td>
+					</tr>
+				</table>
+				</fieldset>
+			</form>
 			<fieldset>
 				<legend>댓글</legend>
 				<table>
@@ -174,7 +208,7 @@ th {
 						out.print("&nbsp;&nbsp;");
 					}
 					if (arr.get(i).getComm_lev() > 0) {
-						out.print("&nbsp;&nbsp;&#8627;");
+						out.print("&nbsp;&nbsp;");
 					}
 					%>
 					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%><%=newicon %>
@@ -218,7 +252,7 @@ th {
 						<tr>
 						<td>➥<%=udto.getUser_nic()%></td>
 						</tr>
-								<form name="co_co" action="community_eventcontent_rere.jsp" method="post">
+								<form name="co_co" action="community_eventcontent_contentReRe.jsp" method="post">
 									<tr>
 									<td>
 									<input type="hidden" name="write_idx" value="<%=write_idx%>">
@@ -238,11 +272,11 @@ th {
 									</tr>								
 								</form>
 						<%}else{%>
-							<form name="co_co" action="community_eventcontent_rere.jsp" method="post">
+							<form name="co_co" action="community_eventcontent_contentReRe.jsp" method="post">
 							<tr>
 							<td>
-							<input type="text" name="co_writer" placeholder="작성자" required>
-							<input type="password" name="co_pwd" placeholder="비밀번호" required>
+							<input type="text" name="comm_writer" placeholder="작성자" required>
+							<input type="password" name="comm_pwd" placeholder="비밀번호" required>
 							<input type="hidden" name="write_idx" value="<%=write_idx%>">
 							<input type="hidden" name=user_idx value="<%=user_idx%>">
 							<input type="hidden" name="comm_ref"value="<%=arr.get(i).getComm_ref()%>">
@@ -270,35 +304,6 @@ th {
 
 			</table>
 			</fieldset>
-
-			<!--본문 댓글-->
-			<form name="cm" action="community_eventcontent_re_ok.jsp" method="post">
-				<input type="hidden" name="write_idx" value="<%=write_idx%>">
-				<input type="hidden" name="user_idx" value=<%=user_idx%>>
-				<fieldset>
-				<legend>댓글작성</legend>
-				<table>
-				<%if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
-					<tr>
-					<td><input type="hidden" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
-					<%=udto.getUser_nic()%></td>
-					
-					
-				<%}else{%>
-					<tr>
-						<td>
-						<input type="text" name="comm_writer" placeholder="작성자" required>
-						<input type="password" name="comm_pwd" placeholder="비밀번호" required>
-						</td>
-					</tr>
-					<%} %>
-					<tr>
-						<td><textarea rows="3" cols="50" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
-						<input type="submit" value="등록"></td>
-					</tr>
-				</table>
-				</fieldset>
-			</form>
 		</article>
 		<%} %>
 	</section>

@@ -23,6 +23,9 @@ section img{
    width:250px;
    height:250px;
 }
+th{
+background-color: yellow;
+}
 </style>
 </head>
 <%

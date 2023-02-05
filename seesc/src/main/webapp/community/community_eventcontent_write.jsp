@@ -48,10 +48,10 @@ UserinfoDTO dto = userdao.userInfo(sid);
 								<%
 								String readonly =user_idx==0?"":"readonly";
 								out.println(readonly);
-								%>"
+								%>
 								></td>
 				<th>비밀번호</th>
-				<td><input type="password" placeholder="비밀번호입력" name="write_pwd" required="required"></td>
+				<td><input type="password" placeholder="비밀번호입력" name="write_pwd" required></td>
 			</tr>
 			<tr>
 				<th align="left" colspan="2">파일첨부 : <input type="file" name="write_filename"></th>
@@ -61,10 +61,10 @@ UserinfoDTO dto = userdao.userInfo(sid);
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td colspan="3"><input type="text" size="58" placeholder="제목입력" name="write_title" required="required"></td>
+				<td colspan="3"><input type="text" size="58" placeholder="제목입력" name="write_title" required></td>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea rows="10" cols="70" placeholder="내용입력" name="write_content" required="required"></textarea></td>
+				<td colspan="4"><textarea rows="10" cols="70" placeholder="내용입력" name="write_content" required></textarea></td>
 			</tr>
 			</table>
 			
