@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+	
 <%@page import="java.util.*"%>
 <%@page import="com.esc.write.*"%>
 <%@page import="com.esc.userinfo.*"%>
@@ -25,6 +27,13 @@ if (dto == null||dto.equals("")) {
 return;
 }
 
+//게시글 오늘 날짜일경우 표시하기
+Date nowDate = new Date();
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+String today = simpleDateFormat.format(nowDate); 
+
+String dbdate= simpleDateFormat.format(dto.getWrite_wdate());
+String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
 %>
 <!DOCTYPE html>
 <html>
@@ -41,9 +50,7 @@ ul, li {
 a {
 	text-decoration: none;
 }
-.td td{
-  background : gray;
-}
+
 </style>
 </head>
 <body>
@@ -168,7 +175,7 @@ a {
 						out.print("&nbsp;&nbsp;&#8627;");
 					}
 					%>
-					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%>
+					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%><%=newicon %>
 					
 					<%if(manager==1){%>
 					<a href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=commdel">

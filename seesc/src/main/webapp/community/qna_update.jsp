@@ -8,6 +8,7 @@ int write_idx= request.getParameter("write_idx")==null||request.getParameter("wr
 String flag = request.getParameter("flag");
 String userinput_pwd = request.getParameter("userinput_pwd");
 
+
 WriteDTO dto = qnadao.writeQnAContent(write_idx);
 if(dto==null||dto.equals("")){
 	%><script>
@@ -58,6 +59,11 @@ if(user_idx!=dto.getUser_idx()||user_idx==0){
 						<tr>
 							<th>제목</th>
 							<td><input type = "text" name = "write_title" value="<%=dto.getWrite_title()%>"></td>
+						</tr>
+						<tr>
+							<th>공개여부</th>
+							<td><input type="radio" name="write_open" value="0" checked>비밀글
+								<input type="radio" name="write_open" value="1">공개글</td>
 						</tr>
 						<tr>
 							<th>작성시간</th>

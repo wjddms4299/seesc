@@ -37,21 +37,12 @@ if(dto==null){
 		<article>
 			<fieldset>
 			<form name="bookingCancle" method="post" action="bookingCancle_ok.jsp">
-				<h4>예약 취소</h4>
-				<div>
-				<span>예약취소를 위해서는 예약시 입력한 비밀번호가 필요합니다.</span> <br>
-				<span>비밀번호를 잊으셨다면 업체로 연락 바랍니다.</span><br>
-				<span>연락처 010-1111-1111</span>
-		</div>
-				
-					<hr>
-					<br>
 				
 					<%if(dto.getBooking_pay_ok()==0){ %>
 					
 				
 					<label>환불 정보 입력</label>
-					결제 내역이 있습니다. 환불은 3~5영업일 정도 소요됩니다.
+					이미 입금한 내역이 있습니다. 환불은 3~5영업일 정도 소요됩니다.
 					계좌번호 오류시 시간 지연될 수 있으니 확인하여 입력해주시기 바랍니다.
 					<div><select name = "bank">
 					<option value = "농협">농협
@@ -68,10 +59,10 @@ if(dto==null){
 					</div>
 					
 					<%} %>
-					<br><br><br><br><br><hr>
+					<br><br><br><br><br>
 						<br><br>
 					  정말 취소하시겠습니까?<br>
-					  취소하려면 비밀번호를 입력해주세요.<br>
+					  취소하려면 예약시 입력한 비밀번호를 입력해주세요.<br>
 					  <br>
 					<input type="hidden" name="booking_pwd"
 						value="<%=dto.getBooking_pwd()%>"> <input
