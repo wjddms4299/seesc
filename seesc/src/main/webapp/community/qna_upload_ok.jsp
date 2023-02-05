@@ -9,10 +9,19 @@ MultipartRequest mr = new MultipartRequest(request,savepath,2097152,"UTF-8");
 
 
 int result = qnadao.writeQnAupload(mr);
-String msg = result>0?"글쓰기 성공~": "실패 ㅠㅠㅠ";
+
+if(result>0){
 %>
 
 <script>
-window.alert('<%=msg%>');
+window.alert('글작성을 완료하였습니다.');
 window.location.href = '/seesc/community/qna_list.jsp';
 </script>
+
+<%}else{%>
+	<script>
+	window.alert('글을 작성에 실패하였습니다.');
+	history.back();
+	</script>
+
+<%}%>

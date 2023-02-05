@@ -1,3 +1,6 @@
+<%@page import="java.time.Month"%>
+<%@page import="java.time.Year"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.time.Instant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,16 +12,10 @@
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 
 <%
+
+
 int user_idx = session.getAttribute("user_idx") == null || session.getAttribute("user_idx").equals("")? 0: (Integer) session.getAttribute("user_idx");
 int manager = session.getAttribute("manager") == null || session.getAttribute("manager").equals("")? 0: (Integer) session.getAttribute("manager");
-
-Calendar now=Calendar.getInstance();
-
-int yy=now.get(Calendar.YEAR);
-int mm=now.get(Calendar.MONTH)+1;
-int dd=now.get(Calendar.DATE);
-String today = ""+yy+mm+dd;
-;
 
 %>
 <!DOCTYPE html>
@@ -42,13 +39,20 @@ ul {
 	font-weight: bold;
 }
 
-.write_table {
+table {
 	margin: 0px auto;
 	width: 800px;
+	
 
 }
 .notice{
-color : red;}
+color : red;
+background-color: #E6E6E6;
+}
+th{
+background-color: #E0F8E0;
+}
+
 </style>
 
 
@@ -86,7 +90,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 	<section>
 		<article>
 			<p class="write_title">
-				질문과 답변 <%=today %>
+				질문과 답변
 			</p>
 			
 			<table class="write_table">
@@ -106,6 +110,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								<option value="qna_list.jsp?listSize=10&listname=<%=listname%>&content=<%=content%>">10개씩</option>
 								<option value="qna_list.jsp?listSize=15&listname=<%=listname%>&content=<%=content%>">15개씩</option>
 								<option value="qna_list.jsp?listSize=30&listname=<%=listname%>&content=<%=content%>">30개씩</option>
+								<option value="qna_list.jsp?listSize=50&listname=<%=listname%>&content=<%=content%>">50개씩</option>
 						</select></td>
 					</tr>
 					<tr>
@@ -122,11 +127,18 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
 					if(notice!=null&&notice.size()!=0){
 					for(int n=0;n<notice.size();n++){
+						//오늘 올라온 글일 경우 new icon 붙이기
+						Date nowDate = new Date();
+						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+						String today = simpleDateFormat.format(nowDate); 
+						
+						String dbdate= simpleDateFormat.format(notice.get(n).getWrite_wdate());
+						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
 					%>
 						<tr class = "notice">
 						<td>공 지</td>
 						<td>
-						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"class = "notice"><%=notice.get(n).getWrite_title()%></a></td>
+						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"class = "notice"><%=notice.get(n).getWrite_title()%><%=newicon %></a></td>
 						<td><%=notice.get(n).getWrite_writer()%></td>
 						<td><%=notice.get(n).getWrite_wdate()%></td>
 						<td><%=notice.get(n).getWrite_readnum()%></td>
@@ -138,6 +150,9 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				
 					<!-- --------------------------------------게시물 리스트 출력 ----------------------------------------------- -->
 					<%
+					
+				
+					
 					ArrayList<WriteDTO> arr = qnadao.writeQnAList(userpage,writeList,listname,content);
 					if (arr == null || arr.size() == 0) {
 					%>
@@ -148,11 +163,25 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					<%
 					} else {
 					for (int i = 0; i < arr.size(); i++) {
+						//게시글 오늘 날짜일경우 표시하기
+						Date nowDate = new Date();
+						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+						String today = simpleDateFormat.format(nowDate); 
+						
+						String dbdate= simpleDateFormat.format(arr.get(i).getWrite_wdate());
+						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
 					%>
+					<!-- a태그 post방식으로 보내기 -->
+					<form  id = "open_pwd" action = "qnaOpen_pwd.jsp" method = "post">
+									<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
+									<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
+									</form>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
 						<td>
 						<%
+						
+						
 						for(int z=0; z<arr.get(i).getWrite_lev();z++){
 							out.println("&nbsp;&nbsp;");
 							}
@@ -163,20 +192,17 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								/**관리자나 본인이 쓴글이면 비밀번호 필요 없음*/
 								if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
 									<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-									&#128274;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+									<%=arr.get(i).getWrite_title()%>&nbsp;<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
 								<%}else{%>
-									<form  name = "open_pwd" action = "qnaOpen_pwd" method = "post">
-									<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
-									<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
-									</form><!-- 제발 수정하고 싶다...post로 -->
-									<a href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> ">
-								&#128274;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+									<a href="#" onclick="document.getElementById('open_pwd').submit();">
+								<%=arr.get(i).getWrite_title()%>&nbsp;<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
 								<%}
 							}else{%>
-								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-								<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
-							<%} %></td>
-						
+								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">&nbsp;
+								<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
+							
+							<%} %>
+							</td>
 							<td><%=arr.get(i).getWrite_writer()%></td>
 							<td><%=arr.get(i).getWrite_wdate()%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>

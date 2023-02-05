@@ -12,7 +12,15 @@
 	<section>
 		<article>
 			<h2>예약 정보 입력</h2>
-			<br> <br>
+		
+			<br>
+				<div>
+				<span>예약취소를 위해서는 예약시 입력한 비밀번호가 필요합니다.</span> <br>
+				<span>비밀번호를 잊으셨다면 아래 번호로 연락 바랍니다.</span><br>
+				<span>연락처 010-1111-1111</span>
+				</div>
+				<br>
+				<br>
 			<form name="b_bookingCheck" action = "b_bookingCheck_ok.jsp" method = "post">
 				<ul>
 					<li><label>예약자</label><input type="text" name="booking_name"

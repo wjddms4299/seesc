@@ -10,10 +10,18 @@ MultipartRequest mr = new MultipartRequest(request,savepath,2097152,"UTF-8");
 
 
 int result = qnadao.qna_repwrite(mr);
-String msg = result>0?"답글 작성 완료": "실패 ㅠㅠㅠ";
+if(result>0){
 %>
 
 <script>
-window.alert('<%=msg%>');
+window.alert('답변글을 작성하였습니다.');
 window.location.href = '/seesc/community/qna_list.jsp';
 </script>
+
+<%}else{%>
+	<script>
+	window.alert('답변글을 작성에 실패하였습니다.');
+	history.back();
+	</script>
+
+<%}%>

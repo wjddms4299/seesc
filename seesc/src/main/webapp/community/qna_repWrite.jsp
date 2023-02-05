@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%request.setCharacterEncoding("utf-8"); %>
 <%@page import="com.esc.write.*"%>
 <%@page import ="com.esc.userinfo.*" %>
 <jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
@@ -9,6 +10,7 @@ String write_title = request.getParameter("write_title");
 String write_ref = request.getParameter("write_ref");
 String write_lev = request.getParameter("write_lev");
 String write_step = request.getParameter("write_step");
+String write_content = request.getParameter("write_content");
 
 int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
@@ -51,13 +53,13 @@ UserinfoDTO dto = userdao.userInfo(sid);
 		<article>
 			<form name="qna_repWrite" action="qna_repWrite_ok.jsp" method="post"
 				enctype="multipart/form-data">
-				<h2 class="write_title">답글쓰기</h2>
-				<fieldset>
-				<table class="write_table">
 					<input type="hidden" name="user_idx" value="<%=user_idx%>">
 					<input type ="hidden" name = "write_ref" value = "<%=write_ref%>">
 					<input type = "hidden" name = "write_step" value = "<%=write_step%>">
 					<input type = "hidden" name = "write_lev" value = "<%=write_lev%>">
+				<h2 class="write_title">답글쓰기</h2>
+				<fieldset>
+				<table class="write_table">
 					<tr>
 						<th>작성자</th>
 							<td><input type="text" name="write_writer"
@@ -87,7 +89,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 					<tr>
 						<th>글내용</th>
 						<td><textarea name="write_content" rows="10" cols="50"
-								required="required"><%=write_title %></textarea></td>
+								required="required"></textarea></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
