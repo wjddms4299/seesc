@@ -72,7 +72,7 @@ bottom: 70px;
 </style>
 <script>
 function login_open(){
-	window.open('/seesc/member/login.jsp','login','width=450,height=500');
+	window.open('/seesc/member/login.jsp','login','width=370,height=450');
 }
 
 
