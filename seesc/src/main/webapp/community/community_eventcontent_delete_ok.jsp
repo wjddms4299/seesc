@@ -7,14 +7,31 @@
 
 <%
 String userinput_pwd = request.getParameter("userinput_pwd");
-
-if(userinput_pwd.equals(wdto.getWrite_pwd())){
-	int result = idao.event_delete(wdto.getWrite_idx());
+String write_idx = request.getParameter("write_idx");
+String write_pwd = request.getParameter("write_pwd");
+String flag = request.getParameter("flag");
+if(flag!=null && flag.equals("uDelete")){
+		if(idao.event_delete(Integer.parseInt(write_idx))>0){%>
+			<script>
+			window.alert('삭제 완료.');
+			location.href='community_eventcontent_list.jsp';
+			</script>
+		<%}else{%>
+			<script>
+					window.alert('삭제 실패.');
+					location.href = 'community_eventcontent_content.jsp?write_idx=<%=wdto.getWrite_idx()%>';
+			</script>
+		<%
+		return;
+		}
+}
+if(userinput_pwd!=null&&userinput_pwd.equals(write_pwd)){
+	int result = idao.event_delete(Integer.parseInt(write_idx));
 
 		if(result<0){
 			%>
 		<script>
-		window.alert('잠시후에 다시 시도해주세요.');
+		window.alert('삭제 실패.');
 		location.href = 'community_eventcontent_content.jsp?write_idx=<%=wdto.getWrite_idx()%>';
 		</script>
 		<% 	
