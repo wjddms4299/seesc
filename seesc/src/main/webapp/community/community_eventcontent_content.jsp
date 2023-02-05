@@ -13,7 +13,7 @@ if (write_idx_s == null || write_idx_s.equals("")) {
 }
 int write_idx=Integer.parseInt(write_idx_s);
 WriteDTO dto = idao.writeEventContent(write_idx);
-if (dto == null) {
+if (dto == null || dto.equals("")) {
 %>
 <script>
 	window.alert('삭제된 게시글 입니다.');
@@ -106,19 +106,54 @@ th {
 					</tbody>
 			  		 </table>
 			  		<%
-					if (dto.getWrite_notice() != 1) {
-					%>	
-					<hr>
-					<form name = "community_eventcontent_delete" action = "community_eventcontent_delete_ok.jsp" method = "post">
+					if (dto.getWrite_notice()==1 && manager!=1) {%>
+						<tr>
+						<td colspan="4">
+							<input type="button" value="목록으로 돌아가기" onclick="location.href = 'community_eventcontent_list.jsp'">
+						</td>
+					</tr>
+					<% }else if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
+					<tr>
+					<td colspan="4">
+						<form name ="com" action = "community_eventcontent_re.jsp" method = "post">
+						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
+						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
+						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
+						<input type="button" value="삭제" onclick ="location.href ='community_eventcontent_delete_ok.jsp?flag=uDelete&write_idx=<%=write_idx%>'">
+						<input type="button" value="수정" onclick="location.href = 'community_eventcontent_update.jsp?flag=uUpdate&write_idx=<%=write_idx%>'">
+						<input type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
+						<input type = "submit" value = "답글">
+						</form>
+					</td>
+				</tr>
+					<%}else {%>
+					<tr>
+						<td td colspan="4">
+							<form name="wdu" method="post">
+							<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
+							<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
+							<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
+							<input type="hidden" name="write_idx" value="<%=write_idx%>">
+							<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
+							글을 삭제 또는 수정을 원하시면 비밀번호를 입력해주세요.<br>
+							<input type="password" name="userinput_pwd" required>
+							<input type="submit" value="삭제" onclick="javascript:qna_wdu.action='qna_delete_ok.jsp';">
+							<input type="submit" value="수정" onclick="javascript:qna_wdu.action='qna_update.jsp';">
+							<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
+							<input type="submit" value="답글"onclick="javascript:qna_wdu.action='qna_repWrite.jsp';">
+							</form>
+						</td>
+					</tr>
+				<%} %>
+			</tbody>
+			</table>
+		</fieldset>
+		</article>
 					
-					<input type = "hidden" name = "write_idx" value = "<%=write_idx%>">
-					<input type = "hidden" name = "write_pwd" value = "<%=dto.getWrite_pwd() %>">
 					
 					
-					
-					
-						비밀번호 <input type="password" name="userinput_pwd" required = "required">
-					
+		
+				
 					<div align="center">
 						<br>
 						<input type="submit" value=" 삭제 "> 

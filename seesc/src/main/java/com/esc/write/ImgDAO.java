@@ -208,7 +208,7 @@ public class ImgDAO {
 		
 	}
 	
-	/**관리자 공지등록*/
+	/**공지등록*/
 	public int event_noticeUpload(MultipartRequest mr) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
@@ -241,8 +241,58 @@ public class ImgDAO {
 			}catch(Exception e2) {}
 		}
 	}
-/**이벤트 게시물 수정 관련 메서드 */
-public int event_update(WriteDTO dto) {
+	/** 공지글 출력 관련 메서드 */
+	public ArrayList<WriteDTO> event_noticelist() {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "select * from write where write_cate = 'event' and write_notice=1 order by write_idx desc";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
+
+			while (rs.next()) {
+				int write_idx = rs.getInt("write_idx");
+				int user_idx = rs.getInt("user_idx");
+				String write_cate = rs.getString("write_cate");
+				String write_title = rs.getString("write_title");
+				String write_writer = rs.getString("write_writer");
+				String write_pwd = rs.getString("write_pwd");
+				Date write_wdate = rs.getDate("write_wdate");
+				String write_filename = rs.getString("write_filename");
+				String write_content = rs.getString("write_content");
+				int write_readnum = rs.getInt("write_readnum");
+				int write_ref = rs.getInt("write_ref");
+				int write_lev = rs.getInt("write_lev");
+				int write_step = rs.getInt("write_step");
+				int write_open = rs.getInt("write_open");
+				int write_notice = rs.getInt("write_notice");
+
+				WriteDTO dto = new WriteDTO(write_idx, user_idx, write_cate, write_title, write_writer, write_pwd,
+						write_wdate, write_filename, write_content, write_readnum, write_ref, write_lev, write_step,
+						write_open, write_notice);
+
+				arr.add(dto);
+			}
+
+			return arr;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (rs != null)rs.close();
+				if (ps != null)ps.close();
+				if (conn != null)conn.close();
+			} catch (Exception e2) {
+
+			}
+		}
+
+	}
+	
+	/**이벤트 게시물 수정 관련 메서드 */
+	public int event_update(WriteDTO dto) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			String sql = "update write set write_title = ?, write_content =?,write_open = ? where write_idx = ?";
@@ -260,17 +310,15 @@ public int event_update(WriteDTO dto) {
 			return -1;
 		} finally {
 			try {
-				if (ps != null)
-					ps.close();
-				if (conn != null)
-					conn.close();
+				if (ps != null)ps.close();
+				if (conn != null)conn.close();
 			} catch (Exception e2) {
 			}
 		}
 	}
-/** 이벤트게시물 삭제 관련 메서드 */
-public int event_delete(int write_idx) {
-	try {
+	/** 이벤트게시물 삭제 관련 메서드 */
+	public int event_delete(int write_idx) {
+		try {
 		conn = com.esc.db.EscDB.getConn();
 		String sql = "delete from write where write_idx = ?";
 		ps = conn.prepareStatement(sql);
@@ -278,16 +326,14 @@ public int event_delete(int write_idx) {
 		int count = ps.executeUpdate();
 		return count;
 
-	} catch (Exception e) {
+		} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return -1;
-	} finally {
+		} finally {
 		try {
-			if (ps != null)
-				ps.close();
-			if (conn != null)
-				conn.close();
+			if (ps != null)ps.close();
+			if (conn != null)conn.close();
 		} catch (Exception e2) {
 		}
 	}

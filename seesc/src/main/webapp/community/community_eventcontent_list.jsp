@@ -16,7 +16,7 @@ h3{
 	font-size: 30px;
 }
 table{
-	width: 660px;
+	width: 1200px;
 	margin: 0px auto;
 }
 section img{
@@ -29,7 +29,7 @@ section img{
 int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
 int manager=session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
 int totalCnt=wdao.getTotalCnt();
-int listSize=12; 
+int listSize=10; 
 int pageSize=5; 
 
 String cp_s=request.getParameter("cp");
@@ -50,6 +50,8 @@ if(cp%pageSize==0)userGroup--;
 	<article>
 	<br>
 		<h3>이벤트게시판</h3>
+		<br>
+	<hr>
 	<br>
 		<table>
 			<thead>
@@ -63,8 +65,11 @@ if(cp%pageSize==0)userGroup--;
       		</thead>
       		
       <tfoot>
+      <tr>
+      <td colspan="5" align="right"><input style=font-size:15px; type="button" value=" 글쓰기 " onclick="location.href='community_eventcontent_write.jsp'"></td>
+      </tr>	
       	<tr>
-      		<td colspan="4" align="center">
+      		<td colspan="5" align="center">
       			<!-- -------------------------------------- -->
       			<%
 if(userGroup!=0){
@@ -85,10 +90,24 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
 %>
       			<!-- -------------------------------------- -->
       		</td>
-      		<td align="center"><input type="button" value="글쓰기" onclick="location.href='community_eventcontent_write.jsp'"></td>
       	</tr>
       </tfoot>
       <tbody>
+      <%
+		ArrayList<WriteDTO> notice = idao.event_noticelist();
+		if(notice!=null&&notice.size()!=0){
+			for(int i=0;i<notice.size();i++){
+		%>
+		<tr align="center">
+		<td style=color:blue;>-공 지-</td>
+		<td>
+		<a href="community_eventcontent_content.jsp?write_idx=<%=notice.get(i).getWrite_idx()%>"><%=notice.get(i).getWrite_title()%></a></td>
+		<td style=color:blue;><%=notice.get(i).getWrite_writer()%></td>
+		<td><%=notice.get(i).getWrite_wdate()%></td>
+		<td><%=notice.get(i).getWrite_readnum()%></td>
+		</tr>
+		<%}
+			}%>
      <%
      ArrayList<WriteDTO> arr=idao.writeEventList(listSize,cp);
      if(arr==null||arr.size()==0){  
@@ -103,7 +122,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
         <% 
      }else{
         for(int i=0;i<arr.size();i++){
-       	 if(i%4==0){
+       	 if(i%5==0){
     		 %>
     		</tr>
     		<tr>
