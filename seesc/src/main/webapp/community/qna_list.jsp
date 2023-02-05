@@ -9,6 +9,9 @@
 <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 
 <%
+int user_idx = session.getAttribute("user_idx") == null || session.getAttribute("user_idx").equals("")? 0: (Integer) session.getAttribute("user_idx");
+int manager = session.getAttribute("manager") == null || session.getAttribute("manager").equals("")? 0: (Integer) session.getAttribute("manager");
+
 Calendar now=Calendar.getInstance();
 
 int yy=now.get(Calendar.YEAR);
@@ -48,38 +51,20 @@ ul {
 color : red;}
 </style>
 
+
 </head>
 <%
-int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
-int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+/*검색 기능*/
+String listname = request.getParameter("listname")==null||request.getParameter("listname").equals("")?"0":request.getParameter("listname");
+String content = request.getParameter("content")==null||request.getParameter("content").equals("")?"0":request.getParameter("content");
 
-String listname = request.getParameter("listname");
-if(listname==null||listname.equals("")){
-	listname = "0";
-}
-String content = request.getParameter("content");
-if(content==null||content.equals("")){
-	content = "0";
-}
 
+/*페이징 처리*/
 int totalqna = qnadao.getTotalCnt(listname,content);
-
-String writeList_s = request.getParameter("listSize");
-if (writeList_s == null || writeList_s.equals("")) {
-	writeList_s = "10";
-}
-int writeList = Integer.parseInt(writeList_s);
-
+int writeList = request.getParameter("listSize")==null||request.getParameter("listSize").equals("")?10:Integer.parseInt(request.getParameter("listSize"));
 int pageList = 5;
-
-String userpage_s = request.getParameter("userpage");
-if(userpage_s==null||userpage_s.equals("")){
-	userpage_s = "1";
-}
-int userpage = Integer.parseInt(userpage_s);
-
+int userpage = request.getParameter("userpage")==null||request.getParameter("userpage").equals("")?1:Integer.parseInt(request.getParameter("userpage"));
 int totalpage = totalqna/writeList+1;
-
 if(totalqna%writeList==0){
 	totalpage --;
 }
@@ -88,9 +73,10 @@ if(userpage%pageList == 0){
 	pagegroup --;
 }
 
+/*넘길때 데이터 너무 많아서*/
 String data = "&listSize="+writeList+"&listname="+listname+"&content="+content;
-
 String notice_open = request.getParameter("notice_open");
+
 %>
 
 <body>
@@ -113,7 +99,6 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						<%=searchmsg %>
 						</td>
 						<td align="right">
-
 						<select name="writeList"
 							onChange="window.location.href=this.value">
 								<option>리스트수</option>
@@ -121,9 +106,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								<option value="qna_list.jsp?listSize=10&listname=<%=listname%>&content=<%=content%>">10개씩</option>
 								<option value="qna_list.jsp?listSize=15&listname=<%=listname%>&content=<%=content%>">15개씩</option>
 								<option value="qna_list.jsp?listSize=30&listname=<%=listname%>&content=<%=content%>">30개씩</option>
-
 						</select></td>
-
 					</tr>
 					<tr>
 						<th>번호</th>
@@ -168,26 +151,36 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					%>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
-						<td><%
+						<td>
+						<%
 						for(int z=0; z<arr.get(i).getWrite_lev();z++){
 							out.println("&nbsp;&nbsp;");
 							}
 						if(arr.get(i).getWrite_lev()>0){
 							out.println("&#8627;");
 						}
-						if(arr.get(i).getWrite_open()==0){ %>
-					
-						<a href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> ">
+							if(arr.get(i).getWrite_open()==0){ //비밀글 관리
+								/**관리자나 본인이 쓴글이면 비밀번호 필요 없음*/
+								if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
+									<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
+									&#128274;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+								<%}else{%>
+									<form  name = "open_pwd" action = "qnaOpen_pwd" method = "post">
+									<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
+									<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
+									</form><!-- 제발 수정하고 싶다...post로 -->
+									<a href="qnaOpen_pwd.jsp?write_pwd=<%=arr.get(i).getWrite_pwd()%>&write_idx=<%=arr.get(i).getWrite_idx()%> ">
 								&#128274;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
-							<%}else{%>
-							<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
+								<%}
+							}else{%>
+								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
 								<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
 							<%} %></td>
-
-						<td><%=arr.get(i).getWrite_writer()%></td>
-						<td><%=arr.get(i).getWrite_wdate()%></td>
-						<td><%=arr.get(i).getWrite_readnum()%></td>
-					</tr>
+						
+							<td><%=arr.get(i).getWrite_writer()%></td>
+							<td><%=arr.get(i).getWrite_wdate()%></td>
+							<td><%=arr.get(i).getWrite_readnum()%></td>
+						</tr>
 
 					<%
 					}
@@ -241,8 +234,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								%>
 								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%><%=data%>">다음</a>
 								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%><%=data%>">&gt;&gt;</a>
-							<%}
-							%>
+							<%}%>
 				</tfoot>
 			</table>
 		</article>
