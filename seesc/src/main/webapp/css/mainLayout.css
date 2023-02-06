@@ -31,23 +31,29 @@ header {
 	margin: 0px auto;
 }
 
-#mainlogin a {
-	color: white;
-}
 
+#mainlogin :hover{
+	color: yellow;
+	letter-spacing: 5px;
+	font-weight: bold;
+	zoom:1.02;
+	
+}
 #mainlogo {
 	position: absolute;
-	bottom: 30px;
+	bottom: 15px;
 	left: 70px;
 	margin: 0px auto;
-
-
 }
-
+#mainlogo :hover{
+	zoom : 1.03;
+	filter: contrast(500%)
+		
+}
 .dropdown {
 	position: relative;
 	display: inline-block;
-	top: 90px; left : 300px;
+	top: 90px; left : 330px;
 	margin: 0px auto;
 
 }
@@ -55,25 +61,28 @@ header {
 .dropbtn {
 	border-radius: 3px;
 	font-weight: bold;
-	color: white;
-	padding: 10px;
-	width: 110px;
+	padding: 9px;
+	width: 140px;
 	text-align: center;
 	cursor: pointer;
 	font-size: 20px;
 	margin: 0px auto;
-	color: white;
+	color: #65FFBA;
+}
+.dropbtn :hover{
+	letter-spacing: 5px;
+	color :yellow;
 }
 
 .dropdown-content {
 	display: none;
 	position: absolute;
 	z-index: 1; /*다른 요소들보다 앞에 배치*/
-	font-weight: 400;
 	background-color: black;
-	min-width: 110px;
+	min-width: 140px;
 	text-align: center;
 	margin: 0px auto;
+	
 }
 
 .dropdown-content a {
@@ -81,12 +90,18 @@ header {
 	text-decoration: none;
 	color: white;
 	font-size: 15px;
-	padding: 15px 20px;
+	padding: 18px 32px;
 	text-align: center;
+	
+	
+	
 }
 
 .dropdown-content a:hover {
-	background-color: pink;
+	background-color: #48DAD2;
+	color : black;
+	font-weight: bold;
+	
 }
 
 .dropdown:hover .dropdown-content {
@@ -105,7 +120,7 @@ margin: 0px auto;
 footer {
 	position: relative;
 	width: 1200px;
-	height: 200px;
+	height: 150px;
 	
 	margin: 0px auto;
 	color: white;
@@ -122,3 +137,18 @@ footer a {
 	right: 70px;
 	margin: 0px auto;
 }
+
+#footlogo :hover{
+	zoom : 1.03;
+
+	}
+#snsLogo {
+	position: absolute;
+	bottom: 10px;
+	left: 250px;
+	margin: 0px auto;
+}
+#snsLogo :hover{
+		zoom : 1.03;
+
+	}

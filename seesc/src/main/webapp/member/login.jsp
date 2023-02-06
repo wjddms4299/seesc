@@ -84,6 +84,14 @@ function join_open(){
 	opener.location='/seesc/member/memberJoin.jsp';
 	
 }
+function fid(){
+	window.close();
+	opener.location='/seesc/member/findId.jsp';
+}
+function fpwd(){
+	window.close();
+	opener.location='/seesc/member/findPwd.jsp';
+}
 </script>
 <%
 String saveid="";
@@ -112,6 +120,10 @@ if(cks!=null){
 			<div class="div">
 				<input type="submit" value="login">
 				<a href="javascript:join_open();">회원가입</a>
+			</div>
+			<div class="div">
+				<a href="javascript:fid();">ID찾기</a>
+				<a href="javascript:fpwd();">PWD찾기</a>
 			</div>
 </form>
 </body>
