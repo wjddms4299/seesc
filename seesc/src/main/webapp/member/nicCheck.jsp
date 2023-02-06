@@ -8,7 +8,7 @@
 </head>
 <body>
 <article align="center">
-	<form name="nicCheck" action="nicCheck_ok.jsp">
+	<form name="nicCheck" action="/seesc/member/nicCheck_ok.jsp">
 	<h2>중복확인</h2>
 	<label>닉네임:</label>
 	<input type="text" name="nicname">

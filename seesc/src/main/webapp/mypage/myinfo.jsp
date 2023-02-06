@@ -9,6 +9,65 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+input[type=text], input[type=password], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=button] {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=button]:hover {
+  background-color: #45a049;
+}
+input[type=submit] {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+</style>
+<script>
+function open_nicCheck(){
+	window.open('/seesc/member/nicCheck.jsp','nicCheck','width=450,height=200')
+}
+</script>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
@@ -24,7 +83,7 @@
 	int user_idx=(int)session.getAttribute("user_idx");
 	UserinfoDTO dto=userdao.userInfo(sid);
 	%>
-	<form name="myinfo" action="myUpdate.jsp">
+	<form name="memberJoin" action="myUpdate.jsp">
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -32,7 +91,8 @@
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" value="<%=dto.getUser_nic()%>" name="user_nic"></td>
+			<td><input type="text" value="<%=dto.getUser_nic()%>" name="user_nic" readonly></td>
+			<td><input type="button" name="idCheck" value="중복확인" onclick="open_nicCheck()"></td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
