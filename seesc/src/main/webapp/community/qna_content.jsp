@@ -34,6 +34,9 @@ String today = simpleDateFormat.format(nowDate);
 
 String dbdate= simpleDateFormat.format(dto.getWrite_wdate());
 String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
+
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -164,6 +167,9 @@ a {
 				String flag = request.getParameter("flag");
 				if (arr != null && arr.size() != 0) {
 					for (int i = 0; i < arr.size(); i++) {
+						//댓글 작성자가 본문 작성자와 동일할경우 알려주기
+						String me = 
+						dto.getUser_idx()==arr.get(i).getUser_idx()?"<img src='/seesc/img/me.png' alt = '작성자' style='width :35px; height:25px;'>":"";
 				%>
 				<tr>
 				<td onclick="location.href = 'qna_content.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=commentwrite'">
@@ -175,7 +181,7 @@ a {
 						out.print("&nbsp;&nbsp;&#8627;");
 					}
 					%>
-					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%><%=newicon %>
+					<%=me%><%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%><%=newicon %>
 					
 					<%if(manager==1){%>
 					<a href="comment_Delete.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=commdel">

@@ -163,13 +163,18 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					<%
 					} else {
 					for (int i = 0; i < arr.size(); i++) {
-						//게시글 오늘 날짜일경우 표시하기
+						//게시글 오늘 날짜일경우  new 표시하기
 						Date nowDate = new Date();
 						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 						String today = simpleDateFormat.format(nowDate); 
 						
 						String dbdate= simpleDateFormat.format(arr.get(i).getWrite_wdate());
-						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
+						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new' >":"";
+						
+						
+						//내가쓴글 알려주기
+						String me = 
+						user_idx==arr.get(i).getUser_idx()?"<img src='/seesc/img/meme.png' alt = 'me' style='width :25px; height:16px;'>":"";
 					%>
 					<!-- a태그 post방식으로 보내기 -->
 					<form  id = "open_pwd" action = "qnaOpen_pwd.jsp" method = "post">
@@ -192,10 +197,10 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								/**관리자나 본인이 쓴글이면 비밀번호 필요 없음*/
 								if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
 									<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-									<%=arr.get(i).getWrite_title()%>&nbsp;<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
+									<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
 								<%}else{%>
 									<a href="#" onclick="document.getElementById('open_pwd').submit();">
-								<%=arr.get(i).getWrite_title()%>&nbsp;<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
+								<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
 								<%}
 							}else{%>
 								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">&nbsp;
@@ -203,7 +208,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							
 							<%} %>
 							</td>
-							<td><%=arr.get(i).getWrite_writer()%></td>
+							<td><%=me%><%=arr.get(i).getWrite_writer()%></td>
 							<td><%=arr.get(i).getWrite_wdate()%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>
 						</tr>

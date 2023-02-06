@@ -8,7 +8,7 @@ if(result){
 	%>
 <script>
 window.alert('<%=nicname%>는 이미 가입되어있는 아이디 입니다.');
-location.href=('nicCheck.jsp');
+location.href=('/seesc/member/nicCheck.jsp');
 </script>
 	<%
 }else{

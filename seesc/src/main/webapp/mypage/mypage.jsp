@@ -9,6 +9,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+</style>
 <%
 int user_idx=(int)session.getAttribute("user_idx");
 int totalCnt=boodao.getTotalCnt(user_idx);

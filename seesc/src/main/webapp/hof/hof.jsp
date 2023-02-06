@@ -11,10 +11,32 @@
 </head>
 
 <style>
-table{
-text-align: center;
-}
 
+ div:nth-child(1) {
+    text-align: center;
+  }
+  div:nth-child(1) span{
+  color: gold;
+  font-size: 30px;
+  }
+
+  div:nth-child(2) {
+    float: left;
+    margin-right: 10px;
+  }
+  div:nth-child(2) span{
+  color: silver;
+  font-size: 30px;
+  }
+
+  div:nth-child(3) {
+    float: right;
+    margin-left: 10px;
+  }
+  div:nth-child(3) span{
+  color: brown;
+  font-size: 30px;
+  }
 
 </style>
 <script>
@@ -77,30 +99,30 @@ if(thema==null||thema==""){
 	</div>
 </article>
 <article>
-	<table>
+	
 <%
 
 ArrayList<HofDTO> arr=hofdao.hofList(thema); 
 if(arr==null||arr.size()==0){
 	%>
-	<tr>
-	<th>등록된 기록이 없습니다</th>
-	</tr>
+	<div>
+	등록된 기록이 없습니다
+	</div>
 	<%
 }else{
 	for(int i=0;i<arr.size();i++){
 		if(arr.get(i)==null){
 			%>
-			<tr>
-			<th>등록된 기록이 없습니다</th>
-			</tr>
+			<div>
+			등록된 기록이 없습니다
+			</div>
 			<%
 		}
 		%>
-		<tr>
-		<th><%=i+1 %>위</th>
-		<td>
 		<div>
+		<span><%=i+1 %>위</span>
+		
+		
 		<img src="/seesc/hof/hofimg/<%=arr.get(i).getHof_imgname()%>" width="200" height="300"><br>
 		<%=arr.get(i).getHof_name() %><br>
 		<%=arr.get(i).getHof_date() %><br>
@@ -110,22 +132,24 @@ if(arr==null||arr.size()==0){
 		%>
 		<%=record %>클리어
 		</div>
-		</td>
-		</tr>
+		
 		<%
 		if(i==2)break;
 	}
 }
 %>
-	</table>
+	
 	<%
-	int manager=(int)session.getAttribute("manager");
+	int manager=0;
+	if(session.getAttribute("manager")!=null){
+		manager=(int)session.getAttribute("manager");
 	if(manager>0){
 		%>
 		<div>
 			<input type="button" value="기록올리기" onclick="openhofUpload();">
 		</div>
 		<%
+	}
 	}
 	%>
 </article>
