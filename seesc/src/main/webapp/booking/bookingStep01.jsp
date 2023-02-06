@@ -4,6 +4,7 @@
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="bdao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <%
 String time_date=request.getParameter("time_date");
 
@@ -426,7 +427,19 @@ select{margin:0px 950px;}
  <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[40]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
  <a href="bookingStep02.jsp?thema_idx=7&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[41]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
 </article>
-<input type="button" name="themaInsert" value="테마 추가"> &nbsp; <input type="button" name="themaUpdate" value="테마 수정"> &nbsp; <input type="button" name="themaDelete" value="테마 삭제">
+<article>
+ <%
+ Integer user_idx=(Integer)session.getAttribute("user_idx");
+ if(user_idx!=null){
+	 int manager=udao.mngnum(user_idx);
+ 	 if(manager==1){%>
+ 	 	<hr width="950">
+ 	 	<br><table><tr><td>
+ 		 <a href="/seesc/booking/bookingStep01_in.jsp"><input type="button" name="themaInsert" value="테마 추가"></a> &nbsp; <a href="/seesc/booking/bookingStep01_up.jsp"><input type="button" name="themaUpdate" value="테마 수정"></a> &nbsp; <a href="/seesc/booking/bookingStep01_del.jsp"><input type="button" name="themaDelete" value="테마 삭제"></a>
+ 		</td></tr></table><br>
+ 	 <%}%>
+ <%}%>
+</article>
 </section>
 <hr width="1200">
 <%@include file="/footer.jsp"%>
