@@ -70,21 +70,24 @@ th {
 	UserinfoDTO udto = udao.userInfo(sid); %>
 	<section>
 		<article>
+		<br>
 			<h2>이벤트 본문보기</h2>
+			<br>
+			<hr>
 			<table>
 				<tbody>
-					<tr>
+					<tr style="background-color:lightgray;">
 						<th>제목:</th>
 						<td><%=dto.getWrite_title()%>
 						<th>날짜:</th>
 						<td><%=dto.getWrite_wdate()%></td>
-					<tr>
+					<tr style="background-color:lightgray;">
 						<th>작성자:</th>
 						<td><%=dto.getWrite_writer()%></td>
 						<th>조회수:</th>
 						<td><%=dto.getWrite_readnum() %></td>
 					</tr>
-					<tr>
+					<tr style="background-color:lightgray;">
 						<th>파일이름:</th>
 						<%
 						if (dto.getWrite_filename() != null) {
@@ -103,7 +106,7 @@ th {
 						%>
 					</tr>
 					<tr>
-						<td colspan="4"><textarea rows="10" cols="90"
+						<td colspan="4"><textarea rows="10" cols="92"
 								name="write_content" readonly><%=dto.getWrite_content()%></textarea></td>
 					</tr>
 					
@@ -128,7 +131,7 @@ th {
 						<input type ="hidden" name = "write_ref" value = "<%=dto.getWrite_ref()%>">
 						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
 						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
-						<input type="submit" value="답글">
+				<!-- 	<input type="submit" value="답글">  -->
 						</form>
 					</td>
 				</tr>
@@ -138,7 +141,7 @@ th {
 						<form name="event_wdu" method="post">
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
-						[삭제] [수정]을 원하시면 비밀번호를 입력해주세요:
+						[수정] [삭제]를 원하시면 비밀번호를 입력해주세요:
 						<input type="password" name="userinput_pwd" required>
 						<input type="submit" value="삭제" onclick="javascript:event_wdu.action='community_eventcontent_delete_ok.jsp';">
 						<input type="submit" value="수정" onclick="javascript:event_wdu.action='community_eventcontent_update.jsp';">
@@ -152,7 +155,7 @@ th {
 						<input type ="hidden" name = "write_ref" value = "<%=dto.getWrite_ref()%>">
 						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
 						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
-						<input type = "submit" value ="답글">
+				<!-- 	<input type = "submit" value ="답글"> -->
 						</form>
 					</td>
 				</tr>
@@ -186,8 +189,8 @@ th {
 					</tr>
 					<%} %>
 					<tr>
-						<td><textarea rows="3" cols="50" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
-						<input type="submit" value="등록"></td>
+						<td><textarea rows="3" cols="90" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
+						<br><input type="submit" value="등록"></td>
 					</tr>
 				</table>
 				</fieldset>
@@ -304,6 +307,7 @@ th {
 
 			</table>
 			</fieldset>
+			<br>
 		</article>
 		<%} %>
 	</section>

@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-int idx = Integer.parseInt(request.getParameter("write_idx"));
+request.setCharacterEncoding("utf-8");
+int write_idx = Integer.parseInt(request.getParameter("write_idx"));
 String write_pwd = request.getParameter("write_pwd");
-String ipwd = request.getParameter("ipwd");
+String inputpwd = request.getParameter("inputpwd");
 
-if(write_pwd.equals(ipwd)){
+if(write_pwd.equals(inputpwd)){
 %>
 <script>
-location.href = 'community_eventcontent_content.jsp?write_idx=<%=idx%>';
+location.href = 'community_eventcontent_content.jsp?write_idx=<%=write_idx%>';
 </script>
 <%}
 else{
