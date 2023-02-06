@@ -125,7 +125,13 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
         <% 
      }else{
         for(int i=0;i<arr.size();i++){
-       	 if(i%5==0){
+        %>	
+        <form  id ="community_eventcontent_openPwd" action = "community_eventcontent_openPwd.jsp" method = "post">
+		<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
+		<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
+		</form>
+        <%
+        if(i%5==0){
     		 %>
     		</tr>
     		<tr>
