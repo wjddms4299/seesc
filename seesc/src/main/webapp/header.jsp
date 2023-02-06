@@ -6,20 +6,21 @@
 position: fixed;
 right: 78px;
 bottom: 19px;
+z-index: 2;
 }
 #topbutton{
 position: fixed;
 right: 85px;
 bottom: 70px;
 color :black;
+z-index: 2;
 }
 
 #button:hover{
-zoom : 1.05;
+filter: saturate(1000%)
 }
 #topbutton:hover{
-zoom : 1.2;
-	filter: saturate(1000%)
+filter: saturate(1000%)
 }
 </style>
 <script>
@@ -88,8 +89,8 @@ function login_open(){
 		
 
 <!-- ---------------------------------------------- -->
-<a href="https://open.kakao.com/o/gHOLLp2e"><img src ="/seesc/img/kakaoLogo.png" style = "width:50px;height:50px;" alt = "카카오톡문의" id="button"></a>
-<a href="#top"><img src ="/seesc/img/toppoint.png" style = "width:30px;height:30px;" alt = "상단으로이동" id="topbutton"></a>
+<div id="button"><a href="https://open.kakao.com/o/gHOLLp2e"><img src ="/seesc/img/kakaoLogo.png" style = "width:50px;height:50px;" alt = "카카오톡문의" ></a></div>
+<div id="topbutton"><a href="#top"><img src ="/seesc/img/toppoint.png" style = "width:30px;height:30px;" alt = "상단으로이동" ></a></div>
 
 
 </header>

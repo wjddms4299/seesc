@@ -6,18 +6,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<style>
+article{
+text-align: center;}
+</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
+		<br><br>
 			<h2>예약 정보 입력</h2>
 		
 			<br>
 				<div>
 				<span>예약취소를 위해서는 예약시 입력한 비밀번호가 필요합니다.</span> <br>
 				<span>비밀번호를 잊으셨다면 아래 번호로 연락 바랍니다.</span><br>
-				<span>연락처 010-1111-1111</span>
+				<span>전화 02-1234-1234</span>
 				</div>
 				<br>
 				<br>
@@ -43,6 +48,7 @@
 			</form>
 
 		</article>
+			<br><br>
 	</section>
 	<%@include file="/footer.jsp"%>
 

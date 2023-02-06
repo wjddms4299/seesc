@@ -9,6 +9,11 @@ request.setCharacterEncoding("utf-8");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<style>
+section{
+text-align:center;
+}
+</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
@@ -17,16 +22,16 @@ request.setCharacterEncoding("utf-8");
 			<form name="qnaOpen" action="qnaOpen_pwd_ok.jsp" method="post">
 				<input type="hidden" name="write_pwd" value="<%=request.getParameter("write_pwd")%>">
 				<input type="hidden" name="write_idx" value="<%=request.getParameter("write_idx")%>">
-				<fieldset>
-					<h4>비밀글 기능으로 보호된 글입니다.</h4>
+					<br><br>
+					<p>비밀글 기능으로 보호된 글입니다.</p>
 					작성자와 관리자만 열람하실 수 있습니다. <br>
+					<br>
 					본인이라면 비밀번호를 입력하세요.
 					<div>
 						비밀번호<input type="password" name="inputpwd" required>
 						<input type="submit" value="확인">
 					</div>
-
-				</fieldset>
+					<br><br>
 			</form>
 		</article>
 	</section>
