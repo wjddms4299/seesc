@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 section{width:1200px;margin:0px auto;}
 h1,h2{text-align:center;}
@@ -15,6 +16,7 @@ h2{font-size:25px;}
 </style>
 </head>
 <body>
+<%@include file="/header.jsp" %>
 <section>
 <hr width="1100">
  <article>
@@ -82,5 +84,6 @@ h2{font-size:25px;}
  </article>
  <hr width="1100">
 </section>
+<%@include file="/footer.jsp" %>
 </body>
 </html>

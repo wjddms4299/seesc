@@ -33,7 +33,7 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 String today = simpleDateFormat.format(nowDate); 
 
 String dbdate= simpleDateFormat.format(dto.getWrite_wdate());
-String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
+String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new' style = 'width:15px;height:15px;'>":"";
 
 
 

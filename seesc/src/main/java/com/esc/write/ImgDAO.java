@@ -567,5 +567,32 @@ public class ImgDAO {
 			}
 		}
 	}
+	/**댓글 갯수*/
+	public int commentNum(int write_idx) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "select count(*) from comments where write_idx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,write_idx);
+			rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			return count;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}finally {
+			try {
+				if (rs != null)rs.close();
+				if (ps != null)ps.close();
+				if (conn != null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+		
+	}
 }
 

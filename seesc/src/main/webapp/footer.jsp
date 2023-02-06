@@ -3,20 +3,19 @@
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 <div class="footerback">
 <footer>
-<hr>
-<div>(주)탈출탈출<br>
+<div>(주)S2탈출탈출<br>
 사업자등록번호 1234567/CEO @@@<br>
 Copyright ⓒ 2023 All rights reserved.<br>
 www.ezenac.co.kr<br>
 <a>이용약관</a>
 <a>환불규정 및 철회</a>
 </div>
-<div><h3>문의 전화</h3></div>
-<div><h2>010-5014-5789</h2></div>
-<div><h3>SNS</h3><br>
-<a>sns 이미지,링크연결</a>
+<div><h3>문의 전화 010-5014-5789</h3></div>
+<span id="snsLogo">
+<a href="https://instagram.com/cats_cho?igshid=YmMyMTA2M2Y="><img src='/seesc/img/instaLogo.png' alt = '인스타그램' style = 'width:40px;height:40px;'></a>
+<a href="https://open.kakao.com/o/gHOLLp2e"><img src ="/seesc/img/kakaoLogo.png" style = "width:40px;height:40px;" alt = "카카오톡문의"></a></span>
 
-</div>
+
 <span id="footlogo"> <a href = "/seesc/index.jsp"><img
 src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> 
 </footer>
