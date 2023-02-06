@@ -119,13 +119,16 @@ if(arr==null||arr.size()==0){
 %>
 	</table>
 	<%
-	int manager=(int)session.getAttribute("manager");
+	int manager=0;
+	if(session.getAttribute("manager")!=null){
+		manager=(int)session.getAttribute("manager");
 	if(manager>0){
 		%>
 		<div>
 			<input type="button" value="기록올리기" onclick="openhofUpload();">
 		</div>
 		<%
+	}
 	}
 	%>
 </article>
