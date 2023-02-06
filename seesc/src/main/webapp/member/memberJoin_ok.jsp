@@ -4,6 +4,17 @@
 <%@ page import="java.text.*"%>
 <%@ page import="java.util.*" %>
 <%
+String pwd=request.getParameter("user_pwd");
+String pwd_ok=request.getParameter("user_pwd_ok");
+if(!pwd.equals(pwd_ok)){
+	%>
+	<script>
+	window.alert('비밀번호가 일치하지않습니다.');
+	location.href='memberJoin.jsp';
+	</script>
+	<%
+	return;
+}
 String user_tel_r1=request.getParameter("user_tel1");
 String user_tel_r2=request.getParameter("user_tel2");
 String user_tel_r3=request.getParameter("user_tel3");
