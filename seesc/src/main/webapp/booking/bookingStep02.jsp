@@ -225,7 +225,7 @@ function applyCoupon(o){
  <table id="a2-1">
  	<tr>
  		<td>
- 			<a href="bookingStep01.jsp"><input type="button" value="취소"></a> <input type="submit" value="예약하기">
+ 			<input type="submit" value="예약하기"> &nbsp; <a href="bookingStep01.jsp"><input type="button" value="취소"></a>
  		</td>
  	</tr>
  </table>

@@ -1,6 +1,7 @@
 package com.esc.thema;
 
 import java.sql.*;
+import java.util.*;
 
 public class ThemaDAO {
 	
@@ -40,6 +41,85 @@ public class ThemaDAO {
 			}
 		}
 	}
+	/**테마번호 불러오기:이름순*/
+	public ArrayList<Integer> themaInfo_Name(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select thema_idx from thema order by thema_name";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<Integer> arr=new ArrayList<Integer>();
+			while(rs.next()) {
+				int thema_idx=rs.getInt("thema_idx");
+				arr.add(thema_idx);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	/**테마번호 불러오기:난이도순*/
+	public ArrayList<Integer> themaInfo_Level(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select thema_idx from thema order by thema_level";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<Integer> arr=new ArrayList<Integer>();
+			while(rs.next()) {
+				int thema_idx=rs.getInt("thema_idx");
+				arr.add(thema_idx);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	/**테마번호 불러오기:인기순*/
+	public ArrayList<Integer> themaInfo_Booking(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select thema.thema_idx from thema,booking where thema.thema_idx=booking.thema_idx(+) group by thema.thema_idx order by count(booking.thema_idx) desc";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<Integer> arr=new ArrayList<Integer>();
+			while(rs.next()) {
+				int thema_idx=rs.getInt("thema_idx");
+				arr.add(thema_idx);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
 	/**테마 이름만 불러오기*/
 	public String themaName(int thema_idx) {
 		try {
