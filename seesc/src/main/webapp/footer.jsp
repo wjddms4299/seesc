@@ -17,6 +17,6 @@ www.ezenac.co.kr<br>
 
 
 <span id="footlogo"> <a href = "/seesc/index.jsp"><img
-src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> 
+src="/seesc/img/logo_y.png" alt="로고" style ="width :140px; height : 110px;"></a></span> 
 </footer>
 </div>

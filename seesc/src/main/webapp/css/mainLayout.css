@@ -31,25 +31,23 @@ header {
 	margin: 0px auto;
 }
 
-#mainlogin:hover{
-	zoom:1.02;
-}
-
 
 #mainlogin :hover{
 	color: yellow;
 	letter-spacing: 5px;
 	font-weight: bold;
+	zoom:1.02;
 	
 }
 #mainlogo {
 	position: absolute;
-	bottom: 30px;
+	bottom: 15px;
 	left: 70px;
 	margin: 0px auto;
 }
 #mainlogo :hover{
 	zoom : 1.03;
+	filter: contrast(500%)
 		
 }
 .dropdown {
@@ -142,7 +140,7 @@ footer a {
 
 #footlogo :hover{
 	zoom : 1.03;
-	
+
 	}
 #snsLogo {
 	position: absolute;

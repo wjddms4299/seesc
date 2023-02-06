@@ -18,7 +18,8 @@ color :black;
 zoom : 1.05;
 }
 #topbutton:hover{
-zoom : 1.05;
+zoom : 1.2;
+	filter: saturate(1000%)
 }
 </style>
 <script>
@@ -36,7 +37,7 @@ function login_open(){
 <a id="top"></a>
 
 <!-- ------------------------------------------------------ -->
-		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img src="/seesc/img/logo_w.png" alt="로고" style ="width : 140px; height : 110px;"></a></span> 
+		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img src="/seesc/img/logo_y.png" alt="로고" style ="width : 170px; height : 120px;"></a></span> 
 		<%
 		if(sid==null||sid==""){
 			%>
@@ -71,7 +72,7 @@ function login_open(){
 				</ul>
 			</ul>
 			<ul class="dropdown">
-				<li class="dropbtn"><a href="/seesc/community/community.jsp">커뮤니티</a></li>
+				<li class="dropbtn"><a href="/seesc/community/community_eventcontent_list.jsp">커뮤니티</a></li>
 				<ul class="dropdown-content">
 					<a href="/seesc/community/community_eventcontent_list.jsp">이벤트</a>
 					<a href="/seesc/community/qna_list.jsp">QnA</a>
