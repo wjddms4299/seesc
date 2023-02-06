@@ -183,9 +183,10 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#사내연애 #운명 #로맨스</label><br><br>
- <label class="a2-1"><div class="a2-3">대학생 철수와 직장인 유리의 만남은 결코 우연이 아니었다!!!</div>
-				<div class="a2-3">그들의 운명적인 만남 이야기</div></label><br>
+ <label class="a2-1" id="a2-2">#<%=dto[0].getThema_tag1()%> #<%=dto[0].getThema_tag2()%> #<%=dto[0].getThema_tag3()%></label><br><br>
+ <label class="a2-1"><div class="a2-3"><%=dto[0].getThema_intro1()%></div>
+				<div class="a2-3"><%=dto[0].getThema_intro2()%></div>
+				<%if(dto[0].getThema_intro3()!=null){%><div class="a2-3"><%=dto[0].getThema_intro3()%></div></label><%}%><br>
   <%
  StringBuffer time_date_b=new StringBuffer(time_date);
  time_date_b.delete(time_date_b.length()-4,time_date_b.length());
@@ -224,9 +225,10 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#괴물 #할로윈 #공포</label><br><br>
- <label class="a2-1"><div class="a2-3">할로윈의 밤 수많은 괴물들이 깨어나는 시간</div>
-				<div class="a2-3">괴물들이 당신을 맞이할 것입니다.!</div></label><br>
+ <label class="a2-1" id="a2-2">#<%=dto[1].getThema_tag1()%> #<%=dto[1].getThema_tag2()%> #<%=dto[1].getThema_tag3()%></label><br><br>
+ <label class="a2-1"><div class="a2-3"><%=dto[1].getThema_intro1()%></div>
+				<div class="a2-3"><%=dto[1].getThema_intro2()%></div>
+				<%if(dto[1].getThema_intro3()!=null){%><div class="a2-3"><%=dto[1].getThema_intro3()%></div></label><%}%><br>
  <%
  booking_idx[6]=bdao.bookingIdx(idx_name.get(1),time_date_in,1);
  booking_idx[7]=bdao.bookingIdx(idx_name.get(1),time_date_in,2);
@@ -260,10 +262,10 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#학교 #폭행 #추리</label><br><br>
- <label class="a2-1"><div class="a2-3">중학생 철수는 순조로운 학창생활을 하고 있었는데</div>
-				<div class="a2-3">갑자기 폭행 사건에 휘말려 가해자가 되고 마는데,</div>
-				<div class="a2-3">철수를 도와 철수의 누명을 풀어주자!</div></label><br>
+ <label class="a2-1" id="a2-2">#<%=dto[2].getThema_tag1()%> #<%=dto[2].getThema_tag2()%> #<%=dto[2].getThema_tag3()%></label><br><br>
+ <label class="a2-1"><div class="a2-3"><%=dto[2].getThema_intro1()%></div>
+				<div class="a2-3"><%=dto[2].getThema_intro2()%></div>
+				<%if(dto[2].getThema_intro3()!=null){%><div class="a2-3"><%=dto[2].getThema_intro3()%></div></label><%}%><br>
  <%
  booking_idx[12]=bdao.bookingIdx(idx_name.get(2),time_date_in,1);
  booking_idx[13]=bdao.bookingIdx(idx_name.get(2),time_date_in,2);
@@ -297,9 +299,10 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#탐정 #미스터리 #추리</label><br><br>
- <label class="a2-1"><div class="a2-3">당신이 셜록홈즈가 되어</div>
-				<div class="a2-3">미스터리한 사건을 해결하자!!</div></label><br>
+ <label class="a2-1" id="a2-2">#<%=dto[3].getThema_tag1()%> #<%=dto[3].getThema_tag2()%> #<%=dto[3].getThema_tag3()%></label><br><br>
+ <label class="a2-1"><div class="a2-3"><%=dto[3].getThema_intro1()%></div>
+				<div class="a2-3"><%=dto[3].getThema_intro2()%></div>
+				<%if(dto[3].getThema_intro3()!=null){%><div class="a2-3"><%=dto[3].getThema_intro3()%></div></label><%}%><br>
  <%
  booking_idx[18]=bdao.bookingIdx(idx_name.get(3),time_date_in,1);
  booking_idx[19]=bdao.bookingIdx(idx_name.get(3),time_date_in,2);
@@ -333,9 +336,10 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#재판 #두뇌싸움 #분별력</label><br><br>
- <label class="a2-1"><div class="a2-3">당신은 청소년 재판의 재판관이 되어</div>
-				<div class="a2-3">분별력 있는 판결로 재판을 끝내주세요!!</div></label><br>
+ <label class="a2-1" id="a2-2">#<%=dto[4].getThema_tag1()%> #<%=dto[4].getThema_tag2()%> #<%=dto[4].getThema_tag3()%></label><br><br>
+ <label class="a2-1"><div class="a2-3"><%=dto[4].getThema_intro1()%></div>
+				<div class="a2-3"><%=dto[4].getThema_intro2()%></div>
+				<%if(dto[4].getThema_intro3()!=null){%><div class="a2-3"><%=dto[4].getThema_intro3()%></div></label><%}%><br>
  <%
  booking_idx[24]=bdao.bookingIdx(idx_name.get(4),time_date_in,1);
  booking_idx[25]=bdao.bookingIdx(idx_name.get(4),time_date_in,2);
@@ -369,10 +373,10 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#첫사랑 #징검다리 #로맨스</label><br><br>
- <label class="a2-1"><div class="a2-3">사랑을 해본 적 없는 은지와 철수는</div>
-				<div class="a2-3">서로 썸을 타고 있지만 서로에게 먼저 말을 건네기 어려운데</div>
-				<div class="a2-3">그들의 징검다리가 되어 사랑을 이어주자!</div></label><br>
+ <label class="a2-1" id="a2-2">#<%=dto[5].getThema_tag1()%> #<%=dto[5].getThema_tag2()%> #<%=dto[5].getThema_tag3()%></label><br><br>
+ <label class="a2-1"><div class="a2-3"><%=dto[5].getThema_intro1()%></div>
+				<div class="a2-3"><%=dto[5].getThema_intro2()%></div>
+				<%if(dto[5].getThema_intro3()!=null){%><div class="a2-3"><%=dto[5].getThema_intro3()%></div></label><%}%><br>
  <%
  booking_idx[30]=bdao.bookingIdx(idx_name.get(5),time_date_in,1);
  booking_idx[31]=bdao.bookingIdx(idx_name.get(5),time_date_in,2);
@@ -406,9 +410,10 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#바이러스 #좀비 #공포</label><br><br>
- <label class="a2-1"><div class="a2-3">2023년 갑자기 좀비바이러스가 퍼진다</div>
-				<div class="a2-3">쉘터의 마지막 생존자가 된 당신 어떻게 살아남을 것인가!</div></label><br>
+ <label class="a2-1" id="a2-2">#<%=dto[6].getThema_tag1()%> #<%=dto[6].getThema_tag2()%> #<%=dto[6].getThema_tag3()%></label><br><br>
+ <label class="a2-1"><div class="a2-3"><%=dto[6].getThema_intro1()%></div>
+				<div class="a2-3"><%=dto[6].getThema_intro2()%></div>
+				<%if(dto[6].getThema_intro3()!=null){%><div class="a2-3"><%=dto[6].getThema_intro3()%></div></label><%}%><br>
  <%
  booking_idx[36]=bdao.bookingIdx(idx_name.get(6),time_date_in,1);
  booking_idx[37]=bdao.bookingIdx(idx_name.get(6),time_date_in,2);

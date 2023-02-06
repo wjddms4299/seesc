@@ -9,9 +9,15 @@ public class ThemaDTO {
 	private int thema_people_max;
 	private int thema_time;
 	private int thema_price;
+	private String thema_tag1;
+	private String thema_tag2;
+	private String thema_tag3;
+	private String thema_intro1;
+	private String thema_intro2;
+	private String thema_intro3;
 	
-	
-	public ThemaDTO(int thema_idx, String thema_name, int thema_level, int thema_people_min, int thema_people_max, int thema_time, int thema_price) {
+	public ThemaDTO(int thema_idx, String thema_name, int thema_level, int thema_people_min, int thema_people_max,int thema_time, int thema_price,
+			String thema_tag1, String thema_tag2, String thema_tag3, String thema_intro1, String thema_intro2, String thema_intro3) {
 		super();
 		this.thema_idx = thema_idx;
 		this.thema_name = thema_name;
@@ -20,8 +26,13 @@ public class ThemaDTO {
 		this.thema_people_max = thema_people_max;
 		this.thema_time = thema_time;
 		this.thema_price = thema_price;
+		this.thema_tag1 = thema_tag1;
+		this.thema_tag2 = thema_tag2;
+		this.thema_tag3 = thema_tag3;
+		this.thema_intro1 = thema_intro1;
+		this.thema_intro2 = thema_intro2;
+		this.thema_intro3 = thema_intro3;
 	}
-
 
 	public ThemaDTO() {
 		super();
@@ -89,12 +100,55 @@ public class ThemaDTO {
 		return thema_price;
 	}
 
-
 	public void setThema_price(int thema_price) {
 		this.thema_price = thema_price;
 	}
 	
+	public String getThema_tag1() {
+		return thema_tag1;
+	}
+
+	public void setThema_tag1(String thema_tag1) {
+		this.thema_tag1 = thema_tag1;
+	}
 	
+	public String getThema_tag2() {
+		return thema_tag2;
+	}
+
+	public void setThema_tag2(String thema_tag2) {
+		this.thema_tag2 = thema_tag2;
+	}
 	
+	public String getThema_tag3() {
+		return thema_tag3;
+	}
+
+	public void setThema_tag3(String thema_tag3) {
+		this.thema_tag3 = thema_tag3;
+	}
 	
+	public String getThema_intro1() {
+		return thema_intro1;
+	}
+
+	public void setThema_intro1(String thema_intro1) {
+		this.thema_intro1 = thema_intro1;
+	}
+	
+	public String getThema_intro2() {
+		return thema_intro2;
+	}
+
+	public void setThema_intro2(String thema_intro2) {
+		this.thema_intro2 = thema_intro2;
+	}
+	
+	public String getThema_intro3() {
+		return thema_intro3;
+	}
+
+	public void setThema_intro3(String thema_intro3) {
+		this.thema_intro3 = thema_intro3;
+	}
 }

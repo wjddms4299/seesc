@@ -300,5 +300,28 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
+	/**회원번호로 관리자 여부 가져오기*/
+	public int mngnum(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select manager from userinfo where user_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			rs=ps.executeQuery();
+			rs.next();
+			int manager=rs.getInt("manager");
+			return manager;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 
 }
