@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("utf-8"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +27,7 @@ fieldset {
 <fieldset align="center">
 <h2>비밀글 입니다.
 <br>비밀번호를 입력하세요!</h2>
-<div>비밀번호 <input type = "password" name ="ipwd"><input type = "submit" value = " 확인 "></div>
+<div>비밀번호 <input type = "password" name ="ipwd" required><input type = "submit" value = " 확인 "></div>
 </fieldset>
 </form>
 </article>

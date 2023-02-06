@@ -24,7 +24,7 @@ section img{
    height:250px;
 }
 th{
-background-color: yellow;
+background-color: lightgray;
 }
 </style>
 </head>
