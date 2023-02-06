@@ -29,8 +29,8 @@ background-color: lightgray;
 </style>
 </head>
 <%
-int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
-int manager=session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+int manager=session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
 int totalCnt=wdao.getTotalCnt();
 int listSize=10; 
 int pageSize=5; 
