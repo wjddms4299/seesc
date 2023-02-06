@@ -9,6 +9,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+</style>
 <%
 int user_idx=(int)session.getAttribute("user_idx");
 int totalCnt=boodao.getTotalCnt(user_idx);
@@ -118,7 +134,15 @@ if(cp%pageSize==0)userGroup--;
 				if(pay_ok.equals("결제완료")){
 					%><td><a href="/seesc/booking/bookingCancle.jsp?user_idx=<%=user_idx %>&booking_idx=<%=arr.get(i).getBooking_idx()%>"><button>취소</button></a><td><%
 				}else{
-					%><td><td><%
+					%><script>
+							function cancel(){
+							var result=window.confirm('취소하시겠습니까?');
+							if(result){
+							location.href='/seesc/mypage/mypage_ok.jsp?user_idx=<%=user_idx %>&booking_idx=<%=arr.get(i).getBooking_idx()%>';
+						}
+							}
+					</script>
+					<td><a><button onclick="cancel();">취소</button></a><td><%
 				}
 				%>
 				
