@@ -9,10 +9,16 @@ bottom: 19px;
 }
 #topbutton{
 position: fixed;
-right: 78px;
+right: 85px;
 bottom: 70px;
-color :yellow;
-background-color: blue;
+color :black;
+}
+
+#button:hover{
+zoom : 1.05;
+}
+#topbutton:hover{
+zoom : 1.05;
 }
 </style>
 <script>
@@ -30,11 +36,11 @@ function login_open(){
 <a id="top"></a>
 
 <!-- ------------------------------------------------------ -->
-		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img src="/seesc/img/logo_w.png" alt="로고" style ="width :140px; height : 110px;"></a></span> 
+		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img src="/seesc/img/logo_w.png" alt="로고" style ="width : 140px; height : 110px;"></a></span> 
 		<%
 		if(sid==null||sid==""){
 			%>
-			<span id="mainlogin"><a href="javascript:login_open();">로그인</a> <a href="javascript:login_open();"><img src="/seesc/img/login_main.png" alt="마이페이지"></a> </span>
+			<span id="mainlogin"><a href="javascript:login_open();">로그인</a> <a href="javascript:login_open();"><img src="/seesc/img/login_no.png" alt="로그인"></a> </span>
 			<%
 		}else{
 			%>
@@ -46,7 +52,7 @@ function login_open(){
 
 		<span>
 			<div class="dropdown">
-				<div class="dropbtn"><a href="/seesc/introduce/escape_introduce.jsp">소개</a></div>
+				<div class="dropbtn"><a href="/seesc/introduce/escape_introduce.jsp"> 소 개 </a></div>
 				<div class="dropdown-content">
 					<a href="/seesc/introduce/escape_introduce.jsp">방탈출 소개</a>
 					<a href="/seesc/introduce/thema_introduce.jsp">테마 소개</a>
@@ -54,7 +60,7 @@ function login_open(){
 				</div>
 			</div>
 			<ul class="dropdown">
-				<li class="dropbtn"><a href="/seesc/booking/bookingStep01.jsp">예약</a></li>
+				<li class="dropbtn"><a href="/seesc/booking/bookingStep01.jsp"> 예 약 </a></li>
 				<ul class="dropdown-content">
 					<a href="/seesc/booking/bookingStep01.jsp">예약하기</a>
 					<%if(sid==null||sid.equals("")){ %>
@@ -67,9 +73,9 @@ function login_open(){
 			<ul class="dropdown">
 				<li class="dropbtn"><a href="/seesc/community/community.jsp">커뮤니티</a></li>
 				<ul class="dropdown-content">
-					<a href="/seesc/community/community_eventcontent_list.jsp">공지사항</a>
+					<a href="/seesc/community/community_eventcontent_list.jsp">이벤트</a>
 					<a href="/seesc/community/qna_list.jsp">QnA</a>
-					<a href="/seesc/community/freenoticeboard.jsp">팀구해요</a>
+					<a href="/seesc/community/community_freecontent.jsp">자유게시판</a>
 				</ul>
 			</ul>
 			
@@ -81,8 +87,8 @@ function login_open(){
 		
 
 <!-- ---------------------------------------------- -->
-<a href="https://open.kakao.com/o/gHOLLp2e"><img src ="/seesc/img/kakaoLogo.png" style = "width:50px;height:50px;" alt = "카카오톡문의" id="button"class="w-btn w-btn-brown"></a>
-<a href="#top"><button id="topbutton" type="button"><span>▲</span></button></a>
+<a href="https://open.kakao.com/o/gHOLLp2e"><img src ="/seesc/img/kakaoLogo.png" style = "width:50px;height:50px;" alt = "카카오톡문의" id="button"></a>
+<a href="#top"><img src ="/seesc/img/toppoint.png" style = "width:30px;height:30px;" alt = "상단으로이동" id="topbutton"></a>
 
 
 </header>
