@@ -133,7 +133,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						String today = simpleDateFormat.format(nowDate); 
 						
 						String dbdate= simpleDateFormat.format(notice.get(n).getWrite_wdate());
-						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
+						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new' style = 'width:15px;height:15px;'>":"";
 					%>
 						<tr class = "notice">
 						<td>공 지</td>
@@ -169,12 +169,12 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						String today = simpleDateFormat.format(nowDate); 
 						
 						String dbdate= simpleDateFormat.format(arr.get(i).getWrite_wdate());
-						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new' >":"";
+						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'style = 'width:15px;height:15px;' >":"";
 						
 						
 						//내가쓴글 알려주기
 						String me = 
-						user_idx==arr.get(i).getUser_idx()?"<img src='/seesc/img/meme.png' alt = 'me' style='width :25px; height:16px;'>":"";
+						user_idx==arr.get(i).getUser_idx()&&user_idx!=0?"<img src='/seesc/img/meme.png' alt = 'me' style='width :25px; height:16px;'>":"";
 					%>
 					<!-- a태그 post방식으로 보내기 -->
 					<form  id = "open_pwd" action = "qnaOpen_pwd.jsp" method = "post">

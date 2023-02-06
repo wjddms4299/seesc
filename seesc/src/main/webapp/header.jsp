@@ -7,67 +7,12 @@ position: fixed;
 right: 78px;
 bottom: 19px;
 }
-.w-btn {
-    z-index: 1;
-    border: none;
-    display: inline-block;
-    padding: 15px 30px;
-    border-radius: 15px;
-    font-family: "paybooc-Light", sans-serif;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.25s;
-}
-
-.w-btn-outline {
-    z-index: 1;
-    padding: 15px 30px;
-    border-radius: 15px;
-    font-family: "paybooc-Light", sans-serif;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.25s;
-}
-.w-btn-brown {
-    background-color: #ce6d39;
-    color: #ffeee4;
-}
-
-.w-btn-brown-outline {
-    border: 3px solid #ce6d39;
-    color: #b8b8b8;
-}
-
-.w-btn-brown-outline:hover {
-    background-color: #ce6d39;
-    color: #ffeee4;
-}
-.w-btn:hover {
-    letter-spacing: 2px;
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-.w-btn-outline:hover {
-    letter-spacing: 2px;
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-.w-btn:active {
-    transform: scale(1.5);
-}
-
-.w-btn-outline:active {
-    transform: scale(1.5);
-}
-
 #topbutton{
 position: fixed;
 right: 78px;
 bottom: 70px;
+color :yellow;
+background-color: blue;
 }
 </style>
 <script>
@@ -99,21 +44,24 @@ function login_open(){
 		
 		%>
 
-		<span id="mainmenu">
+		<span>
 			<div class="dropdown">
-				<div class="dropbtn"><a href="#">소개</a></div>
+				<div class="dropbtn"><a href="/seesc/introduce/escape_introduce.jsp">소개</a></div>
 				<div class="dropdown-content">
-					<a href="#">방탈출 소개</a>
+					<a href="/seesc/introduce/escape_introduce.jsp">방탈출 소개</a>
 					<a href="/seesc/introduce/thema_introduce.jsp">테마 소개</a>
 					<a href ="/seesc/introduce/map.jsp">오시는 길</a>
 				</div>
 			</div>
 			<ul class="dropdown">
-				<li class="dropbtn"><a href="#">예약</a></li>
+				<li class="dropbtn"><a href="/seesc/booking/bookingStep01.jsp">예약</a></li>
 				<ul class="dropdown-content">
 					<a href="/seesc/booking/bookingStep01.jsp">예약하기</a>
+					<%if(sid==null||sid.equals("")){ %>
 					<a href="/seesc/booking/b_bookingcheck.jsp">예약 확인</a>
-
+					<%}else{%>
+					<a href="/seesc/mypage/payment.jsp">예약 확인</a>
+					<% }%>
 				</ul>
 			</ul>
 			<ul class="dropdown">
@@ -121,7 +69,7 @@ function login_open(){
 				<ul class="dropdown-content">
 					<a href="/seesc/community/community_eventcontent_list.jsp">공지사항</a>
 					<a href="/seesc/community/qna_list.jsp">QnA</a>
-					<a href="#">팀구해요</a>
+					<a href="/seesc/community/freenoticeboard.jsp">팀구해요</a>
 				</ul>
 			</ul>
 			
@@ -133,7 +81,7 @@ function login_open(){
 		
 
 <!-- ---------------------------------------------- -->
-<a href="seesc/cafe/cafeOrder.jsp"><button id="button" type="button" class="w-btn w-btn-brown"><span>카페주문하기</span></button></a>
+<a href="https://open.kakao.com/o/gHOLLp2e"><img src ="/seesc/img/kakaoLogo.png" style = "width:50px;height:50px;" alt = "카카오톡문의" id="button"class="w-btn w-btn-brown"></a>
 <a href="#top"><button id="topbutton" type="button"><span>▲</span></button></a>
 
 
