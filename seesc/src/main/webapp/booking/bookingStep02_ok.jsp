@@ -99,13 +99,20 @@ String booking_num_t=request.getParameter("booking_num");
 String booking_num_s=booking_num_t.substring(0,1);
 int booking_num=Integer.parseInt(booking_num_s);
 String booking_msg=request.getParameter("booking_msg");
+String booking_money=request.getParameter("booking_money");
+String booking_money_p=booking_money.substring(0,booking_money.length()-5);
+int booking_money_i=Integer.parseInt(booking_money_p)*1000;
 
 String booking_tel=booking_tel1+"-"+booking_tel2_s+"-"+booking_tel3_s;
 
 int coupon_idx=0;
 if(user_idx!=null){
-	String coupon_idx_s=request.getParameter("coupon_idx");
-	coupon_idx=Integer.parseInt(coupon_idx_s);
+	String coupon_idx_t=request.getParameter("coupon_idx");
+	
+	if(!coupon_idx_t.substring(0,1).equals("0")){
+		String coupon_idx_s=coupon_idx_t.substring(0,coupon_idx_t.length()-5);
+		coupon_idx=Integer.parseInt(coupon_idx_s);
+	}
 }
 
 int booking_pay=Integer.parseInt(booking_pay_s);
@@ -120,7 +127,7 @@ if(user_idx==null){
 }
 
 int result=bdao.booking(thema_idx,coupon_idx,user_idx,booking_name,booking_tel,booking_pwd,
-		time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num);
+		time_date,time_ptime,booking_pay,booking_pay_ok,booking_msg,booking_num,booking_money_i);
 if(coupon_idx!=0){
 	cpdao.bookingCouponUse(coupon_idx);
 }
@@ -129,7 +136,7 @@ if(result==1){
 	int booking_idx=bdao.bookingIdx(thema_idx,time_date,time_ptime);%>
 	
 	<script>
-	location.href="bookingStep03.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>";
+	location.href="bookingStep03.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>&booking_money=<%=booking_money%>";
 	</script>
 <%}else{%>
 	<script>

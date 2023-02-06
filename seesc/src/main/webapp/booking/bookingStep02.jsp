@@ -35,7 +35,10 @@ if(user_idx!=null){
 ///////////////////////////////////////////////////////////////////////
 
 ArrayList<CouponDTO> cpdto=cpdao.bookingCoupon(user_idx);
-%>
+
+///////////////////////////////////////////////////////////////////////
+
+ThemaDTO thdto=thdao.themaInfo(thema_idx);%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +55,14 @@ section{width:1200px;margin:0px auto;}
 #d1{margin:40px 220px;}
 #d2{margin:0px auto;}
 </style>
+<script>
+function applyCoupon(o){
+	
+	document.getElementById('money').value=
+		(document.getElementById('money').value.substring(0,document.getElementById('money').value.length-5)
+		-o.substring(o.length-4,o.length-3))+',000원';
+}
+</script>
 </head>
 <body>
 <%@include file="/header.jsp"%>
@@ -70,8 +81,6 @@ section{width:1200px;margin:0px auto;}
  <article>
  <table class="a1-1" border="1" cellspacing="0">
  	<tr height="40">
- 		<%
- 		ThemaDTO thdto=thdao.themaInfo(thema_idx); %>
  		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
  		<td width="500">&nbsp;&nbsp;<%=thdto.getThema_name()%><input type="hidden" name="thema_name" value="<%=thdto.getThema_name()%>"></td>
  	</tr>
@@ -98,7 +107,7 @@ section{width:1200px;margin:0px auto;}
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
  		<td>&nbsp;&nbsp;
- 			<select name="booking_num">
+ 			<select name="booking_num" onchange="document.getElementById('money').value=this.options[this.selectedIndex].value.substring(4,this.options[this.selectedIndex].value.length-1)">
  				<%
  				for(int i=thdto.getThema_people_min();i<=thdto.getThema_people_max();i++){
  					%>
@@ -133,13 +142,13 @@ section{width:1200px;margin:0px auto;}
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
- 			<select name="coupon_idx">
+ 			<select name="coupon_idx" onchange="applyCoupon(this.options[this.selectedIndex].value)">
  				<option value="0">사용안함</option>
  				<%
  				if(cpdto!=null){
 	 				for(int i=0;i<cpdto.size();i++){
 	 					%>
-	 					<option value="<%=cpdto.get(i).getCoupon_idx()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>
+	 					<option value="<%=cpdto.get(i).getCoupon_idx()+"/"+cpdto.get(i).getCoupon_dc()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>
 	 					<%
 	 				}
  				}
@@ -150,7 +159,11 @@ section{width:1200px;margin:0px auto;}
  	<%}%>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b><input name="booking_money" value=></b></td>               <!-- cpdto.get(i).getCoupon_dc() -->
+ 		<td>&nbsp;&nbsp;<b><input type="text" id="money" name="booking_money"
+ 			value="<%
+ 				StringBuffer booking_money_b=new StringBuffer(String.valueOf(thdto.getThema_people_min()*thdto.getThema_price()));
+ 				booking_money_b.insert(booking_money_b.length()-3,",");
+ 				out.print(booking_money_b);%>원" readonly></b></td>               <!-- cpdto.get(i).getCoupon_dc() -->
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2" ><b>결제방식</b></td>

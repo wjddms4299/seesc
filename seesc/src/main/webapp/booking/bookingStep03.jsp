@@ -21,6 +21,8 @@ String booking_msg=request.getParameter("booking_msg");
 String booking_idx=request.getParameter("booking_idx");
 String booking_pay_ok_s=request.getParameter("booking_pay_ok");
 int booking_pay_ok=Integer.parseInt(booking_pay_ok_s);
+
+String booking_money=request.getParameter("booking_money");
 %>
 <!DOCTYPE html>
 <html>
@@ -124,7 +126,7 @@ function popup_open(){
 	}%>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b>43,000원</b></td>
+ 		<td>&nbsp;&nbsp;<b><%=booking_money%></b></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>결제방식</b></td>
