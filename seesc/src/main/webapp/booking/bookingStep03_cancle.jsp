@@ -7,7 +7,50 @@
 String booking_idx_s=request.getParameter("booking_idx");
 int booking_idx=Integer.parseInt(booking_idx_s);
 BookingDTO dto=bdao.one_bookingList(booking_idx);
-String cancel_banknum=request.getParameter("bank")+"-"+request.getParameter("cacle_banknum")+"-"+request.getParameter("depositor");
+
+String booking_pay_ok_s=request.getParameter("booking_pay_ok");
+int booking_pay_ok=Integer.parseInt(booking_pay_ok_s);
+
+String bank=null;
+String cacle_banknum_s=null;
+String depositor=null;
+if(booking_pay_ok==0){
+	bank=request.getParameter("bank");
+	cacle_banknum_s=request.getParameter("cacle_banknum");
+	if(cacle_banknum_s==null || cacle_banknum_s.equals("")){
+		%>
+		<script>
+		window.alert("계좌번호를 입력해주세요.");
+		history.back();
+		</script>
+		<%
+		return;
+	}
+	try{
+		int cacle_banknum=Integer.parseInt(cacle_banknum_s);
+	}catch(NumberFormatException e){
+		%>
+		<script>
+		window.alert("계좌번호는 '숫자'만 입력해주세요.");
+		history.back();
+		</script>
+		<%
+		return;
+	}
+	
+	depositor=request.getParameter("depositor");
+	if(depositor==null || depositor.equals("")){
+		%>
+		<script>
+		window.alert("예금주명을 입력해주세요.");
+		history.back();
+		</script>
+		<%
+		return;
+	}
+}
+
+String cancel_banknum=bank+"-"+cacle_banknum_s+"-"+depositor;
 
 int coupon_idx=bdao.bookingCouponIdx(booking_idx);
 
@@ -26,7 +69,7 @@ if (result==1) {%>
 	</script>
 <%}else {%>
 	<script>
-	window.alert('예약취소에 실패하였습니다.');
+	window.alert('예약취소에 실패하였습니다. 고객센터로 연락바랍니다.');
 	window.opener.location.href='bookingStep01.jsp';
 	window.self.close();
 	</script>

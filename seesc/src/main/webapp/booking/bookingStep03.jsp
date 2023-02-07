@@ -41,7 +41,7 @@ section{width:1200px;margin:0px auto;}
 </style>
 <script>
 function popup_open(){
-	window.open('/seesc/booking/cancle_popup.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>','cancle_popup.jsp','width=550,height=300,top=100,left=300');
+	window.open('/seesc/booking/cancle_popup.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>','cancle_popup.jsp','width=550,height=300,top=100,left=300');
 }
 </script>
 </head>

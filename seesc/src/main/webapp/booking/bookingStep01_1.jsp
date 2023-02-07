@@ -4,10 +4,11 @@
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="bdao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <%
 String time_date=request.getParameter("time_date");
 
-if(time_date==null || time_date==""){
+if(time_date==null || time_date.equals("")){
 	Calendar now=Calendar.getInstance();
 	
 	int yy=now.get(Calendar.YEAR);
@@ -157,277 +158,87 @@ select{margin:0px 950px;}
  ArrayList<Integer> idx_name=new ArrayList<Integer>();
  idx_name=thdao.themaInfo_Name();
  
- ThemaDTO dto[]=new ThemaDTO[7];
- dto[0]=thdao.themaInfo(idx_name.get(0));
+ ArrayList<ThemaDTO> dto=new ArrayList<ThemaDTO>();
  
- if(dto[0]==null){
-	 %>
-	 <br><br><br>
-	 <h3 align="center">잘못된 접근입니다.</h3>
-	 <br><br><br>
-	 <%@include file="/footer.jsp"%>
-	 <%
-	 return;
- }
- %>
- <h3 class="a2-0"><%=dto[0].getThema_name()%></h3>
- <div class="a2-0">난이도:<%
- 					for(int i=1;i<=dto[0].getThema_level();i++){out.print("★");}
- 					for(int i=1;i<=(5-dto[0].getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
- 					인원:<%=dto[0].getThema_people_min()%>~<%=dto[0].getThema_people_max()%>명&nbsp;&nbsp;
- 					시간:<%=dto[0].getThema_time()%>분</div>
- <hr width="950">
-</article>
-<article id="a2">
- <img alt="방탈출 <%=idx_name.get(0)%>" src="/seesc/thema_img/00<%=idx_name.get(0)%>.jpg" width="300" height="400" class="a2-0">
-</article>
-<article id="a3">
- <br><br><br><br>
- <label class="a2-1" id="a2-2">#<%=dto[0].getThema_tag1()%> #<%=dto[0].getThema_tag2()%> #<%=dto[0].getThema_tag3()%></label><br><br>
- <label class="a2-1"><div class="a2-3"><%=dto[0].getThema_intro1()%></div>
-				<div class="a2-3"><%=dto[0].getThema_intro2()%></div>
-				<%if(dto[0].getThema_intro3()!=null){%><div class="a2-3"><%=dto[0].getThema_intro3()%></div></label><%}%><br>
-  <%
+ Integer user_idx=(Integer)session.getAttribute("user_idx");
+ 
  StringBuffer time_date_b=new StringBuffer(time_date);
  time_date_b.delete(time_date_b.length()-4,time_date_b.length());
  String time_date_in=time_date_b.toString();
- 
- int booking_idx[]=new int[42];
- booking_idx[0]=bdao.bookingIdx(idx_name.get(0),time_date_in,1);
- booking_idx[1]=bdao.bookingIdx(idx_name.get(0),time_date_in,2);
- booking_idx[2]=bdao.bookingIdx(idx_name.get(0),time_date_in,3);
- booking_idx[3]=bdao.bookingIdx(idx_name.get(0),time_date_in,4);
- booking_idx[4]=bdao.bookingIdx(idx_name.get(0),time_date_in,5);
- booking_idx[5]=bdao.bookingIdx(idx_name.get(0),time_date_in,6);
- %>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(0)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[0]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(0)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[1]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(0)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[2]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(0)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[3]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(0)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[4]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(0)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[5]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
-</article>
 
+ ArrayList<Integer> booking_idx=new ArrayList<Integer>();
+ %>
+</article>
+<%for(int j=0;j<idx_name.size();j++){%>
+	<article>
+	<%
+	dto.add(thdao.themaInfo(idx_name.get(j)));
+	
+	if(j==0){
+		if(dto.get(j)==null){
+		%>
+		<br><br><br>
+		<h3 align="center">잘못된 접근입니다.</h3>
+		<br><br><br>
+		<%@include file="/footer.jsp"%>
+		<%
+		return;
+		}
+	}
+	%>
+	 <h3 class="a2-0"><%=dto.get(j).getThema_name()%></h3>
+	 <div class="a2-0">난이도:<%
+	 					for(int i=1;i<=dto.get(j).getThema_level();i++){out.print("★");}
+	 					for(int i=1;i<=(5-dto.get(j).getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
+	 					인원:<%=dto.get(j).getThema_people_min()%>~<%=dto.get(j).getThema_people_max()%>명&nbsp;&nbsp;
+	 					시간:<%=dto.get(j).getThema_time()%>분
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%
+	 if(user_idx!=null){
+		 int manager=udao.mngnum(user_idx);
+	 	 if(manager==1){%>
+	 		 <a href="/seesc/booking/bookingStep01_up.jsp?thema_idx=<%=idx_name.get(j)%>"><input type="button" name="themaUpdate" value="테마 수정"></a> &nbsp; <input type="button" name="themaDelete" value="테마 삭제" onclick="window.open('/seesc/booking/del_popup.jsp?thema_idx=<%=idx_name.get(j)%>','del_popup.jsp','width=550,height=300,top=100,left=300');">
+	 	 <%}%>
+	 <%}%></div>
+	 <hr width="950">
+	</article>
+	<article id="a2">
+	 <img alt="방탈출 <%=idx_name.get(j)%>" src="/seesc/thema_img/00<%=idx_name.get(j)%>.jpg" width="300" height="400" class="a2-0">
+	</article>
+	<article id="a3">
+	 <br><br><br><br>
+	 <label class="a2-1" id="a2-2">#<%=dto.get(j).getThema_tag1()%> #<%=dto.get(j).getThema_tag2()%> #<%=dto.get(j).getThema_tag3()%></label><br><br>
+	 <label class="a2-1"><div class="a2-3"><%=dto.get(j).getThema_intro1()%></div>
+					<div class="a2-3"><%=dto.get(j).getThema_intro2()%></div>
+					<%if(dto.get(j).getThema_intro3()!=null){%><div class="a2-3"><%=dto.get(j).getThema_intro3()%></div></label><%}%><br>
+	 <%
+	 booking_idx.add(bdao.bookingIdx(idx_name.get(j),time_date_in,1));
+	 booking_idx.add(bdao.bookingIdx(idx_name.get(j),time_date_in,2));
+	 booking_idx.add(bdao.bookingIdx(idx_name.get(j),time_date_in,3));
+	 booking_idx.add(bdao.bookingIdx(idx_name.get(j),time_date_in,4));
+	 booking_idx.add(bdao.bookingIdx(idx_name.get(j),time_date_in,5));
+	 booking_idx.add(bdao.bookingIdx(idx_name.get(j),time_date_in,6));
+	 %>
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx.get(j*6)>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx.get(j*6+1)>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx.get(j*6+2)>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx.get(j*6+3)>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx.get(j*6+4)>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx.get(j*6+5)>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
+	</article>
+<%}%>
 <article>
  <%
- dto[1]=thdao.themaInfo(idx_name.get(1));
- %>
- <h3 class="a2-0"><%=dto[1].getThema_name()%></h3>
- <div class="a2-0">난이도:<%
- 					for(int i=1;i<=dto[1].getThema_level();i++){out.print("★");}
- 					for(int i=1;i<=(5-dto[1].getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
- 					인원:<%=dto[1].getThema_people_min()%>~<%=dto[1].getThema_people_max()%>명&nbsp;&nbsp;
- 					시간:<%=dto[1].getThema_time()%>분</div>
- <hr width="950">
-</article>
-<article id="a2">
- <img alt="방탈출 <%=idx_name.get(1)%>" src="/seesc/thema_img/00<%=idx_name.get(1)%>.jpg" width="300" height="400" class="a2-0">
-</article>
-<article id="a3">
- <br><br><br><br>
- <label class="a2-1" id="a2-2">#<%=dto[1].getThema_tag1()%> #<%=dto[1].getThema_tag2()%> #<%=dto[1].getThema_tag3()%></label><br><br>
- <label class="a2-1"><div class="a2-3"><%=dto[1].getThema_intro1()%></div>
-				<div class="a2-3"><%=dto[1].getThema_intro2()%></div>
-				<%if(dto[1].getThema_intro3()!=null){%><div class="a2-3"><%=dto[1].getThema_intro3()%></div></label><%}%><br>
- <%
- booking_idx[6]=bdao.bookingIdx(idx_name.get(1),time_date_in,1);
- booking_idx[7]=bdao.bookingIdx(idx_name.get(1),time_date_in,2);
- booking_idx[8]=bdao.bookingIdx(idx_name.get(1),time_date_in,3);
- booking_idx[9]=bdao.bookingIdx(idx_name.get(1),time_date_in,4);
- booking_idx[10]=bdao.bookingIdx(idx_name.get(1),time_date_in,5);
- booking_idx[11]=bdao.bookingIdx(idx_name.get(1),time_date_in,6);
- %>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(1)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[6]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(1)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[7]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(1)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[8]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(1)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[9]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(1)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[10]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(1)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[11]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
-</article>
-
-<article>
- <%
- dto[2]=thdao.themaInfo(idx_name.get(2));
- %>
- <h3 class="a2-0"><%=dto[2].getThema_name()%></h3>
- <div class="a2-0">난이도:<%
- 					for(int i=1;i<=dto[2].getThema_level();i++){out.print("★");}
- 					for(int i=1;i<=(5-dto[2].getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
- 					인원:<%=dto[2].getThema_people_min()%>~<%=dto[2].getThema_people_max()%>명&nbsp;&nbsp;
- 					시간:<%=dto[2].getThema_time()%>분</div>
- <hr width="950">
-</article>
-<article id="a2">
- <img alt="방탈출 <%=idx_name.get(2)%>" src="/seesc/thema_img/00<%=idx_name.get(2)%>.jpg" width="300" height="400" class="a2-0">
-</article>
-<article id="a3">
- <br><br><br><br>
- <label class="a2-1" id="a2-2">#<%=dto[2].getThema_tag1()%> #<%=dto[2].getThema_tag2()%> #<%=dto[2].getThema_tag3()%></label><br><br>
- <label class="a2-1"><div class="a2-3"><%=dto[2].getThema_intro1()%></div>
-				<div class="a2-3"><%=dto[2].getThema_intro2()%></div>
-				<%if(dto[2].getThema_intro3()!=null){%><div class="a2-3"><%=dto[2].getThema_intro3()%></div></label><%}%><br>
- <%
- booking_idx[12]=bdao.bookingIdx(idx_name.get(2),time_date_in,1);
- booking_idx[13]=bdao.bookingIdx(idx_name.get(2),time_date_in,2);
- booking_idx[14]=bdao.bookingIdx(idx_name.get(2),time_date_in,3);
- booking_idx[15]=bdao.bookingIdx(idx_name.get(2),time_date_in,4);
- booking_idx[16]=bdao.bookingIdx(idx_name.get(2),time_date_in,5);
- booking_idx[17]=bdao.bookingIdx(idx_name.get(2),time_date_in,6);
- %>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(2)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[12]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(2)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[13]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(2)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[14]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(2)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[15]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(2)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[16]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(2)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[17]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
-</article>
-
-<article>
- <%
- dto[3]=thdao.themaInfo(idx_name.get(3));
- %>
- <h3 class="a2-0"><%=dto[3].getThema_name()%></h3>
- <div class="a2-0">난이도:<%
- 					for(int i=1;i<=dto[3].getThema_level();i++){out.print("★");}
- 					for(int i=1;i<=(5-dto[3].getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
- 					인원:<%=dto[3].getThema_people_min()%>~<%=dto[3].getThema_people_max()%>명&nbsp;&nbsp;
- 					시간:<%=dto[3].getThema_time()%>분</div>
- <hr width="950">
-</article>
-<article id="a2">
- <img alt="방탈출 <%=idx_name.get(3)%>" src="/seesc/thema_img/00<%=idx_name.get(3)%>.jpg" width="300" height="400" class="a2-0">
-</article>
-<article id="a3">
- <br><br><br><br>
- <label class="a2-1" id="a2-2">#<%=dto[3].getThema_tag1()%> #<%=dto[3].getThema_tag2()%> #<%=dto[3].getThema_tag3()%></label><br><br>
- <label class="a2-1"><div class="a2-3"><%=dto[3].getThema_intro1()%></div>
-				<div class="a2-3"><%=dto[3].getThema_intro2()%></div>
-				<%if(dto[3].getThema_intro3()!=null){%><div class="a2-3"><%=dto[3].getThema_intro3()%></div></label><%}%><br>
- <%
- booking_idx[18]=bdao.bookingIdx(idx_name.get(3),time_date_in,1);
- booking_idx[19]=bdao.bookingIdx(idx_name.get(3),time_date_in,2);
- booking_idx[20]=bdao.bookingIdx(idx_name.get(3),time_date_in,3);
- booking_idx[21]=bdao.bookingIdx(idx_name.get(3),time_date_in,4);
- booking_idx[22]=bdao.bookingIdx(idx_name.get(3),time_date_in,5);
- booking_idx[23]=bdao.bookingIdx(idx_name.get(3),time_date_in,6);
- %>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(3)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[18]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(3)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[19]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(3)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[20]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(3)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[21]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(3)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[22]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(3)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[23]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
-</article>
-
-<article>
- <%
- dto[4]=thdao.themaInfo(idx_name.get(4));
- %>
- <h3 class="a2-0"><%=dto[4].getThema_name()%></h3>
- <div class="a2-0">난이도:<%
- 					for(int i=1;i<=dto[4].getThema_level();i++){out.print("★");}
- 					for(int i=1;i<=(5-dto[4].getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
- 					인원:<%=dto[4].getThema_people_min()%>~<%=dto[4].getThema_people_max()%>명&nbsp;&nbsp;
- 					시간:<%=dto[4].getThema_time()%>분</div>
- <hr width="950">
-</article>
-<article id="a2">
- <img alt="방탈출 <%=idx_name.get(4)%>" src="/seesc/thema_img/00<%=idx_name.get(4)%>.jpg" width="300" height="400" class="a2-0">
-</article>
-<article id="a3">
- <br><br><br><br>
- <label class="a2-1" id="a2-2">#<%=dto[4].getThema_tag1()%> #<%=dto[4].getThema_tag2()%> #<%=dto[4].getThema_tag3()%></label><br><br>
- <label class="a2-1"><div class="a2-3"><%=dto[4].getThema_intro1()%></div>
-				<div class="a2-3"><%=dto[4].getThema_intro2()%></div>
-				<%if(dto[4].getThema_intro3()!=null){%><div class="a2-3"><%=dto[4].getThema_intro3()%></div></label><%}%><br>
- <%
- booking_idx[24]=bdao.bookingIdx(idx_name.get(4),time_date_in,1);
- booking_idx[25]=bdao.bookingIdx(idx_name.get(4),time_date_in,2);
- booking_idx[26]=bdao.bookingIdx(idx_name.get(4),time_date_in,3);
- booking_idx[27]=bdao.bookingIdx(idx_name.get(4),time_date_in,4);
- booking_idx[28]=bdao.bookingIdx(idx_name.get(4),time_date_in,5);
- booking_idx[29]=bdao.bookingIdx(idx_name.get(4),time_date_in,6);
- %>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(4)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[24]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(4)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[25]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(4)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[26]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(4)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[27]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(4)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[28]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(4)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[29]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
-</article>
-
-<article>
- <%
- dto[5]=thdao.themaInfo(idx_name.get(5));
- %>
- <h3 class="a2-0"><%=dto[5].getThema_name()%></h3>
- <div class="a2-0">난이도:<%
- 					for(int i=1;i<=dto[5].getThema_level();i++){out.print("★");}
- 					for(int i=1;i<=(5-dto[5].getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
- 					인원:<%=dto[5].getThema_people_min()%>~<%=dto[5].getThema_people_max()%>명&nbsp;&nbsp;
- 					시간:<%=dto[5].getThema_time()%>분</div>
- <hr width="950">
-</article>
-<article id="a2">
- <img alt="방탈출 <%=idx_name.get(5)%>" src="/seesc/thema_img/00<%=idx_name.get(5)%>.jpg" width="300" height="400" class="a2-0">
-</article>
-<article id="a3">
- <br><br><br><br>
- <label class="a2-1" id="a2-2">#<%=dto[5].getThema_tag1()%> #<%=dto[5].getThema_tag2()%> #<%=dto[5].getThema_tag3()%></label><br><br>
- <label class="a2-1"><div class="a2-3"><%=dto[5].getThema_intro1()%></div>
-				<div class="a2-3"><%=dto[5].getThema_intro2()%></div>
-				<%if(dto[5].getThema_intro3()!=null){%><div class="a2-3"><%=dto[5].getThema_intro3()%></div></label><%}%><br>
- <%
- booking_idx[30]=bdao.bookingIdx(idx_name.get(5),time_date_in,1);
- booking_idx[31]=bdao.bookingIdx(idx_name.get(5),time_date_in,2);
- booking_idx[32]=bdao.bookingIdx(idx_name.get(5),time_date_in,3);
- booking_idx[33]=bdao.bookingIdx(idx_name.get(5),time_date_in,4);
- booking_idx[34]=bdao.bookingIdx(idx_name.get(5),time_date_in,5);
- booking_idx[35]=bdao.bookingIdx(idx_name.get(5),time_date_in,6);
- %>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(5)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[30]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(5)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[31]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(5)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[32]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(5)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[33]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(5)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[34]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(5)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[35]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
-</article>
-
-<article>
- <%
- dto[6]=thdao.themaInfo(idx_name.get(6));
- %>
- <h3 class="a2-0"><%=dto[6].getThema_name()%></h3>
- <div class="a2-0">난이도:<%
- 					for(int i=1;i<=dto[6].getThema_level();i++){out.print("★");}
- 					for(int i=1;i<=(5-dto[6].getThema_level());i++){out.print("☆");}%>&nbsp;&nbsp;
- 					인원:<%=dto[6].getThema_people_min()%>~<%=dto[6].getThema_people_max()%>명&nbsp;&nbsp;
- 					시간:<%=dto[6].getThema_time()%>분</div>
- <hr width="950">
-</article>
-<article id="a2">
- <img alt="방탈출 <%=idx_name.get(6)%>" src="/seesc/thema_img/00<%=idx_name.get(6)%>.jpg" width="300" height="400" class="a2-0">
-</article>
-<article id="a3">
- <br><br><br><br>
- <label class="a2-1" id="a2-2">#<%=dto[6].getThema_tag1()%> #<%=dto[6].getThema_tag2()%> #<%=dto[6].getThema_tag3()%></label><br><br>
- <label class="a2-1"><div class="a2-3"><%=dto[6].getThema_intro1()%></div>
-				<div class="a2-3"><%=dto[6].getThema_intro2()%></div>
-				<%if(dto[6].getThema_intro3()!=null){%><div class="a2-3"><%=dto[6].getThema_intro3()%></div></label><%}%><br>
- <%
- booking_idx[36]=bdao.bookingIdx(idx_name.get(6),time_date_in,1);
- booking_idx[37]=bdao.bookingIdx(idx_name.get(6),time_date_in,2);
- booking_idx[38]=bdao.bookingIdx(idx_name.get(6),time_date_in,3);
- booking_idx[39]=bdao.bookingIdx(idx_name.get(6),time_date_in,4);
- booking_idx[40]=bdao.bookingIdx(idx_name.get(6),time_date_in,5);
- booking_idx[41]=bdao.bookingIdx(idx_name.get(6),time_date_in,6);
- %>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(6)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx[36]>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(6)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx[37]>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(6)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx[38]>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(6)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx[39]>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(6)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx[40]>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
- <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(6)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx[41]>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
+ if(user_idx!=null){
+	 int manager=udao.mngnum(user_idx);
+ 	 if(manager==1){%>
+ 	 	<hr width="950">
+ 	 	<br><table><tr><td>
+ 		 <a href="/seesc/booking/bookingStep01_in.jsp"><input type="button" name="themaInsert" value="테마 추가"></a>
+ 		</td></tr></table><br>
+ 	 <%}%>
+ <%}%>
 </article>
 </section>
 <hr width="1200">

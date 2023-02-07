@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
+  <hr width="1100" style="background : yellow; height :1px;">
 <div class="footerback">
 <footer>
 <div class="footertext">

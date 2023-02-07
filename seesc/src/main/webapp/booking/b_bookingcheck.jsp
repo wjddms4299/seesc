@@ -8,21 +8,42 @@
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 article{
-text-align: center;}
+text-align: center;
+
+}
+.body{
+background-color: black;
+}
+.back{
+padding: 0px; margin: 0px;
+background-image: url(/seesc/img/backimg.gif);
+      background-size: cover;
+color : white;
+background-attachment: fixed;
+}
+h2{
+color : #BECDFF;
+}
+
+label{
+text-align : left;}
 </style>
 </head>
 <body>
+<div class="body">
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
+		<div class = "back">
 		<br><br>
 			<h2>예약 정보 입력</h2>
+			<hr style="width:200px;">
 		
 			<br>
 				<div>
-				<span>예약취소를 위해서는 예약시 입력한 비밀번호가 필요합니다.</span> <br>
+				<span>예약확인 위해 예약시 입력한 비밀번호가 필요합니다.</span> <br>
 				<span>비밀번호를 잊으셨다면 아래 번호로 연락 바랍니다.</span><br>
-				<span>전화 02-1234-1234</span>
+				<span style ="font-weight : bold;color :red;">전화 02-1234-1234</span>
 				</div>
 				<br>
 				<br>
@@ -44,13 +65,13 @@ text-align: center;}
 					<li><label>비밀번호</label><input type="text" name="booking_pwd"
 						required placeholder="예약시 입력한 비밀번호"></li>
 				</ul>
-				<span><input type="submit" value="조회"></span>
+				<span class= "cbutton"><input type="submit" value="예약확인하기"></span>
 			</form>
-
+		</div>
 		</article>
 			<br><br>
 	</section>
 	<%@include file="/footer.jsp"%>
-
+</div>
 </body>
 </html>

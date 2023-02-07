@@ -35,6 +35,7 @@ function login_open(){
 %>
 <div class="headerback">
 <header>
+<div class="header">
 <a id="top"></a>
 
 <!-- ------------------------------------------------------ -->
@@ -92,6 +93,7 @@ function login_open(){
 <div id="button"><a href="https://open.kakao.com/o/gHOLLp2e"><img src ="/seesc/img/kakaoLogo.png" style = "width:50px;height:50px;" alt = "카카오톡문의" ></a></div>
 <div id="topbutton"><a href="#top"><img src ="/seesc/img/toppoint.png" style = "width:30px;height:30px;" alt = "상단으로이동" ></a></div>
 
-
+</div>
 </header>
 </div>
+  <hr width="1100" style="background : yellow; height :1px;">
