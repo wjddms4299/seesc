@@ -8,14 +8,14 @@
 <%
 
 
-String savePath=request.getRealPath("/img");
+String savePath=request.getRealPath("/community/userFile/writeImg");
 MultipartRequest mr=
 	new MultipartRequest(request,savePath,2097152,"utf-8");
 %>
 
 <%
 	int result=wdao.insertWrite(mr);
-	String msg=result>0?"글 작성을 성공하셨습니다!":"글 작성을 실패하셨습니다1";
+	String msg=result>0?"글 작성을 성공하셨습니다!":"글 작성을 실패하셨습니다!";
 
 %>
 

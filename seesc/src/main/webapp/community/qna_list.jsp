@@ -24,6 +24,10 @@ int manager = session.getAttribute("manager") == null || session.getAttribute("m
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
+<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
+
+
 <style>
 a {
 	text-decoration: none;
@@ -33,17 +37,10 @@ ul {
 	list-style: none;
 }
 
-.write_title {
-	text-align: center;
-	font-size: 25px;
-	font-weight: bold;
-}
 
 table {
 	margin: 0px auto;
 	width: 800px;
-	
-
 }
 .notice{
 color : red;
@@ -87,12 +84,24 @@ String notice_open = request.getParameter("notice_open");
 	<%@include file="/header.jsp"%>
 	<%sid= (String) session.getAttribute("sid");
 UserinfoDTO udto = userdao.userInfo(sid); %>
+
+
+
+<article>
+	<div class = "submenu">
+	<a href="mypage.jsp"><button class="rbutton"><span>예약내역</span></button></a>
+	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
+	<a href="myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
+	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
+	</div>
+	</article>
 	<section>
 		<article>
-			<p class="write_title">
-				질문과 답변
-			</p>
-			
+			<br><br>
+			<h1 class ="h1">QnA</h1>
+			<br>
+			  <hr width="130px">
+			  
 			<table class="write_table">
 				<thead>
 					<tr>
