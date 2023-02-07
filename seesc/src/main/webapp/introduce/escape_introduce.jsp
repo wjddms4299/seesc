@@ -21,14 +21,15 @@ h2{font-size:25px;}
  <article>
 <br>
 <br>
- <h1>S2의 방탈출</h1>
+ <h1>S2 방탈출</h1>
  <br>
-  <hr width="950">
+  <hr width="130px">
   	<br>
   	<br>
 	 <h2>방탈출게임?</h2><br>
 	 <div class="d0" align="center">"60분 안에 갇혀 있는 방에서 숨겨진 단서를 찾아 탈출하면 됩니다!"</div>
 	 <div class="d0" align="center">비디오 게임이 아닌, 실제로 체험하는 놀이문화입니다. 여러분은 어떠한 이유로 다양한 테마룸에 갇히게 됩니다.</div>
+	<br>
 	 <table align="center" border="1" cellspacing="0" cellpadding="5">
 		 <tr height="25">
 			 <td align="center"><b>Your Brain</b></td>
@@ -49,9 +50,11 @@ h2{font-size:25px;}
 	 		<td width="200" align="center">S2의 방탈출은 안전합니다!</td>
 	 	 </tr>
 	 </table>
+	 <br>
   <br>
   <hr width="950">
-	 <h2>누구를 위한 게임인가요?</h2>
+  <br>
+	 <h2>누구를 위한 게임인가요?</h2><br><br>
 	 <table align="center" border="1" cellspacing="0" cellpadding="10">
 	 <tr height="150">
 			 <td align="center"><img src="/seesc/img/e_intro_005.png" alt="05" width="150" height="150"></td>

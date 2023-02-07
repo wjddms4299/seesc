@@ -31,7 +31,9 @@ color: #50BEBE;
 <div class = "back">
 <br>
 <br>
-<div class ="menu"><h2>오시는 길</h2><hr style ="width : 100px; color : D7F1FA ;" ></div>
+<div class ="menu"><h2>오시는 길</h2>
+<hr style ="width : 100px; color : D7F1FA ;" ></div>
+<br><br>
 
 <a href = "https://map.naver.com/v5/search/%EC%9D%B4%EC%A0%A0%20%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/place/13574433?c=15,0,0,0,dh&placePath=%3Fentry%253Dbmp" target = "_blank" class="zoom">
 <img src = "/seesc/img/map.png" style = "width : 500px; height :350px;" alt ='지도'></a>
