@@ -306,7 +306,6 @@ public class BookingDAO {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			input_CancelList(booking_idx, dto, cancel_banknum);
-			if(dto.getCoupon_idx()!=0) {bookingCouponUse_R(booking_idx);}
 			String sql = "delete from booking where booking_idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, booking_idx);

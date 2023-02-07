@@ -6,7 +6,7 @@
 Integer user_idx=(Integer)session.getAttribute("user_idx");
 
 String booking_name=request.getParameter("booking_name");
-if(booking_name==null || booking_name==""){
+if(booking_name==null || booking_name.equals("")){
 	%>
 	<script>
 	window.alert("예약자 성함을 입력해주세요.");
@@ -19,7 +19,7 @@ if(booking_name==null || booking_name==""){
 String booking_tel1=request.getParameter("booking_tel1");
 String booking_tel2_s=request.getParameter("booking_tel2");
 String booking_tel3_s=request.getParameter("booking_tel3");
-if(booking_tel1==null || booking_tel2_s==null || booking_tel3_s==null || booking_tel1=="" || booking_tel2_s=="" || booking_tel3_s==""){
+if(booking_tel1==null || booking_tel2_s==null || booking_tel3_s==null || booking_tel1.equals("") || booking_tel2_s.equals("") || booking_tel3_s.equals("")){
 	%>
 	<script>
 	window.alert("연락처를 입력해주세요.");
@@ -64,7 +64,7 @@ if(booking_pay_s==null){
 }
 
 String booking_pwd=request.getParameter("booking_pwd");
-if(booking_pwd==null || booking_pwd==""){
+if(booking_pwd==null || booking_pwd.equals("")){
 	%>
 	<script>
 	window.alert("예약 비밀번호를 입력해주세요.");
@@ -140,7 +140,7 @@ if(result==1){
 	</script>
 <%}else{%>
 	<script>
-	window.alert('예약하기에 실패하였습니다.');
+	window.alert('예약하기에 실패하였습니다. 고객센터로 연락바랍니다.');
 	location.href="bookingStep01.jsp";
 	</script>
 <%}%>
