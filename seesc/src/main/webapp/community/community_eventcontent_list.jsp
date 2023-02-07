@@ -11,8 +11,21 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
-<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 <style>
+.listbutton{
+		width: 100px;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+        background-color: #FFA300;
+        color: white;
+        font-size: 16px;
+      }
+.listbutton:hover {
+    background-color: #FF870C;
+
+}
+
 .submenu{
 position: relative;
 width : 1200px;
@@ -31,7 +44,9 @@ section img{
 thead th{
 color:#FFA300;
 }
-
+b {
+	text-decoration:none;
+}
 </style>
 </head>
 <%
@@ -193,13 +208,13 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
            }
            	if(arr.get(i).getWrite_open()==0){
         	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
-        	   		<b style="color:red;">[Secret]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:</b>&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+        	   		<b style="color:red;">[Secret]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>
         	   <%}else{%>
-           			<b style="color:red;">[Secret]</b><br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><b style="color:#FFA300;">제목:</b>&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+           			<b style="color:red;">[Secret]</b><br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><b style="color:#FFA300;">제목:&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>
            		<%} 
            	}else{%>
-           		<b style="color:blue;">[Open]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:</b>:&nbsp;
-           		<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>	
+           		<b style="color:blue;">[Open]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;
+           		<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>	
            	<%} %>	
            <br>작성자: <%=arr.get(i).getWrite_writer() %>
            <br><%=arr.get(i).getWrite_wdate() %>

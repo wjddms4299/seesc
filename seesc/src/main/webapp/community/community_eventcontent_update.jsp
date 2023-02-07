@@ -32,6 +32,19 @@ int open=dto.getWrite_open();
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
+.listbutton{
+		width: 80px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background-color: #FFA300;
+        color: white;
+        font-size: 16px;
+      }
+.listbutton:hover {
+    background-color: #FF870C;
+
+}
 h2 {
 	text-align: center;
 	font-size: 30px;
@@ -90,8 +103,8 @@ th {
 						<td>비밀번호</td>
 						<td><input type="password" name="userinput_pwd"
 							required="required"></td>
-						<td colspan="2"><input type="submit" value="수정"> 
-						<input type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp';"></td>
+						<td colspan="2"><input type="submit" class="listbutton"  value="수정"> 
+						<input type="button"  class="listbutton" value="목록" onclick="location.href = 'community_eventcontent_list.jsp';"></td>
 					</tr>
 				</tbody>
 				</form>

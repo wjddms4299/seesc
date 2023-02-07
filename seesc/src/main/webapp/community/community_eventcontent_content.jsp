@@ -30,6 +30,19 @@ return;
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
+.listbutton{
+		width: 80px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background-color: #FFA300;
+        color: white;
+        font-size: 16px;
+      }
+.listbutton:hover {
+    background-color: #FF870C;
+
+}
 h3{
 	text-align: center;
 	font-size: 30px;
@@ -115,9 +128,9 @@ th {
 				<% }else if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
 				<tr>
 					<td colspan="4">
-						<input type="button" value="삭제" onclick ="location.href ='community_eventcontent_delete_ok.jsp?flag=uDelete&write_idx=<%=write_idx%>'">
-						<input type="button" value="수정" onclick="location.href = 'community_eventcontent_update.jsp?flag=uUpdate&write_idx=<%=write_idx%>'">
-						<input type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
+						<input type="button" class="listbutton" value="삭제" onclick ="location.href ='community_eventcontent_delete_ok.jsp?flag=uDelete&write_idx=<%=write_idx%>'">
+						<input type="button" class="listbutton" value="수정" onclick="location.href = 'community_eventcontent_update.jsp?flag=uUpdate&write_idx=<%=write_idx%>'">
+						<input type="button" class="listbutton" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
 		
 						<form name = "community_eventcontent_re" action="community_eventcontent_re.jsp" method ="post">
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
@@ -138,9 +151,9 @@ th {
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
 						[수정] [삭제]를 원하시면 비밀번호를 입력해주세요:
 						<input type="password" name="userinput_pwd" required>
-						<input type="submit" value="삭제" onclick="javascript:event_wdu.action='community_eventcontent_delete_ok.jsp';">
-						<input type="submit" value="수정" onclick="javascript:event_wdu.action='community_eventcontent_update.jsp';">
-						<input type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
+						<input class="listbutton" type="submit" value="삭제" onclick="javascript:event_wdu.action='community_eventcontent_delete_ok.jsp';">
+						<input class="listbutton" type="submit" value="수정" onclick="javascript:event_wdu.action='community_eventcontent_update.jsp';">
+						<input class="listbutton" type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
 						</form>
 						
 						<form name = "event_re" action="community_eventcontent_re.jsp" method ="post">
@@ -185,7 +198,7 @@ th {
 					<%} %>
 					<tr>
 						<td><textarea rows="3" cols="90" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
-						<br><input type="submit" value="등록"></td>
+						<br><input  class="listbutton" type="submit" value="등록"></td>
 					</tr>
 				</table>
 				</fieldset>
@@ -265,7 +278,7 @@ th {
 									<td>
 									<textarea rows="2" cols="40" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
 									<input type="submit" value="등록">
-									<input type="button"value="닫기" onclick="location.href = 'qna_content.jsp?write_idx=<%=write_idx%>'">
+									<input type="button"value="닫기" onclick="location.href = 'community_eventcontent_content.jsp?write_idx=<%=write_idx%>'">
 									</td>
 									</tr>								
 								</form>

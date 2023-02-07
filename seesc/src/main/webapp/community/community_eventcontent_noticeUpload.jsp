@@ -16,6 +16,19 @@ int write_notice=0;
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
+.listbutton{
+		width: 80px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background-color: #FFA300;
+        color: white;
+        font-size: 16px;
+      }
+.listbutton:hover {
+    background-color: #FF870C;
+
+}
 h3{
 	text-align: center;
 	font-size: 30px;
@@ -62,8 +75,8 @@ UserinfoDTO dto = udao.userInfo(sid);
 						</tr>
 						<tr>
 							<td colspan="4" align="center"><input type="submit"
-								value="등록"> <input type="reset" value="다시 작성"> 
-								<input type="button" value="목록" onclick="location.href ='/seesc/community/community_eventcontent_list.jsp'"></td>
+								value="등록" class="listbutton" > <input type="reset"  class="listbutton" value="다시 작성"> 
+								<input type="button"  class="listbutton" value="목록" onclick="location.href ='/seesc/community/community_eventcontent_list.jsp'"></td>
 						</tr>
 					</table>
 			</form>

@@ -15,16 +15,32 @@ int write_notice = 0;
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
+.listbutton{
+		width: 80px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background-color: #FFA300;
+        color: white;
+        font-size: 16px;
+      }
+.listbutton:hover {
+    background-color: #FF870C;
+
+}
+table{
+	blackground-color:white;
+	width: 660px;
+	word-break:break-all;
+	margin: 0px auto;
+	align:center;
+}
 h3{
 	text-align: center;
 	font-size: 30px;
 	color:#FFA300;
 }
-table {
-	width: 660px;
-	margin: 0px auto;
-	align:center;
-}
+
 th {
 	float:left;
 }
@@ -78,8 +94,8 @@ UserinfoDTO dto = userdao.userInfo(sid);
 			</tr>
 			</table>
 			
-			<div align="center"><input type="submit" value=" 등록 ">
-			<input type="button" value=" 취소 " onclick="location.href='community_eventcontent_list.jsp'"></div>
+			<div align="center"><input  class="listbutton" type="submit" value=" 등록 ">
+			<input class="listbutton" type="button" value=" 취소 " onclick="location.href='community_eventcontent_list.jsp'"></div>
 		</form>
 		<br>
 	</article>	
