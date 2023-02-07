@@ -6,10 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 <style>
 section{width:1200px;margin:0px auto;}
 h1,h2{text-align:center;}
-h1{font-size:30px;}
+h1{font-size:30px;
+color : #FFA500;}
 h2{font-size:25px;}
 .d0{margin-bottom:20px;}
 .d1{margin-bottom:20px;margin-left:150px;}
@@ -21,7 +23,7 @@ h2{font-size:25px;}
  <article>
 <br>
 <br>
- <h1>S2 방탈출</h1>
+ <h1 class = "h1">S2 방탈출</h1>
  <br>
   <hr width="130px">
   	<br>

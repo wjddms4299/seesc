@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 <style>
 #map {
 width : 1200px;
@@ -20,6 +21,10 @@ font-weight: bold;
 font-size : 18px;
 color: #50BEBE;
 }
+h1,h2{text-align:center;}
+h1{font-size:30px;
+color : #FFA500;}
+h2{font-size:25px;}
 
 </style>
 </head>
@@ -28,11 +33,12 @@ color: #50BEBE;
 <%@include file="/header.jsp" %>
 <section>
 <article  id = "map">
-<div class = "back">
 <br>
 <br>
-<div class ="menu"><h2>오시는 길</h2>
-<hr style ="width : 100px; color : D7F1FA ;" ></div>
+<div><h1 class = "h1">오시는 길</h1>
+<br>
+  <hr width="130px">
+
 <br><br>
 
 <a href = "https://map.naver.com/v5/search/%EC%9D%B4%EC%A0%A0%20%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/place/13574433?c=15,0,0,0,dh&placePath=%3Fentry%253Dbmp" target = "_blank" class="zoom">
