@@ -89,8 +89,8 @@ if(cp%pageSize==0)userGroup--;
       <br>
       <b style="color:red;">-관리자모드-</b>
       <br>
-      <input style=font-size:15px; type="button" value=" 공지글쓰기 " onclick="location.href='community_eventcontent_noticeUpload.jsp'">
-      <input style=font-size:15px; type="button" value=" 일반글쓰기 " onclick="location.href='community_eventcontent_write.jsp'">
+      <input style=font-size:15px; type="button" class="listbutton" value=" 공지글쓰기 " onclick="location.href='community_eventcontent_noticeUpload.jsp'">
+      <input style=font-size:15px; type="button" class="listbutton" value=" 일반글쓰기 " onclick="location.href='community_eventcontent_write.jsp'">
       </td>
       <%}else{ %>
       <td colspan="5" align="right"><input class="listbutton" style=font-size:15px; type="button" value=" 글쓰기 " onclick="location.href='community_eventcontent_write.jsp'"></td>
@@ -193,12 +193,12 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
            }
            	if(arr.get(i).getWrite_open()==0){
         	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
-        	   		<b style="color:red;">[Secret]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>">제목:&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+        	   		<b style="color:red;">[Secret]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:</b>&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
         	   <%}else{%>
-           			<b style="color:red;">[Secret]</b><br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();">제목:&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+           			<b style="color:red;">[Secret]</b><br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><b style="color:#FFA300;">제목:</b>&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
            		<%} 
            	}else{%>
-           		<b style="color:blue;">[Open]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>">제목:&nbsp;
+           		<b style="color:blue;">[Open]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:</b>:&nbsp;
            		<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>	
            	<%} %>	
            <br>작성자: <%=arr.get(i).getWrite_writer() %>
