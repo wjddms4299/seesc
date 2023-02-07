@@ -11,19 +11,40 @@
 </head>
 <style>
 *{
-background-color: #66EC66;
+background-color: #828282;
 margin: 0px auto;
 text-align: center;
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
+th, td {
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+.blue{
+color: blue;
+}
+.red{
+color: red;
+}
 </style>
 <body>
 <section>
 <h1>예약취소관리</h1>
 <article>
+	<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
 	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
 	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
-	<a href="canclemng.jsp"><button><span>예약취소관리</span></button></a>
+	<a href="cancelmng.jsp"><button><span>예약취소관리</span></button></a>
+	<a href="coumng.jsp"><button><span>쿠폰관리</span></button></a>
 	<a href="/seesc/mypage/myinfo.jsp"><button><span>내정보</span></button></a>
 	<table>
 		<tr>
@@ -90,12 +111,16 @@ text-align: center;
 				<%
 				if(arr.get(i).getCancel_ok()>0){
 					cancel_ok="환불완료";
+					%>
+					<td class="blue"><%=cancel_ok %></td>
+					<%
 				}else{
 					cancel_ok="환불안됨";
+					%>
+					<td class="red"><%=cancel_ok %></td>
+					<%
 				}
-				%>
-				<td><%=cancel_ok %></td>
-				<%
+				
 				if(cancel_ok.equals("환불안됨")){
 					%><td><a href="cancelmng_ok.jsp?booking_idx=<%=arr.get(i).getBooking_idx()%>"><input type="button" value="환불"></a></td><%
 				}else{

@@ -12,28 +12,28 @@
 
 <style>
 
- div:nth-child(1) {
+ .rank:nth-child(1) {
     text-align: center;
   }
-  div:nth-child(1) span{
+  .rank:nth-child(1) span{
   color: gold;
   font-size: 30px;
   }
 
-  div:nth-child(2) {
+  .rank:nth-child(2) {
     float: left;
     margin-right: 10px;
   }
-  div:nth-child(2) span{
+  .rank:nth-child(2) span{
   color: silver;
   font-size: 30px;
   }
 
-  div:nth-child(3) {
+  .rank:nth-child(3) {
     float: right;
     margin-left: 10px;
   }
-  div:nth-child(3) span{
+  .rank:nth-child(3) span{
   color: brown;
   font-size: 30px;
   }
@@ -119,7 +119,7 @@ if(arr==null||arr.size()==0){
 			<%
 		}
 		%>
-		<div>
+		<div class="rank">
 		<span><%=i+1 %>위</span>
 		
 		

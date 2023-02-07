@@ -165,8 +165,8 @@ function open_nicCheck(){
 						<th>성별</th>
 					</tr>
 					<tr>
-						<th>남자<input type="radio" name="user_se" value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							여자<input type="radio" name="user_se" value="0"></th>
+						<td>남자<input type="radio" name="user_se" value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							여자<input type="radio" name="user_se" value="0"></td>
 					</tr>
 					<tr>
 						<th>이메일</th>
@@ -178,7 +178,7 @@ function open_nicCheck(){
 						<th>휴대전화</th>
 					</tr>
 					<tr>
-						<td><input type="number" name="user_tel1" placeholder="핸드폰 번호를 입력해주세요." max="999" required class="tel1">-<input type="number" name="user_tel2" max="9999" required class="tel">-<input type="number" name="user_tel3" max="9999" required class="tel"></td>
+						<td><input type="tel" name="user_tel1" placeholder="핸드폰 번호를 입력해주세요." maxlength="3" pattern="[0-9]{3}" onclick="this.value=''" required class="tel1">-<input type="tel" name="user_tel2" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''" required class="tel">-<input type="tel" name="user_tel3" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''" required class="tel"></td>
 					</tr>
 					<tr>
 						<th>생년월일
