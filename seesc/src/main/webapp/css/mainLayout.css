@@ -155,6 +155,7 @@ footer a {
 		zoom : 1.03;
 
 	}
+<<<<<<< HEAD
 	
 table {
   width: 100%;
@@ -164,11 +165,12 @@ th{
 color: black;
 }
 th, td {
-  text-align: left;
-  padding: 8px;
   text-align: center;
+  padding: 8px;
 }
 
 th {
   background-color: #f2f2f2;
 }
+=======
+>>>>>>> 710cad4fb51aa671cfab7ff1ed9bf139c139a615

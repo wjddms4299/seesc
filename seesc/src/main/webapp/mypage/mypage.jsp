@@ -9,7 +9,42 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+.cbutton {
+	display: inline-block;
+	width: 150px;
+	height: 54px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 54px;
+	outline: none;
+}
+.cbutton::before,
+.cbutton::after {
+	position: absolute;
+	z-index: -1;
+	display: block;
+	content: '';
+}
+.cbutton,
+.cbutton::before,
+.cbutton::after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
 
+
+.cbutton {
+	background-color: #FF6EED;
+	color: #black;
+}
+.cbutton:hover {
+	letter-spacing: 5px;
+}
+</style>
 <%
 int user_idx=(int)session.getAttribute("user_idx");
 int totalCnt=boodao.getTotalCnt(user_idx);
@@ -117,7 +152,7 @@ if(cp%pageSize==0)userGroup--;
 				<td><%=pay_ok %></td>
 				<%
 				if(pay_ok.equals("결제완료")){
-					%><td><a href="/seesc/booking/bookingCancle.jsp?user_idx=<%=user_idx %>&booking_idx=<%=arr.get(i).getBooking_idx()%>"><button>취소</button></a><td><%
+					%><td><a href="/seesc/booking/bookingCancle.jsp?user_idx=<%=user_idx %>&booking_idx=<%=arr.get(i).getBooking_idx()%>"><button class="cbutton">취소</button></a><td><%
 				}else{
 					%><script>
 							function cancel(){
@@ -127,7 +162,7 @@ if(cp%pageSize==0)userGroup--;
 						}
 							}
 					</script>
-					<td><a><button onclick="cancel();">취소</button></a><td><%
+					<td><a><button onclick="cancel();" class="cbutton">취소</button></a><td><%
 				}
 				%>
 				
