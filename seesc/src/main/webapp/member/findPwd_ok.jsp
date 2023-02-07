@@ -37,7 +37,7 @@ if(result==0){
 <%@include file="/header.jsp" %>
 <section>
 <article>
-<form action="/seesc/member/findPwd_ok_ok.jsp">
+<form action="/seesc/member/findPwd_ok_ok.jsp" method="post">
 <div><span>PWD변경하기</span></div>
 <input type="hidden" name="user_name" value="<%=user_name%>">
 <input type="hidden" name="year" value="<%=year%>">

@@ -14,7 +14,9 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-
+th{
+color: black;
+}
 th, td {
   text-align: left;
   padding: 8px;

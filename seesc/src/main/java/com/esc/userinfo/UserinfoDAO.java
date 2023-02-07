@@ -365,7 +365,7 @@ public class UserinfoDAO {
 			return result;
 		}catch(Exception e) {
 			e.printStackTrace();
-			return 0;
+			return -1;
 		}finally {
 			try {
 				if(rs!=null)rs.close();
