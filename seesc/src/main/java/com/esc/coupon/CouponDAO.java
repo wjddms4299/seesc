@@ -143,5 +143,24 @@ public class CouponDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	
+	/**관리자페이지에서 쿠폰 생성하기*/
+	public int couponCre(int coupon_dc,int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="insert into coupon values (coupon_coupon_idx.nextval,?,'선물',?,sysdate,sysdate+100,1)";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			ps.setInt(2, coupon_dc);
+			int result=ps.executeUpdate();
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 }

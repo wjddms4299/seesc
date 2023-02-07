@@ -38,7 +38,7 @@
 
 
 .cbutton {
-	background-color: #FF6EED;
+	background-color: #aaaaaa;
 	color: #black;
 }
 .cbutton:hover {

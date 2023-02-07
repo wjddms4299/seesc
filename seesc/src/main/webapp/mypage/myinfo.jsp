@@ -124,7 +124,7 @@ function open_nicCheck(){
 			String tel2=tel.substring(4, 8);
 			String tel3=tel.substring(9, tel.length());
 			%>
-			<td><input type="text" value="<%=tel1%>" name="tel1">-<input type="text" value="<%=tel2%>" name="tel2">-<input type="text" value="<%=tel3%>" name="tel3"></td>
+			<td><input type="tel" value="<%=tel1%>" name="tel1" maxlength="3" pattern="[0-9]{3}" onclick="this.value=''">-<input type="tel" value="<%=tel2%>" name="tel2" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''">-<input type="tel" value="<%=tel3%>" name="tel3" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''"></td>
 		</tr>
 		<tr>
 			<th>이메일</th>

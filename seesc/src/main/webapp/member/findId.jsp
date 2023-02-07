@@ -75,7 +75,7 @@ input[type="submit"]:hover {
 			<option value = "018">018
 			<option value = "019">019
 		</select>
-		-<input type="number" max="9999" name="tel2">-<input type="number" max="9999" name="tel3">
+		-<input type="tel" name="tel2" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''">-<input type="tel" name="tel3" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''">
 		<input type="submit" value="찾기">
 	</div>
 </form>

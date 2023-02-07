@@ -59,12 +59,26 @@ input[type="submit"]:hover {
     background-color: #3e8e41;
 }
 
-a {
+.join {
     display: inline-block;
     width: 150px;
     padding: 10px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #EA813D;
+    color: black;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+}
+.fid {
+    display: inline-block;
+    width: 150px;
+    padding: 10px;
+    background-color: #a0a0a0;
+    color: black;
     font-size: 16px;
     border: none;
     border-radius: 5px;
@@ -77,6 +91,12 @@ a {
 margin: 0px auto;
 text-align: center;
 }
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
 </style>
 <script>
 function join_open(){
@@ -115,15 +135,15 @@ if(cks!=null){
 				<input type="password" placeholder="비밀번호" name="userpwd" required>
 			</div>
 			<div>
-				<input type="checkbox" name="saveid"value="on" <%=saveid.equals("")?"":"checked" %>>ID기억
+				<input type="checkbox" name="saveid"value="on" <%=saveid.equals("")?"":"checked" %> class="checkbox">ID기억
 			</div>
 			<div class="div">
 				<input type="submit" value="login">
-				<a href="javascript:join_open();">회원가입</a>
+				<a href="javascript:join_open();" class="join">회원가입</a>
 			</div>
 			<div class="div">
-				<a href="javascript:fid();">ID찾기</a>
-				<a href="javascript:fpwd();">PWD찾기</a>
+				<a href="javascript:fid();" class="fid">ID찾기</a>
+				<a href="javascript:fpwd();" class="fid">PWD찾기</a>
 			</div>
 </form>
 </body>
