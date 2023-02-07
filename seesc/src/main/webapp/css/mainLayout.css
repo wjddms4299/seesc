@@ -164,9 +164,8 @@ th{
 color: black;
 }
 th, td {
-  text-align: left;
-  padding: 8px;
   text-align: center;
+  padding: 8px;
 }
 
 th {
