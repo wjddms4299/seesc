@@ -27,22 +27,18 @@ public class WriteDAO {
 			String sql="";
 			switch(option) {
 			case 0 : sql = "select * from (select rownum as rnum, a.* from  "
-						+ "(select * from write order by write_ref desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
+					+ " (select * from write where write_cate='free' order by write_ref desc)a)  where rnum>=? and rnum<=? ";
 					break;
 			case 1 : sql = "select * from (select rownum as rnum, a.* from  "
-					+ "(select * from write order by write_readnum desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
+					+ " (select * from write where write_cate='free' order by write_readnum desc)a) where rnum>=? and rnum<=? ";
 					break;
 			case 2 : sql = "select * from (select rownum as rnum, a.* from  "
-					+ "(select * from write order by write_wdate desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
-					break;
-			default : sql = "select * from (select rownum as rnum, a.* from  "
-					+ "(select * from write order by write_ref desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
-			
+					+ " (select * from write where write_cate='free' order by write_wdate desc)a) where rnum>=? and rnum<=? ";
 			}
+			
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, start);
 			ps.setInt(2, end);
-			ps.setString(3, free);
 			rs = ps.executeQuery();
 			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
 			while (rs.next()) {
@@ -352,11 +348,12 @@ public class WriteDAO {
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
 			String sql = "select * from (select rownum as rnum, a.* from  "
-					+ "(select * from write order by write_idx desc)a)b  " + "where rnum>=? and rnum<=? and write_title like ?";
+					+ "(select * from write where  write_title like ? order by write_idx desc)a)b  " + "where rnum>=? and rnum<=? ";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, start);
-			ps.setInt(2, end);
-			ps.setString(3, mem);
+			ps.setString(1, mem);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
+		
 			rs=ps.executeQuery();
 			ArrayList<WriteDTO> arr=new ArrayList<WriteDTO>();
 			while(rs.next()){

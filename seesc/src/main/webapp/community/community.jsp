@@ -61,18 +61,20 @@ if(cp%pageSize==0)userGroup--;
 			<input type="button" value="이벤트 게시판" onclick="location.href='community_eventcontent_list.jsp'">
 			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
 			<select name="sort">
-				<option  value="0">번호순
-				<option  value="1">조회수 순
-				<option  value="2">작성일 순
+				<option  value="0">번호순</option>
+				<option  value="1">조회수 순</option>
+				<option  value="2">작성일 순</option>
 				<%
 				String sort_s=request.getParameter("sort");
 				int sort=0;
 				if(sort_s==null || sort_s.equals("")){
 					sort_s="0";
+					sort=Integer.parseInt(sort_s);	
 					
 				}else{
 					 sort=Integer.parseInt(sort_s);
 				} %>
+				
 				
 			</select>
 			<input type="submit" value="바꾸기">

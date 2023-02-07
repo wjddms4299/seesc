@@ -51,6 +51,7 @@ if(cp%pageSize==0)userGroup--;
 		<h2>커뮤니티</h2>
 		<div>
 		<input type="button" value="자유게시판" onclick="location.href='community.jsp'">
+		<input type="button" value="이벤트게시판" onclick="location.href='community_eventcontent_list'.jsp">
 		<input type="button" value="멤버모집" onclick="location.href='memberboard.jsp'">
 		<select>
 			<option value="0">정렬순</option>
@@ -69,26 +70,30 @@ if(cp%pageSize==0)userGroup--;
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				
 					<% 
 					 ArrayList<WriteDTO> arr=wdao.member(listSize, cp);
 					for(int i=0;i<arr.size();i++){
 						if(arr==null || arr.size()==0){
 							%>
+							<tr>
 							<td colspan="5">게시글이 존재하지 않습니다.</td>
+							</tr>
 							<%
 						}else{
 							%>
+							<tr>
 							<td><%=arr.get(i).getWrite_idx() %></td>
 							<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title() %></a></td>
 							<td><%=arr.get(i).getWrite_writer() %></td>
 							<td><%=arr.get(i).getWrite_wdate() %></td>
 							<td><%=arr.get(i).getWrite_readnum() %></td>
+							</tr>
 							<%
 						}
 					}
 					%>
-				</tr>
+				
 			</tbody>
 			<tfoot>
 				<tr>
