@@ -30,9 +30,10 @@ return;
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
-h2 {
+h3{
 	text-align: center;
 	font-size: 30px;
+	color:#FFA300;
 }
 .msrc{
    width:250px;
@@ -65,7 +66,7 @@ th {
 	<section>
 		<article>
 		<br>
-			<h2>이벤트 본문보기</h2>
+			<h3>이벤트 본문보기</h3>
 			<br>
 			<hr>
 			<table>
