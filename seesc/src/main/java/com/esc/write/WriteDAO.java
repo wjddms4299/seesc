@@ -16,18 +16,30 @@ public class WriteDAO {
 	}
 
 	/** 커뮤니티 게시판 보이는 메서드 */
-	public ArrayList<WriteDTO> selWrite(int ls, int cp) {
+	public ArrayList<WriteDTO> selWrite(int ls, int cp, int option) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			// String sql = "select * from write order by write_idx desc";
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
 			String free="free";
-				String sql = "select * from (select rownum as rnum, a.* from  "
-						+ "(select * from write order by write_idx desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
-				ps=conn.prepareStatement(sql);
+			option=0;
+			String sql="";
+			switch(option) {
+			case 0 : sql = "select * from (select rownum as rnum, a.* from  "
+						+ "(select * from write order by write_ref desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
+					break;
+			case 1 : sql = "select * from (select rownum as rnum, a.* from  "
+					+ "(select * from write order by write_readnum desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
+					break;
+			case 2 : sql = "select * from (select rownum as rnum, a.* from  "
+					+ "(select * from write order by write_wdate desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
+					break;
+			default : sql = "select * from (select rownum as rnum, a.* from  "
+					+ "(select * from write order by write_ref desc)a)b  " + "where rnum>=? and rnum<=? and write_cate=?";
 			
-				
+			}
+			ps=conn.prepareStatement(sql);
 			ps.setInt(1, start);
 			ps.setInt(2, end);
 			ps.setString(3, free);
@@ -90,9 +102,10 @@ public class WriteDAO {
 				title=member+title;
 			}
 			
-			String filename=mr.getParameter("write_filename");
+			String filename=mr.getFilesystemName("write_filename");
 			String content=mr.getParameter("write_content");
 			
+		
 			ps.setString(1, cate);
 			ps.setString(2, title);
 			ps.setString(3, writer);
@@ -122,18 +135,27 @@ public class WriteDAO {
 	public WriteDTO contentWrite(int idx) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "select write_title,write_writer,write_wdate,write_content,write_readnum from write where write_idx=?";
+			String sql = "select * from write where write_idx=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
 			rs = ps.executeQuery();
-			WriteDTO dto = null;
+			WriteDTO dto = new WriteDTO();
 
 			if (rs.next()) {
+				int userid=rs.getInt("user_idx");
+				String cate=rs.getString("write_cate");
+				String pwd=rs.getString("write_pwd");
+				String filename=rs.getString("write_filename");
 				String title = rs.getString("write_title");
 				String writer = rs.getString("write_writer");
 				java.sql.Date date = rs.getDate("write_wdate");
 				String content = rs.getString("write_content");
 				int readnum = rs.getInt("write_readnum");
+				int ref=rs.getInt("write_ref");
+				int lev=rs.getInt("write_lev");
+				int step=rs.getInt("write_step");
+				int open=rs.getInt("write_open");
+				int notice=rs.getInt("write_notice");
 				readnum(idx, readnum + 1);
 
 				dto = new WriteDTO();
@@ -143,6 +165,16 @@ public class WriteDAO {
 				dto.setWrite_wdate(date);
 				dto.setWrite_writer(writer);
 				dto.setWrite_readnum(readnum);
+				dto.setWrite_ref(readnum);
+				dto.setUser_idx(userid);
+				dto.setWrite_cate(cate);
+				dto.setWrite_pwd(pwd);
+				dto.setWrite_filename(filename);
+				dto.setWrite_ref(ref);
+				dto.setWrite_lev(lev);
+				dto.setWrite_step(step);
+				dto.setWrite_open(open);
+				dto.setWrite_notice(notice);
 			}
 			return dto;
 		} catch (Exception e) {
@@ -169,13 +201,13 @@ public class WriteDAO {
 			String sql = "update write set write_title=?, write_content=?,write_wdate=sysdate,write_filename=? where write_idx=?";
 			ps = conn.prepareStatement(sql);
 			String title=mr.getParameter("title");
-			String filename=mr.getParameter("filename");
+			String filename=mr.getFilesystemName("filename");
 			String content=mr.getParameter("content");
 			String idx_s=mr.getParameter("idx");
 			int idx=Integer.parseInt(idx_s);
 			ps.setString(1, title);
 			ps.setString(2, content);
-			ps.setString(3, idx_s);
+			ps.setString(3, filename);
 			ps.setInt(4, idx);
 			int count = ps.executeUpdate();
 			return count;
@@ -195,7 +227,7 @@ public class WriteDAO {
 	}
 
 	/** 자유게시판 보기 관련 메서드 안쓰는 DAO */
-	public ArrayList<WriteDTO> freeWrite() {
+	/*public ArrayList<WriteDTO> freeWrite() {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			String sql = "select * from write where write_cate='자유게시판'";
@@ -239,7 +271,7 @@ public class WriteDAO {
 			} catch (Exception e2) {
 			}
 		}
-	}
+	}*/
 
 	/** 총게시물수 관련 메서드 */
 	public int getTotalCnt() {
@@ -260,10 +292,9 @@ public class WriteDAO {
 					rs.close();
 				if (ps != null)
 					ps.close();
-				if (conn != null)
+				if(conn!=null)
 					conn.close();
-			} catch (Exception e2) {
-			}
+			} catch (Exception e2) {}
 		}
 	}
 
@@ -283,7 +314,7 @@ public class WriteDAO {
 			return -1;
 		} finally {
 			try {
-
+				if(ps!=null)ps.close();
 			} catch (Exception e2) {
 			}
 		}
@@ -367,7 +398,7 @@ public class WriteDAO {
 		/**마지막 ref 구하기 관련 메서드*/
 	public int getMaxRef() { 
 		try {
-			String sql="select max(ref) from write";
+			String sql="select max(write_ref) from write";
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			int max=0;
@@ -382,29 +413,132 @@ public class WriteDAO {
 			try {
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
 			}catch(Exception e2) {
 				
 			}
 		}
 	}
-	/*댓글 달기 관련 메서드**/
-	public int underWrite() {
-		c
+	/*댓글 등록 관련 메서드**/
+	public int underWrite(MultipartRequest mr) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="insert into write values(write_write_idx.nextval,0,'comments','댓글',?,?,sysdate,0,?,0,?,?,?,?,0)";
+			setUpdatestep(Integer.parseInt(mr.getParameter("write_ref")), Integer.parseInt(mr.getParameter("write_lev"))+1);
+			String writer=mr.getParameter("write_writer");
+			String pwd=mr.getParameter("write_pwd");
+			String content=mr.getParameter("write_content");
+			String ref_s=mr.getParameter("write_ref");
+			int ref=Integer.parseInt(ref_s);
+			String lev_s=mr.getParameter("write_lev");
+			int lev=Integer.parseInt(lev_s);
+			String step_s=mr.getParameter("write_step");
+			int step=Integer.parseInt(step_s);
+			String open_s=mr.getParameter("write_open");
+			if(open_s==null) {
+				open_s="1";
+			}
+			int open=Integer.parseInt(open_s);
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, writer);
+			ps.setString(2, pwd);
+			ps.setString(3, content);
+			ps.setInt(4, ref);
+			ps.setInt(5, lev+1);
+			ps.setInt(6, step+1);
+			ps.setInt(7, open);
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
 	}
 	/**순서 변경 관련 메서드*/
-	public void setUpdatestep() {
+	public void setUpdatestep(int ref, int step) {
 		try {
-			String sql="update write set write_step=write_step+1 where write_ref=? and write_lev=?";
+			String sql="update write set write_step=write_step+1 where write_ref=? and write_step>=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, ref);
+			ps.setInt(2,  step);
+			ps.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 			
 		}finally {
 			try {
-				
+				if(ps!=null)ps.close();
 			}catch(Exception e2) {
 				
 			}
 		}
 	}
+	;
+	/**댓글 보여주기 관련 메서드*/
+	public ArrayList<WriteDTO> underList(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from write where write_cate=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, "comments");
+			rs=ps.executeQuery();
+			ArrayList<WriteDTO> arr=new ArrayList<WriteDTO>();
+			while(rs.next()){
+				int idx = rs.getInt("write_idx");
+				int uidx = rs.getInt("user_idx");
+				String cate = rs.getString("write_cate");
+				String title = rs.getString("write_title");
+				String writer = rs.getString("write_writer");
+				String pwd = rs.getString("write_pwd");
+				java.sql.Date wdate = rs.getDate("write_wdate");
+				String filename = rs.getString("write_filename");
+				String content = rs.getString("write_content");
+				int readnum = rs.getInt("write_readnum");
+				int ref = rs.getInt("write_ref");
+				int lev = rs.getInt("write_lev");
+				int step = rs.getInt("write_step");
+				int open = rs.getInt("write_open");
+				int notice = rs.getInt("write_notice");
+				
+				WriteDTO dto=new WriteDTO(idx, uidx, cate, title, writer, pwd, wdate, filename, content, readnum, ref, lev, step, open, notice);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**댓글 삭제하기 관련 메서드*/
+	public int underDel(int idx, String pwd) {
+		try{
+			conn=com.esc.db.EscDB.getConn();
+			String sql="delete from write where write_idx=? and write_pwd=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			ps.setString(2, pwd);
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**답글 등록 관련 메서드*/
+	
 }
