@@ -80,7 +80,7 @@ th {
 					</tr>
 					<tr>
 						<th>파일:</th>
-						<td colspan="3"><a href="<%=dto.getWrite_filename()%>"><%=dto.getWrite_filename()%></a></td>
+						<td colspan="3"><a href="/seesc/community/img/<%=dto.getWrite_filename()%>"><%=dto.getWrite_filename()%></a></td>
 					</tr>
 					<tr>
 						<td colspan="4"><textarea rows="10" cols="90"

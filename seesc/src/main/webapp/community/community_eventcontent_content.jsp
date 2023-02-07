@@ -22,12 +22,6 @@ if (dto == null || dto.equals("")) {
 <%
 return;
 }
-//오늘 날짜 표시
-Date nowDate = new Date();
-SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-String today = simpleDateFormat.format(nowDate); 
-String dbdate= simpleDateFormat.format(dto.getWrite_wdate());
-String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'>":"";
 %>
 <!DOCTYPE html>
 <html>
@@ -214,7 +208,7 @@ th {
 						out.print("&nbsp;&nbsp;");
 					}
 					%>
-					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%><%=newicon %>
+					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%>
 					
 					<%if(manager==1){%>
 					<a href="event_comment_del.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=cd">
