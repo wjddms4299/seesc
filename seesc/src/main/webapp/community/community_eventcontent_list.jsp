@@ -10,11 +10,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 <style>
-h3{
-	text-align: center;
-	font-size: 30px;
-	color:#FFA300;
+.submenu{
+position: relative;
+width : 1200px;
+height : 50px;
+margin : 0px auto;
+left :380px;
 }
 table{
 	width: 1200px;
@@ -24,10 +28,10 @@ section img{
    width:238px;
    height:238px;
 }
-th{
+thead th{
 color:#FFA300;
-background-color: black;
 }
+
 </style>
 </head>
 <%
@@ -51,13 +55,21 @@ if(cp%pageSize==0)userGroup--;
 %>
 <body>
 <%@include file="/header.jsp" %>
-<section>
-	<article>
+<article>
+	<div class = "submenu">
 	<br>
-		<h3>이벤트 게시판</h3>
-		<br>
-	<hr>
-	<br>
+	<a href="/seesc/community/community_eventcontent_list.jsp"><button class="rbutton"><span>이벤트</span></button></a>
+	<a href="/seesc/community/qna_list.jsp"><button class="tbutton"><span>QnA</span></button></a>
+	<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
+	</div>
+	</article>
+	<section>
+		<article>
+			<br><br><br>
+			<h1 class ="h1">Event</h1>
+			<br>
+			  <hr width="130px">
+			  <br><br>
 		<table>
 			<thead>
 				<tr>
@@ -81,7 +93,7 @@ if(cp%pageSize==0)userGroup--;
       <input style=font-size:15px; type="button" value=" 일반글쓰기 " onclick="location.href='community_eventcontent_write.jsp'">
       </td>
       <%}else{ %>
-      <td colspan="5" align="right"><input style=font-size:15px; type="button" value=" 글쓰기 " onclick="location.href='community_eventcontent_write.jsp'"></td>
+      <td colspan="5" align="right"><input class="listbutton" style=font-size:15px; type="button" value=" 글쓰기 " onclick="location.href='community_eventcontent_write.jsp'"></td>
       <%
       }
       %>

@@ -29,6 +29,13 @@ int manager = session.getAttribute("manager") == null || session.getAttribute("m
 
 
 <style>
+.submenu{
+position: relative;
+width : 1200px;
+height : 50px;
+margin : 0px auto;
+left :380px;
+}
 a {
 	text-decoration: none;
 }
