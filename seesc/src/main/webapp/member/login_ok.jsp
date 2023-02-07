@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.esc.userinfo.*"%>
 <jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO"></jsp:useBean>
+<jsp:useBean id="coudao" class="com.esc.coupon.CouponDAO"></jsp:useBean>
 <%
 String userid=request.getParameter("userid");
 String userpwd=request.getParameter("userpwd");
@@ -23,6 +24,7 @@ if(result==userdao.LOGIN_OK){
 		ck.setMaxAge(60*60*24*30);
 		response.addCookie(ck);
 	}
+	int couend=coudao.couponEnd(user_idx);
 	%>
 	<script>
 	window.alert('환영합니다!');

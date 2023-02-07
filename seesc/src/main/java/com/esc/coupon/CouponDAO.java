@@ -124,5 +124,24 @@ public class CouponDAO {
 			}
 		}
 	}
+	/**기간 지난 쿠폰 삭제*/
+	public int couponEnd(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="delete from coupon where user_idx=? and coupon_end<sysdate";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			int result=ps.executeUpdate();
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 	
 }
