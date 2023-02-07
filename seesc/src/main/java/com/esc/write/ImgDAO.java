@@ -219,7 +219,7 @@ public class ImgDAO {
 				user_idx_s="0";
 			}
 			int user_idx=Integer.parseInt(user_idx_s);
-			String sql="insert into write values(write_write_idx.nextval,?,'event',?,관리자,?,sysdate,?,?,0,?,0,0,1,1)";
+			String sql="insert into write values(write_write_idx.nextval,?,'event',?,'관리자',?,sysdate,?,?,0,?,0,0,1,1)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, user_idx);
 			ps.setString(2, mr.getParameter("write_title"));

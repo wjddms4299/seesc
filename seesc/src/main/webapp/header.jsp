@@ -78,7 +78,7 @@ function login_open(){
 				<ul class="dropdown-content">
 					<a href="/seesc/community/community_eventcontent_list.jsp">이벤트</a>
 					<a href="/seesc/community/qna_list.jsp">QnA</a>
-					<a href="/seesc/community/community_freecontent.jsp">자유게시판</a>
+					<a href="/seesc/community/community.jsp">자유게시판</a>
 				</ul>
 			</ul>
 			

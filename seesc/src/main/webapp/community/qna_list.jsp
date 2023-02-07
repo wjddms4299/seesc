@@ -24,8 +24,8 @@ int manager = session.getAttribute("manager") == null || session.getAttribute("m
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
-<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 
 
 <style>
@@ -37,22 +37,25 @@ ul {
 	list-style: none;
 }
 
-
-table {
-	margin: 0px auto;
-	width: 800px;
-}
 .notice{
-color : red;
-background-color: #E6E6E6;
+color : black;
+background-color : #FFAF0A;
 }
-th{
-background-color: #E0F8E0;
+.write_title {
+text-align: left;
+}
+.submenu{
+position: relative;
+width : 1200px;
+height : 50px;
+margin : 0px auto;
+left :380px;
 }
 
+.write_table{
+width: 800px;
+}
 </style>
-
-
 </head>
 <%
 /*검색 기능*/
@@ -89,19 +92,19 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 
 <article>
 	<div class = "submenu">
-	<a href="mypage.jsp"><button class="rbutton"><span>예약내역</span></button></a>
-	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
-	<a href="myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
-	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
+	<br>
+	<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
+	<a href="/seesc/community/qna_list.jsp"><button class="rbutton"><span>QnA</span></button></a>
+	<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
 	</div>
 	</article>
 	<section>
 		<article>
-			<br><br>
+			<br><br><br>
 			<h1 class ="h1">QnA</h1>
 			<br>
 			  <hr width="130px">
-			  
+			  <br><br>
 			<table class="write_table">
 				<thead>
 					<tr>
@@ -192,7 +195,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 									</form>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
-						<td>
+						<td class="write_title">
 						<%
 						
 						
