@@ -103,14 +103,14 @@ ul.img li{
 </style>
 <body>
 <%@include file="header.jsp" %>
-<br>
+<br><br><br>
 <br>
 <h1 style = "color :#FF0000;">"숨겨진 단서를 찾아라!"</h1>
 <h1>탄탄한 스토리! 재방문 많은 방탈출!</h1>
 <section>
 <!-- ----------------------공지사항 부분--------------- -->
 <div class = "notice">
-<h2 style = "color :#FFCAD5;">공지사항</h2><br>
+<h2>공지사항</h2><br>
 <img src="/seesc/img/notice.png" width="450" height="500">
 </div>
 

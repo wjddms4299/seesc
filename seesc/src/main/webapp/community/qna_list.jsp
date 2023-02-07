@@ -36,14 +36,6 @@ a {
 ul {
 	list-style: none;
 }
-
-.notice{
-color : black;
-background-color : #FFAF0A;
-}
-.write_title {
-text-align: left;
-}
 .submenu{
 position: relative;
 width : 1200px;
@@ -52,8 +44,60 @@ margin : 0px auto;
 left :380px;
 }
 
-.write_table{
-width: 800px;
+table{
+  width: 900px;
+  border-collapse: collapse;
+  table-layout:fixed;
+  word-break:break-all;
+}
+.th{ /*제목*/
+
+    padding: 10px;
+    word-break:break-all;
+    background-color: #FFCC00;
+    color : black;
+    text-align:center;
+    
+
+}
+
+
+.noticelist{/*공지 리스트*/
+border-top : 2px double black ;
+color : red;
+text-align : center;
+background-color: #FFCC00;
+}
+
+.noticelist a{
+color : red;
+}
+.noticelist td{
+border-bottom: 1px dotted #444444;
+color : red;
+
+}
+
+
+
+
+.writelist{/*일반글 리스트*/
+text-align : center;
+background-color: white;
+color : black;
+}
+.writelist td{/*일반글 리스트*/
+border-bottom: 1px dotted #444444;
+}
+
+
+.write_title {/*일반글 제목 정렬*/
+text-align : left;
+
+}
+.tfoot{
+background-color: white;
+text-align : center;
 }
 </style>
 </head>
@@ -105,10 +149,10 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 			<br>
 			  <hr width="130px">
 			  <br><br>
-			<table class="write_table">
+			<table >
 				<thead>
 					<tr>
-						<td colspan="4" align="left">
+						<td colspan="6" style = "text-align:left;">
 						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.getTotalCnt(listname,content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+qnadao.getTotalCnt(listname,content)+"개");
 						%>
 						
@@ -116,7 +160,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						</td>
 						<td align="right">
 						<select name="writeList"
-							onChange="window.location.href=this.value">
+							onChange="window.location.href=this.value" class = "select">
 								<option>리스트수</option>
 								<option value="qna_list.jsp?listSize=5&listname=<%=listname%>&content=<%=content%>">5개씩</option>
 								<option value="qna_list.jsp?listSize=10&listname=<%=listname%>&content=<%=content%>">10개씩</option>
@@ -125,15 +169,15 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								<option value="qna_list.jsp?listSize=50&listname=<%=listname%>&content=<%=content%>">50개씩</option>
 						</select></td>
 					</tr>
-					<tr>
+					<tr class="th">
 						<th>번호</th>
-						<th>제목</th>
+						<th colspan = "3">제목</th>
 						<th>등록자</th>
 						<th>등록일</th>
 						<th>조회수</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class = "noticelist">
 					<!-- --------------------------------------공지 ----------------------------------------------- -->
 					<%
 					ArrayList<WriteDTO> notice = qnadao.qna_noticelist();
@@ -147,9 +191,9 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						String dbdate= simpleDateFormat.format(notice.get(n).getWrite_wdate());
 						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new' style = 'width:15px;height:15px;'>":"";
 					%>
-						<tr class = "notice">
+						<tr class = "td">
 						<td>공 지</td>
-						<td>
+						<td colspan="3">
 						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"class = "notice"><%=notice.get(n).getWrite_title()%><%=newicon %></a></td>
 						<td><%=notice.get(n).getWrite_writer()%></td>
 						<td><%=notice.get(n).getWrite_wdate()%></td>
@@ -157,19 +201,17 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					</tr>
 						<%}
 					}%>
-					
+					</tboby>
 					<!-- -------------------------------------- ----------------------------------------------- -->
-				
+					<tbody class = "writelist">
 					<!-- --------------------------------------게시물 리스트 출력 ----------------------------------------------- -->
 					<%
-					
-				
-					
+
 					ArrayList<WriteDTO> arr = qnadao.writeQnAList(userpage,writeList,listname,content);
 					if (arr == null || arr.size() == 0) {
 					%>
 					<tr>
-						<td colspan="5">등록된 게시글이 없습니다.</td>
+						<td colspan="7">등록된 게시글이 없습니다.</td>
 					</tr>
 					
 					<%
@@ -195,7 +237,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 									</form>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
-						<td class="write_title">
+						<td class="write_title" colspan="3">
 						<%
 						
 						
@@ -233,32 +275,35 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 
 				</tbody>
 				<!-- -----------------------------검색-------------------------------------------------------------- -->
-				<tfoot>
+				
+				<tfoot class="tfoot">
+				<tr>
+				<td colspan="7"><br></td>
+				</tr>
+				<tr><td colspan="7"><br></td></tr>
 					<tr>
 					<form name = "search_list" action = "qna_list.jsp" method = "post">
 					<input type = "hidden" name = "listsize" value = "<%=writeList %>">
 					<input type = "hidden" name = "userpage" value = "<%=userpage %>">
 					
-					<td colspan="4" align="center"><select name= "listname">
+					<td colspan="6" align="center"><select name= "listname" class = "select1">
 							<option value ="4">제목+내용</option>
 								<option value="1">글제목</option>
 								<option value="2">내용</option>
 								<option value="3">작성자</option>
-						</select> <input type="text" name="content" placeholder="내용입력" required = "required"> 
-						<input type="submit" value="검색" ></td>
-						</form>
-						<td>
+						</select> <input type="text" name="content" placeholder="내용입력" required = "required" class="inputtext"> 
+						<input type="submit" value="검색"  class = "findbutton"></td>
+						<td rowspan ="2">
 						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
-						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'">
-						<input type="button" value="목록" onclick= "location.href ='qna_list.jsp'"></td>
+						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'" class ="writebutton">
+						<input type="button" value="목록" onclick= "location.href ='qna_list.jsp'" class = "listbutton"></td>
+						</form>
 						
 					</tr>
 						<!-- ------------------------------------------------------------------------------------------- -->
-						
-						
 						<!-- ---------------------------------------페이징---------------------------------------------------- -->
 					<tr>
-						<td colspan="5" align="center">
+						<td colspan="7" align="center">
 						<%if(pagegroup!=0){
 							%><a href = "qna_list.jsp?userpage=<%=1 %><%=data%>">&lt;&lt;</a>
 							<a href = "qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%><%=data%>">이전</a>
@@ -278,10 +323,14 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%><%=data%>">다음</a>
 								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%><%=data%>">&gt;&gt;</a>
 							<%}%>
+						
+						</td>
+						</tr>
 				</tfoot>
 			</table>
 		</article>
 	</section>
+			<br><br><br>
 	<%@include file="/footer.jsp"%>
 </body>
 </html>

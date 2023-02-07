@@ -53,7 +53,7 @@ h2{font-size:25px;}
 	 	 </tr>
 	 </table>
 	 <br>
-  <br>
+  <br><br>
   <hr width="950">
   <br>
 	 <h2>누구를 위한 게임인가요?</h2><br><br>
@@ -69,12 +69,12 @@ h2{font-size:25px;}
 			 <td align="center"><b>회사와 작업그룹간 빠른 <br>Team Building이 필요하신 분들</b></td>
 		 </tr>
 	 </table>
-  <br>
+  <br><br>
   <hr width="950">
   <br>
 
 	 <h2>예약방법</h2>
-	 <br>
+	 <br><br>
 	 <ul>
 		 <li class="d1">모든 예약은 S2의 방탈출 홈페이지를 통해서만 이루어집니다.</li>
 		 <li class="d1">비어있는 시간대를 선택하여 이름, 이메일, 인원 등을 정확히 입력 후 예약하시고 가급적 예약시간 10분전에 도착하여,<br>
@@ -86,7 +86,7 @@ h2{font-size:25px;}
   <hr width="950">
   <br>
 	 <h2>주의사항</h2>
-	 <br>
+	 <br><br>
 	 <ul>
 		 <li class="d1">사진촬영 금지</li>
 		 <li class="d1">13세 미만 어린이는 성인 동반 시에만 입장 가능합니다.</li>

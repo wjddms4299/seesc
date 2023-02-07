@@ -19,7 +19,7 @@ zoom : 1.05;
 label{
 font-weight: bold;
 font-size : 18px;
-color: #50BEBE;
+color: #73EAA8;
 }
 h1,h2{text-align:center;}
 h1{font-size:30px;
@@ -67,7 +67,7 @@ h2{font-size:25px;}
 <br>
 <br>
 
-<p style = "text-align:center;font-weight : bold;color :#CBFF75;">차공간이 별도로 마련되어 있지 않아 대중교통 이용을 권장드립니다.<br>
+<p style = "text-align:center;font-weight : bold;color :#FFCC00;">차공간이 별도로 마련되어 있지 않아 대중교통 이용을 권장드립니다.<br>
 길을 헤매고 있으실 경우, 위 번호로 전화주시면 친절히 설명도와드리겠습니다<p>
 
 </div>

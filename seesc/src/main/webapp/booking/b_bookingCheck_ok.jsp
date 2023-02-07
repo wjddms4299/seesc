@@ -18,7 +18,7 @@ ArrayList<BookingDTO> arr = boodao.b_BookingCheck(booking_name, booking_tel, boo
 if (arr == null || arr.size() == 0) {
 %>
 <script>
-	window.alert('잘못된 정보를 입력하였습니다. 다시 시도해주세요.');
+	window.alert('예약된 정보가 없습니다.');
 	location.href = 'b_bookingcheck.jsp';
 </script>
 <%
@@ -34,18 +34,47 @@ return;
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
-table{
-text-align : center;
-width : 800px;
+table {
+  width: 800px;
+  border-collapse: collapse;
 }
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #FFE146;
+  color : black;
+}
+    input[type="button"] {
+        width: 80px;
+        height: 35px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        margin-left: 20px;
+      }
+      input[type="button"]:hover {
+    background-color: #3e8e41;
+	}
 </style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
-			<h2>예약 내역 조회</h2>
-			<form name>
+			<br><br>
+			<h1 class ="h1">예약 확인</h1>
+			<br>
+			  <hr width="130px">
+			  <br><br>
+			  <br><br>
+			<form>
 			<table>
 				<tr>
 					<th>예약번호</th>
@@ -78,6 +107,7 @@ width : 800px;
 			</table>
 			</form>
 		</article>
+		<br><br><br><br>
 	</section>
 	<%@include file="/footer.jsp"%>
 

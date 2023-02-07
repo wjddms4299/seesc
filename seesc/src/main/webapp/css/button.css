@@ -3,17 +3,82 @@
 height : 50px;
 width : 100px;
 border-radius: 5px;
-background:#FFA500;
+background:#4CAF50;
 font-weight: bold;
 font-size : 15px;
 }
 
 .booking_b:hover{
 
-background:yellow;
+background: #3e8e41;
+}
+ .select{ /*상단 select 박스*/
+     	 width: 80px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        font-size: 15px;
+        margin-left: 20px;
+}
+ .select1{ /*검색창 select박스*/
+     	width: 100px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+     background-color: #73EAA8;
+        color: black;
+        font-size: 15px;
+        margin-left: 20px;
+        text-align:center;
 }
 
-.h1{font-size:30px;
-color : #FFA500;
-text-align:center;
+.inputtext{/*검색창 text박스*/
+	   width: 160px;
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        margin-bottom: 20px;
+  
+	
 }
+.findbutton{/*검색버튼*/
+	    width: 50px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+      }
+.findbutton:hover {
+    background-color: #3e8e41;
+}
+.writebutton{/*글쓰기 버튼*/
+		width: 50px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+      }
+.writebutton:hover {
+    background-color: #3e8e41;
+}
+.listbutton{/*글목록 버튼*/
+		width: 50px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+      }
+.listbutton:hover {
+    background-color: #3e8e41;
+
+}
+
