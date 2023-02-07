@@ -9,6 +9,15 @@
 </head>
 <body>
 <%@include file="/header.jsp" %>
+<%
+String ref_s=request.getParameter("ref");
+int ref=Integer.parseInt(ref_s);
+String lev_s=request.getParameter("lev");
+int lev=Integer.parseInt(lev_s);
+String step_s=request.getParameter("step");
+int step=Integer.parseInt(step_s);
+%>
+%>
 <section>
 	<article>
 		<h3>답글 작성하기</h3>
@@ -31,6 +40,9 @@
 		</tbody>	
 		</table>
 		</fieldset>
+		<input type="hidden" name="write_ref" value="<%=ref %>" >
+		<input type="hidden" name="write_lev" value="<%=lev %>">
+		<input type="hidden" name="write_step" value="<%=step %>">
 		</form>
 	</article>
 </section>

@@ -44,6 +44,7 @@ h4{
 		<%
 		
 		WriteDTO dto=wdao.contentWrite(idx);
+		int ref=dto.getWrite_ref();
 		%>
 			<thead>
 				<tr>
@@ -74,7 +75,7 @@ h4{
 						<input type="submit" value="수정하기">
 						<input type="button" value="목록으로" onclick="location.href='community.jsp'">
 						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'">
-						<input type="button" value="댓글작성하기" onclick="location.href='community_under.jsp?ref=<%=dto.getWrite_ref() %>&lev=<%=dto.getWrite_lev() %>&step=<%=dto.getWrite_step() %>'"	>						
+						<input type="button" value="댓글작성하기" onclick="location.href='community_under.jsp?ref=<%=dto.getWrite_ref() %>&lev=<%=dto.getWrite_lev() %>&step=<%=dto.getWrite_step() %>'">						
 					</td>
 				</tr>
 			</tfoot>
@@ -86,39 +87,37 @@ h4{
 			<table>
 			<tbody>
 			<%
-			ArrayList<WriteDTO> arr2=wdao.underList();
+			ArrayList<WriteDTO> arr2=wdao.underList(ref);
 			%>
-				
-				<%
-				for(int i=0;i<arr2.size();i++){
-					%>				
-					<tr>
-					<% 
-					if(arr2==null || arr2.size()==0){
-						%>
-						<td colspan="2" align="center">등록된 댓글이 없습니다.</td>
 						<%
-					}else{
-						%>
-						<td><%=arr2.get(i).getWrite_writer() %></td>
-						<%
-						if(arr2.get(i).getWrite_open()==1){
-							%>
-							<td colspan="2"><%=arr2.get(i).getWrite_content() %></td>
-							<% 
-						}else{
-							%>
-							<td colspan="2">비밀글입니다.</td>
-							<%
-						}
-						
-						}
-							%>
-						<td><input type="button" value="삭제하기" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>'"></td>
-						<td><input type="button" value="답글하기" onclick="location.href='under_answer.jsp?ref=<%=dto.getWrite_ref() %>&lev=<%=dto.getWrite_lev() %>&step=<%=dto.getWrite_step() %>>'"></td>
-					</tr> 	<%	
-				}
+			if(arr2==null || arr2.size()==0){
 				%>
+				<tr>
+					<td colspan="2">등록된 댓글이 없습니다.</td>
+				</tr>
+				<% 
+			}else{
+				for(int i=0;i<arr2.size();i++){
+					%>
+					<tr>
+						<td>
+					<%
+						for(int z=0;z<arr2.get(i).getWrite_lev();z++){
+							out.print("&nbsp;&nbsp;");
+						}
+						%>
+						<%=arr2.get(i).getWrite_writer() %>
+						
+						<%=arr2.get(i).getWrite_content() %>
+						</td>
+						<td><input type="button" value="삭제하기" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>'"></td>
+						<td><input type="button" value="답글하기" onclick="location.href='under_answer.jsp?ref=<%=arr2.get(i).getWrite_ref() %>&lev=<%=arr2.get(i).getWrite_lev() %>&step=<%=arr2.get(i).getWrite_step()%>&write_idx=<%=dto.getWrite_idx() %>'"></td>
+						
+					</tr>
+					<% 
+				}
+			}
+			%>
 				</tbody>
 			</table>
 		</fieldset>

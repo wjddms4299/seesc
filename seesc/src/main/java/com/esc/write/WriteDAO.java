@@ -423,7 +423,7 @@ public class WriteDAO {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			String sql="insert into write values(write_write_idx.nextval,0,'comments','댓글',?,?,sysdate,0,?,0,?,?,?,?,0)";
-			setUpdatestep(Integer.parseInt(mr.getParameter("write_ref")), Integer.parseInt(mr.getParameter("write_lev"))+1);
+			setUpdatestep(Integer.parseInt(mr.getParameter("write_ref")), Integer.parseInt(mr.getParameter("write_step"))+1);
 			String writer=mr.getParameter("write_writer");
 			String pwd=mr.getParameter("write_pwd");
 			String content=mr.getParameter("write_content");
@@ -479,12 +479,13 @@ public class WriteDAO {
 	}
 	;
 	/**댓글 보여주기 관련 메서드*/
-	public ArrayList<WriteDTO> underList(){
+	public ArrayList<WriteDTO> underList(int ref){
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="select * from write where write_cate=?";
+			String sql="select * from write where write_cate=? and write_ref=? order by write_ref desc , write_step asc , write_lev asc";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, "comments");
+			ps.setInt(2, ref);
 			rs=ps.executeQuery();
 			ArrayList<WriteDTO> arr=new ArrayList<WriteDTO>();
 			while(rs.next()){
@@ -498,7 +499,6 @@ public class WriteDAO {
 				String filename = rs.getString("write_filename");
 				String content = rs.getString("write_content");
 				int readnum = rs.getInt("write_readnum");
-				int ref = rs.getInt("write_ref");
 				int lev = rs.getInt("write_lev");
 				int step = rs.getInt("write_step");
 				int open = rs.getInt("write_open");
@@ -539,6 +539,45 @@ public class WriteDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	/**답글 등록 관련 메서드*/
-	
+	/**대댓글 등록 관련 메서드*/
+	public int underanswer(MultipartRequest mr) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="insert into write values(write_write_idx.nextval,0,'comments','댓글',?,?,sysdate,0,?,0,?,?,?,?,0)";
+			setUpdatestep(Integer.parseInt(mr.getParameter("write_ref")), Integer.parseInt(mr.getParameter("write_step"))+1);
+			String writer=mr.getParameter("write_writer");
+			String pwd=mr.getParameter("write_pwd");
+			String content=mr.getParameter("write_content");
+			String ref_s=mr.getParameter("write_ref");
+			int ref=Integer.parseInt(ref_s);
+			String lev_s=mr.getParameter("write_lev");
+			int lev=Integer.parseInt(lev_s);
+			String step_s=mr.getParameter("write_step");
+			int step=Integer.parseInt(step_s);
+			String open_s=mr.getParameter("write_open");
+			if(open_s==null || open_s=="") {
+				open_s="1";
+			}
+			int open=Integer.parseInt(open_s);
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, writer);
+			ps.setString(2, pwd);
+			ps.setString(3, content);
+			ps.setInt(4, ref);
+			ps.setInt(5, lev+1);
+			ps.setInt(6, step+1);
+			ps.setInt(7, open);
+			int count=ps.executeUpdate();
+			
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 }
