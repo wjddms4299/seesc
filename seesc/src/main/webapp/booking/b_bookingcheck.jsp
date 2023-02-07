@@ -6,26 +6,46 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
+
 <style>
+ul,li{
+	list-style: none;
+}
 article{
-text-align: center;}
+text-align: center;
+}
+
+#inputlist{
+text-align:center;
+}
+ul{
+text-align : left;}
+.button {
+
+}
 </style>
 </head>
 <body>
+<div class="body">
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
+		<div class = "back">
 		<br><br>
-			<h2>예약 정보 입력</h2>
-		
+			<h1 class ="h1">예약 확인</h1>
 			<br>
-				<div>
-				<span>예약취소를 위해서는 예약시 입력한 비밀번호가 필요합니다.</span> <br>
-				<span>비밀번호를 잊으셨다면 아래 번호로 연락 바랍니다.</span><br>
-				<span>전화 02-1234-1234</span>
+			  <hr width="130px">
+		
+			<br><br>
+				<p>예약확인 위해 예약시 입력한 비밀번호가 필요합니다.</p>
+				<p>비밀번호를 잊으셨다면 아래 번호로 연락 바랍니다.</p><br>
+				<span style ="font-weight : bold;color :#FF5675;">전화 02-1234-1234</span>
 				</div>
 				<br>
 				<br>
+				<div id="inputlist">
+
 			<form name="b_bookingCheck" action = "b_bookingCheck_ok.jsp" method = "post">
 				<ul>
 					<li><label>예약자</label><input type="text" name="booking_name"
@@ -44,13 +64,14 @@ text-align: center;}
 					<li><label>비밀번호</label><input type="text" name="booking_pwd"
 						required placeholder="예약시 입력한 비밀번호"></li>
 				</ul>
-				<span><input type="submit" value="조회"></span>
+				<span class= "cbutton"><input type="submit" value="예약확인하기" id = "button"></span>
 			</form>
-
+	
+		</div>
 		</article>
 			<br><br>
 	</section>
 	<%@include file="/footer.jsp"%>
-
+</div>
 </body>
 </html>

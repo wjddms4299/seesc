@@ -323,5 +323,76 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**아이디 찾기*/
+	public String findId(String user_name,String tel) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select user_id from userinfo where user_name=? and user_tel=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, user_name);
+			ps.setString(2, tel);
+			rs=ps.executeQuery();
+			String user_id=null;
+			if(rs.next()) {
+				user_id=rs.getString(1);
+			}
+			return user_id;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**비밀번호 찾기*/
+	public int findPwd(String user_name,String user_id,String user_birth) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select user_pwd from userinfo where user_name=? and user_id=? and user_birth=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, user_name);
+			ps.setString(2, user_id);
+			ps.setString(3, user_birth);
+			rs=ps.executeQuery();
+			int result=0;
+			if(rs.next()) {
+				result=1;
+			}
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**비밀번호 변경하기*/
+	public int pwdUpdate(String user_pwd,String user_id) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="update userinfo set user_pwd=? where user_id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, user_pwd);
+			ps.setString(2, user_id);
+			int count =ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 
 }

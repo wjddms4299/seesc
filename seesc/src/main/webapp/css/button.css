@@ -1,0 +1,19 @@
+@charset "UTF-8";
+.booking_b{
+height : 50px;
+width : 100px;
+border-radius: 5px;
+background:#FFA500;
+font-weight: bold;
+font-size : 15px;
+}
+
+.booking_b:hover{
+
+background:yellow;
+}
+
+.h1{font-size:30px;
+color : #FFA500;
+text-align:center;
+}

@@ -24,6 +24,10 @@ int manager = session.getAttribute("manager") == null || session.getAttribute("m
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
+
+
 <style>
 a {
 	text-decoration: none;
@@ -33,29 +37,25 @@ ul {
 	list-style: none;
 }
 
-.write_title {
-	text-align: center;
-	font-size: 25px;
-	font-weight: bold;
-}
-
-table {
-	margin: 0px auto;
-	width: 800px;
-	
-
-}
 .notice{
-color : red;
-background-color: #E6E6E6;
+color : black;
+background-color : #FFAF0A;
 }
-th{
-background-color: #E0F8E0;
+.write_title {
+text-align: left;
+}
+.submenu{
+position: relative;
+width : 1200px;
+height : 50px;
+margin : 0px auto;
+left :380px;
 }
 
+.write_table{
+width: 800px;
+}
 </style>
-
-
 </head>
 <%
 /*검색 기능*/
@@ -87,12 +87,24 @@ String notice_open = request.getParameter("notice_open");
 	<%@include file="/header.jsp"%>
 	<%sid= (String) session.getAttribute("sid");
 UserinfoDTO udto = userdao.userInfo(sid); %>
+
+
+
+<article>
+	<div class = "submenu">
+	<br>
+	<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
+	<a href="/seesc/community/qna_list.jsp"><button class="rbutton"><span>QnA</span></button></a>
+	<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
+	</div>
+	</article>
 	<section>
 		<article>
-			<p class="write_title">
-				질문과 답변
-			</p>
-			
+			<br><br><br>
+			<h1 class ="h1">QnA</h1>
+			<br>
+			  <hr width="130px">
+			  <br><br>
 			<table class="write_table">
 				<thead>
 					<tr>
@@ -183,7 +195,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 									</form>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
-						<td>
+						<td class="write_title">
 						<%
 						
 						

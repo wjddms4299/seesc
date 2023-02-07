@@ -4,8 +4,8 @@
 <%request.setCharacterEncoding("UTF-8");%>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
 <%
-	
-	String savePath=request.getRealPath("/img");
+	String write_idx=(String)session.getAttribute("write_idx");
+	String savePath=request.getRealPath("/community/userFile/writeImg");
 
 
 	MultipartRequest mr=
@@ -19,5 +19,5 @@
 %>
 <script>
 	window.alert('<%=msg%>');
-	location.href='community.jsp';
+	location.href='community_freecontent.jsp?idx=<%=write_idx%>';
 </script>

@@ -3,6 +3,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.esc.write.*" %>
 <jsp:useBean id="wdto" class="com.esc.write.WriteDTO"></jsp:useBean>
+<jsp:useBean id="udto" class="com.esc.userinfo.UserinfoDTO"></jsp:useBean>
+
 <!DOCTYPE html>
 <html>
 <head>

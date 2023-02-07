@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.esc.thema.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,14 +26,16 @@ select{margin:0px 950px;}
 <body>
 <%@include file="/header.jsp"%>
 <section>
+<form name="bookingStep01_in" action="bookingStep01_in_ok.jsp">
 <article>
  <br><br>
  <h2 id="a1">테마 추가하기</h2>
  <br>
- <h3 class="a2-0">테마명</h3>
- <div class="a2-0">난이도:난이도&nbsp;&nbsp;
- 					인원:최소인원~최대인원명&nbsp;&nbsp;
- 					시간:시간분</div>
+ <h3 class="a2-0"><input type="text" name="thema_name" size="25"></h3>
+ <div class="a2-0">난이도:<input type="text" name="thema_level" size="3">&nbsp;&nbsp;
+ 					인원:<input type="text" name="thema_people_min" size="3">~<input type="text" name="thema_people_max" size="3">명&nbsp;&nbsp;
+ 					시간:<input type="text" name="thema_time" size="6">분
+ 					가격:<input type="text" name="thema_price" size="9">원</div>
  <hr width="950">
 </article>
 <article id="a2">
@@ -40,11 +43,16 @@ select{margin:0px 950px;}
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#해시태그1 #해시태그2 #해시태그3</label><br><br>
- <label class="a2-1"><div class="a2-3">설명1</div>
-				<div class="a2-3">설명2</div>
-				<%//if(설명3!=null){%><div class="a2-3">설명3</div></label><%//}%><br><br><br><br><br><br><br><br><br><br><br>
+ <label class="a2-1" id="a2-2">#<input type="text" name="thema_tag1"" size="9"> #<input type="text" name="thema_tag2" size="9"> #<input type="text" name="thema_tag3" size="9"></label><br><br>
+ <label class="a2-1"><div class="a2-3"><input type="text" name="thema_intro1" size="60"></div>
+				<div class="a2-3"><input type="text" name="thema_intro2" size="60"></div>
+				<div class="a2-3"><input type="text" name="thema_intro3" size="60"></div></label><br><br><br><br><br><br><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" value="추가하기"><br><br><br><br>
 </article>
+</form>
 </section>
 <hr width="1200">
 <%@include file="/footer.jsp"%>
