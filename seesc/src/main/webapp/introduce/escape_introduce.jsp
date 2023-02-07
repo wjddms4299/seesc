@@ -18,13 +18,15 @@ h2{font-size:25px;}
 <body>
 <%@include file="/header.jsp" %>
 <section>
-<hr width="1100">
  <article>
- <br>
+<br>
+<br>
  <h1>S2의 방탈출</h1>
  <br>
   <hr width="950">
-	 <h2>방탈출게임?</h2>
+  	<br>
+  	<br>
+	 <h2>방탈출게임?</h2><br>
 	 <div class="d0" align="center">"60분 안에 갇혀 있는 방에서 숨겨진 단서를 찾아 탈출하면 됩니다!"</div>
 	 <div class="d0" align="center">비디오 게임이 아닌, 실제로 체험하는 놀이문화입니다. 여러분은 어떠한 이유로 다양한 테마룸에 갇히게 됩니다.</div>
 	 <table align="center" border="1" cellspacing="0" cellpadding="5">
@@ -64,7 +66,10 @@ h2{font-size:25px;}
 	 </table>
   <br>
   <hr width="950">
+  <br>
+
 	 <h2>예약방법</h2>
+	 <br>
 	 <ul>
 		 <li class="d1">모든 예약은 S2의 방탈출 홈페이지를 통해서만 이루어집니다.</li>
 		 <li class="d1">비어있는 시간대를 선택하여 이름, 이메일, 인원 등을 정확히 입력 후 예약하시고 가급적 예약시간 10분전에 도착하여,<br>
@@ -74,7 +79,9 @@ h2{font-size:25px;}
 	 </ul>
   <br>
   <hr width="950">
+  <br>
 	 <h2>주의사항</h2>
+	 <br>
 	 <ul>
 		 <li class="d1">사진촬영 금지</li>
 		 <li class="d1">13세 미만 어린이는 성인 동반 시에만 입장 가능합니다.</li>
@@ -82,7 +89,7 @@ h2{font-size:25px;}
 	 </ul>
   <br>
  </article>
- <hr width="1100">
+
 </section>
 <%@include file="/footer.jsp" %>
 </body>

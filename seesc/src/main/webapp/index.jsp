@@ -23,13 +23,26 @@ section {
 	position: relative;
 	margin: 0 auto;
 	overflow: hidden;
+	top : 20px;
+	left : 100px;
 }
+
+.notice{
+	width: 550px;
+	height: 600px;
+	position: relative;
+	bottom : 30px;
+	margin: 0 auto;
+	overflow: hidden;
+	text-align : center;
+}
+
 .slider input[type=radio]{
 	display: none;
 }
 
 ul.img{
-	padding: 0;d
+	padding: 0;
 	margin: 0;
 }
 ul.img li{
@@ -42,9 +55,9 @@ ul.img li{
 }
 .bullets{
 	position: absolute;
-	left: 50%;
+	right: 50%;
 	transform: translateX(-50%);
-	bottom: 20px;
+	bottom: 70px;
 	z-index: 2;
 }
 .bullets label {
@@ -90,29 +103,34 @@ ul.img li{
 </style>
 <body>
 <%@include file="header.jsp" %>
-<h1>"숨겨진 단서를 찾아라!"</h1>
+<br>
+<br>
+<h1 style = "color :#3CC8C8;">"숨겨진 단서를 찾아라!"</h1>
 <h1>탄탄한 스토리! 재방문 많은 방탈출!</h1>
 <section>
-<div>
-<h2>공지사항</h2>
-<img src="/seesc/img/notice.png" width="550" height="600">
+<!-- ----------------------공지사항 부분--------------- -->
+<div class = "notice">
+<h2 style = "color :#FFCAD5;">공지사항</h2><br>
+<img src="/seesc/img/notice.png" width="450" height="500">
 </div>
+
+
+<!-- ----------------------슬라이드 부분--------------- -->
 <div class="slider" style="float: right; text-align: center; padding: 20px;">
+
 	<input type="radio" name="slide" id="slide1" checked>
 	<input type="radio" name="slide" id="slide2">
 	<input type="radio" name="slide" id="slide3">
-
 	<ul class="img">
-		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/moningdc.png" width="550" height="600"></a></li>
-		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/event1.png" width="550" height="600"></a></li>
-		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/event2.png" width="550" height="600"></a></li>
+		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/moningdc.png" width="450" height="500"></a></li>
+		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/event1.png" width="450" height="500"></a></li>
+		<li><a href="/seesc/community/community_eventcontent_list.jsp"><img src="/seesc/img/event2.png" width="450" height="500"></a></li>
 	</ul>
 	<div class="bullets">
 		<label for="slide1"></label>
 		<label for="slide2"></label>
 		<label for="slide3"></label>
 	</div>
-
 
 </div>
 </section>
