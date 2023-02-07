@@ -594,5 +594,32 @@ public class ImgDAO {
 		}
 		
 	}
+	
+	/**댓글 삭제*/
+	public int comment_Del(int comm_idx) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "delete from comments where comm_idx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, comm_idx);
+			
+			int count = ps.executeUpdate();
+			return count;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 }
 

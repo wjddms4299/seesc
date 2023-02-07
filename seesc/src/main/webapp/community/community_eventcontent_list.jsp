@@ -138,14 +138,47 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
     		  <%
     	 }
         %>
-           <td align="center"><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+           <td align="center">
+              <%
+           for(int j=0;j<arr.get(i).getWrite_lev();j++){
+        	   out.println("&nbsp;&nbsp;");
+           }
+           if(arr.get(i).getWrite_lev()>0){
+        	   out.println("&#8627;");
+           }
+           	if(arr.get(i).getWrite_open()==0){
+        	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
+        	   		<a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+        	   <%}else{%>
+           			<a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+           		<%} 
+           	}else{%>
+           		<a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>	
+           	<%} %>
            <br>No. <%=arr.get(i).getWrite_idx() %>
-           <br>제목: <%=arr.get(i).getWrite_title() %>
+           <br>
+           <%
+           for(int j=0;j<arr.get(i).getWrite_lev();j++){
+        	   out.println("&nbsp;&nbsp;");
+           }
+           if(arr.get(i).getWrite_lev()>0){
+        	   out.println("&#8627;");
+           }
+           	if(arr.get(i).getWrite_open()==0){
+        	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
+        	   		[비밀글]<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>">제목:&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+        	   <%}else{%>
+           			[비밀글]<br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();">제목:&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>
+           		<%} 
+           	}else{%>
+           		<a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>">제목:&nbsp;
+           		<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</a>	
+           	<%} %>	
            <br>작성자: <%=arr.get(i).getWrite_writer() %>
            <br><%=arr.get(i).getWrite_wdate() %>
            <br>조회수: <%=arr.get(i).getWrite_readnum() %></td>
         
-        <%  
+        <%
      }
   }
   %>
