@@ -6,11 +6,11 @@
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
 <%
 
-	String savePath=request.getRealPath("/img");
+	String savePath=request.getRealPath("/community/userFile/writeImg");
 	MultipartRequest mr=
 	new MultipartRequest(request,savePath,2097152,"utf-8");
 	
-	String idx_s=mr.getParameter("idx");
+	String idx_s=(String)session.getAttribute("write_idx");
 	int idx=Integer.parseInt(idx_s);
 %>
 <!DOCTYPE html>

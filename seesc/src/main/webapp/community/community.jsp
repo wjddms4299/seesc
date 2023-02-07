@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.esc.write.*" %>
-<jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
+<%@ page import="com.esc.userinfo.*" %>
+<jsp:useBean id="wdao" class="com.esc.write.WriteDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,26 +46,39 @@ if(totalCnt%listSize==0)totalPage--;
 
 int userGroup=cp/pageSize;
 if(cp%pageSize==0)userGroup--;
+
+
+
 %>
 <body>
 <%@include file="/header.jsp" %>
 <section>
 	<article>
 		<h2>커뮤니티</h2>
+		<form name="fm" action=community.jsp>
 		<div>
 			<input type="button" value="자유 게시판" onclick="location.href='community.jsp'">
 			<input type="button" value="이벤트 게시판" onclick="location.href='community_eventcontent_list.jsp'">
 			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
-			<select name="sort" onchange=>
+			<select name="sort">
 				<option  value="0">번호순
 				<option  value="1">조회수 순
 				<option  value="2">작성일 순
-			
-				<!-- 기능 구현할곳 -->
+				<%
+				String sort_s=request.getParameter("sort");
+				int sort=0;
+				if(sort_s==null || sort_s.equals("")){
+					sort_s="0";
+					
+				}else{
+					 sort=Integer.parseInt(sort_s);
+				} %>
 				
 			</select>
+			<input type="submit" value="바꾸기">
 		
 		</div>
+		</form>
 		<table>
 			<thead>
 				<tr>
@@ -76,7 +91,7 @@ if(cp%pageSize==0)userGroup--;
 			</thead>
 			<tbody>
 				<%
-				ArrayList<WriteDTO> arr=wdao.selWrite(listSize, cp);
+				ArrayList<WriteDTO> arr=wdao.selWrite(listSize, cp, sort);
 				for(int i=0;i<arr.size();i++){			
 					if(arr==null || arr.size()==0){
 						%>
@@ -114,19 +129,19 @@ if(cp%pageSize==0)userGroup--;
 				<td colspan="5" align="center"><!-- 페이징 들어갈 영역 -->
 				<%
 if(userGroup!=0){
-	%><a href="community.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+	%><a href="community.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>&sort=<%=sort%>">&lt;&lt;</a><%
 }
 %>
 
 <%
 for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-	%>&nbsp;&nbsp;<a href="community.jsp?cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<% 
+	%>&nbsp;&nbsp;<a href="community.jsp?cp=<%=i%>&sort=<%=sort%>"><%=i %></a>&nbsp;&nbsp;<% 
 	if(i==totalPage)break;
 }
 %>
 <%
 if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-	%><a href="community.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
+	%><a href="community.jsp?cp=<%=(userGroup+1)*pageSize+1%>&sort=<%=sort%>">&gt;&gt;</a> <%
 }
 
 %>
