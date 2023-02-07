@@ -59,7 +59,6 @@ section{width:1200px;margin:0px auto;}
 </style>
 <script>
 function applyCoupon(o){
-	
 	document.getElementById('money').value=
 		(document.getElementById('money').value.substring(0,document.getElementById('money').value.length-5)
 		-o.substring(o.length-4,o.length-3))+',000원';
@@ -165,7 +164,7 @@ function applyCoupon(o){
  			value="<%
  				StringBuffer booking_money_b=new StringBuffer(String.valueOf(thdto.getThema_people_min()*thdto.getThema_price()));
  				booking_money_b.insert(booking_money_b.length()-3,",");
- 				out.print(booking_money_b);%>원" readonly></b></td>               <!-- cpdto.get(i).getCoupon_dc() -->
+ 				out.print(booking_money_b);%>원" readonly></b></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2" ><b>결제방식</b></td>

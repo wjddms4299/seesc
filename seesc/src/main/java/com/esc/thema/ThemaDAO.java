@@ -3,6 +3,8 @@ package com.esc.thema;
 import java.sql.*;
 import java.util.*;
 
+import com.oreilly.servlet.MultipartRequest;
+
 public class ThemaDAO {
 	
 	private Connection conn;
@@ -234,6 +236,29 @@ public class ThemaDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 			return 0;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
+	/**테마 이미지 정보 등록 관련 메서드*/
+	public int imgInsert(MultipartRequest mr) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="insert into img values(img_img_idx.nextval,?)";
+			ps=conn.prepareStatement(sql);
+			String img_name=mr.getFilesystemName("upload");
+			ps.setString(1,img_name);
+			int count=ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
 		}finally {
 			try {
 				if(ps!=null)ps.close();

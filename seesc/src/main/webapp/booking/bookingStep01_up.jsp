@@ -42,7 +42,7 @@ select{margin:0px 950px;}
  <h3 class="a2-0"><input type="text" name="thema_name" value="<%=dto.getThema_name()%>" size="25"></h3>
  <div class="a2-0">난이도:<input type="text" name="thema_level" value="<%=dto.getThema_level()%>" size="3">&nbsp;&nbsp;
  					인원:<input type="text" name="thema_people_min" value="<%=dto.getThema_people_min()%>" size="3">~<input type="text" name="thema_people_max" value="<%=dto.getThema_people_max()%>" size="3">명&nbsp;&nbsp;
- 					시간:<input type="text" name="thema_time" value="<%=dto.getThema_time()%>" size="6">분
+ 					시간:<input type="text" name="thema_time" value="<%=dto.getThema_time()%>" size="6">분&nbsp;&nbsp;
  					가격:<input type="text" name="thema_price" value="<%=dto.getThema_price()%>" size="9">원</div>
  <hr width="950">
 </article>
