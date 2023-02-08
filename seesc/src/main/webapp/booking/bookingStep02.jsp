@@ -8,6 +8,23 @@
 <%@ page import="com.esc.coupon.*"%>
 <jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
+Integer user_idx=(Integer)session.getAttribute("user_idx");
+
+if(user_idx!=null){
+	Integer manager=(Integer)session.getAttribute("manager");
+	if(manager==1){
+		%>
+		<script>
+		window.alert("관리자는 예약이 불가합니다.");
+		location.href="bookingStep01.jsp";
+		</script>
+		<%
+		return;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
 
@@ -17,8 +34,6 @@ String time_ptime_s=request.getParameter("time_ptime");
 int time_ptime=Integer.parseInt(time_ptime_s);
 
 ////////////////////////////////////////////////////////////////////////
-
-Integer user_idx=(Integer)session.getAttribute("user_idx");
 
 String user_name="";
 String user_tel1="";
@@ -62,6 +77,9 @@ function applyCoupon(o){
 	document.getElementById('money').value=
 		(document.getElementById('money').value.substring(0,document.getElementById('money').value.length-5)
 		-o.substring(o.length-4,o.length-3))+',000원';
+}
+function resetMoney(){
+	document.getElementById('money').value=booking_num.options[booking_num.selectedIndex].value.substring(4,booking_num.options[booking_num.selectedIndex].value.length-1);
 }
 </script>
 </head>
@@ -135,16 +153,16 @@ function applyCoupon(o){
  					<option value = "018">018
  					<option value = "019">019
  				</select>
- 					- <input type="text" name="booking_tel2" value="<%=user_tel2%>">
- 					- <input type="text" name="booking_tel3" value="<%=user_tel3%>">
+ 					- <input type="text" name="booking_tel2" value="<%=user_tel2%>" placeholder="숫자 4자리만 입력해주세요.">
+ 					- <input type="text" name="booking_tel3" value="<%=user_tel3%>" placeholder="숫자 4자리만 입력해주세요.">
  		</td>
  	</tr>
  	<%if(user_idx!=null){%>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
- 			<select name="coupon_idx" id="coupon_idx" onchange="applyCoupon(this.options[this.selectedIndex].value)">
- 				<option value="0">사용안함</option>
+ 			<select name="coupon_idx" id="coupon_idx" onchange="this.options[this.selectedIndex].value.equals('0')?resetMoney():applyCoupon(this.options[this.selectedIndex].value)">
+ 				<option value="0" onclick="resetMoney();">사용안함</option>
  				<%
  				if(cpdto!=null){
 	 				for(int i=0;i<cpdto.size();i++){
