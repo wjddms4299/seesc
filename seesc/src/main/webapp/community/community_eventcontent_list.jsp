@@ -17,10 +17,13 @@
         height: 20px;
         border: none;
         border-radius: 5px;
-        background-color: #FF870C;
+        background-color: #FFA300;
         color: white;
         font-size: 30px;
   }
+.pagebutton:hover {
+    background-color: #FF870C;
+}
 .listbutton{
 		width: 100px;
         height: 50px;
@@ -54,6 +57,8 @@ left :380px;
 table{
 	width: 1200px;
 	margin: 0px auto;
+	border: 3px solid #FFA300;
+	
 }
 thead th{
 color:#FFA300;

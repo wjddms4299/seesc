@@ -53,6 +53,7 @@ h2 {
 table {
 	width: 660px;
 	margin: 0px auto;
+	border: 3px solid #FFA300;
 }
 th {
 	text-align:left;

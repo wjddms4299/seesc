@@ -38,6 +38,7 @@ table {
 	width: 660px;
 	margin: 0px auto;
 	align:center;
+	border: 3px solid #FFA300;
 }
 th {
 	float:left;

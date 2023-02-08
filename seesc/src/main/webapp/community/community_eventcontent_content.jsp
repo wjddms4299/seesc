@@ -50,6 +50,7 @@ return;
 table {
 	width: 660px;
 	margin: 0px auto;
+	border: 3px solid #FFA300;
 }
 article{
 	width: 660px;

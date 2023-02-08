@@ -34,6 +34,7 @@ table{
 	word-break:break-all;
 	margin: 0px auto;
 	align:center;
+	border: 3px solid #FFA300;
 }
 h3{
 	text-align: center;
