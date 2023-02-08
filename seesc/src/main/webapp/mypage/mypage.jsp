@@ -57,7 +57,14 @@ th, td {
 th {
   background-color: #f2f2f2;
 }
-
+.tfoot{
+	margin: 0px auto;
+	text-align: center;
+}
+.tfoot td{
+	margin: 0px auto;
+	text-align: center;
+}
 </style>
 <%
 int user_idx=(int)session.getAttribute("user_idx");
@@ -80,6 +87,7 @@ if(cp%pageSize==0)userGroup--;
 %>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
+	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/button.css">
 <body>
 <%@include file="/header.jsp" %>
 <%
@@ -109,24 +117,29 @@ if(cp%pageSize==0)userGroup--;
 	<a href="myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
 	<a href="mycoupon.jsp"><button class="tbutton"><span>쿠폰함</span></button></a>
 	<table>
-	<tfoot>
+	<tfoot class="tfoot">
 			<tr>
-				<td colspan="4">
+				<td colspan="5">
 				<!-- ---------------- -->
 				<%
 				if(userGroup!=0){
-					%><a href="mypage.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+					%><a href="mypage.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>"><button class="onebutton">&lt;&lt;</button></a><%
 				}
 				%>
 				<%
 				for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-					%>&nbsp;&nbsp;<a href="mypage.jsp?cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<%
+					if(cp==i){
+						%>&nbsp;&nbsp;<a href="mypage.jsp?cp=<%=i%>"><button class = "prbutton"><%=i %></button></a>&nbsp;&nbsp;<%
+					}else{
+						%>&nbsp;&nbsp;<a href="mypage.jsp?cp=<%=i%>"><button class = "pagebutton"><%=i %></button></a>&nbsp;&nbsp;<%
+					}
+					
 					if(i==totalPage)break;
 				}
 				%>
 				<%
 				if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-					%><a href="mypage.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
+					%><a href="mypage.jsp?cp=<%=(userGroup+1)*pageSize+1%>"><button class="nextbutton">&gt;&gt;</button></a><%
 				}
 				%>
 				<!-- ---------------- -->

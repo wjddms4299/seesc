@@ -90,6 +90,9 @@ input[type="submit"]:hover {
     text-decoration: none;
     text-align: center;
 }
+.fid:hover{
+	background-color: #6e6e6e;
+}
 .div{
 margin: 0px auto;
 text-align: center;

@@ -22,7 +22,7 @@ if(user_id==null||user_id==""){
 %>
 <script>
 function login_open(){
-	window.open('/seesc/member/login.jsp','login','width=370,height=450');
+	window.open('/seesc/member/login.jsp','login','width=390,height=580');
 }
 
 
