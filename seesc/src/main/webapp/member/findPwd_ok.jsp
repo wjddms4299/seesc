@@ -125,6 +125,7 @@ select {
 </div>
 </form>
 </article>
+<br><br><br>
 </section>
 <%@include file="/footer.jsp" %>
 </body>

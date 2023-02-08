@@ -116,6 +116,7 @@ if(thema==null||thema==""){
 		
 	</div>
 </article>
+<br><br>
 <article>
 	
 <%
@@ -172,6 +173,7 @@ if(arr==null||arr.size()==0){
 	}
 	}
 	%>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section>
 <%@include file="../footer.jsp" %>
 </body>

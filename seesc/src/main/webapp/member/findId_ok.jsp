@@ -88,6 +88,7 @@ font-size: 25px;
 <a href="/seesc/member/findPwd.jsp"><button class="pwdf"><span>PWD찾기</span></button></a>
 </div>
 </article>
+<br><br><br>
 </section>
 <%@include file="/footer.jsp" %>
 </body>

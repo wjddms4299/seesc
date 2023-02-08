@@ -45,7 +45,7 @@ input[type="password"] {
 input[type="submit"] {
     width: 170px;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #0077ff;
     color: white;
     font-size: 20px;
     border: none;
@@ -56,15 +56,15 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #3e8e41;
+    background-color: #0057ff;
 }
 
 .join {
     display: inline-block;
     width: 150px;
     padding: 10px;
-    background-color: #EA813D;
-    color: black;
+    background-color: #4CAF50;
+    color: white;
     font-size: 16px;
     border: none;
     border-radius: 5px;
@@ -72,6 +72,9 @@ input[type="submit"]:hover {
     margin-top: 20px;
     text-decoration: none;
     text-align: center;
+}
+.join:hover{
+	background-color: #3e8e41;
 }
 .fid {
     display: inline-block;
