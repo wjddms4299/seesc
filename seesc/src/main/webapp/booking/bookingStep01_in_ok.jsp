@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <%
+String img_idx_s=request.getParameter("img_idx");
+int img_idx=Integer.parseInt(img_idx_s);
+
 String thema_name=request.getParameter("thema_name");
 if(thema_name==null || thema_name.equals("")){
 	%>
@@ -195,8 +198,8 @@ if(thema_intro2==null || thema_intro2.equals("")){
 
 String thema_intro3=request.getParameter("thema_intro3");
 
-int result=thdao.themaInsert(thema_name,thema_level,thema_people_min,thema_people_max,thema_time,thema_price,thema_tag1,thema_tag2,thema_tag3,thema_intro1,thema_intro2,thema_intro3);
-String msg=result>0?"테마 추가를 완료하였습니다.":"테마 추가에 실패하였습니다.담당 개발자에게 문의바랍니다.";%>
+int result=thdao.themaInsert(thema_name,img_idx,thema_level,thema_people_min,thema_people_max,thema_time,thema_price,thema_tag1,thema_tag2,thema_tag3,thema_intro1,thema_intro2,thema_intro3);
+String msg=result>0?"테마 추가를 완료하였습니다.":"테마 추가에 실패하였습니다. 담당 개발자에게 문의바랍니다.";%>
 <script>
 window.alert("<%=msg%>");
 location.href='/seesc/booking/bookingStep01.jsp';

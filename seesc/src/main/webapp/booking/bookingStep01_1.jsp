@@ -222,7 +222,7 @@ for(int j=0;j<idx_name.size();j++){%>
 	 <hr width="950">
 	</article>
 	<article id="a2">
-	 <img alt="방탈출 <%=idx_name.get(j)%>" src="/seesc/thema_img/00<%=idx_name.get(j)%>.jpg" width="300" height="400" class="a2-0">
+	 <img alt="방탈출 <%=idx_name.get(j)%>" src="/seesc/thema_img/<%=thdao.imgSelect_N(dto.get(j).getImg_idx())%>" width="300" height="400" class="a2-0">
 	</article>
 	<article id="a3">
 	 <br><br><br><br>

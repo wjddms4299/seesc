@@ -3,6 +3,7 @@ package com.esc.thema;
 public class ThemaDTO {
 
 	private int thema_idx;
+	private int img_idx;
 	private String thema_name;
 	private int thema_level;
 	private int thema_people_min;
@@ -16,10 +17,11 @@ public class ThemaDTO {
 	private String thema_intro2;
 	private String thema_intro3;
 	
-	public ThemaDTO(int thema_idx, String thema_name, int thema_level, int thema_people_min, int thema_people_max,int thema_time, int thema_price,
+	public ThemaDTO(int thema_idx, int img_idx, String thema_name, int thema_level, int thema_people_min, int thema_people_max,int thema_time, int thema_price,
 			String thema_tag1, String thema_tag2, String thema_tag3, String thema_intro1, String thema_intro2, String thema_intro3) {
 		super();
 		this.thema_idx = thema_idx;
+		this.img_idx = img_idx;
 		this.thema_name = thema_name;
 		this.thema_level = thema_level;
 		this.thema_people_min = thema_people_min;
@@ -43,9 +45,17 @@ public class ThemaDTO {
 		return thema_idx;
 	}
 
-
 	public void setThema_idx(int thema_idx) {
 		this.thema_idx = thema_idx;
+	}
+	
+	
+	public int getImg_idx() {
+		return img_idx;
+	}
+
+	public void setImg_idx(int img_idx) {
+		this.img_idx = img_idx;
 	}
 
 
