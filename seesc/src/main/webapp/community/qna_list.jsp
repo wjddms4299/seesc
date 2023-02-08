@@ -63,7 +63,7 @@ table{
 border-top : 2px double black ;
 color : red;
 text-align : center;
-background-color: #FADCA5;
+background-color: #c8c8c8;
 }
 
 .noticelist a{
