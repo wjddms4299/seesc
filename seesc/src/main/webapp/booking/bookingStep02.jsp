@@ -78,15 +78,13 @@ function applyCoupon(o){
 		(document.getElementById('money').value.substring(0,document.getElementById('money').value.length-5)
 		-o.substring(o.length-4,o.length-3))+',000원';
 }
-function resetMoney(){
-	document.getElementById('money').value=booking_num.options[booking_num.selectedIndex].value.substring(4,booking_num.options[booking_num.selectedIndex].value.length-1);
-}
 </script>
 </head>
 <body>
 <%@include file="/header.jsp"%>
 <section>
 <form name="bookingStep02" action="bookingStep02_ok.jsp">
+<input type="hidden" name="user_idx" value="<%=user_idx!=null?user_idx:""%>">
 <input type="hidden" name="thema_idx" value="<%=thema_idx%>">
 <input type="hidden" name="time_date" value="<%=time_date%>">
 <input type="hidden" name="time_ptime" value="<%=time_ptime%>">
@@ -126,7 +124,7 @@ function resetMoney(){
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
  		<td>&nbsp;&nbsp;
- 			<select name="booking_num" onchange="document.getElementById('money').value=this.options[this.selectedIndex].value.substring(4,this.options[this.selectedIndex].value.length-1);document.getElementById('coupon_idx').value='0'">
+ 			<select name="booking_num" id="booking_num" onchange="document.getElementById('money').value=this.options[this.selectedIndex].value.substring(4,this.options[this.selectedIndex].value.length-1);document.getElementById('coupon_idx').value='0'">
  				<%
  				for(int i=thdto.getThema_people_min();i<=thdto.getThema_people_max();i++){
  					%>
@@ -161,7 +159,7 @@ function resetMoney(){
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
- 			<select name="coupon_idx" id="coupon_idx" onchange="this.options[this.selectedIndex].value.equals('0')?resetMoney():applyCoupon(this.options[this.selectedIndex].value)">
+ 			<select name="coupon_idx" id="coupon_idx" onchange="document.getElementById('money').value=booking_num.options[booking_num.selectedIndex].value.substring(4,booking_num.options[booking_num.selectedIndex].value.length-1);applyCoupon(this.options[this.selectedIndex].value)">
  				<option value="0" onclick="resetMoney();">사용안함</option>
  				<%
  				if(cpdto!=null){

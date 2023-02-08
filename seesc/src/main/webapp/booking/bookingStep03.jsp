@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
-Integer user_idx=(Integer)session.getAttribute("user_idx");
+String user_idx=request.getParameter("user_idx");
 
 String thema_idx=request.getParameter("thema_idx");
 String time_date=request.getParameter("time_date");
