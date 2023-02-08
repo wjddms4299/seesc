@@ -123,6 +123,9 @@ if(cp%pageSize==0)userGroup--;
       <input style=font-size:15px; type="button" class="listbutton" value=" 공지글쓰기 " onclick="location.href='community_eventcontent_noticeUpload.jsp'">
       <input style=font-size:15px; type="button" class="listbutton" value=" 일반글쓰기 " onclick="location.href='community_eventcontent_write.jsp'">
       </td>
+      <%}else{ %>
+      <td><br></td> <!--공간만들기-->
+      	
   <%//}else{ %> <!-- 일반유저 글쓰기 버튼  --> 
   <!--	<td colspan="5" align="right"><input class="listbutton" style=font-size:15px; type="button" value=" 글쓰기 " onclick="location.href='community_eventcontent_write.jsp'"></td>
   --> <%
