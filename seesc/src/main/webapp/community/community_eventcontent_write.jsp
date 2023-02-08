@@ -44,6 +44,9 @@ h3{
 th {
 	float:left;
 }
+td {
+	color:black;
+}
 </style>
 </head>
 <body>
@@ -54,18 +57,19 @@ UserinfoDTO dto = userdao.userInfo(sid);
 %>
 <section>
 	<article>
-	<br>
-		<h3>이벤트게시판 글쓰기</h3>
-		<hr>
-		<br>
+			<br><br><br>
+			<h1 class ="h1">Event 글쓰기</h1>
+			<br>
+			  <hr width="130px">
+			  <br><br>
 		<form name="community_eventcontent_write" action="community_eventcontent_write_ok.jsp" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="user_idx" value="<%=user_idx%>">
 		<input type="hidden" name="write_notice" value="<%=write_notice%>">
 							
-		<table>
+		<table style="background-color: #f2f2f2;">
 			<tr>
 				<th>작성자 :</th>
-				<td><input type="text" name="write_writer"
+				<td><input type="text" size="33px" name="write_writer"
 								required="required" value="<%
 								String value = user_idx==0?"":dto.getUser_nic();
 								out.println(value);
@@ -86,8 +90,8 @@ UserinfoDTO dto = userdao.userInfo(sid);
 				<input type="radio" name="write_open" value="1">공개글</td>
 			</tr>
 			<tr>
-				<th>제목 :</th>
-				<td colspan="3"><input type="text" placeholder="제목입력" name="write_title" required></td>
+				<th colspan="1">제목 :</th>
+				<td colspan="3"><input type="text" size="76px" placeholder="제목입력" name="write_title" required></td>
 			</tr>
 			<tr>
 				<td colspan="4"><textarea rows="10" cols="92" placeholder="내용입력" name="write_content" required></textarea></td>

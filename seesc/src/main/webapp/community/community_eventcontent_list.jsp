@@ -44,9 +44,6 @@ section img{
 thead th{
 color:#FFA300;
 }
-b {
-	text-decoration:none;
-}
 </style>
 </head>
 <%
@@ -81,7 +78,7 @@ if(cp%pageSize==0)userGroup--;
 	<section>
 		<article>
 			<br><br><br>
-			<h1 class ="h1">Event</h1>
+			<h1 class ="h1"> Event</h1>
 			<br>
 			  <hr width="130px">
 			  <br><br>
@@ -208,12 +205,12 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
            }
            	if(arr.get(i).getWrite_open()==0){
         	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
-        	   		<b style="color:red;">[Secret]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>
+        	   		<b style="color:red;">[Secret]</b><br><a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>
         	   <%}else{%>
-           			<b style="color:red;">[Secret]</b><br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><b style="color:#FFA300;">제목:&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>
+           			<b style="color:red;">[Secret]</b><br><a  style="text-decoration:none;" href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><b style="color:#FFA300;">제목:&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>
            		<%} 
            	}else{%>
-           		<b style="color:blue;">[Open]</b><br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;
+           		<b style="color:blue;">[Open]</b><br><a  style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;
            		<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>	
            	<%} %>	
            <br>작성자: <%=arr.get(i).getWrite_writer() %>

@@ -57,14 +57,21 @@ table {
 th {
 	text-align:left;
 }
+td {
+	color:black;
+}
 </style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
-			<h2>이벤트글 수정하기</h2>
-			<table>
+						<br><br><br>
+			<h1 class ="h1">Event 수정하기</h1>
+			<br>
+			  <hr width="130px">
+			  <br><br>
+			<table style="background-color: #f2f2f2;">
 				<form name="community_eventcontent_update.jsp" action="community_eventcontent_update_ok.jsp" method="post">
 					<input type="hidden" name="write_idx" value="<%=write_idx%>">
 					<input type="hidden" name="write_pwd"
@@ -78,9 +85,7 @@ th {
 						<td><%=dto.getWrite_wdate()%></td>
 					<tr>
 						<th>작성자:</th>
-						<td colspan="3"><%=dto.getWrite_writer()%></td>
-					</tr>
-					<tr>
+						<td><%=dto.getWrite_writer()%></td>
 						<th>공개여부:</th>
 						<td><input type="radio" name="write_open" value="0"
 							<%if (dto.getWrite_open() == 0) {
@@ -93,7 +98,7 @@ th {
 					</tr>
 					<tr>
 						<th>파일:</th>
-						<td colspan="3"><a href="/seesc/community/img/<%=dto.getWrite_filename()%>"><%=dto.getWrite_filename()%></a></td>
+						<td><a href="/seesc/community/img/<%=dto.getWrite_filename()%>"><%=dto.getWrite_filename()%></a></td>
 					</tr>
 					<tr>
 						<td colspan="4"><textarea rows="10" cols="90"
@@ -109,6 +114,7 @@ th {
 				</tbody>
 				</form>
 			</table>
+			<br>
 		</article>
 	</section>
 	<%@include file="/footer.jsp"%>

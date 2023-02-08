@@ -42,6 +42,9 @@ table {
 th {
 	float:left;
 }
+td {
+	color:black;
+}
 </style>
 </head>
 <body>
@@ -53,21 +56,22 @@ UserinfoDTO dto = udao.userInfo(sid);
 	<section>
 		<article>
 			<form name="community_eventcontent_noticeUpload" action="community_eventcontent_noticeUpload_ok.jsp" method="post" enctype="multipart/form-data">
-				<br>
-				<h3>이벤트 공지사항 글쓰기</h3>
-				<hr>
-				<br>
-					<table>
+			<br><br><br>
+			<h1 class ="h1">Event 공지사항 글쓰기</h1>
+			<br>
+			  <hr width="130px">
+			  <br><br>
+					<table style="background-color: #f2f2f2;">
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">
 						
 						<tr>
-							<th>제목: </th>
-							<td colspan="3"><input type="text" size="79" name="write_title"
+							<th>제목 :</th>
+							<td colspan="3"><input type="text" size="70"  placeholder="제목입력" name="write_title"
 								required></td>
 						</tr>
 						<tr>
-							<th>파일첨부: </th>
-							<td colspan="3"><input type="file" name="write_filename"></td>
+							<th>파일첨부 :</th>
+							<td><input type="file" name="write_filename"></td>
 						</tr>
 						<tr>
 							<td colspan="4"><textarea name="write_content" rows="10" cols="92"
@@ -79,6 +83,7 @@ UserinfoDTO dto = udao.userInfo(sid);
 								<input type="button"  class="listbutton" value="목록" onclick="location.href ='/seesc/community/community_eventcontent_list.jsp'"></td>
 						</tr>
 					</table>
+					<br>
 			</form>
 		</article>
 	</section>

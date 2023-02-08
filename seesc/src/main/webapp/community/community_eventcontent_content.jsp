@@ -43,11 +43,6 @@ return;
     background-color: #FF870C;
 
 }
-h3{
-	text-align: center;
-	font-size: 30px;
-	color:#FFA300;
-}
 .msrc{
    width:250px;
    height:250px;
@@ -69,6 +64,9 @@ li {
 th {
 	float:left;
 }
+td {
+	color:black;
+}
 </style>
 </head>
 <body>
@@ -78,24 +76,25 @@ th {
 	UserinfoDTO udto = udao.userInfo(sid); %>
 	<section>
 		<article>
-		<br>
-			<h3>이벤트 본문보기</h3>
+			<br><br><br>
+			<h1 class ="h1">Event 본문</h1>
 			<br>
-			<hr>
-			<table>
-				<tbody>
-					<tr style="background-color:lightgray;">
+			  <hr width="130px">
+			  <br><br>
+			<table style="background-color:white;">
+				<tbody style="background-color:#f2f2f2;">
+					<tr>
 						<th>제목:</th>
 						<td><%=dto.getWrite_title()%>
 						<th>날짜:</th>
 						<td><%=dto.getWrite_wdate()%></td>
-					<tr style="background-color:lightgray;">
-						<th>작성자:</th>
+					<tr>
+						<th>작성자:</td>
 						<td><%=dto.getWrite_writer()%></td>
 						<th>조회수:</th>
 						<td><%=dto.getWrite_readnum() %></td>
 					</tr>
-					<tr style="background-color:lightgray;">
+					<tr>
 						<th>파일이름:</th>
 						<%
 						if (dto.getWrite_filename() != null) {
@@ -181,7 +180,7 @@ th {
 				<input type="hidden" name="user_idx" value=<%=user_idx%>>
 				<fieldset>
 				<legend>댓글작성</legend>
-				<table>
+				<table style="background-color: #f2f2f2;">
 				<%if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
 					<tr>
 					<td><input type="hidden" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
@@ -197,7 +196,7 @@ th {
 					</tr>
 					<%} %>
 					<tr>
-						<td><textarea rows="3" cols="90" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
+						<td><textarea rows="3" cols="91" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
 						<br><input  class="listbutton" type="submit" value="등록"></td>
 					</tr>
 				</table>
@@ -205,7 +204,7 @@ th {
 			</form>
 			<fieldset>
 				<legend>댓글</legend>
-				<table>
+				<table style="background-color: #f2f2f2;">
 				<%
 				ArrayList<CommentDTO> arr = idao.event_commentList(write_idx);
 				String flag = request.getParameter("flag");
@@ -219,10 +218,10 @@ th {
 						out.print("&nbsp;&nbsp;");
 					}
 					if (arr.get(i).getComm_lev() > 0) {
-						out.print("&nbsp;&nbsp;");
+						out.print("&nbsp;&nbsp;ㄴ");
 					}
 					%>
-					<%=arr.get(i).getComm_writer()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%>
+					<b style="color:orange;"><%=arr.get(i).getComm_writer()%></b>&nbsp;-&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%>
 					
 					<%if(manager==1){%>
 					<a href="event_comment_del.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=cd">
@@ -261,7 +260,7 @@ th {
 				if (comm_idx == arr.get(i).getComm_idx()&&flag!=null&&flag.equals("cw")) {
 					if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
 						<tr>
-						<td>➥<%=udto.getUser_nic()%></td>
+						<td>ㄴ re) <%=udto.getUser_nic()%></td>
 						</tr>
 								<form name="co_co" action="community_eventcontent_contentReRe.jsp" method="post">
 									<tr>
@@ -277,7 +276,7 @@ th {
 									<tr>
 									<td>
 									<textarea rows="2" cols="40" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
-									<input type="submit" value="등록">
+									<br><input type="submit" value="등록">
 									<input type="button"value="닫기" onclick="location.href = 'community_eventcontent_content.jsp?write_idx=<%=write_idx%>'">
 									</td>
 									</tr>								
@@ -286,6 +285,7 @@ th {
 							<form name="co_co" action="community_eventcontent_contentReRe.jsp" method="post">
 							<tr>
 							<td>
+							ㄴ re)
 							<input type="text" name="comm_writer" placeholder="작성자" required>
 							<input type="password" name="comm_pwd" placeholder="비밀번호" required>
 							<input type="hidden" name="write_idx" value="<%=write_idx%>">
@@ -299,8 +299,8 @@ th {
 							</tr>
 							<tr>
 							<td>
-							<textarea rows="3" cols="50" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
-							<input type="submit" value="등록">
+							<textarea rows="3" cols="60" name="comm_content" placeholder="내용을 작성해주세요" required></textarea>
+							<br><input type="submit" value="등록">
 							<input type="button"value="닫기" onclick="location.href = 'community_eventcontent_content.jsp?write_idx=<%=write_idx%>'">
 							</td>
 						</tr>
