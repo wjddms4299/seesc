@@ -23,6 +23,7 @@ th, td {
 
 th {
   background-color: #f2f2f2;
+  color: black;
 }
 </style>
 <%

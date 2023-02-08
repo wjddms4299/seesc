@@ -31,9 +31,14 @@ String user_birth=year+month+day;
 <jsp:useBean id="udto" class="com.esc.userinfo.UserinfoDTO"></jsp:useBean>
 <jsp:setProperty property="*" name="udto" />
 <jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO"></jsp:useBean>
+<jsp:useBean id="coudao" class="com.esc.coupon.CouponDAO"></jsp:useBean>
 <%
 int result=udao.memberJoin(udto,user_birth,user_tel);
 String msg=result>0?"회원가입완료!":"회원가입실패!";
+if(result>0){
+	int idx=udao.userNum(udto.getUser_id());
+	int couresult=coudao.joinCoupon(idx);
+}
 %>
 
 <script>
