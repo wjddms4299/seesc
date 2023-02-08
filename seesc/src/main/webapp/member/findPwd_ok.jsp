@@ -33,12 +33,77 @@ if(result==0){
 	return;
 }
 %>
+<style>
+.article {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.article div {
+  margin: 20px 0;
+  color: black;
+}
+
+.article div span {
+  font-size: 2em;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 20px;
+  color: white;
+}
+
+form {
+  display: inline-block;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input[type="text"],input[type="password"] {
+  width: 80%;
+  height: 30px;
+  font-size: 1em;
+  padding: 5px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 5px #999;
+}
+
+input[type="submit"] {
+  width: 40%;
+  height: 40px;
+  font-size: 1.2em;
+  margin-top: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #0077ff;
+  color: #fff;
+  cursor: pointer;
+}
+input[type="submit"]:hover{
+	background-color: #0057ff;
+}
+
+select {
+  width: 20%;
+  height: 40px;
+  font-size: 1em;
+  padding: 5px;
+  margin: 10px 10px 10px 0;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 5px #999;
+}
+</style>
 <body>
 <%@include file="/header.jsp" %>
 <section>
-<article>
-<form action="/seesc/member/findPwd_ok_ok.jsp" method="post">
+<article class="article">
 <div><span>PWD변경하기</span></div>
+<form action="/seesc/member/findPwd_ok_ok.jsp" method="post">
 <input type="hidden" name="user_name" value="<%=user_name%>">
 <input type="hidden" name="year" value="<%=year%>">
 <input type="hidden" name="month" value="<%=monthr%>">

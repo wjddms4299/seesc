@@ -20,16 +20,72 @@ if(user_id==null||user_id==""){
 	return;
 }
 %>
+<script>
+function login_open(){
+	window.open('/seesc/member/login.jsp','login','width=370,height=450');
+}
+
+
+</script>
+<style>
+.article{
+margin: 0px auto;
+text-align: center;
+}
+.h1{font-size:30px;
+color : #FFA500;
+text-align:center;
+}
+.id{
+border: 3px double #FFA500;
+width:190px;
+height: 40px;
+font-size: 25px;
+}
+.login {
+    display: inline-block;
+    width: 150px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+}
+.pwdf {
+    display: inline-block;
+    width: 150px;
+    padding: 10px;
+    background-color: #a0a0a0;
+    color: black;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+}
+</style>
+<link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 <body>
 <%@include file="/header.jsp" %>
 <section>
-<article>
-<div><span>ID찾기</span></div>
+<article class="article">
+<br><br>
+         <h1 class ="h1">ID찾기</h1>
+         <br>
+           <hr width="130px">
+           <br>
 <div>
 <h2><%=user_name %>님의 아이디</h2>
-<div><%=user_id %></div>
-<a href="#"><button><span>로그인하러가기</span></button></a>
-<a href="/seesc/member/findPwd.jsp"><button><span>PWD찾기</span></button></a>
+<div class="id"><%=user_id %></div>
+<a href="javascript:login_open();"><button class="login"><span>로그인하러가기</span></button></a>
+<a href="/seesc/member/findPwd.jsp"><button class="pwdf"><span>PWD찾기</span></button></a>
 </div>
 </article>
 </section>

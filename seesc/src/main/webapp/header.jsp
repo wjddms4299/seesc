@@ -25,7 +25,7 @@ filter: saturate(1000%)
 </style>
 <script>
 function login_open(){
-	window.open('/seesc/member/login.jsp','login','width=370,height=450');
+	window.open('/seesc/member/login.jsp','login','width=390,height=580');
 }
 
 
