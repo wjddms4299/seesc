@@ -56,7 +56,7 @@ public class ImgDAO {
 		}
 }
 	
-	public ArrayList<WriteDTO> writeEventList(int ls, int cp) {
+/*	public ArrayList<WriteDTO> writeEventList(int ls, int cp) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			int start = (cp - 1) * ls + 1;
@@ -112,7 +112,7 @@ public class ImgDAO {
 
 			}
 		}
-	}
+	} */
 	/** event글 본문보기 관련 메서드 */
 	public WriteDTO writeEventContent(int write_idx) {
 		try {
@@ -643,6 +643,64 @@ public class ImgDAO {
 				if(conn!=null)
 					conn.close();
 			} catch (Exception e2) {}
+		}
+	}
+	//idx 순서 출력
+	public ArrayList<WriteDTO> writeEventList(int ls, int cp) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			int start = (cp - 1) * ls + 1;
+			int end = cp * ls;
+			String sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'event'and write_notice = 0 order by write_idx desc)a) where r >=? and r<=?";
+
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
+
+			ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
+
+			while (rs.next()) {
+				int write_idx = rs.getInt("write_idx");
+				int user_idx = rs.getInt("user_idx");
+				String write_cate = rs.getString("write_cate");
+				String write_title = rs.getString("write_title");
+				String write_writer = rs.getString("write_writer");
+				String write_pwd = rs.getString("write_pwd");
+				Date write_wdate = rs.getDate("write_wdate");
+				String write_filename = rs.getString("write_filename");
+				String write_content = rs.getString("write_content");
+				int write_readnum = rs.getInt("write_readnum");
+				int write_ref = rs.getInt("write_ref");
+				int write_lev = rs.getInt("write_lev");
+				int write_step = rs.getInt("write_step");
+				int write_open = rs.getInt("write_open");
+				int write_notice = rs.getInt("write_notice");
+
+				WriteDTO dto = new WriteDTO(write_idx, user_idx, write_cate, write_title, write_writer, write_pwd,
+						write_wdate, write_filename, write_content, write_readnum, write_ref, write_lev, write_step,
+						write_open, write_notice);
+
+				arr.add(dto);
+			}
+
+			return arr;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+
+			}
 		}
 	}
 }
