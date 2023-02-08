@@ -51,7 +51,7 @@ table{
   word-break:break-all;
 }
 .th{ /*제목*/
-
+	margin : 10px auto;
     padding: 10px;
     word-break:break-all;
     background-color: #2C952C;
@@ -268,11 +268,17 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 
 					}
 					%>
-
+					
 				</tbody>
 				<!-- -----------------------------검색-------------------------------------------------------------- -->
 				
 				<tfoot class="tfoot">
+				<tr>
+						<td colspan ="7" align = "right">
+						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
+						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'" class ="writebutton">
+						<input type="button" value="목록" onclick= "location.href ='qna_list.jsp'" class = "listbutton"></td>
+						</tr>
 				<tr>
 				<td colspan="7"><br></td>
 				</tr>
@@ -282,17 +288,14 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					<input type = "hidden" name = "listsize" value = "<%=writeList %>">
 					<input type = "hidden" name = "userpage" value = "<%=userpage %>">
 					
-					<td colspan="6" align="center"><select name= "listname" class = "select1">
+					<td colspan="7" align="center"><select name= "listname" class = "select1">
 							<option value ="4">제목+내용</option>
 								<option value="1">글제목</option>
 								<option value="2">내용</option>
 								<option value="3">작성자</option>
 						</select> <input type="text" name="content" placeholder="내용입력" required = "required" class="inputtext"> 
 						<input type="submit" value="검색"  class = "findbutton"></td>
-						<td rowspan ="2">
-						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
-						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'" class ="writebutton">
-						<input type="button" value="목록" onclick= "location.href ='qna_list.jsp'" class = "listbutton"></td>
+
 						</form>
 						
 					</tr>

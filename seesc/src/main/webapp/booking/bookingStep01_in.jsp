@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.esc.thema.*"%>
+<jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
+<%
+String img_name=request.getParameter("img_name");
+int img_idx=thdao.imgSelect(img_name);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +29,7 @@ select{margin:0px 950px;}
 </style>
 <script>
 function open_popup(){
-	window.open('/seesc/booking/upload_popup.jsp','upload_popup.jsp','width=450,height=203,top=100,left=300');
+	window.open('/seesc/booking/upload_popup.jsp','upload_popup.jsp','width=550,height=203,top=100,left=300');
 }
 </script>
 </head>
@@ -32,6 +37,7 @@ function open_popup(){
 <%@include file="/header.jsp"%>
 <section>
 <form name="bookingStep01_in" action="bookingStep01_in_ok.jsp">
+<input type="hidden" name="img_idx" value="<%=img_idx%>">
 <article>
  <br><br>
  <h2 id="a1">테마 추가하기</h2>
@@ -44,12 +50,18 @@ function open_popup(){
  <hr width="950">
 </article>
 <article id="a2">
- <!-- <table width="300" height="400" style="background-color:lightgray;text-align:center;" class="a2-0"><tr><td><a onclick="open_popup();" style="color:black;">이미지 올리기</a></td></tr></table> -->
- <img src="/seesc/thema_img/11.jpg">
+ <table width="300" class="a2-0">
+  <tr height="400">
+  	<td><img src="/seesc/thema_img/<%=img_name==null || img_name.equals("")?"000.jpg":img_name%>" width='300' height='400'></td>
+  </tr>
+  <tr>
+  	<td><input type="button" value="이미지 올리기" onclick="open_popup();"></td>
+  </tr>
+ </table>
 </article>
 <article id="a3">
  <br><br><br><br>
- <label class="a2-1" id="a2-2">#<input type="text" name="thema_tag1"" size="9"> #<input type="text" name="thema_tag2" size="9"> #<input type="text" name="thema_tag3" size="9"></label><br><br>
+ <label class="a2-1" id="a2-2">#<input type="text" name="thema_tag1" size="9"> #<input type="text" name="thema_tag2" size="9"> #<input type="text" name="thema_tag3" size="9"></label><br><br>
  <label class="a2-1"><div class="a2-3"><input type="text" name="thema_intro1" size="60"></div>
 				<div class="a2-3"><input type="text" name="thema_intro2" size="60"></div>
 				<div class="a2-3"><input type="text" name="thema_intro3" size="60"></div></label><br><br><br><br><br><br><br>

@@ -25,7 +25,16 @@
     background-color: #FF870C;
 
 }
+.listimg{
+  		width:250px;
+   		height:250px;
+        background-color: #FFA300;
+      }
+.listimg:hover {
+    background-color: #FF870C;
+    border: 5px solid #FFA300;
 
+}
 .submenu{
 position: relative;
 width : 1200px;
@@ -36,10 +45,6 @@ left :380px;
 table{
 	width: 1200px;
 	margin: 0px auto;
-}
-section img{
-   width:238px;
-   height:238px;
 }
 thead th{
 color:#FFA300;
@@ -187,12 +192,12 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
            }
            	if(arr.get(i).getWrite_open()==0){
         	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
-        	   		<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+        	   		<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img class="listimg" src="img/<%=arr.get(i).getWrite_filename()%>"></a>
         	   <%}else{%>
-           			<br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+           			<br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><img class="listimg" src="img/<%=arr.get(i).getWrite_filename()%>"></a>
            		<%} 
            	}else{%>
-           		<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img src="img/<%=arr.get(i).getWrite_filename()%>"></a>	
+           		<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img class="listimg" src="img/<%=arr.get(i).getWrite_filename()%>"></a>	
            	<%} %>
            <br>No. <%=arr.get(i).getWrite_idx() %>
            <br>

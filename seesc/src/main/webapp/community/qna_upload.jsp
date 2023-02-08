@@ -43,29 +43,33 @@ margin-bottom: 20px;
 }
       
 table {
-width: 700px;
+width: 800px;
 margin: 0 auto;
-text-align: left;
+text-align: center;
 background-color: #FADCA5;
+text-align : left;
       }
       
       th {
         font-size: 18px;
         padding: 10px;
         border-bottom: 1px dotted #444444;
+        color : black;
+        text-align : center;
         
 
       }
       td{
    color : black;
       border-bottom: 1px dotted #444444;
+              text-align : left;
       
    
       }
       
       input[type="text"],
       input[type="password"]{
-        width: 400px;
+        width: 600px;
         padding: 10px;
         font-size: 16px;
         border-radius: 5px;
@@ -87,7 +91,7 @@ background-color: #FADCA5;
 	}
       
       input[type="submit"] {
-        width: 100%;
+        width: 600px;
         height: 50px;
         border: none;
         border-radius: 5px;
@@ -102,7 +106,7 @@ background-color: #FADCA5;
 		}
       
       textarea {
-        width: 400px;
+        width: 600px;
     height: 250px;
     border: none;
     resize: none;
@@ -111,13 +115,6 @@ background-color: #FADCA5;
   }
 </style>
 
-  textarea {
-    width: 100%;
-    height: 50px;
-    border: none;
-    resize: none;
-  }
-</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
@@ -140,6 +137,8 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">
 						<input type="hidden" name="write_notice"
 							value="<%=write_notice%>">
+
+	
 						
 						<tr>
 							<th>작성자</th>
@@ -151,8 +150,8 @@ UserinfoDTO dto = userdao.userInfo(sid);
 								<%
 								String readonly =user_idx==0?"":"readonly";
 								out.println(readonly);
-								%>
-								ㄴ></td>
+								%>>
+								</td>
 						</tr>
 						<tr>
 							<th>글제목</th>
@@ -180,12 +179,14 @@ UserinfoDTO dto = userdao.userInfo(sid);
 								required="required"  placeholder="비밀번호 분실시 글 수정과 삭제를 할 수 없습니다."></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center"><input type="submit"
+						<td>&nbsp;</td>
+							<td><input type="submit"
 								value="등록"> 
 								</tr>
-								<tr>
-								<td colspan ="2">
 								
+								<tr>
+								<td >&nbsp;</td>
+								<td style = "text-align : right;">
 								<input type="reset" value="다시 작성"> 
 								<input
 								type="button" value="목록"

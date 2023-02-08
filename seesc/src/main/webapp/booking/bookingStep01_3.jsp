@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.text.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
@@ -169,7 +170,24 @@ select{margin:0px 950px;}
  ArrayList<Integer> booking_idx=new ArrayList<Integer>();
  %>
 </article>
-<%for(int j=0;j<idx_booking.size();j++){%>
+<%
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+
+int HH=now.get(Calendar.HOUR_OF_DAY);
+int mm=now.get(Calendar.MINUTE);
+int ss=now.get(Calendar.SECOND);
+Date time=sdf.parse(y[0]+"-"+m[0]+"-"+d[0]+" "+HH+":"+mm+":"+ss);
+
+StringBuffer time_date_sb=new StringBuffer(time_date);
+time_date_sb.delete(time_date_sb.length()-4,time_date_sb.length());
+String time_date_c=time_date_sb.toString();
+
+Date ctime[]=new Date[6];
+for(int i=0;i<6;i++){
+	ctime[i]=sdf.parse(time_date_c+" "+(10+i*2)+":"+00+":"+00);
+}
+
+for(int j=0;j<idx_booking.size();j++){%>
 	<article>
 	<%
 	dto.add(thdao.themaInfo(idx_booking.get(j)));
@@ -204,7 +222,7 @@ select{margin:0px 950px;}
 	 <hr width="950">
 	</article>
 	<article id="a2">
-	 <img alt="방탈출 <%=idx_booking.get(j)%>" src="/seesc/thema_img/00<%=idx_booking.get(j)%>.jpg" width="300" height="400" class="a2-0">
+	 <img alt="방탈출 <%=idx_booking.get(j)%>" src="/seesc/thema_img/<%=thdao.imgSelect_N(dto.get(j).getImg_idx())%>" width="300" height="400" class="a2-0">
 	</article>
 	<article id="a3">
 	 <br><br><br><br>
@@ -220,12 +238,66 @@ select{margin:0px 950px;}
 	 booking_idx.add(bdao.bookingIdx(idx_booking.get(j),time_date_in,5));
 	 booking_idx.add(bdao.bookingIdx(idx_booking.get(j),time_date_in,6));
 	 %>
-	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%=booking_idx.get(j*6)>0?"value='10:00 예약마감' disabled":"value='10:00 예약가능'"%> class="a2-1"></a> &nbsp;
-	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%=booking_idx.get(j*6+1)>0?"value='12:00 예약마감' disabled":"value='12:00 예약가능'"%>></a> &nbsp;
-	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%=booking_idx.get(j*6+2)>0?"value='14:00 예약마감' disabled":"value='14:00 예약가능'"%>></a><br>
-	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%=booking_idx.get(j*6+3)>0?"value='16:00 예약마감' disabled":"value='16:00 예약가능'"%> class="a2-1"></a> &nbsp;
-	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%=booking_idx.get(j*6+4)>0?"value='18:00 예약마감' disabled":"value='18:00 예약가능'"%>></a> &nbsp;
-	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%=booking_idx.get(j*6+5)>0?"value='20:00 예약마감' disabled":"value='20:00 예약가능'"%>></a><br><br><br><br><br><br><br><br><br>
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=1"><input type="button" <%
+	 	if(time.after(ctime[0])){
+	 		out.print("value='10:00 예약마감' disabled");
+	 	}else{
+	 		if(booking_idx.get(j*6)>0){
+	 			out.print("value='10:00 예약마감' disabled");
+	 		}else{
+	 			out.print("value='10:00 예약가능'");
+	 		}
+	 	}%> class="a2-1"></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%
+	 	if(time.after(ctime[1])){
+	 		out.print("value='12:00 예약마감' disabled");
+	 	}else{
+	 		if(booking_idx.get(j*6)>0){
+	 			out.print("value='12:00 예약마감' disabled");
+	 		}else{
+	 			out.print("value='12:00 예약가능'");
+	 		}
+	 	}%> class="a2-1"></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%
+	 	if(time.after(ctime[2])){
+	 		out.print("value='14:00 예약마감' disabled");
+	 	}else{
+	 		if(booking_idx.get(j*6)>0){
+	 			out.print("value='14:00 예약마감' disabled");
+	 		}else{
+	 			out.print("value='14:00 예약가능'");
+	 		}
+	 	}%> class="a2-1"></a><br>
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%
+	 	if(time.after(ctime[3])){
+	 		out.print("value='16:00 예약마감' disabled");
+	 	}else{
+	 		if(booking_idx.get(j*6)>0){
+	 			out.print("value='16:00 예약마감' disabled");
+	 		}else{
+	 			out.print("value='16:00 예약가능'");
+	 		}
+	 	}%> class="a2-1"></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%
+	 	if(time.after(ctime[4])){
+	 		out.print("value='18:00 예약마감' disabled");
+	 	}else{
+	 		if(booking_idx.get(j*6)>0){
+	 			out.print("value='18:00 예약마감' disabled");
+	 		}else{
+	 			out.print("value='18:00 예약가능'");
+	 		}
+	 	}%> class="a2-1"></a> &nbsp;
+	 <a href="bookingStep02.jsp?thema_idx=<%=idx_booking.get(j)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%
+	 	if(time.after(ctime[5])){
+	 		out.print("value='20:00 예약마감' disabled");
+	 	}else{
+	 		if(booking_idx.get(j*6)>0){
+	 			out.print("value='20:00 예약마감' disabled");
+	 		}else{
+	 			out.print("value='20:00 예약가능'");
+	 		}
+	 	}%> class="a2-1"></a><br><br><br><br><br><br><br><br><br>
 	</article>
 <%}%>
 <article>

@@ -162,19 +162,3 @@ footer a {
 		zoom : 1.03;
 
 	}
-	
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th{
-color: black;
-}
-th, td {
-  text-align: center;
-  padding: 8px;
-}
-
-th {
-  background-color: #f2f2f2;
-}
