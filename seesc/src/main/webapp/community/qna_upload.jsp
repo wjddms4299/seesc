@@ -111,13 +111,6 @@ background-color: #FADCA5;
   }
 </style>
 
-  textarea {
-    width: 100%;
-    height: 50px;
-    border: none;
-    resize: none;
-  }
-</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
