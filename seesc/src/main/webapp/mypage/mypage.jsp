@@ -44,6 +44,20 @@
 .cbutton:hover {
 	letter-spacing: 5px;
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-bottom: 1px dashed white;
+}
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
 </style>
 <%
 int user_idx=(int)session.getAttribute("user_idx");
@@ -97,7 +111,7 @@ if(cp%pageSize==0)userGroup--;
 	<table>
 	<tfoot>
 			<tr>
-				<td colspan="4" align="center">
+				<td colspan="4">
 				<!-- ---------------- -->
 				<%
 				if(userGroup!=0){
