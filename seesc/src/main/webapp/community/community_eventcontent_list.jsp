@@ -12,6 +12,15 @@
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
 <style>
+.pagebutton{
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FF870C;
+        color: white;
+        font-size: 30px;
+  }
 .listbutton{
 		width: 100px;
         height: 50px;
@@ -54,7 +63,7 @@ color:#FFA300;
 <%
 int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
 int manager=session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
-int totalCnt=wdao.getTotalCnt();
+int totalCnt=idao.getTotalCnt();
 int listSize=10; 
 int pageSize=5; 
 
@@ -120,13 +129,13 @@ if(cp%pageSize==0)userGroup--;
       			<!-- -------------------------------------- -->
       			<%
 if(userGroup!=0){
-	%><a href="community_eventcontent.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><% 
+	%><a href="community_eventcontent_list.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><% 
 	
 }
 %>
 <%
 for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-	%>&nbsp;&nbsp;<a href="community_eventcontent_list.jsp?cp=<%=i%>"><%=i %>&nbsp;&nbsp;<%
+	%>&nbsp;&nbsp;<a style="text-decoration:none;" href="community_eventcontent_list.jsp?cp=<%=i%>"><b class="pagebutton"><%=i %></b>&nbsp;&nbsp;<%
 	if(i==totalPage)break;
 }
 %>
@@ -146,12 +155,12 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
 			for(int i=0;i<notice.size();i++){
 		%>
 		<tr align="center">
-		<td style=color:blue;background-color:lightgray;>-공 지-</td>
-		<td style=background-color:lightgray;>
+		<td style="color:blue;background-color:lightgray;">-공 지-</td>
+		<td style="background-color:lightgray;">
 		<a href="community_eventcontent_content.jsp?write_idx=<%=notice.get(i).getWrite_idx()%>"><%=notice.get(i).getWrite_title()%></a></td>
-		<td style=color:red;background-color:lightgray;><%=notice.get(i).getWrite_writer()%></td>
-		<td style=background-color:lightgray;><%=notice.get(i).getWrite_wdate()%></td>
-		<td style=background-color:lightgray;><%=notice.get(i).getWrite_readnum()%></td>
+		<td style="color:red;background-color:lightgray;"><%=notice.get(i).getWrite_writer()%></td>
+		<td style="background-color:lightgray;"><%=notice.get(i).getWrite_wdate()%></td>
+		<td style="background-color:lightgray;"><%=notice.get(i).getWrite_readnum()%></td>
 		</tr>
 		<%}
 			}%>

@@ -56,6 +56,7 @@ table {
 }
 th {
 	text-align:left;
+	color:black;
 }
 td {
 	color:black;

@@ -63,6 +63,7 @@ li {
 }
 th {
 	float:left;
+	color:black;
 }
 td {
 	color:black;

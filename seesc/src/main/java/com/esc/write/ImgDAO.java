@@ -621,5 +621,29 @@ public class ImgDAO {
 			}
 		}
 	}
+	/** 총게시물수*/
+	public int getTotalCnt() {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "select count(*) from write where write_cate='event' and write_notice=0";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			return count == 0 ? 1 : count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if(conn!=null)
+					conn.close();
+			} catch (Exception e2) {}
+		}
+	}
 }
 
