@@ -39,31 +39,27 @@ margin-bottom: 20px;
       
 h2 {
 font-size: 36px;
-margin-bottom: 20px;
 }
       
 table {
 width: 800px;
 margin: 0 auto;
 text-align: center;
-background-color: #FADCA5;
-text-align : left;
-      }
+}
       
-      th {
-        font-size: 18px;
-        padding: 10px;
-        border-bottom: 1px dotted #444444;
-        color : black;
-        text-align : center;
+ th {
+font-size: 18px;
+padding: 10px;
+color :black;
+text-align : center;
+background-color: #FF8200;
         
 
       }
-      td{
-   color : black;
-      border-bottom: 1px dotted #444444;
-              text-align : left;
-      
+ td{
+color : black;
+text-align : left;
+  background-color: white;
    
       }
       
@@ -73,7 +69,7 @@ text-align : left;
         padding: 10px;
         font-size: 16px;
         border-radius: 5px;
-        border: 1px solid lightgray;
+        border: 1px solid #FF8200;
       }
   
       input[type="button"],input[type="reset"]{
@@ -91,7 +87,7 @@ text-align : left;
 	}
       
       input[type="submit"] {
-        width: 600px;
+        width: 800px;
         height: 50px;
         border: none;
         border-radius: 5px;
@@ -112,7 +108,25 @@ text-align : left;
     resize: none;
     border-radius: 5px;
       padding: 10px;
+          border: 1px solid #FF8200;
   }
+  
+  .tfoot{
+background-color: white;
+text-align : center;
+padding : 5px;
+}
+.tfoot td{
+background-color: white;}
+.writelist{/*일반글 리스트*/
+text-align : center;
+margin :0px auto;
+color : black;
+}
+.writelist td{/*일반글 리스트*/
+
+}
+
 </style>
 
 </head>
@@ -134,6 +148,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 			<form name="qna_upload" action="qna_upload_ok.jsp" method="post"
 				enctype="multipart/form-data" accept=".jpg,.jpeg,.png,.gif,.bmp">
 					<table>
+					<tbody class = "writelist" cellspacing ="0px">
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">
 						<input type="hidden" name="write_notice"
 							value="<%=write_notice%>">
@@ -178,20 +193,23 @@ UserinfoDTO dto = userdao.userInfo(sid);
 							<td><input type="password" name="write_pwd"
 								required="required"  placeholder="비밀번호 분실시 글 수정과 삭제를 할 수 없습니다."></td>
 						</tr>
+						<tfoot class = "tfoot">
 						<tr>
-						<td>&nbsp;</td>
-							<td><input type="submit"
+							<td colspan ="2"><input type="submit"
 								value="등록"> 
 								</tr>
-								
 								<tr>
-								<td >&nbsp;</td>
-								<td style = "text-align : right;">
+								<td colspan = "2">&nbsp;</td>
+								</tr>
+								<tr>
+								<td colspan="2" style = "text-align : center;">
 								<input type="reset" value="다시 작성"> 
 								<input
 								type="button" value="목록"
 								onclick="location.href ='/seesc/community/qna_list.jsp'"></td>
 						</tr>
+						</tbody>
+						</tfoot>
 					</table>
 
 			</form>

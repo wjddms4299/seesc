@@ -273,6 +273,8 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<!-- -----------------------------검색-------------------------------------------------------------- -->
 				
 				<tfoot class="tfoot">
+				<tr><td colspan="7"><br></td></tr>
+					<tr>
 				<tr>
 						<td colspan ="7" align = "right">
 						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
@@ -282,8 +284,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<tr>
 				<td colspan="7"><br></td>
 				</tr>
-				<tr><td colspan="7"><br></td></tr>
-					<tr>
+				
 					<form name = "search_list" action = "qna_list.jsp" method = "post">
 					<input type = "hidden" name = "listsize" value = "<%=writeList %>">
 					<input type = "hidden" name = "userpage" value = "<%=userpage %>">

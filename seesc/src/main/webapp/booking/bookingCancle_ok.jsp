@@ -31,18 +31,28 @@ if (inputpwd.equals(booking_pwd)) {
 %>
 <script>
 		window.alert('예약취소에 실패하였습니다.다시 시도해주세요.');
-		location.href = 'b_bookingcheck.jsp';
+		location.href = '/seesc/booking/b_bookingcheck.jsp';
 		</script>
 <%
 return;
 } else {
+	if(dto.getUser_idx()==0){
 %>
 <script>
 			window.alert('예약 취소되었습니다.');
-			location.href = 'b_bookingcheck.jsp';
+			location.href = '/seesc/booking/b_bookingcheck.jsp';
 			</script>
 
 <%
+	}else{
+		%>
+		<script>
+					window.alert('예약 취소되었습니다.');
+					location.href = '/seesc/mypage/payment.jsp';
+					</script>
+
+		<%
+	}
 }
 } else {
 %>
