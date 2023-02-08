@@ -577,4 +577,51 @@ public class WriteDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**관리자 일때 게시글을 삭제하는 관련 메서드*/
+	public int contentdel(int write_ref) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String spl="delete from write where write_ref=?";
+			ps=conn.prepareStatement(spl);
+			ps.setInt(1, write_ref);
+			int count=ps.executeUpdate();
+			
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**게시글과 게시글에 속해있는 댓글을 검색하는 관련 메서드*/
+	public WriteDTO contentsel(int idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select write_ref from write where write_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			rs=ps.executeQuery();
+			WriteDTO dto=new WriteDTO();
+			if(rs.next()) {
+				int write_ref=rs.getInt("write_ref");
+				
+				dto.setWrite_ref(write_ref);
+			}
+			return dto;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 }
