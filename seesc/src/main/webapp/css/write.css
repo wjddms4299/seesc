@@ -1,0 +1,110 @@
+@charset "UTF-8";
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+body {
+        font-family: Arial, sans-serif;
+      }
+section {
+width: 50%;
+margin: 0 auto;
+text-align: center;
+}
+      
+article {
+margin-bottom: 20px;
+}
+      
+h2 {
+font-size: 36px;
+}
+      
+table {
+width: 800px;
+margin: 0 auto;
+text-align: center;
+background-color: white;
+
+}
+      
+ th {
+font-size: 18px;
+padding: 10px;
+color :black;
+text-align : center;
+background-color: #FF8200;
+        
+
+      }
+ td{
+color : black;
+text-align : left;
+  background-color: white;
+   
+      }
+      
+      input[type="text"],
+      input[type="password"]{
+        width: 600px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid #FF8200;
+      }
+  
+      input[type="button"],input[type="reset"]{
+        width: 100px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        background-color: #DC9146;
+        color: white;
+        font-size: 16px;
+        margin-left: 20px;
+      }
+      input[type="button"]:hover, input[type="reset"]:hover {
+    background-color: #D27328;
+	}
+      
+      input[type="submit"] {
+        width: 800px;
+        height: 50px;
+        border: none;
+        border-radius: 5px;
+        background-color: #8B4513;
+        color: white;
+        font-weight : bold;
+        font-size:20px;
+        margin-top: 20px;
+      }
+      input[type="submit"]:hover {
+   		 background-color: #8B6331;
+		}
+      
+      textarea {
+        width: 600px;
+    height: 250px;
+    border: none;
+    resize: none;
+    border-radius: 5px;
+      padding: 10px;
+          border: 2px solid #FF8200;
+  }
+  
+  .tfoot{
+background-color: white;
+text-align : center;
+padding : 5px;
+}
+.tfoot td{
+background-color: white;}
+
+.writelist{/*일반글 리스트*/
+text-align : center;
+margin :0px auto;
+color : black;
+}
