@@ -208,7 +208,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
         	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
         	   		<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img class="listimg" src="img/<%=arr.get(i).getWrite_filename()%>"></a>
         	   <%}else{%>
-           			<br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><img class="listimg" src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+           			<br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><img class="listimg" src="img/lock.png"></a>
            		<%} 
            	}else{%>
            		<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img class="listimg" src="img/<%=arr.get(i).getWrite_filename()%>"></a>	
