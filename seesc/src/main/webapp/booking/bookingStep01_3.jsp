@@ -252,7 +252,7 @@ for(int j=0;j<idx_booking.size();j++){%>
 	 	if(time.after(ctime[1])){
 	 		out.print("value='12:00 예약마감' disabled");
 	 	}else{
-	 		if(booking_idx.get(j*6)>0){
+	 		if(booking_idx.get(j*6+1)>0){
 	 			out.print("value='12:00 예약마감' disabled");
 	 		}else{
 	 			out.print("value='12:00 예약가능'");
@@ -262,7 +262,7 @@ for(int j=0;j<idx_booking.size();j++){%>
 	 	if(time.after(ctime[2])){
 	 		out.print("value='14:00 예약마감' disabled");
 	 	}else{
-	 		if(booking_idx.get(j*6)>0){
+	 		if(booking_idx.get(j*6+2)>0){
 	 			out.print("value='14:00 예약마감' disabled");
 	 		}else{
 	 			out.print("value='14:00 예약가능'");
@@ -272,7 +272,7 @@ for(int j=0;j<idx_booking.size();j++){%>
 	 	if(time.after(ctime[3])){
 	 		out.print("value='16:00 예약마감' disabled");
 	 	}else{
-	 		if(booking_idx.get(j*6)>0){
+	 		if(booking_idx.get(j*6+3)>0){
 	 			out.print("value='16:00 예약마감' disabled");
 	 		}else{
 	 			out.print("value='16:00 예약가능'");
@@ -282,7 +282,7 @@ for(int j=0;j<idx_booking.size();j++){%>
 	 	if(time.after(ctime[4])){
 	 		out.print("value='18:00 예약마감' disabled");
 	 	}else{
-	 		if(booking_idx.get(j*6)>0){
+	 		if(booking_idx.get(j*6+4)>0){
 	 			out.print("value='18:00 예약마감' disabled");
 	 		}else{
 	 			out.print("value='18:00 예약가능'");
@@ -292,7 +292,7 @@ for(int j=0;j<idx_booking.size();j++){%>
 	 	if(time.after(ctime[5])){
 	 		out.print("value='20:00 예약마감' disabled");
 	 	}else{
-	 		if(booking_idx.get(j*6)>0){
+	 		if(booking_idx.get(j*6+5)>0){
 	 			out.print("value='20:00 예약마감' disabled");
 	 		}else{
 	 			out.print("value='20:00 예약가능'");

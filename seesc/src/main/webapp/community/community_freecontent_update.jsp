@@ -23,6 +23,19 @@
 h3{
 	text-align: center;
 }
+.communitybutton{
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+}
+.communitybutton:hover{
+	background-color: #3e8e41;
+	
+
+}
 </style>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <body>
@@ -37,10 +50,10 @@ h3{
 		%>
 			<thead>
 				<tr>
-					<th>제목<input type="text" name="title" value="<%=dto.getWrite_title()%>"></th>
+					<th>제목<input type="text" id="texttitle" name="title" value="<%=dto.getWrite_title()%>"></th>
 				</tr>
 				<tr>
-					<th>파일<input type="file" name="filename" value="<%=dto.getWrite_filename() %>">
+					<th>파일<input type="file" id="filename" name="filename" value="<%=dto.getWrite_filename() %>">
 				</tr>
 			</thead>
 			<tbody>
@@ -51,9 +64,9 @@ h3{
 			<tfoot>
 				<tr>
 					<td>
-						<input type="submit" value="수정하기">
-						<input type="reset" value="다시쓰기">
-						<input type="button" value="돌아가기" onclick="location.href='community.jsp'">
+						<input type="submit" value="수정하기" class="communitybutton communitybutton:hover">
+						<input type="reset" value="다시쓰기" class="communitybutton communitybutton:hover">
+						<input type="button" value="돌아가기" onclick="location.href='community.jsp'" class="communitybutton communitybutton:hover">
 					</td>
 				</tr>
 			</tfoot>

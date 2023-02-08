@@ -26,12 +26,23 @@ if(booking_pay_ok==0){
 		<%
 		return;
 	}
+	long cacle_banknum;
 	try{
-		int cacle_banknum=Integer.parseInt(cacle_banknum_s);
+		cacle_banknum=Long.parseLong(cacle_banknum_s);
 	}catch(NumberFormatException e){
 		%>
 		<script>
 		window.alert("계좌번호는 '숫자'만 입력해주세요.");
+		history.back();
+		</script>
+		<%
+		return;
+	}
+	
+	if(cacle_banknum_s.length()!=13){
+		%>
+		<script>
+		window.alert("계좌번호는 '13개'의 숫자로 입력해주세요.");
 		history.back();
 		</script>
 		<%

@@ -45,6 +45,7 @@ if(manager<1){
 <body>
 <h1>권한관리페이지</h1>
 <section>
+	<a href="/seesc/index.jsp"><button><span>홈</span></button></a>
 	<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
 	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
 	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>

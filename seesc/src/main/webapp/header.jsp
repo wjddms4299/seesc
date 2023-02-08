@@ -69,7 +69,7 @@ function login_open(){
 					<%if(sid==null||sid.equals("")){ %>
 					<a href="/seesc/booking/b_bookingcheck.jsp">예약 확인</a>
 					<%}else{%>
-					<a href="/seesc/mypage/payment.jsp">예약 확인</a>
+					<a href="/seesc/mypage/mypage.jsp">예약 확인</a>
 					<% }%>
 				</ul>
 			</ul>

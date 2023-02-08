@@ -24,7 +24,7 @@ z-index: 2;
 	}
  .rank:nth-child(1) {
     text-align: center;
-    border: 3px double gold;
+    border: 6px double gold;
   }
   .rank:nth-child(1) span{
   color: gold;
@@ -34,7 +34,7 @@ z-index: 2;
   .rank:nth-child(2) {
     float: left;
     margin-right: 10px;
-    border: 3px double silver;
+    border: 6px double silver;
   }
   .rank:nth-child(2) span{
   color: silver;
@@ -44,7 +44,7 @@ z-index: 2;
   .rank:nth-child(3) {
     float: right;
     margin-left: 10px;
-    border: 3px double brown;
+    border: 6px double brown;
   }
   .rank:nth-child(3) span{
   color: brown;

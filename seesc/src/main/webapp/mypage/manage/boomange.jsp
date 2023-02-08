@@ -34,6 +34,7 @@ th {
 <section>
 <article>
 <h1>예약내역관리</h1>
+	<a href="/seesc/index.jsp"><button><span>홈</span></button></a>
 	<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
 	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
 	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
@@ -69,12 +70,12 @@ th {
 		for(int i=0;i<arr.size();i++){
 			%>
 			<tr>
-				<th><%=arr.get(i).getBooking_idx() %></th>
-				<th><%=arr.get(i).getThema_idx() %></th>
-				<th><%=arr.get(i).getBooking_name() %></th>
-				<th><%=arr.get(i).getBooking_tel() %></th>
-				<th><%=arr.get(i).getBooking_time() %></th>
-				<th><%=arr.get(i).getTime_date() %></th>
+				<td><%=arr.get(i).getBooking_idx() %></td>
+				<td><%=arr.get(i).getThema_idx() %></td>
+				<td><%=arr.get(i).getBooking_name() %></td>
+				<td><%=arr.get(i).getBooking_tel() %></td>
+				<td><%=arr.get(i).getBooking_time() %></td>
+				<td><%=arr.get(i).getTime_date() %></td>
 				<%
 				String ptime=null;
 				if(arr.get(i).getTime_ptime()==1){ptime="10:00";}
@@ -84,7 +85,7 @@ th {
 				else if(arr.get(i).getTime_ptime()==5){ptime="18:00";}
 				else if(arr.get(i).getTime_ptime()==6){ptime="20:00";}
 				%>
-				<th><%=ptime %></th>
+				<td><%=ptime %></td>
 				<%
 				String pay=null;
 				if(arr.get(i).getBooking_pay()>0){
@@ -93,7 +94,7 @@ th {
 					pay="현장결제";
 				}
 				%>
-				<th><%=pay %></th>
+				<td><%=pay %></td>
 				<%
 				String pay_ok=null;
 				if(arr.get(i).getBooking_pay_ok()>0){
@@ -102,16 +103,16 @@ th {
 					pay_ok="결제완료";
 				}
 				%>
-				<th><%=pay_ok %></th>
+				<td><%=pay_ok %></td>
 				<%
 				String msg=arr.get(i).getBooking_msg();
 				if(arr.get(i).getBooking_msg()==null||arr.get(i).getBooking_msg().equals("")){
 					msg="x";
 				}
 				%>
-				<th><%=msg %></th>
-				<th><%=arr.get(i).getBooking_num() %>명</th>
-				<th><%=arr.get(i).getBooking_money() %>원</th>
+				<td><%=msg %></td>
+				<td><%=arr.get(i).getBooking_num() %>명</td>
+				<td><%=arr.get(i).getBooking_money() %>원</td>
 			</tr>
 			<%
 		}

@@ -16,7 +16,9 @@ String lev_s=request.getParameter("lev");
 int lev=Integer.parseInt(lev_s);
 String step_s=request.getParameter("step");
 int step=Integer.parseInt(step_s);
+String content=request.getParameter("write_content");
 %>
+
 %>
 <section>
 	<article>
@@ -34,7 +36,7 @@ int step=Integer.parseInt(step_s);
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" ></td>
+				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" value="RE:)<%=content %>" ></td>
 				<td><input type="submit" value="댓글 등록하기">	
 			</tr>
 		</tbody>	

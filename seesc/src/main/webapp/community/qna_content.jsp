@@ -44,6 +44,8 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/write.css">
+
 <style>
 
 ul, li {
@@ -66,8 +68,13 @@ a {
 	<section>
 		<!-- ----------------------------본문 글보기--------------------------------------------- -->
 		<article>
-			<fieldset>
-			<legend>QnA 본 문 보 기</legend>
+			
+			<br><br><br>
+			<h1 class ="h1">QnA 본문보기</h1><br>
+			  <hr width="130px">
+			  <br><br>
+			  
+			  
 			<table>
 				<tbody>
 					<tr>
@@ -117,6 +124,7 @@ a {
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
 						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
+						<input type = "hidden" name = "write_content" value = "<%=dto.getWrite_content()%>">
 						<input type ="hidden" name = "write_ref" value = "<%=dto.getWrite_ref()%>">
 						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
 						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
@@ -141,6 +149,7 @@ a {
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
 						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
+						<input type = "hidden" name = "write_content" value = "<%=dto.getWrite_content()%>">
 						<input type ="hidden" name = "write_ref" value = "<%=dto.getWrite_ref()%>">
 						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
 						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
@@ -151,14 +160,14 @@ a {
 				<%} %>
 			</tbody>
 			</table>
-		</fieldset>
+
 		</article>
 		
 		
 			<%if(dto.getWrite_notice()!=1){ %> <!-- 공지글일 경우 댓글 작성 막아두기 -->
 			<!-- ---------------------댓글 출력----------------------------------------- -->
 		<article>
-			<fieldset>
+			
 				<legend>댓글</legend>
 				<table class = "tb">
 				
@@ -276,14 +285,13 @@ a {
 				%>
 
 			</table>
-			</fieldset>
+
 
 			<!-- ----------------본문에 대한 댓글 작성 -------------------------------------------->
 			<form name="comment" action="comment_ok.jsp" method="post">
 				<input type="hidden" name="write_idx" value="<%=write_idx%>">
 				<input type="hidden" name="user_idx" value=<%=user_idx%>>
-				<fieldset>
-				<legend>댓글작성</legend>
+			
 				<table>
 				<%if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
 					<tr>
@@ -304,7 +312,7 @@ a {
 						<input type="submit" value="등록"></td>
 					</tr>
 				</table>
-				</fieldset>
+	
 			</form>
 		</article>
 		<%} %>

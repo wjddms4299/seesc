@@ -16,104 +16,7 @@ int write_notice = 0;
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
-<style>
-a {
-	text-decoration: none;
-}
-
-ul {
-	list-style: none;
-}
-body {
-        font-family: Arial, sans-serif;
-      }
-section {
-width: 50%;
-margin: 0 auto;
-text-align: center;
-}
-      
-article {
-margin-bottom: 20px;
-}
-      
-h2 {
-font-size: 36px;
-margin-bottom: 20px;
-}
-      
-table {
-width: 800px;
-margin: 0 auto;
-text-align: center;
-background-color: #FADCA5;
-text-align : left;
-      }
-      
-      th {
-        font-size: 18px;
-        padding: 10px;
-        border-bottom: 1px dotted #444444;
-        color : black;
-        text-align : center;
-        
-
-      }
-      td{
-   color : black;
-      border-bottom: 1px dotted #444444;
-              text-align : left;
-      
-   
-      }
-      
-      input[type="text"],
-      input[type="password"]{
-        width: 600px;
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: 1px solid lightgray;
-      }
-  
-      input[type="button"],input[type="reset"]{
-        width: 100px;
-        height: 40px;
-        border: none;
-        border-radius: 5px;
-        background-color: #DC9146;
-        color: white;
-        font-size: 16px;
-        margin-left: 20px;
-      }
-      input[type="button"]:hover, input[type="reset"]:hover {
-    background-color: #D27328;
-	}
-      
-      input[type="submit"] {
-        width: 600px;
-        height: 50px;
-        border: none;
-        border-radius: 5px;
-        background-color: #FF8200;
-        color: black;
-        font-weight : bold;
-        font-size: 16px;
-        margin-top: 20px;
-      }
-      input[type="submit"]:hover {
-   		 background-color: #FF9614;
-		}
-      
-      textarea {
-        width: 600px;
-    height: 250px;
-    border: none;
-    resize: none;
-    border-radius: 5px;
-      padding: 10px;
-  }
-</style>
+<link rel="stylesheet" type="text/css" href="/seesc/css/write.css">
 
 </head>
 <body>
@@ -134,15 +37,18 @@ UserinfoDTO dto = userdao.userInfo(sid);
 			<form name="qna_upload" action="qna_upload_ok.jsp" method="post"
 				enctype="multipart/form-data" accept=".jpg,.jpeg,.png,.gif,.bmp">
 					<table>
+					<tbody class = "writelist" cellspacing ="0px">
 						<input type="hidden" name="user_idx" value="<%=user_idx%>">
 						<input type="hidden" name="write_notice"
 							value="<%=write_notice%>">
-
+						
+						
+						<tr><td><br></td></tr>
 	
 						
 						<tr>
 							<th>작성자</th>
-							<td><input type="text" name="write_writer" 
+							<td><input type="text" name="write_writer" maxlength="50"
 								required="required" value="<%
 								String value = user_idx==0?"":dto.getUser_nic();
 								out.println(value);
@@ -155,7 +61,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						</tr>
 						<tr>
 							<th>글제목</th>
-							<td><input type="text" name="write_title"
+							<td><input type="text" name="write_title" maxlength="50"
 								required="required"placeholder=" 제목 50자이내로 작성"></td>
 						</tr>
 						<tr>
@@ -166,32 +72,37 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						</tr>
 						<tr>
 							<th>파일첨부</th>
-							<td><input type="file" name="write_filename"></td>
+							<td><input type="file" name="write_filename"><label style = "color :red;">* jpg, jpeg, png, gif, bmp 파일만 첨부 가능합니다.</label></td>
 						</tr>
 						<tr>
 							<th>글내용</th>
-							<td><textarea name="write_content" rows="10" cols="50"
+							<td><textarea name="write_content" rows="10" cols="50" maxlength="3000"
 									required="required" placeholder="내용 3000자 이내로 작성"></textarea></td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="password" name="write_pwd"
+							<td><input type="password" name="write_pwd" maxlength="50"
 								required="required"  placeholder="비밀번호 분실시 글 수정과 삭제를 할 수 없습니다."></td>
 						</tr>
+						<tfoot class = "tfoot">
+						<tr><td>&nbsp;</td></tr>
 						<tr>
-						<td>&nbsp;</td>
-							<td><input type="submit"
-								value="등록"> 
+							<td colspan ="2"><input type="submit"
+								value="등  록"> 
 								</tr>
-								
 								<tr>
-								<td >&nbsp;</td>
-								<td style = "text-align : right;">
+								<td colspan = "2">&nbsp;</td>
+								</tr>
+								<tr>
+								<td colspan="2" style = "text-align : right;">
 								<input type="reset" value="다시 작성"> 
 								<input
 								type="button" value="목록"
 								onclick="location.href ='/seesc/community/qna_list.jsp'"></td>
 						</tr>
+						<tr><td>&nbsp;</td></tr>
+						</tfoot>
+						</tbody>
 					</table>
 
 			</form>

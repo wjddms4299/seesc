@@ -29,6 +29,25 @@ h3{
 h4{
 	text-align: center;
 }
+
+tbody{
+
+	margin:0px auto;
+}
+.writebutton{/*글쓰기 버튼*/
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+      }
+.writebutton:hover {
+    background-color: #3e8e41;
+}
+#undercontent{
+	text-align: left;
+}
 </style>
 </head>
 
@@ -60,22 +79,20 @@ h4{
 					<th><%=dto.getWrite_wdate() %></th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="content">
 				<tr>
-					<td><img alt="등록 이미지" src="/seesc/community/writeImg<%=dto.getWrite_filename() %>"></td>
-				</tr>
-				<tr>
-					<td colspan="4"><textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
+					<td><img alt="등록 이미지" id="img" src="/seesc/community/userFile/writeImg/<%=dto.getWrite_filename() %>"></td>
+					<td colspan="3"  ><textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="4" align="right">
-						<input type="hidden" name="idx" value="<%=dto.getWrite_idx()%>">
-						<input type="submit" value="수정하기">
-						<input type="button" value="목록으로" onclick="location.href='community.jsp'">
-						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'">
-						<input type="button" value="댓글작성하기" onclick="location.href='community_under.jsp?ref=<%=dto.getWrite_ref() %>&lev=<%=dto.getWrite_lev() %>&step=<%=dto.getWrite_step() %>'">						
+					<td colspan="4" align="right" >
+						<input type="hidden" name="idx" class="writebutton writebutton:hover" value="<%=dto.getWrite_idx()%>">
+						<input type="submit" value="수정하기" class="writebutton writebutton:hover">
+						<input type="button" value="목록으로" onclick="location.href='community.jsp'" class="writebutton writebutton:hover">
+						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'" class="writebutton writebutton:hover">
+						<input type="button" value="댓글작성하기" onclick="location.href='community_under.jsp?ref=<%=dto.getWrite_ref() %>&lev=<%=dto.getWrite_lev() %>&step=<%=dto.getWrite_step() %>'" class="writebutton writebutton:hover">						
 					</td>
 				</tr>
 			</tfoot>
@@ -84,7 +101,14 @@ h4{
 		<hr>
 		<fieldset>
 			<legend>댓글 보이는곳</legend>
-			<table>
+			<table border="1">
+			<thead>
+				<tr>
+					<th>작성자</th>
+					<th>댓글 내용</th>
+					<th colspan="4">선택지</th>
+				</tr>
+			</thead>
 			<tbody>
 			<%
 			ArrayList<WriteDTO> arr2=wdao.underList(ref);
@@ -93,25 +117,26 @@ h4{
 			if(arr2==null || arr2.size()==0){
 				%>
 				<tr>
-					<td colspan="2">등록된 댓글이 없습니다.</td>
+					<td colspan="4" align="center">등록된 댓글이 없습니다.</td>
 				</tr>
 				<% 
 			}else{
 				for(int i=0;i<arr2.size();i++){
 					%>
 					<tr>
-						<td>
-					<%
+						<td align="left">
+						<%=arr2.get(i).getWrite_writer() %>
+						</td>
+						<td id="undercontent">
+						<%
 						for(int z=0;z<arr2.get(i).getWrite_lev();z++){
 							out.print("&nbsp;&nbsp;");
 						}
 						%>
-						<%=arr2.get(i).getWrite_writer() %>
-						
 						<%=arr2.get(i).getWrite_content() %>
 						</td>
-						<td><input type="button" value="삭제하기" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>'"></td>
-						<td><input type="button" value="답글하기" onclick="location.href='under_answer.jsp?ref=<%=arr2.get(i).getWrite_ref() %>&lev=<%=arr2.get(i).getWrite_lev() %>&step=<%=arr2.get(i).getWrite_step()%>&write_idx=<%=dto.getWrite_idx() %>'"></td>
+						<td><input type="button" value="삭제하기" class="writebutton writebutton:hover" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>'"></td>
+						<td><input type="button" value="답글하기" class="writebutton writebutton:hover" onclick="location.href='under_answer.jsp?ref=<%=arr2.get(i).getWrite_ref() %>&lev=<%=arr2.get(i).getWrite_lev() %>&step=<%=arr2.get(i).getWrite_step()%>&write_idx=<%=dto.getWrite_idx() %>&write_content=<%=arr2.get(i).getWrite_content()%>'"></td>
 						
 					</tr>
 					<% 

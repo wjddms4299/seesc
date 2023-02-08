@@ -10,7 +10,7 @@
 <%
 
 String booking_name = request.getParameter("booking_name")==null?"":request.getParameter("booking_name");
-String booking_tel = request.getParameter("phone1")==null?"":request.getParameter("phone1") + request.getParameter("phone2") + request.getParameter("phone3");
+String booking_tel = request.getParameter("phone1")==null?"":request.getParameter("phone1")+"-" + request.getParameter("phone2") +"-"+ request.getParameter("phone3");
 String inputtel = request.getParameter("phone1") +"-"+ request.getParameter("phone2") +"-"+ request.getParameter("phone3");
 String booking_pwd = request.getParameter("booking_pwd");
 

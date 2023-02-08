@@ -4,29 +4,74 @@
 <%@ page import="com.esc.write.*" %>
 <%@ page import="com.esc.userinfo.*" %>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO" scope="session"></jsp:useBean>
-<jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
+<%
+
+	
+	int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+	
+	int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+		
+
+
+%>
 <style>
 section{
 	width:1200px;
 }
-article table{
-	
-	width: 600px;
-	border-bottom: 1px solid dark;
-	border-left: 1px solid dark;
-	border-right:1px solid dark;
+ .select{ /*상단 select 박스*/
+     	 width: 80px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        font-size: 15px;
+        margin-left: 20px;
 }
 
-article table thead{
-	border-bottom: 3px double dark;
-	border-top: 3px double dark;
+
+#div2{
+	text-align: right;
 }
+.writedel{/*게시글삭제하기 버튼*/
+		
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4646CD;
+        color: white;
+        font-size: 16px;
+      }
+.writedel:hover {
+    background-color: #3e8e41;
+}
+
+.submenu{
+position: relative;
+width : 1200px;
+height : 50px;
+margin : 0px auto;
+left :380px;
+}
+table{
+  width: 900px;
+  border-collapse: collapse;
+  table-layout:fixed;
+  word-break:break-all;
+}
+a {
+	text-decoration: none;
+}
+
 
 </style>
 </head>
@@ -55,12 +100,15 @@ if(cp%pageSize==0)userGroup--;
 <section>
 	<article>
 		<h2>커뮤니티</h2>
-		<form name="fm" action=community.jsp>
-		<div>
-			<input type="button" value="자유 게시판" onclick="location.href='community.jsp'">
-			<input type="button" value="이벤트 게시판" onclick="location.href='community_eventcontent_list.jsp'">
-			<input type="button" value="멤버모집"	  onclick="location.href='memberboard.jsp'">
-			<select name="sort">
+		<div  class="submenu">
+			<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
+			<a href="/seesc/community/qna_list.jsp"><button class="rbutton"><span>QnA</span></button></a>
+			<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
+		</div>
+		<br><br><br>
+		<div id="div2">
+			<span><a href="/seesc/community/memberboard.jsp"><input type="button" value="멤버모집게시판" class="writedel"></a></span>
+			<select name="sort" class="select">
 				<option  value="0">번호순</option>
 				<option  value="1">조회수 순</option>
 				<option  value="2">작성일 순</option>
@@ -77,10 +125,8 @@ if(cp%pageSize==0)userGroup--;
 				
 				
 			</select>
-			<input type="submit" value="바꾸기">
-		
-		</div>
-		</form>
+			</div>
+		<br>
 		<table>
 			<thead>
 				<tr>
@@ -123,9 +169,24 @@ if(cp%pageSize==0)userGroup--;
 			</tbody>
 			<tfoot>
 			<tr>
-				<td colspan="5" align="right">
-				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'">
+				<%
+					if(manager==0){
+						%>
+						<td colspan="5" align="right">
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writebutton">
 				</td>
+				<% 
+					}else if(manager==1){
+						%>
+						<td colspan="5" align="right">
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"class="writebutton">
+				<input type="button" value="게시글삭제하기" class="writedel" onclick="location.href='content_del.jsp'">
+				</td>
+						<% 
+					}
+				
+				%>
+				
 			</tr>
 			<tr>
 				<td colspan="5" align="center"><!-- 페이징 들어갈 영역 -->

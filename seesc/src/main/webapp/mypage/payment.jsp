@@ -23,6 +23,7 @@ th, td {
 
 th {
   background-color: #f2f2f2;
+  color: black;
 }
 </style>
 <%
@@ -46,6 +47,7 @@ if(cp%pageSize==0)userGroup--;
 %>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
+	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/button.css">
 <body>
 <%@include file="/header.jsp" %>
 <section>
@@ -58,22 +60,27 @@ if(cp%pageSize==0)userGroup--;
 	<table>
 	<tfoot>
 			<tr>
-				<td colspan="4" align="center">
+				<td colspan="5" align="center">
 				<!-- ---------------- -->
 				<%
 				if(userGroup!=0){
-					%><a href="payment.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+					%><a href="payment.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>"><button class="onebutton">&lt;&lt;</button></a><%
 				}
 				%>
 				<%
 				for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-					%>&nbsp;&nbsp;<a href="payment.jsp?cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<%
+					if(cp==i){
+						%>&nbsp;&nbsp;<a href="payment.jsp?cp=<%=i%>"><button class = "prbutton"><%=i %></button></a>&nbsp;&nbsp;<%
+					}else{
+						%>&nbsp;&nbsp;<a href="payment.jsp?cp=<%=i%>"><button class = "pagebutton"><%=i %></button></a>&nbsp;&nbsp;<%
+					}
+					
 					if(i==totalPage)break;
 				}
 				%>
 				<%
 				if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-					%><a href="payment.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
+					%><a href="payment.jsp?cp=<%=(userGroup+1)*pageSize+1%>"><button class="nextbutton">&gt;&gt;</button></a><%
 				}
 				%>
 				<!-- ---------------- -->
