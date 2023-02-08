@@ -49,6 +49,7 @@ table{
   border-collapse: collapse;
   table-layout:fixed;
   word-break:break-all;
+
 }
 .th{ /*제목*/
 	margin : 10px auto;
@@ -80,6 +81,7 @@ font-weight: bold;
 text-align : center;
 background-color: white;
 color : black;
+padding : 10px;
 }
 .writelist td{/*일반글 리스트*/
 border-bottom: 1px dotted #444444;
@@ -253,7 +255,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
 								<%}
 							}else{%>
-								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">&nbsp;
+								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
 								<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
 							
 							<%} %>
@@ -308,8 +310,9 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						<!-- ---------------------------------------페이징---------------------------------------------------- -->
 					<tr>
 						<td colspan="7" align="center">
+						<input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=1 %><%=data%>'" value = "처음" class="onebutton">
 						<%if(pagegroup!=0){
-							%><input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=1 %><%=data%>'" value = "처음" class="onebutton">
+							%>
 							<input type="button" onclick = "location.href = 'qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%><%=data%>'" value = "이전" class="nextbutton">
 							<%} 	
 						
@@ -328,8 +331,9 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							if(pagegroup!=(totalpage/pageList-(totalpage%pageList==0?1:0))){
 								%>
 								<input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%><%=data%>'" value = "다음" class="nextbutton">
-								<input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=totalpage%><%=data%>'" value ="끝" class="onebutton">
+								
 							<%}%>
+							<input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=totalpage%><%=data%>'" value ="끝" class="onebutton">
 						</td>
 						</tr>
 						<tr><td colspan = "7"><br></td></tr>

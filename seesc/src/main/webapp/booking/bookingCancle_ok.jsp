@@ -48,7 +48,7 @@ return;
 		%>
 		<script>
 					window.alert('예약 취소되었습니다.');
-					location.href = '/seesc/mypage/payment.jsp';
+					location.href = '/seesc/mypage/mypage.jsp';
 					</script>
 
 		<%

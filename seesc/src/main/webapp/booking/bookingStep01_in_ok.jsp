@@ -26,18 +26,7 @@ if(thema_level_s==null || thema_level_s.equals("")){
 	<%
 	return;
 }
-int thema_level;
-try{
-	thema_level=Integer.parseInt(thema_level_s);
-}catch(NumberFormatException e){
-	%>
-	<script>
-	window.alert("난이도는 '숫자'만 입력해주세요.");
-	history.back();
-	</script>
-	<%
-	return;
-}
+int thema_level=Integer.parseInt(thema_level_s);
 
 String thema_people_min_s=request.getParameter("thema_people_min");
 if(thema_people_min_s==null || thema_people_min_s.equals("")){
