@@ -2,8 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.esc.write.*" %>
+<%@ page import="com.esc.userinfo.*" %>
 <jsp:useBean id="wdto" class="com.esc.write.WriteDTO"></jsp:useBean>
-<jsp:useBean id="udto" class="com.esc.userinfo.UserinfoDTO"></jsp:useBean>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,42 @@ textarea{
 #select{
 	text-align:right;
 }
+.communitybutton{
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+}
+.communitybutton:hover{
+	background-color: #3e8e41;
+	
+
+}
+
 </style>
+<%
+	String sid_s=(String)session.getAttribute("sid");
+	if(sid_s==null||sid_s.equals("")){
+		sid_s="";
+	}
+
+	
+
+int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+
+int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+	
+	String nick="";
+	UserinfoDTO dto=udao.userInfo(sid_s);
+	if(dto==null){
+		nick="";
+	}else{
+		nick=dto.getUser_nic();
+	}
+	
+%>
 <body>
 <%@include file="/header.jsp" %>
 <section>
@@ -31,7 +67,18 @@ textarea{
 					<input type="hidden" name="write_cate" value="free">
 			<table>
 					<tr>
-						<th>작성자<input type="text" name="write_writer"></th>
+					<%
+						if(sid_s.equals("")){
+							%>
+							<th>작성자<input type="text" name="write_writer"></th>
+							<% 
+						}else{
+							%>
+							<th>작성자<input type="text" name="write_writer" readonly placeholder="<%=nick%>" value="<%=nick%>"></th>
+							<% 
+						}
+					%>
+						
 						<th>비밀번호<input type="password" name="write_pwd"></th>
 					</tr>
 					<tr>
@@ -46,8 +93,8 @@ textarea{
 					</tr>
 			</table>
 				<div id="select">
-					<input type="button" value="취소하기" onclick="location.href='community.jsp'">
-					<input type="submit" value="글쓰기">
+					<input type="button" value="취소하기" onclick="location.href='community.jsp'" class="communitybutton communitybutton:hover">
+					<input type="submit" value="글쓰기" class="communitybutton communitybutton:hover">
 				</div>
 		</form>
 	</article>

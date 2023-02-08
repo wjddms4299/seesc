@@ -7,6 +7,21 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 </head>
+<style>
+.communitybutton{
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+}
+.communitybutton:hover{
+	background-color: #3e8e41;
+	
+
+}
+</style>
 <%
 String ref_s=request.getParameter("ref");
 int ref=Integer.parseInt(ref_s);
@@ -33,7 +48,7 @@ int step=Integer.parseInt(step_s);
 		<tbody>
 			<tr>
 				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" ></td>
-				<td><input type="submit" value="댓글 등록하기">	
+				<td><input type="submit" class="communitybutton communitybutton:hover " value="댓글 등록하기">	
 			</tr>
 		</tbody>	
 		</table>

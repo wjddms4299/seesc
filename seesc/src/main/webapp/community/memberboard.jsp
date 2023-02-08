@@ -9,25 +9,58 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css"/>
+<link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 </head>
 <style>
 section{
 	width:1200px;
 }
-article table{
+
+
+#div2{
+	text-align: right;
 	
-	width: 600px;
-	border-bottom: 1px solid dark;
-	border-left: 1px solid dark;
-	border-right:1px solid dark;
+
+}
+.submenu{
+position: relative;
+width : 1200px;
+height : 50px;
+margin : 0px auto;
+left :380px;
+}
+table{
+  width: 900px;
+  border-collapse: collapse;
+  table-layout:fixed;
+  word-break:break-all;
+
+  
 }
 
-article table thead{
-	border-bottom: 3px double dark;
-	border-top: 3px double dark;
+.writedel{/*게시글삭제하기 버튼*/
+		
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4646CD;
+        color: white;
+        font-size: 16px;
+      }
+.writedel:hover {
+    background-color: #3e8e41;
+}
+a {
+	text-decoration: none;
 }
 </style>
 <%
+
+int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+
+int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+
 int totalCnt=wdao.getTotalCnt();//DB로 부터 가져올 정보
 int listSize=5;//사용자 마음
 int pageSize=5;//사용자 마음
@@ -49,16 +82,32 @@ if(cp%pageSize==0)userGroup--;
 <section>
 	<article>
 		<h2>커뮤니티</h2>
-		<div>
-		<input type="button" value="자유게시판" onclick="location.href='community.jsp'">
-		<input type="button" value="이벤트게시판" onclick="location.href='community_eventcontent_list'.jsp">
-		<input type="button" value="멤버모집" onclick="location.href='memberboard.jsp'">
-		<select>
-			<option value="0">정렬순</option>
-			<option value="1">조회수 순</option> 
-			<option value="2">작성일 순</option>
-		</select>
+		<div  class="submenu">
+			<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
+			<a href="/seesc/community/qna_list.jsp"><button class="rbutton"><span>QnA</span></button></a>
+			<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
 		</div>
+		<br><br><br>
+		<div id="div2">
+			<span><a href="/seesc/community/memberboard.jsp"><input type="button" value="멤버모집게시판" class="writedel"></a></span>
+			<select name="sort" class="select">
+				<option  value="0">번호순</option>
+				<option  value="1">조회수 순</option>
+				<option  value="2">작성일 순</option>
+				<%
+				String sort_s=request.getParameter("sort");
+				int sort=0;
+				if(sort_s==null || sort_s.equals("")){
+					sort_s="0";
+					sort=Integer.parseInt(sort_s);	
+					
+				}else{
+					 sort=Integer.parseInt(sort_s);
+				} %>
+				
+				
+			</select>
+			</div>
 		<table>
 			<thead>
 				<tr>
@@ -83,11 +132,11 @@ if(cp%pageSize==0)userGroup--;
 						}else{
 							%>
 							<tr>
-							<td><%=arr.get(i).getWrite_idx() %></td>
-							<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title() %></a></td>
-							<td><%=arr.get(i).getWrite_writer() %></td>
-							<td><%=arr.get(i).getWrite_wdate() %></td>
-							<td><%=arr.get(i).getWrite_readnum() %></td>
+								<td><%=arr.get(i).getWrite_idx() %></td>
+								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title() %></a></td>
+								<td><%=arr.get(i).getWrite_writer() %></td>
+								<td><%=arr.get(i).getWrite_wdate() %></td>
+								<td><%=arr.get(i).getWrite_readnum() %></td>
 							</tr>
 							<%
 						}
@@ -119,7 +168,23 @@ if(cp%pageSize==0)userGroup--;
 					<td>
 				</tr>
 				<tr>
-					<td colspan="5"><input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"></td>
+					<%
+					if(manager==0){
+						%>
+						<td colspan="5" align="right">
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writebutton">
+				</td>
+				<% 
+					}else if(manager==1){
+						%>
+						<td colspan="5" align="right">
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"class="writebutton">
+				<input type="button" value="게시글삭제하기" class="writedel">
+				</td>
+						<% 
+					}
+				
+				%>
 				</tr>
 			</tfoot>
 		</table>
