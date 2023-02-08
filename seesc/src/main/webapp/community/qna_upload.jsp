@@ -43,7 +43,7 @@ margin-bottom: 20px;
 }
       
 table {
-width: 700px;
+width: 600px;
 margin: 0 auto;
 text-align: left;
 background-color: #FADCA5;
@@ -111,13 +111,6 @@ background-color: #FADCA5;
   }
 </style>
 
-  textarea {
-    width: 100%;
-    height: 50px;
-    border: none;
-    resize: none;
-  }
-</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>

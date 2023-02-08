@@ -3,6 +3,9 @@
 <%@ page import="com.esc.thema.*"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <%
+String img_name=request.getParameter("img_name");
+int img_idx=thdao.imgSelect(img_name);
+
 String thema_idx_s=request.getParameter("thema_idx");
 int thema_idx=Integer.parseInt(thema_idx_s);
 
@@ -29,11 +32,17 @@ select{margin:0px 950px;}
 #a2-2{font-size:22px;}
 .a2-3{margin-bottom:7px;}
 </style>
+<script>
+function open_popup(){
+	window.open('/seesc/booking/upload_popup2.jsp?thema_idx=<%=thema_idx%>','upload_popup2.jsp','width=550,height=203,top=100,left=300');
+}
+</script>
 </head>
 <body>
 <%@include file="/header.jsp"%>
 <section>
 <form name="bookingStep01_up" action="bookingStep01_up_ok.jsp">
+<input type="hidden" name="img_idx" value="<%=img_idx%>">
 <input type="hidden" name="thema_idx" value="<%=thema_idx%>">
 <article>
  <br><br>
@@ -47,7 +56,14 @@ select{margin:0px 950px;}
  <hr width="950">
 </article>
 <article id="a2">
- <img alt="방탈출 new" src="/seesc/thema_img/001.jpg" width="300" height="400" class="a2-0">
+ <table width="300" class="a2-0">
+  <tr height="400">
+  	<td><img src="/seesc/thema_img/<%=img_name==null || img_name.equals("")?thdao.imgSelect_N(thdao.imgSelectThema(thema_idx)):img_name%>" width='300' height='400'></td>
+  </tr>
+  <tr>
+  	<td><input type="button" value="이미지 올리기" onclick="open_popup();"></td>
+  </tr>
+ </table>
 </article>
 <article id="a3">
  <br><br><br><br>

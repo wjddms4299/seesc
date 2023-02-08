@@ -4,6 +4,8 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <%
+String thema_idx=request.getParameter("thema_idx");
+
 String savepath=request.getRealPath("/thema_img");
 MultipartRequest mr=new MultipartRequest(request,savepath,2097152,"utf-8",new DefaultFileRenamePolicy());
 
@@ -23,6 +25,6 @@ String msg=result>0?"이미지 업로드를 완료하였습니다.":"이미지 �
 %>
 <script>
 window.alert('<%=msg%>');
-window.opener.location.href='bookingStep01_in.jsp?img_name=<%=img_name%>';
+window.opener.location.href='bookingStep01_up.jsp?img_name=<%=img_name%>&thema_idx=<%=thema_idx%>';
 window.self.close();
 </script>

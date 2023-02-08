@@ -45,7 +45,7 @@ left :380px;
 }
 
 table{
-  width: 900px;
+  width: 600px;
   border-collapse: collapse;
   table-layout:fixed;
   word-break:break-all;
@@ -63,7 +63,7 @@ table{
 border-top : 2px double black ;
 color : red;
 text-align : center;
-background-color: #FADCA5;
+background-color: #c8c8c8;
 }
 
 .noticelist a{
