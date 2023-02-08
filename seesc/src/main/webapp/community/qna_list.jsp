@@ -45,7 +45,7 @@ left :380px;
 }
 
 table{
-  width: 900px;
+  width: 600px;
   border-collapse: collapse;
   table-layout:fixed;
   word-break:break-all;

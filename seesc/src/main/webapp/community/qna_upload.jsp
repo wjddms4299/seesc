@@ -43,7 +43,7 @@ margin-bottom: 20px;
 }
       
 table {
-width: 700px;
+width: 600px;
 margin: 0 auto;
 text-align: left;
 background-color: #FADCA5;
