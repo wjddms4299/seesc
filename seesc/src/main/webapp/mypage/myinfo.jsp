@@ -11,7 +11,7 @@
 </head>
 <style>
 table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
 }
 
@@ -26,6 +26,15 @@ th {
 
 input[type=text], input[type=password], select {
   width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=tel]{
+  width: 30%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -96,7 +105,7 @@ function open_nicCheck(){
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><input type="password" name="user_pwd"><h4>영문,숫자조합 8자이상</h4></td>
+			<td><input type="password" name="user_pwd"></td>
 			
 		</tr>
 		<tr>
@@ -114,7 +123,7 @@ function open_nicCheck(){
 		</tr>
 		<tr>
 			<th>이름</th>
-			<td><input type="text" value="<%=dto.getUser_name()%>" name="user_name"></td>
+			<td><input type="text" value="<%=dto.getUser_name()%>" name="user_name" readonly></td>
 		</tr>
 		<tr>
 			<th>휴대전화</th>

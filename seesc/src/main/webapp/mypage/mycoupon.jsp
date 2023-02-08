@@ -58,12 +58,12 @@ th {
 			for(int i=0;i<arr.size();i++){
 				%>
 				<tr>
-					<th><%=arr.get(i).getCoupon_idx() %></th>
-					<th><%=arr.get(i).getCoupon_name() %></th>
-					<th><%=arr.get(i).getCoupon_dc() %></th>
-					<th><%=arr.get(i).getCoupon_start() %></th>
-					<th><%=arr.get(i).getCoupon_end() %></th>
-					<th><%String couponuse=arr.get(i).getCoupon_use()>0?"미사용":"사용완료"; %><%=couponuse %></th>
+					<td><%=arr.get(i).getCoupon_idx() %></td>
+					<td><%=arr.get(i).getCoupon_name() %></td>
+					<td><%=arr.get(i).getCoupon_dc() %></td>
+					<td><%=arr.get(i).getCoupon_start() %></td>
+					<td><%=arr.get(i).getCoupon_end() %></td>
+					<td><%String couponuse=arr.get(i).getCoupon_use()>0?"미사용":"사용완료"; %><%=couponuse %></td>
 				</tr>
 				<%
 			}

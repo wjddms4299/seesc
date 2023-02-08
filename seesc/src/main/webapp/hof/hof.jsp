@@ -11,9 +11,20 @@
 </head>
 
 <style>
-
+.rankrel{
+position: fixed;
+left: 50px;
+bottom: 19px;
+z-index: 2;
+}
+	.rank{
+	width: 220px;
+	height: 415px;
+	text-align: center;
+	}
  .rank:nth-child(1) {
     text-align: center;
+    border: 3px double gold;
   }
   .rank:nth-child(1) span{
   color: gold;
@@ -23,6 +34,7 @@
   .rank:nth-child(2) {
     float: left;
     margin-right: 10px;
+    border: 3px double silver;
   }
   .rank:nth-child(2) span{
   color: silver;
@@ -32,12 +44,18 @@
   .rank:nth-child(3) {
     float: right;
     margin-left: 10px;
+    border: 3px double brown;
   }
   .rank:nth-child(3) span{
   color: brown;
   font-size: 30px;
   }
-
+  .name{
+  font-size: 20px;
+  }
+  .rank1{
+  width: 70%;
+  }
 </style>
 <script>
 function openhofUpload(){
@@ -98,6 +116,7 @@ if(thema==null||thema==""){
 		
 	</div>
 </article>
+<br><br>
 <article>
 	
 <%
@@ -110,6 +129,7 @@ if(arr==null||arr.size()==0){
 	</div>
 	<%
 }else{
+	%><div class="rank1"><%
 	for(int i=0;i<arr.size();i++){
 		if(arr.get(i)==null){
 			%>
@@ -124,7 +144,7 @@ if(arr==null||arr.size()==0){
 		
 		
 		<img src="/seesc/hof/hofimg/<%=arr.get(i).getHof_imgname()%>" width="200" height="300"><br>
-		<%=arr.get(i).getHof_name() %><br>
+		<a class="name"><%=arr.get(i).getHof_name() %></a><br>
 		<%=arr.get(i).getHof_date() %><br>
 		<%
 		int record1=arr.get(i).getHof_record();
@@ -136,23 +156,24 @@ if(arr==null||arr.size()==0){
 		<%
 		if(i==2)break;
 	}
+	%></div><%
 }
 %>
-	
-	<%
+</article>
+<%
 	int manager=0;
 	if(session.getAttribute("manager")!=null){
 		manager=(int)session.getAttribute("manager");
 	if(manager>0){
 		%>
-		<div>
-			<input type="button" value="기록올리기" onclick="openhofUpload();">
+		<div class="rankrel">
+			<input type="button" value="기록올리기" onclick="openhofUpload();" class="tbutton">
 		</div>
 		<%
 	}
 	}
 	%>
-</article>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section>
 <%@include file="../footer.jsp" %>
 </body>

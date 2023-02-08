@@ -54,19 +54,16 @@ table{
 
     padding: 10px;
     word-break:break-all;
-    background-color: #FFCC00;
+    background-color: #2C952C;
     color : black;
     text-align:center;
-    
 
 }
-
-
 .noticelist{/*공지 리스트*/
 border-top : 2px double black ;
 color : red;
 text-align : center;
-background-color: #FFCC00;
+background-color: #FADCA5;
 }
 
 .noticelist a{
@@ -75,11 +72,9 @@ color : red;
 .noticelist td{
 border-bottom: 1px dotted #444444;
 color : red;
+font-weight: bold;
 
 }
-
-
-
 
 .writelist{/*일반글 리스트*/
 text-align : center;
@@ -98,6 +93,7 @@ text-align : left;
 .tfoot{
 background-color: white;
 text-align : center;
+padding : 5px;
 }
 </style>
 </head>
@@ -153,20 +149,20 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<thead>
 					<tr>
 						<td colspan="6" style = "text-align:left;">
-						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.getTotalCnt(listname,content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+qnadao.getTotalCnt(listname,content)+"개");
-						%>
-						
+						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.getTotalCnt(listname,content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+qnadao.getTotalCnt(listname,content)+"개");%>
+					
+					
 						<%=searchmsg %>
 						</td>
 						<td align="right">
 						<select name="writeList"
 							onChange="window.location.href=this.value" class = "select">
-								<option>리스트수</option>
-								<option value="qna_list.jsp?listSize=5&listname=<%=listname%>&content=<%=content%>">5개씩</option>
-								<option value="qna_list.jsp?listSize=10&listname=<%=listname%>&content=<%=content%>">10개씩</option>
-								<option value="qna_list.jsp?listSize=15&listname=<%=listname%>&content=<%=content%>">15개씩</option>
-								<option value="qna_list.jsp?listSize=30&listname=<%=listname%>&content=<%=content%>">30개씩</option>
-								<option value="qna_list.jsp?listSize=50&listname=<%=listname%>&content=<%=content%>">50개씩</option>
+								<option value ="">리스트수</option>
+								<option value="qna_list.jsp?listSize=5&listname=<%=listname%>&content=<%=content%>"	<% out.println(writeList==5?"selected":"");%>>5개씩</option>
+								<option value="qna_list.jsp?listSize=10&listname=<%=listname%>&content=<%=content%>"	<% out.println(writeList==10?"selected":"");%>>10개씩</option>
+								<option value="qna_list.jsp?listSize=15&listname=<%=listname%>&content=<%=content%>"	<% out.println(writeList==15?"selected":"");%>>15개씩</option>
+								<option value="qna_list.jsp?listSize=30&listname=<%=listname%>&content=<%=content%>"	<% out.println(writeList==30?"selected":"");%>>30개씩</option>
+								<option value="qna_list.jsp?listSize=50&listname=<%=listname%>&content=<%=content%>"	<% out.println(writeList==50?"selected":"");%>>50개씩</option>
 						</select></td>
 					</tr>
 					<tr class="th">
@@ -301,31 +297,38 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						
 					</tr>
 						<!-- ------------------------------------------------------------------------------------------- -->
+						
+						
+	
+						
 						<!-- ---------------------------------------페이징---------------------------------------------------- -->
 					<tr>
 						<td colspan="7" align="center">
 						<%if(pagegroup!=0){
-							%><a href = "qna_list.jsp?userpage=<%=1 %><%=data%>">&lt;&lt;</a>
-							<a href = "qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%><%=data%>">이전</a>
+							%><input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=1 %><%=data%>'" value = "처음" class="onebutton">
+							<input type="button" onclick = "location.href = 'qna_list.jsp?userpage=<%=(pagegroup-1)*pageList+pageList%><%=data%>'" value = "이전" class="nextbutton">
 							<%} 	
 						
 						
 							for(int i=pagegroup*pageList+1;i<=pagegroup*pageList+pageList;i++){
 								%>
-								&nbsp;&nbsp;<a href = "qna_list.jsp?userpage=<%=i%><%=data%>"><%=i%></a>&nbsp;&nbsp;
-								
+									<%if(userpage==i){
+		%>	<input type="button" onclick = "location.href='qna_list.jsp?userpage=<%=i%><%=data%>'"value = "<%=i%>" class = "prbutton"><%
+		}else{
+			%>	<input type="button" onclick = "location.href='qna_list.jsp?userpage=<%=i%><%=data%>'"value = "<%=i%>" class = "pagebutton"><%
+		} %>
 								<%
 							if(i==totalpage)break;
 							}
 							
 							if(pagegroup!=(totalpage/pageList-(totalpage%pageList==0?1:0))){
 								%>
-								<a href = "qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%><%=data%>">다음</a>
-								&nbsp;<a href = "qna_list.jsp?userpage=<%=totalpage%><%=data%>">&gt;&gt;</a>
+								<input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=(pagegroup+1)*pageList+1%><%=data%>'" value = "다음" class="nextbutton">
+								<input type = "button" onclick ="location.href = 'qna_list.jsp?userpage=<%=totalpage%><%=data%>'" value ="끝" class="onebutton">
 							<%}%>
-						
 						</td>
 						</tr>
+						<tr><td colspan = "7"><br></td></tr>
 				</tfoot>
 			</table>
 		</article>

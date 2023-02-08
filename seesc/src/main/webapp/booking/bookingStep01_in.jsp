@@ -22,6 +22,11 @@ select{margin:0px 950px;}
 #a2-2{font-size:22px;}
 .a2-3{margin-bottom:7px;}
 </style>
+<script>
+function open_popup(){
+	window.open('/seesc/booking/upload_popup.jsp','upload_popup.jsp','width=450,height=203,top=100,left=300');
+}
+</script>
 </head>
 <body>
 <%@include file="/header.jsp"%>
@@ -34,12 +39,13 @@ select{margin:0px 950px;}
  <h3 class="a2-0"><input type="text" name="thema_name" size="25"></h3>
  <div class="a2-0">난이도:<input type="text" name="thema_level" size="3">&nbsp;&nbsp;
  					인원:<input type="text" name="thema_people_min" size="3">~<input type="text" name="thema_people_max" size="3">명&nbsp;&nbsp;
- 					시간:<input type="text" name="thema_time" size="6">분
+ 					시간:<input type="text" name="thema_time" size="6">분&nbsp;&nbsp;
  					가격:<input type="text" name="thema_price" size="9">원</div>
  <hr width="950">
 </article>
 <article id="a2">
- <img alt="방탈출 new" src="/seesc/thema_img/001.jpg" width="300" height="400" class="a2-0">
+ <!-- <table width="300" height="400" style="background-color:lightgray;text-align:center;" class="a2-0"><tr><td><a onclick="open_popup();" style="color:black;">이미지 올리기</a></td></tr></table> -->
+ <img src="/seesc/thema_img/11.jpg">
 </article>
 <article id="a3">
  <br><br><br><br>
