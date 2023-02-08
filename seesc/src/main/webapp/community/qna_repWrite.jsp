@@ -93,17 +93,13 @@ UserinfoDTO dto = userdao.userInfo(sid);
 							<td><input type="password" name="write_pwd" maxlength="50"
 								required="required"  placeholder="비밀번호 분실시 글 수정과 삭제를 할 수 없습니다."></td>
 						</tr>
+						</tbody>
 						<tfoot class = "tfoot">
 						<tr><td>&nbsp;</td></tr>
-						<tr>
-							<td colspan ="2"><input type="submit"
+								<tr>
+								<td colspan="2" style = "text-align : center;">
+								<input type="submit"
 								value="등  록"> 
-								</tr>
-								<tr>
-								<td colspan = "2">&nbsp;</td>
-								</tr>
-								<tr>
-								<td colspan="2" style = "text-align : right;">
 								<input type="reset" value="다시 작성"> 
 								<input
 								type="button" value="목록"
@@ -111,7 +107,6 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						</tr>
 						<tr><td>&nbsp;</td></tr>
 						</tfoot>
-						</tbody>
 					</table>
 
 			</form>

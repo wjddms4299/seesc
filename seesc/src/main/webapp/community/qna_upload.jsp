@@ -87,14 +87,9 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						<tfoot class = "tfoot">
 						<tr><td>&nbsp;</td></tr>
 						<tr>
-							<td colspan ="2"><input type="submit"
+								<td colspan="2" style = "text-align :center;">
+							<input type="submit"
 								value="등  록"> 
-								</tr>
-								<tr>
-								<td colspan = "2">&nbsp;</td>
-								</tr>
-								<tr>
-								<td colspan="2" style = "text-align : right;">
 								<input type="reset" value="다시 작성"> 
 								<input
 								type="button" value="목록"

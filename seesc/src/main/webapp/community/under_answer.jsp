@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.esc.userinfo.*" %>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +12,26 @@
 <body>
 <%@include file="/header.jsp" %>
 <%
+
+String sid_s=(String)session.getAttribute("sid");
+if(sid_s==null||sid_s.equals("")){
+	sid_s="";
+}
+
+int user_idx=session.getAttribute("user_idx")==null || session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+
+int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+
+String nick="";
+UserinfoDTO dto=udao.userInfo(sid_s);
+if(dto==null){
+	nick="";
+}else{
+	nick=dto.getUser_nic();
+}
+
+
+
 String ref_s=request.getParameter("ref");
 int ref=Integer.parseInt(ref_s);
 String lev_s=request.getParameter("lev");
@@ -29,7 +51,17 @@ String content=request.getParameter("write_content");
 				<table>
 		<thead>
 			<tr>
-				<th>작성자 : <input type="text" name="write_writer"></th>
+				<%
+				if(sid_s==null || sid_s.equals("")){
+					%>
+					<th>작성자 :<input type="text" name="write_writer"></th>
+					<% 
+				}else{
+					%>
+					<th>작성자 :<input type="text" name="write_writer" readonly  value="<%=nick %>"></th>
+					<%
+				}
+				%>
 				<th>비밀번호 : <input type="password" name="write_pwd"></th>
 				<th><input type="checkbox" name="write_open" value="0">비밀 글</th>
 			</tr>
