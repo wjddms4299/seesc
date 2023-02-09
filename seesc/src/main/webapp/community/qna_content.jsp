@@ -89,7 +89,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 					</tr>
 					<% if(dto.getWrite_filename()!=null){%>
 					<tr>
-					<td colspan ="4" style = "text-align:center;"><img src="/seesc/community/userFile/<%=dto.getWrite_filename()%>" alt = "사용자업로드이미지 "></td>
+					<td colspan ="4" style = "text-align:center;"><img src="/seesc/community/userFile/<%=dto.getWrite_filename()%>" alt = "사용자업로드이미지 " style ="width :800px; height : 300px; object-fit: contain;"></td>
 					</tr>
 					<%} %>
 					<tr><th>내용</th>
@@ -112,7 +112,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 				<tr>
 				<td colspan="4" style = "text-align : center;">
 					<form name = "qna_rewrite" action="qna_repWrite.jsp" method ="post">
-					<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}">
+					<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}"style = "color : black; font-weight : bold;">
 					<input type="submit" value="답글">
 					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					<input type="hidden" name="write_idx" value="<%=write_idx%>">
@@ -131,7 +131,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 			<%}else if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%> <!-- 관리자 또는 작성자 본인이면 바로 삭제 할 수 있는 기능  -->
 				<tr>
 					<td colspan="4" style = "text-align : center;">
-						<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}">
+						<input type="submit" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}"style = "color : black; font-weight : bold;">
 						<input type="button" value="수정" onclick="location.href = 'qna_update.jsp?flag=userUpdate&write_idx=<%=write_idx%>'">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					</td>
@@ -152,8 +152,8 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
 						<input type="password" name="userinput_pwd" required="required">
-						<input type="submit" value="삭제" 
-						onclick="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){qna_wdu.action='qna_delete_ok.jsp';}">
+						<input type="submit" value="삭제" style = "color : black; font-weight : bold;"
+						onclick="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){qna_wdu.action='qna_delete_ok.jsp';}" >
 						<input type="submit" value="수정" onclick="javascript:qna_wdu.action='qna_update.jsp';">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 						</form>

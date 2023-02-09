@@ -57,7 +57,7 @@ text-align : left;
         border: 2px solid #FF8200;
       }
   
-      input[type="button"],input[type="reset"],  input[type="submit"]{
+      input[type="button"],input[type="reset"]{
         width: 100px;
         height: 40px;
         border: none;
@@ -65,10 +65,22 @@ text-align : left;
         background-color: #DC9146;
         color: white;
         font-size: 16px;
-        margin-left: 20px;
       }
-      input[type="button"]:hover, input[type="reset"]:hover ,  input[type="submit"]:hover{
+      input[type="button"]:hover, input[type="reset"]:hover {
     background-color: #D27328;
+	}
+    
+        input[type="submit"]{
+        width: 100px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4AB34A;
+        color: white;
+        font-size: 16px;
+      }
+     input[type="submit"]:hover{
+    background-color: #006400;
 	}
     
       
@@ -106,23 +118,17 @@ color : black;
         border: 2px solid #FF8200;
       }
       
-      
-        
-#secret input[type="button"],#secret input[type="reset"], #secret input[type="submit"]{
-        width: 80px;
+.delete {
+	  width: 80px;
         height: 40px;
         border: none;
         border-radius: 5px;
-        background-color: #DC9146;
+        background-color: #4AB34A;
         color: white;
         font-size: 16px;
         margin-left: 1px;
-      }
-      #secret input[type="button"]:hover,#secret input[type="reset"]:hover ,#secret input[type="submit"]:hover{
-    background-color: #D27328;
-	}
-    
-.bottom{
-border-bottom: 1px solid black;
-border-
+}
+
+.delete:hover{
+	    background-color: #006400;
 }
