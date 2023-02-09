@@ -27,7 +27,6 @@ if(result==userdao.LOGIN_OK){
 	int couend=coudao.couponEnd(user_idx);
 	%>
 	<script>
-	window.alert('환영합니다!');
 	opener.location.reload();
 	window.self.close();
 	</script>

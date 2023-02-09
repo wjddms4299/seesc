@@ -35,6 +35,7 @@ function open_nicCheck(){
       }
       
       fieldset {
+      	width: 100%
         border: 1px solid gray;
         padding: 20px;
         border-radius: 10px;
@@ -55,7 +56,7 @@ function open_nicCheck(){
       input[type="text"],
       input[type="password"],
       input[type="email"] {
-        width: 100%;
+        width: 70%;
         padding: 10px;
         font-size: 16px;
         border-radius: 5px;
@@ -77,6 +78,7 @@ function open_nicCheck(){
         border-radius: 5px;
         border: 1px solid lightgray;
         margin-bottom: 20px;
+        display: inline-block;
       }
       select{
      	 width: 100px;
@@ -116,16 +118,24 @@ function open_nicCheck(){
       input[type="submit"]:hover {
    		 background-color: #3e8e41;
 		}
-      
+      .article{
+      width:70%;
+      margin: 0px auto;
+      text-align: center;
+      }
 </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
 	<section>
 		<article>
-			<h2 align="center"> 회 원 가 입 </h2>
+			<br><br>
+<h1 class ="h1">회원가입</h1>
+         <br>
+           <hr width="130px">
+           <br>
 		</article>
-		<article>
+		<article class="article">
 			<fieldset>
 				<form name="memberJoin" action="memberJoin_ok.jsp">
 				<table align="center">

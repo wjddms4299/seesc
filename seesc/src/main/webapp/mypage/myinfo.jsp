@@ -22,10 +22,13 @@ th, td {
 
 th {
   background-color: #f2f2f2;
+  color: black;
 }
-
+td{
+	display: inline-block;
+}
 input[type=text], input[type=password], select {
-  width: 100%;
+  width: 90%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -71,6 +74,9 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 }
+.form{
+width:60%
+}
 </style>
 <script>
 function open_nicCheck(){
@@ -92,7 +98,7 @@ function open_nicCheck(){
 	int user_idx=(int)session.getAttribute("user_idx");
 	UserinfoDTO dto=userdao.userInfo(sid);
 	%>
-	<form name="memberJoin" action="myUpdate.jsp">
+	<form name="memberJoin" action="myUpdate.jsp" class="form">
 	<table>
 		<tr>
 			<th>아이디</th>

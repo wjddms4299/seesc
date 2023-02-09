@@ -26,6 +26,9 @@ z-index: 2;
     text-align: center;
     border: 6px double gold;
   }
+  .rank:nth-child(1):hover {
+    border: -6px double blue;
+  }
   .rank:nth-child(1) span{
   color: gold;
   font-size: 30px;
@@ -56,6 +59,10 @@ z-index: 2;
   .rank1{
   width: 70%;
   }
+  .themabt{
+  margin: 0px auto;
+  text-align: center;
+  }
 </style>
 <script>
 function openhofUpload(){
@@ -73,8 +80,12 @@ if(thema==null||thema==""){
 <body>
 <%@include file="../header.jsp" %>
 <section>
-<h1>명예의 전당</h1>
-<article>
+<br><br>
+<h1 class ="h1">명예의 전당</h1>
+         <br>
+           <hr width="130px">
+           <br>
+<article  class="themabt">
 	<div>
 		<%if(thema.equals("이젠401")){
 			%><a href="hof.jsp?thema=이젠401"><button class="rbutton"><span>이젠401</span></button></a><%
