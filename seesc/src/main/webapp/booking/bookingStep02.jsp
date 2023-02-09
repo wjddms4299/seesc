@@ -160,12 +160,15 @@ function applyCoupon(o){
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;
  			<select name="coupon_idx" id="coupon_idx" onchange="document.getElementById('money').value=booking_num.options[booking_num.selectedIndex].value.substring(4,booking_num.options[booking_num.selectedIndex].value.length-1);applyCoupon(this.options[this.selectedIndex].value)">
- 				<option value="0" onclick="resetMoney();">사용안함</option>
+ 				<option value="0">사용안함</option>
  				<%
  				if(cpdto!=null){
 	 				for(int i=0;i<cpdto.size();i++){
 	 					%>
-	 					<option value="<%=cpdto.get(i).getCoupon_idx()+"/"+cpdto.get(i).getCoupon_dc()%>"><%=cpdto.get(i).getCoupon_name()%>원 할인쿠폰</option>
+	 					<option value="<%=cpdto.get(i).getCoupon_idx()+"/"+cpdto.get(i).getCoupon_dc()%>"><%
+ 							StringBuffer coupon_dc_b=new StringBuffer(String.valueOf(cpdto.get(i).getCoupon_dc()));
+ 							coupon_dc_b.insert(coupon_dc_b.length()-3,",");
+ 							out.print(coupon_dc_b);%>원 할인쿠폰 - <%=cpdto.get(i).getCoupon_name()%></option>
 	 					<%
 	 				}
  				}
