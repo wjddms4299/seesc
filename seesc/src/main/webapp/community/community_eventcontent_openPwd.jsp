@@ -16,8 +16,9 @@ request.setCharacterEncoding("utf-8");
         border: none;
         border-radius: 10px;
         background-color: #FFA300;
-        color: white;
+        color: black;
         font-size: 15px;
+        font-weight: bold;
       }
 .listbutton:hover {
     background-color: #FF870C;
@@ -45,7 +46,7 @@ fieldset {
 <h2><b>비밀글</b> 입니다.
 <br><b>비밀번호</b>를 입력하세요!</h2>
 <br>
-<div><input type = "password" name ="inputpwd" required>&nbsp;<input type = "submit" class="listbutton" value = "확인 "></div>
+<div><input type = "password" name ="inputpwd" required>&nbsp;<input type = "submit" class="listbutton" value = "확인"></div>
 <br>
 </fieldset>
 </form>
