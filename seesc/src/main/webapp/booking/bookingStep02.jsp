@@ -63,7 +63,6 @@ ThemaDTO thdto=thdao.themaInfo(thema_idx);%>
 <style>
 section{width:1200px;margin:0px auto;}
 #a1{margin:0px 100px;}
-#a1-0{background:lightgray;}
 .a1-1{margin:40px auto;}
 .a2{font-size:17px;}
 #a2-1{margin:0px auto;}
@@ -92,22 +91,22 @@ function applyCoupon(o){
  <br><br>
  <h2 id="a1">예약하기</h2>
  <br>
- <h4 align="center">STEP01 날짜/테마 선택 &nbsp; <label id="a1-0">STEP02 정보입력</label> &nbsp; STEP03 예약확인</h4>
+ <h4 align="center"><img src="/seesc/thema_img/Step01_2.png" alt="STEP 01" height="100"> &nbsp; <img src="/seesc/thema_img/Step02_1.png" alt="STEP 02" height="90"> &nbsp; <img src="/seesc/thema_img/Step03_2.png" alt="STEP 03" height="100"></h4>
  <br><br>
  </article>
  <article>
  <table class="a1-1" border="1" cellspacing="0">
  	<tr height="40">
  		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="500">&nbsp;&nbsp;<%=thdto.getThema_name()%><input type="hidden" name="thema_name" value="<%=thdto.getThema_name()%>"></td>
+ 		<td width="500">&nbsp;&nbsp;&nbsp;&nbsp;<%=thdto.getThema_name()%><input type="hidden" name="thema_name" value="<%=thdto.getThema_name()%>"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
- 		<td>&nbsp;&nbsp;<%=time_date%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=time_date%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약시간</b></td>
- 		<td>&nbsp;&nbsp;<%
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%
  		switch(time_ptime){
 	 		case 1:out.print("10:00");break;
 	 		case 2:out.print("12:00");break;
@@ -119,12 +118,12 @@ function applyCoupon(o){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>게임시간</b></td>
- 		<td>&nbsp;&nbsp;<%=thdto.getThema_time()%>분<input type="hidden" name="thema_time" value="<%=thdto.getThema_time()%>분"></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=thdto.getThema_time()%>분<input type="hidden" name="thema_time" value="<%=thdto.getThema_time()%>분"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
- 		<td>&nbsp;&nbsp;
- 			<select name="booking_num" id="booking_num" onchange="document.getElementById('money').value=this.options[this.selectedIndex].value.substring(4,this.options[this.selectedIndex].value.length-1);document.getElementById('coupon_idx').value='0'">
+ 		<td>&nbsp;&nbsp;&nbsp;
+ 			<select name="booking_num" id="booking_num" onchange="document.getElementById('money').value=this.options[this.selectedIndex].value.substring(4,this.options[this.selectedIndex].value.length-1);document.getElementById('coupon_idx').value='0'" style="width:150px;height:30px;">
  				<%
  				for(int i=thdto.getThema_people_min();i<=thdto.getThema_people_max();i++){
  					%>
@@ -140,26 +139,27 @@ function applyCoupon(o){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약자</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_name" value="<%=user_name%>"></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="booking_name" value="<%=user_name%>" style="height:25px;width:100px;"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>연락처</b></td>
- 		<td>&nbsp;&nbsp;<select name="booking_tel1">
+ 		<td>&nbsp;&nbsp;&nbsp;
+ 			<select name="booking_tel1" style="width:80px;height:30px;">
  					<option value = "010">010
  					<option value = "016">016
  					<option value = "017">017
  					<option value = "018">018
  					<option value = "019">019
  				</select>
- 					- <input type="text" name="booking_tel2" value="<%=user_tel2%>" placeholder="숫자 4자리만 입력해주세요.">
- 					- <input type="text" name="booking_tel3" value="<%=user_tel3%>" placeholder="숫자 4자리만 입력해주세요.">
+ 					- <input type="text" name="booking_tel2" value="<%=user_tel2%>" placeholder="숫자 4자리만 입력해주세요." style="height:25px;width:120px;">
+ 					- <input type="text" name="booking_tel3" value="<%=user_tel3%>" placeholder="숫자 4자리만 입력해주세요." style="height:25px;width:120px;">
  		</td>
  	</tr>
  	<%if(user_idx!=null){%>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
- 		<td>&nbsp;&nbsp;
- 			<select name="coupon_idx" id="coupon_idx" onchange="document.getElementById('money').value=booking_num.options[booking_num.selectedIndex].value.substring(4,booking_num.options[booking_num.selectedIndex].value.length-1);applyCoupon(this.options[this.selectedIndex].value)">
+ 		<td>&nbsp;&nbsp;&nbsp;
+ 			<select name="coupon_idx" id="coupon_idx" onchange="document.getElementById('money').value=booking_num.options[booking_num.selectedIndex].value.substring(4,booking_num.options[booking_num.selectedIndex].value.length-1);applyCoupon(this.options[this.selectedIndex].value)" style="width:200px;height:30px;">
  				<option value="0">사용안함</option>
  				<%
  				if(cpdto!=null){
@@ -179,26 +179,26 @@ function applyCoupon(o){
  	<%}%>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b><input type="text" id="money" name="booking_money"
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<b><input type="text" id="money" name="booking_money"
  			value="<%
  				StringBuffer booking_money_b=new StringBuffer(String.valueOf(thdto.getThema_people_min()*thdto.getThema_price()));
  				booking_money_b.insert(booking_money_b.length()-3,",");
- 				out.print(booking_money_b);%>원" readonly></b></td>
+ 				out.print(booking_money_b);%>원" readonly style="height:25px;width:120px;"></b></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2" ><b>결제방식</b></td>
- 		<td>&nbsp;&nbsp;
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;
  			<input type="radio" name="booking_pay" value="0">무통장입금&nbsp;&nbsp;&nbsp;&nbsp;
  			<input type="radio" name="booking_pay" value="1">현장결제
  		</td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약 비밀번호</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_pwd"></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="booking_pwd" style="height:25px;width:100px;"></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>전달메세지</b></td>
- 		<td>&nbsp;&nbsp;<input type="text" name="booking_msg"></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="booking_msg" style="height:25px;width:450px;"></td>
  	</tr>
  </table>
  </article>
@@ -209,7 +209,7 @@ function applyCoupon(o){
  <div class="ddd">※ 당일 취소시에는 선결제약 환불이 되지 않으니 주의바랍니다.</div>
  <div class="ddd">※ 음주시 이용제한이 될 수 있으니 양해부탁드립니다.</div>
  </div>
- <div class="a1-1" style="border:1px solid black;width:850px;height:220px;overflow:auto;">
+ <div class="a1-1" style="border:1px solid white;width:850px;height:220px;overflow:auto;">
 	&nbsp;&nbsp;개인정보 수집, 이용 및 제공 등에 관한 고지사항
 	<br>
 	&nbsp;이용자 본인은 아래의 개인정보가 사실임을 확인하며, 아래와 같이 개인정보를 수집 및 이용하는 것에 동의합니다.
