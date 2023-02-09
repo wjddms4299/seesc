@@ -139,8 +139,8 @@ if(cp%pageSize==0)userGroup--;
 		<h2>커뮤니티</h2>
 		<div  class="submenu">
 			<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
-			<a href="/seesc/community/qna_list.jsp"><button class="rbutton"><span>QnA</span></button></a>
-			<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
+			<a href="/seesc/community/qna_list.jsp"><button class="tbutton"><span>QnA</span></button></a>
+			<a href="/seesc/community/community.jsp"><button class="rbutton"><span>자유게시판</span></button></a>
 		</div>
 		<br><br><br>
 		<div id="div2">
