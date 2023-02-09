@@ -39,6 +39,7 @@ if(time_date==null || time_date.equals("")){
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
 section{width:1200px;margin:0px auto;}
+a{text-decoration : none;color: white;}
 #a1{margin:0px 100px;}
 #a1-0{background:lightgray;}
 #a1-1{margin:20px auto;}
@@ -51,6 +52,8 @@ select{margin:0px 950px;}
 .a2-1{margin:10px 0px;}
 #a2-2{font-size:22px;}
 .a2-3{margin-bottom:7px;}
+
+.date:visited{font-size:30px;}
 </style>
 </head>
 <body>
@@ -130,15 +133,15 @@ select{margin:0px 950px;}
  		
  		if(w_i[z]==1){
  			%>
- 			<td id="a1-2"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>"><%out.print(d[z]);%></a></td>
+ 			<td id="a1-2" class="date"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>" style="color:red;"><%out.print(d[z]);%></a></td>
  			<%
  		}else if(w_i[z]==7){
  			%>
- 			<td id="a1-3"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>"><%out.print(d[z]);%></a></td>
+ 			<td id="a1-3" class="date"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>" style="color:blue;"><%out.print(d[z]);%></a></td>
  			<%
  		}else{
  			%>
- 			<td><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>"><%out.print(d[z]);%></a></td>
+ 			<td class="date"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>"><%out.print(d[z]);%></a></td>
  			<%
  		}
  		

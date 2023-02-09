@@ -55,7 +55,7 @@ table{
 	margin : 10px auto;
     padding: 10px;
     word-break:break-all;
-    background-color: #2C952C;
+    background-color: #FFF064;
     color : black;
     text-align:center;
 
@@ -64,7 +64,7 @@ table{
 border-top : 2px double black ;
 color : red;
 text-align : center;
-background-color: #c8c8c8;
+background-color: #DCFFDC;
 }
 
 .noticelist a{
@@ -229,13 +229,13 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						user_idx==arr.get(i).getUser_idx()&&user_idx!=0?"<img src='/seesc/img/meme.png' alt = 'me' style='width :25px; height:16px;'>":"";
 					%>
 					<!-- a태그 post방식으로 보내기 -->
+					<tr>
+						<td><%=arr.get(i).getWrite_idx()%></td>
+						<td class="write_title" colspan="3">
 					<form  id = "open_pwd" action = "qnaOpen_pwd.jsp" method = "post">
 									<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
 									<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
 									</form>
-					<tr>
-						<td><%=arr.get(i).getWrite_idx()%></td>
-						<td class="write_title" colspan="3">
 						<%
 						
 						
@@ -249,14 +249,14 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								/**관리자나 본인이 쓴글이면 비밀번호 필요 없음*/
 								if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
 									<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-									<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
+									<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;<%=newicon %></a>
 								<%}else{%>
 									<a href="#" onclick="document.getElementById('open_pwd').submit();">
-								<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
+								<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;<%=newicon %></a>
 								<%}
 							}else{%>
 								<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
-								<%=arr.get(i).getWrite_title()%>&nbsp;[<%=qnadao.commentNum(arr.get(i).getWrite_idx()) %>]<%=newicon %></a>
+								<%=arr.get(i).getWrite_title()%>&nbsp;<%=newicon %></a>
 							
 							<%} %>
 							</td>

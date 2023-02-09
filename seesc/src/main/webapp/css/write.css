@@ -33,6 +33,7 @@ background-color: white;
       
  th {
 font-size: 18px;
+width : 100px;
 padding: 10px;
 color :black;
 text-align : center;
@@ -93,4 +94,35 @@ background-color: white;}
 text-align : center;
 margin :0px auto;
 color : black;
+}
+
+
+#secret input[type="text"],
+  #secret input[type="password"]{
+        width: 150px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid #FF8200;
+      }
+      
+      
+        
+#secret input[type="button"],#secret input[type="reset"], #secret input[type="submit"]{
+        width: 80px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        background-color: #DC9146;
+        color: white;
+        font-size: 16px;
+        margin-left: 1px;
+      }
+      #secret input[type="button"]:hover,#secret input[type="reset"]:hover ,#secret input[type="submit"]:hover{
+    background-color: #D27328;
+	}
+    
+.bottom{
+border-bottom: 1px solid black;
+border-
 }

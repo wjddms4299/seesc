@@ -5,16 +5,27 @@
 <%@page import ="com.esc.userinfo.*" %>
 <jsp:useBean id="userdao" class="com.esc.userinfo.UserinfoDAO" scope = "session"></jsp:useBean>
 <%
+
+int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
+int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
+int write_notice = 0;
+
+if(manager==0){
+	%><script>
+	window.alert('관리자만 접근가능합니다.');
+	history.back();
+	</script>
+	
+<%return;}
+
 String write_title = request.getParameter("write_title");
 String write_ref = request.getParameter("write_ref");
 String write_lev = request.getParameter("write_lev");
 String write_step = request.getParameter("write_step");
 String write_content = request.getParameter("write_content");
-write_content = write_content.replace("\r\n","<br>");
+String write_pwd = request.getParameter("write_pwd");
 
-int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(int)session.getAttribute("user_idx");
-int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
-int write_notice = 0;
+write_content = write_content.replace("\r\n","<br>");
 %>
 <!DOCTYPE html>
 <html>
@@ -48,6 +59,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						<input type ="hidden" name = "write_ref" value = "<%=write_ref%>">
 						<input type = "hidden" name = "write_step" value = "<%=write_step%>">
 						<input type = "hidden" name = "write_lev" value = "<%=write_lev%>">
+						<input type = "hidden" name = "write_pwd" value = "<%=write_pwd%>">
 						
 						<tr>
 							<th>작성자</th>
@@ -87,11 +99,6 @@ UserinfoDTO dto = userdao.userInfo(sid);
 ----------------------------------------------------
 
 </textarea></td>
-						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td><input type="password" name="write_pwd" maxlength="50"
-								required="required"  placeholder="비밀번호 분실시 글 수정과 삭제를 할 수 없습니다."></td>
 						</tr>
 						</tbody>
 						<tfoot class = "tfoot">
