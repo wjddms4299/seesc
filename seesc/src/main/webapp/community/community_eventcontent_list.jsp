@@ -153,7 +153,11 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
 	%><a href="community_eventcontent_list.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
 }
 %>
-      			<!-- -------------------------------------- -->
+      		<br>
+      		<br>
+      		<br>
+      		
+      		
       		</td>
       	</tr>
       </tfoot>
@@ -164,12 +168,12 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
 			for(int i=0;i<notice.size();i++){
 		%>
 		<tr align="center">
-		<td style="color:blue;background-color:lightgray;">-공 지-</td>
-		<td style="background-color:lightgray;">
-		<a href="community_eventcontent_content.jsp?write_idx=<%=notice.get(i).getWrite_idx()%>"><%=notice.get(i).getWrite_title()%></a></td>
-		<td style="color:red;background-color:lightgray;"><%=notice.get(i).getWrite_writer()%></td>
-		<td style="background-color:lightgray;"><%=notice.get(i).getWrite_wdate()%></td>
-		<td style="background-color:lightgray;"><%=notice.get(i).getWrite_readnum()%></td>
+		<td style="color:red;background-color:#FFA300;"><b>-공 지-</b></td>
+		<td style="background-color:#FFA300;">
+		<a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=notice.get(i).getWrite_idx()%>"><b style="color:black;"><%=notice.get(i).getWrite_title()%></b></a></td>
+		<td style="color:red;background-color:#FFA300;"><%=notice.get(i).getWrite_writer()%></td>
+		<td style="color:black;background-color:#FFA300;"><%=notice.get(i).getWrite_wdate()%></td>
+		<td style="color:black;background-color:#FFA300;"><%=notice.get(i).getWrite_readnum()%></td>
 		</tr>
 		<%}
 			}%>
