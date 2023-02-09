@@ -8,6 +8,7 @@ int write_idx = request.getParameter("write_idx")==null||request.getParameter("w
 if(request.getParameter("write_pwd")!=null&&!request.getParameter("write_pwd").equals("")&&request.getParameter("inputpwd")!=null&&!request.getParameter("inputpwd").equals("")){
 	String write_pwd = request.getParameter("write_pwd");
 	String inputpwd = request.getParameter("inputpwd");
+	
 	if(write_pwd.equals(inputpwd)){
 		
 %>

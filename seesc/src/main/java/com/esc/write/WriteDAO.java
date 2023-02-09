@@ -624,4 +624,26 @@ public class WriteDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**답글이 있으면 삭제 못하게 하는 기능*/
+	public boolean refcount(int write_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String spl="select count(write_ref) from write where write_idx = ?";
+			ps=conn.prepareStatement(spl);
+			ps.setInt(1, write_idx);
+			
+		rs.next();
+			return rs.getInt(1)>1?true:false;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 }
