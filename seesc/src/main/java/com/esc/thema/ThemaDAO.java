@@ -379,5 +379,69 @@ public class ThemaDAO {
 			}
 		}
 	}
-
+	/**테마 정보 불러오기*/
+	public ArrayList<ThemaDTO> themaread(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from thema order by thema_idx desc";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<ThemaDTO> arr=new ArrayList<ThemaDTO>();
+			ThemaDTO dto=null;
+			while(rs.next()) {
+				int idx=rs.getInt("thema_idx");
+				int idx2=rs.getInt("img_idx");
+				String name=rs.getString("thema_name");
+				int level=rs.getInt("thema_level");
+				int people_min=rs.getInt("thema_people_min");
+				int people_max=rs.getInt("thema_people_max");
+				int thema_time=rs.getInt("thema_time");
+				int thema_price=rs.getInt("thema_price");
+				String thema_tag1=rs.getString("thema_tag1");
+				String thema_tag2=rs.getString("thema_tag2");
+				String thema_tag3=rs.getString("thema_tag3");
+				String thema_intro1=rs.getString("thema_intro1");
+				String thema_intro2=rs.getString("thema_intro2");
+				String thema_intro3=rs.getString("thema_intro3");
+			
+				dto=new ThemaDTO(idx, idx2, name, level, people_min, people_max, thema_time, thema_price, thema_tag1, thema_tag2, thema_tag3, thema_intro1, thema_intro2, thema_intro3);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+		
+	}
+	/* 이미지 번호를를 이용해서 이미지 이름을 가져오기*/
+	public  String imgread(int img_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from img where img_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, img_idx);
+			rs=ps.executeQuery();
+			rs.next();
+			String img_name=rs.getString("img_name");
+			
+			return img_name;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+		
+	}
 }
