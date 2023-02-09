@@ -82,6 +82,7 @@ function applyCoupon(o){
 <body>
 <%@include file="/header.jsp"%>
 <section>
+<div>
 <form name="bookingStep02" action="bookingStep02_ok.jsp">
 <input type="hidden" name="user_idx" value="<%=user_idx%>">
 <input type="hidden" name="thema_idx" value="<%=thema_idx%>">
@@ -253,15 +254,15 @@ function applyCoupon(o){
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="submit" value="예약하기"> &nbsp; <a href="bookingStep01.jsp"><input type="button" value="취소"></a>
+ 			<input type="submit" value="예약하기" style="height:40px;width:120px;background-color:#2EACF9;color:white;border-radius:5px;"> &nbsp; <a href="bookingStep01.jsp"><input type="button" value="취소" style="height:40px;width:120px;background-color:lightgray;border-radius:5px;"></a>
  		</td>
  	</tr>
  </table>
  <br>
  </article>
 </form>
+</div>
 </section>
-<hr width="1200">
 <%@include file="/footer.jsp"%>
 </body>
 </html>

@@ -36,7 +36,7 @@ section{width:1200px;margin:0px auto;}
 </style>
 <script>
 function open_popup(){
-	window.open('/seesc/booking/upload_popup2.jsp?thema_idx=<%=thema_idx%>','upload_popup2.jsp','width=550,height=203,top=100,left=300');
+	window.open('/seesc/booking/upload_popup2.jsp?thema_idx=<%=thema_idx%>','upload_popup2.jsp','width=550,height=213,top=100,left=300');
 }
 </script>
 </head>

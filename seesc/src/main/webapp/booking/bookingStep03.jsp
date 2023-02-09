@@ -27,6 +27,9 @@ int booking_pay_ok=Integer.parseInt(booking_pay_ok_s);
 String booking_money=request.getParameter("booking_money");
 
 String booking_msg=bdao.bookingMsg(booking_idx);
+if(booking_msg==null){
+	booking_msg="";
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -51,6 +54,7 @@ function popup_open(){
 <body>
 <%@include file="/header.jsp"%>
 <section>
+<div>
  <article>
  <br><br>
  <h2 id="a1">예약완료</h2>
@@ -159,14 +163,14 @@ function popup_open(){
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="button" value="예약 취소하기" onclick="popup_open();"> &nbsp; <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
+ 			<input type="button" value="예약 취소하기" onclick="popup_open();" style="height:40px;width:120px;background-color:lightgray;border-radius:5px;"> &nbsp; <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기" style="height:40px;width:120px;background-color:#2EACF9;color:white;border-radius:5px;"></a>
  		</td>
  	</tr>
  </table>
  <br>
  </article>
+</div>
 </section>
-<hr width="1200">
 <%@include file="/footer.jsp"%>
 </body>
 </html>

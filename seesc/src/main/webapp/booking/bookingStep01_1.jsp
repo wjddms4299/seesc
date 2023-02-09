@@ -48,7 +48,7 @@ select{margin:0px 960px;}
 #a2{width:500px;float:left;}
 #a3{width:580px;float:left;}
 .a2-0{margin:10px 150px;}
-.a2-1{margin:10px 0px;height:40px;width:120px;}
+.a2-1{margin:10px 0px;}
 #a2-2{font-size:22px;}
 .a2-3{margin-bottom:7px;}
 .button1{background-color:gray;color:lightgray;border-radius:5px;margin:10px 0px;height:40px;width:120px;}
@@ -251,7 +251,7 @@ for(int j=0;j<idx_name.size();j++){%>
 	 		}else{
 	 			out.print("value='10:00 예약가능' class='button2'");
 	 		}
-	 	}%> class="a2-1"></a> &nbsp;
+	 	}%>></a> &nbsp;
 	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=2"><input type="button" <%
 	 	if(time.after(ctime[1])){
 	 		out.print("value='12:00 예약마감' disabled class='button1'");
@@ -261,7 +261,7 @@ for(int j=0;j<idx_name.size();j++){%>
 	 		}else{
 	 			out.print("value='12:00 예약가능' class='button2'");
 	 		}
-	 	}%> class="a2-1"></a> &nbsp;
+	 	}%>></a> &nbsp;
 	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=3"><input type="button" <%
 	 	if(time.after(ctime[2])){
 	 		out.print("value='14:00 예약마감' disabled class='button1'");
@@ -271,7 +271,7 @@ for(int j=0;j<idx_name.size();j++){%>
 	 		}else{
 	 			out.print("value='14:00 예약가능' class='button2'");
 	 		}
-	 	}%> class="a2-1"></a><br>
+	 	}%>></a><br>
 	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=4"><input type="button" <%
 	 	if(time.after(ctime[3])){
 	 		out.print("value='16:00 예약마감' disabled class='button1'");
@@ -281,7 +281,7 @@ for(int j=0;j<idx_name.size();j++){%>
 	 		}else{
 	 			out.print("value='16:00 예약가능' class='button2'");
 	 		}
-	 	}%> class="a2-1"></a> &nbsp;
+	 	}%>></a> &nbsp;
 	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=5"><input type="button" <%
 	 	if(time.after(ctime[4])){
 	 		out.print("value='18:00 예약마감' disabled class='button1'");
@@ -291,7 +291,7 @@ for(int j=0;j<idx_name.size();j++){%>
 	 		}else{
 	 			out.print("value='18:00 예약가능' class='button2'");
 	 		}
-	 	}%> class="a2-1"></a> &nbsp;
+	 	}%>></a> &nbsp;
 	 <a href="bookingStep02.jsp?thema_idx=<%=idx_name.get(j)%>&time_date=<%=time_date%>&time_ptime=6"><input type="button" <%
 	 	if(time.after(ctime[5])){
 	 		out.print("value='20:00 예약마감' disabled class='button1'");
@@ -301,7 +301,7 @@ for(int j=0;j<idx_name.size();j++){%>
 	 		}else{
 	 			out.print("value='20:00 예약가능' class='button2'");
 	 		}
-	 	}%> class="a2-1"></a><br><br><br><br><br><br><br><br><br>
+	 	}%>></a><br><br><br><br><br><br><br><br><br>
 	</article>
 <%}%>
 <article>
