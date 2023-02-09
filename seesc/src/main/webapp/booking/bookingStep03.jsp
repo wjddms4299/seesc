@@ -33,7 +33,6 @@ String booking_money=request.getParameter("booking_money");
 <style>
 section{width:1200px;margin:0px auto;}
 #a1{margin:0px 100px;}
-#a1-0{background:lightgray;}
 #a1-1{margin:40px auto;}
 .a2{font-size:17px;}
 #a2-1{margin:0px auto;}
@@ -52,22 +51,22 @@ function popup_open(){
  <br><br>
  <h2 id="a1">예약완료</h2>
  <br>
- <h4 align="center">STEP01 날짜/테마 선택 &nbsp; STEP02 정보입력 &nbsp; <label id="a1-0">STEP03 예약확인</label></h4>
+ <h4 align="center"><img src="/seesc/thema_img/Step01_2.png" alt="STEP 01" height="100"> &nbsp; <img src="/seesc/thema_img/Step02_2.png" alt="STEP 02" height="100"> &nbsp; <img src="/seesc/thema_img/Step03_1.png" alt="STEP 03" height="110"></h4>
  <br><br>
  </article>
  <article>
  <table id="a1-1" border="1" cellspacing="0">
  	<tr height="40">
  		<td width="300" align="center" class="a2"><b>테마 (Room)</b></td>
- 		<td width="500">&nbsp;&nbsp;<%=thema_name%></td>
+ 		<td width="500">&nbsp;&nbsp;&nbsp;&nbsp;<%=thema_name%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약일 (Date)</b></td>
- 		<td>&nbsp;&nbsp;<%=time_date%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=time_date%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약시간</b></td>
- 		<td>&nbsp;&nbsp;<%
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%
  		int time_ptime_i=Integer.parseInt(time_ptime);
  		switch(time_ptime_i){
 	 		case 1:out.print("10:00");break;
@@ -80,26 +79,26 @@ function popup_open(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>게임시간</b></td>
- 		<td>&nbsp;&nbsp;<%=thema_time%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=thema_time%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>인원 (Player)</b></td>
- 		<td>&nbsp;&nbsp;<%=booking_num%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=booking_num%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약자</b></td>
- 		<td>&nbsp;&nbsp;<%=booking_name%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=booking_name%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>연락처</b></td>
- 		<td>&nbsp;&nbsp;<%=booking_tel%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=booking_tel%></td>
  	</tr>
  	<%
  	try{
 	 	if(user_idx!=null){%>
 	 	<tr height="40">
 	 		<td align="center" class="a2"><b>쿠폰 사용</b></td>
-	 		<td>&nbsp;&nbsp;<%
+	 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%
 			String coupon_idx_s=request.getParameter("coupon_idx");
 			int coupon_idx=Integer.parseInt(coupon_idx_s);
 			
@@ -126,11 +125,11 @@ function popup_open(){
 	}%>
  	<tr height="40">
  		<td align="center" class="a2"><b>참가요금</b></td>
- 		<td>&nbsp;&nbsp;<b><%=booking_money%></b></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=booking_money%></b></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>결제방식</b></td>
- 		<td>&nbsp;&nbsp;<%
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%
  		int booking_pay_i=Integer.parseInt(booking_pay);
  		switch(booking_pay_i){
 	 		case 0:out.print("무통장입금");break;
@@ -139,11 +138,11 @@ function popup_open(){
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>예약 비밀번호</b></td>
- 		<td>&nbsp;&nbsp;<%=booking_pwd%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=booking_pwd%></td>
  	</tr>
  	<tr height="40">
  		<td align="center" class="a2"><b>전달메세지</b></td>
- 		<td>&nbsp;&nbsp;<%=booking_msg%></td>
+ 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=booking_msg%></td>
  	</tr>
  </table>
  </article>
@@ -156,7 +155,7 @@ function popup_open(){
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="button" value="예약 취소하기" onclick="popup_open();"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
+ 			<input type="button" value="예약 취소하기" onclick="popup_open();"> &nbsp; <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
  		</td>
  	</tr>
  </table>

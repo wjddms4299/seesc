@@ -136,7 +136,7 @@ if(result==1){
 	int booking_idx=bdao.bookingIdx(thema_idx,time_date,time_ptime);%>
 	
 	<script>
-	location.href="bookingStep03.jsp?user_idx=<%=user_idx%>?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>&booking_money=<%=booking_money%>";
+	location.href="bookingStep03.jsp?user_idx=<%=user_idx%>&booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>&booking_money=<%=booking_money%>";
 	</script>
 <%}else{%>
 	<script>
