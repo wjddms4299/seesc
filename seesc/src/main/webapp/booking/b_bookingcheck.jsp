@@ -95,8 +95,8 @@ font-size: 18px;}
 					<option value = "018">018
 					<option value = "019">019
 					</select>
-					<input type="tel" name="phone2" pattern="[0-9]{4}" onclick="this.value=''"required>
-					<input type="tel" name="phone3" pattern="[0-9]{4}" onclick="this.value=''"required></li>
+					<input type="tel" name="phone2" pattern="[0-9]{4}" maxlength="4"  onclick="this.value=''"required>
+					<input type="tel" name="phone3" pattern="[0-9]{4}" maxlength="4"  onclick="this.value=''"required></li>
 					</td></tr>
 					<tr>
 					<th> 비밀번호 </th>

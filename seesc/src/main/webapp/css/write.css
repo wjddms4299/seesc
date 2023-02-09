@@ -45,7 +45,7 @@ background-color: #FF8200;
 color : black;
 text-align : left;
   background-color: white;
-   
+border-bottom: 1px solid black;
       }
       
       input[type="text"],
@@ -65,9 +65,11 @@ text-align : left;
         background-color: #DC9146;
         color: white;
         font-size: 16px;
+        font-weight: bold;
       }
       input[type="button"]:hover, input[type="reset"]:hover {
     background-color: #D27328;
+
 	}
     
         input[type="submit"]{
@@ -78,9 +80,13 @@ text-align : left;
         background-color: #4AB34A;
         color: white;
         font-size: 16px;
+        font-weight: bold;
+
       }
      input[type="submit"]:hover{
     background-color: #006400;
+
+ 
 	}
     
       
@@ -100,7 +106,9 @@ text-align : center;
 padding : 5px;
 }
 .tfoot td{
-background-color: white;}
+background-color: white;
+border-bottom: 0px;
+}
 
 .writelist{/*일반글 리스트*/
 text-align : center;
@@ -117,18 +125,4 @@ color : black;
         border-radius: 5px;
         border: 2px solid #FF8200;
       }
-      
-.delete {
-	  width: 80px;
-        height: 40px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4AB34A;
-        color: white;
-        font-size: 16px;
-        margin-left: 1px;
-}
-
-.delete:hover{
-	    background-color: #006400;
-}
+    
