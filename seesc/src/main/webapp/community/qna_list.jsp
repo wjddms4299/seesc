@@ -151,7 +151,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<thead>
 					<tr>
 						<td colspan="6" style = "text-align:left;">
-						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.getTotalCnt(listname,content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+qnadao.getTotalCnt(listname,content)+"개");%>
+						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.getTotalCnt(listname,content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+(qnadao.getTotalCnt(listname,content)==1?1:qnadao.getTotalCnt(listname,content))+"개");%>
 					
 					
 						<%=searchmsg %>
@@ -219,9 +219,14 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						Date nowDate = new Date();
 						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 						String today = simpleDateFormat.format(nowDate); 
-						
 						String dbdate= simpleDateFormat.format(arr.get(i).getWrite_wdate());
 						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'style = 'width:15px;height:15px;' >":"";
+						
+						
+						Date nowTime = new Date();
+						SimpleDateFormat time = new SimpleDateFormat("HH:mm"); 
+						String writetime = time.format(arr.get(i).getWrite_wdate());
+						String todaytime = today.equals(dbdate)?writetime:dbdate;
 						
 						
 						//내가쓴글 알려주기
@@ -261,7 +266,6 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						</tr>
 					<%
 					}%>
-					
 					
 					<%
 
@@ -318,11 +322,11 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								%>
 									<%if(userpage==i){
 		%>	<input type="button" onclick = "location.href='qna_list.jsp?userpage=<%=i%><%=data%>'"value = "<%=i%>" class = "prbutton"><%
-		}else{
-			%>	<input type="button" onclick = "location.href='qna_list.jsp?userpage=<%=i%><%=data%>'"value = "<%=i%>" class = "pagebutton"><%
-		} %>
+									}else{
+									%>	<input type="button" onclick = "location.href='qna_list.jsp?userpage=<%=i%><%=data%>'"value = "<%=i%>" class = "pagebutton"><%
+									} %>
 								<%
-							if(i==totalpage)break;
+								if(i==totalpage)break;
 							}
 							
 							if(pagegroup!=(totalpage/pageList-(totalpage%pageList==0?1:0))){

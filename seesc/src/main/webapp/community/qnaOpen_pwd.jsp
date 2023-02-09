@@ -36,6 +36,20 @@ text-align:center;
    		 background-color: #3e8e41;
 		}
       
+                input[type="button"] {
+        width: 80px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        background-color: #464646;
+        color: white;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+      input[type="button"]:hover {
+   		 background-color: #3c3c3c;
+		}
+      
 </style>
 </head>
 <body>
@@ -56,6 +70,7 @@ text-align:center;
 					<div style = "font-size:18px;">
 						비밀번호 <input type="password" name="inputpwd" required>
 						<input type="submit" value="확인">
+						<input type="button" value="뒤로" onclick = "javascript:history.back();">
 					</div>
 					<br><br>
 			</form>

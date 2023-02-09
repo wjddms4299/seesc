@@ -518,13 +518,18 @@ public class WriteDAO {
 	}
 	;
 	/**댓글 보여주기 관련 메서드*/
-	public ArrayList<WriteDTO> underList(int ref){
+	public ArrayList<WriteDTO> underList(int ref, int ls, int cp){
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="select * from write where write_cate=? and write_ref=? order by write_ref desc , write_step asc , write_lev asc";
+			//String sql="select * from write where write_cate=? and write_ref=? order by write_ref desc , write_step asc , write_lev asc";
+			int start = (cp - 1) * ls + 1;
+			int end = cp * ls;
+			String sql= "select * from (select rownum as rnum, a.* from (select * from write where write_cate=? and write_ref=? order by write_ref desc, write_step asc, write_lev asc )a)  where rnum>=? and rnum<=? ";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, "comments");
 			ps.setInt(2, ref);
+			ps.setInt(3, start);
+			ps.setInt(4, end);
 			rs=ps.executeQuery();
 			ArrayList<WriteDTO> arr=new ArrayList<WriteDTO>();
 			while(rs.next()){
@@ -668,22 +673,23 @@ public class WriteDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	/**답글이 있으면 삭제 못하게 하는 기능*/
-	public boolean refcount(int write_idx) {
+	/** 현재게시물에 있는 댓글의 총량을 알려주는 메서드*/
+	public int  getUnderTotal(int write_ref) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String spl="select count(write_ref) from write where write_idx = ?";
-			ps=conn.prepareStatement(spl);
-			ps.setInt(1, write_idx);
+			String sql="select count(write_idx) from write where write_ref=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, write_ref);
+			rs=ps.executeQuery();
+			rs.next();
+			int write_idx=rs.getInt(1);
 			
-		rs.next();
-			return rs.getInt(1)>1?true:false;
+			return write_idx;
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return -1;
 		}finally {
 			try {
-				
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();

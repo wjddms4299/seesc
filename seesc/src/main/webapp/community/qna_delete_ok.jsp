@@ -5,25 +5,21 @@
     <jsp:useBean id="qnadao" class="com.esc.write.QnADAO" scope="session"></jsp:useBean>
 
 <%
-
+int manager = session.getAttribute("manager") == null || session.getAttribute("manager").equals("")? 0: (int) session.getAttribute("manager");
 String userinput_pwd = request.getParameter("userinput_pwd");
 String write_idx = request.getParameter("write_idx");
 String write_pwd = request.getParameter("write_pwd");
 String flag = request.getParameter("flag");
 
-if(qnadao.refcount(Integer.parseInt(write_idx))){
-	%>
-	<script>
-			window.alert('답글이 있어 삭제할 수 없습니다. 관리자에게 연락주세요.');
-			history.back();
-	</script>
-<%
-return;
-}
-
 
 if(flag!=null && flag.equals("userDelete")){
-		
+		if(qnadao.refcount(Integer.parseInt(write_idx))>0 &&manager==0){%>
+			<script>
+			window.alert('답글이 있어 삭제할 수 없습니다. \n 관리자에게 문의하세요.');
+			history.back();
+			</script>
+			
+		<% return;}
 		if(qnadao.qna_delete(Integer.parseInt(write_idx))>0){%>
 			<script>
 			window.alert('삭제 완료되었습니다.');
@@ -41,6 +37,14 @@ if(flag!=null && flag.equals("userDelete")){
 
 
 if(userinput_pwd!=null&&userinput_pwd.equals(write_pwd)){
+	if(qnadao.refcount(Integer.parseInt(write_idx))>0&& manager==0){%>
+	<script>
+	window.alert('답글이 있어 삭제할 수 없습니다.\n 관리자에게 문의하세요.');
+	history.back();
+	</script>
+	
+<% return;}
+	
 	int result = qnadao.qna_delete(Integer.parseInt(write_idx));
 
 		if(result<0){

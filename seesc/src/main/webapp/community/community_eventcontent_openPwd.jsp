@@ -49,6 +49,7 @@ fieldset {
 <div><input type = "password" name ="inputpwd" required>&nbsp;<input type = "submit" class="listbutton" value = "확인"></div>
 <br>
 </fieldset>
+
 </form>
 </article>
 </section>

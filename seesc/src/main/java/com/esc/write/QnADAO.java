@@ -174,44 +174,44 @@ public class QnADAO {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			String sql = "";
-			int count = 0;
+			int count = 1;
 			switch (Listname) {
 			case "0":
 				sql = "select count(*) from write where write_cate = 'qna' and write_notice = 0";
 				ps = conn.prepareStatement(sql);
 				rs = ps.executeQuery();
 				rs.next();
-				count = rs.getInt(1);
+				count = rs.getInt(1)==0?1:rs.getInt(1);
 				break;
-			case "1":
-				sql = "select count(*) from write where write_cate = 'qna' and write_title like ?";
+			case "1"://제목
+				sql = "select count(*) from write where write_cate = 'qna' and write_title like ? and write_notice = 0";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				rs = ps.executeQuery();
 				rs.next();
-				count = rs.getInt(1);
+				count = rs.getInt(1)==0?1: rs.getInt(1);
 				break;
-			case "2":
-				sql = "select count(*) from write where write_cate = 'qna' and write_content like ?";
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, "%" + content + "%");
-
-				rs = ps.executeQuery();
-				rs.next();
-				count = rs.getInt(1);
-				break;
-			case "3":
-				sql = "select count(*) from write where write_cate = 'qna' and write_writer like ?";
+			case "2"://내용
+				sql = "select count(*) from write where write_cate = 'qna' and write_content like ? and write_notice = 0";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 
 				rs = ps.executeQuery();
 				rs.next();
-				count = rs.getInt(1);
+				count = rs.getInt(1)==0?1:rs.getInt(1);
+				break;
+			case "3"://작성자
+				sql = "select count(*) from write where write_cate = 'qna' and write_writer like ? and write_notice = 0";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+
+				rs = ps.executeQuery();
+				rs.next();
+				count = rs.getInt(1)==0?1: rs.getInt(1);
 				break;
 
-			case "4":
-				sql = "select count(*) from write where write_cate = 'qna' and write_writer like ? or write_content like ?";
+			case "4"://제목 본문
+				sql = "select count(*) from write where write_cate = 'qna' and write_notice = 0 and (write_title like ? or write_content like ?) ";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setString(2, "%" + content + "%");
@@ -219,7 +219,7 @@ public class QnADAO {
 				rs = ps.executeQuery();
 				rs.next();
 				
-				count = rs.getInt(1);
+				count = rs.getInt(1)==0?1:rs.getInt(1);
 				break;
 			}
 
@@ -228,7 +228,7 @@ public class QnADAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
+			return 1;
 		} finally {
 			try {
 				if (rs != null)
@@ -252,38 +252,37 @@ public class QnADAO {
 			int end = userpage * writeList;
 
 			String sql = "";
-
-			switch (Listname) {
-			case "0":
+			int list = Integer.parseInt(Listname);
+			switch (list) {
+			case 0://기본
 				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna'and write_notice = 0 order by write_ref desc,write_step asc)a) where r >=? and r<=?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, start);
 				ps.setInt(2, end);
-
 				break;
-			case "1":
-				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_title like ? order by write_idx desc)a) where r >=? and r<=?";
+			case 1://제목
+				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_title like ? order by write_idx desc)a) where r >=? and r<=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setInt(2, start);
 				ps.setInt(3, end);
 				break;
-			case "2":
-				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_content like ? order by write_idx desc)a) where r >=? and r<=?";
+			case 2://본문
+				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_content like ? order by write_idx desc)a) where r >=? and r<=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setInt(2, start);
 				ps.setInt(3, end);
 				break;
-			case "3":
-				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_writer like ? order by write_idx desc)a) where r >=? and r<=?";
+			case 3://작성자
+				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_writer like ? order by write_idx desc)a) where r >=? and r<=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setInt(2, start);
 				ps.setInt(3, end);
 				break;
-			case "4":
-				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_title like ? or write_content like ? order by write_idx desc)a) where r >=? and r<=?";
+			case 4://제목+본문
+				sql = "select * from(select rownum r,a.* from (select * from write where write_notice = 0 and write_cate = 'qna' and write_title like ? or write_content like ? order by write_idx desc)a) where r >=? and r<=? and write_notice = 0";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setString(2, "%" + content + "%");
@@ -810,27 +809,25 @@ public class QnADAO {
 	}
 	
 	/**답글이 있으면 삭제 못하게 하는 기능*/
-	public boolean refcount(int write_idx) {
+	public int refcount(int write_idx) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			int write_ref = refgroup(write_idx);
+			String sql = "select count(write_lev) from write where write_ref = (select write_ref from write where write_idx =?) and write_lev!=0";
 			
-			String spl="select count(write_lev) from write where write_ref = ? and write_lev!=0";
-			
-			ps=conn.prepareStatement(spl);
-			ps.setInt(1, write_ref);
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, write_idx);
 			rs = ps.executeQuery();
-					
-			rs.next();
-		
-			return rs.getInt(1)>0?true:false;
+			int count = 0;
+			if(rs.next()) {
+			count = rs.getInt(1);}
 			
+			 return count;
+			 
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return -1;
 		}finally {
 			try {
-				
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();

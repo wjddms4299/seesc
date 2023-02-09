@@ -8,10 +8,10 @@
 <%@ page import="com.esc.coupon.*"%>
 <jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
-Integer user_idx=(Integer)session.getAttribute("user_idx");
+Integer user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
 
-if(user_idx!=null){
-	Integer manager=(Integer)session.getAttribute("manager");
+if(user_idx!=0){
+	Integer manager=session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
 	if(manager==1){
 		%>
 		<script>
@@ -39,7 +39,7 @@ String user_name="";
 String user_tel1="";
 String user_tel2="";
 String user_tel3="";
-if(user_idx!=null){
+if(user_idx!=0){
 	UserinfoDTO udto=udao.bookingUserinfo(user_idx);
 	user_name=udto.getUser_name();
 	String user_tel=udto.getUser_tel();
@@ -83,7 +83,7 @@ function applyCoupon(o){
 <%@include file="/header.jsp"%>
 <section>
 <form name="bookingStep02" action="bookingStep02_ok.jsp">
-<input type="hidden" name="user_idx" value="<%=user_idx!=null?user_idx:""%>">
+<input type="hidden" name="user_idx" value="<%=user_idx%>">
 <input type="hidden" name="thema_idx" value="<%=thema_idx%>">
 <input type="hidden" name="time_date" value="<%=time_date%>">
 <input type="hidden" name="time_ptime" value="<%=time_ptime%>">
@@ -155,7 +155,7 @@ function applyCoupon(o){
  					- <input type="text" name="booking_tel3" value="<%=user_tel3%>" placeholder="숫자 4자리만 입력해주세요." style="height:25px;width:120px;">
  		</td>
  	</tr>
- 	<%if(user_idx!=null){%>
+ 	<%if(user_idx!=0){%>
  	<tr height="40">
  		<td align="center" class="a2"><b>쿠폰 사용</b></td>
  		<td>&nbsp;&nbsp;&nbsp;
