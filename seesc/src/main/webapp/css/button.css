@@ -61,12 +61,12 @@ background: #3e8e41;
         height: 30px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color: #4AB34A;
         color: white;
         font-size: 16px;
       }
 .writebutton:hover {
-    background-color: #0000CD;
+    background-color: #006400;
 }
 .listbutton{/*글목록 버튼*/
 		width: 50px;

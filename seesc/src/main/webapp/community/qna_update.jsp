@@ -99,7 +99,7 @@ return;
 						<tr><td colspan="2">&nbsp;</td></tr>
 					<tr>
 						<td colspan = "2" style = "text-align : center;"><input type="submit" value="수 정">
-						<input type="reset" value="다시 작성"><input type="button" value="취소"
+						<input type="reset" value="다시 작성"> <input type="button" value="취소"
 							onclick="history.back();"></td>
 					</tr>
 					
