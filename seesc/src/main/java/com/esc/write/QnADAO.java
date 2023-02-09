@@ -243,7 +243,7 @@ public class QnADAO {
 		}
 
 	}
-
+	
 	/** QnA 게시글 리스트 출력 메서드 */
 	public ArrayList<WriteDTO> writeQnAList(int userpage, int writeList, String Listname, String content) {
 		try {
@@ -836,18 +836,55 @@ public class QnADAO {
 		}
 	}
 
+	
+	/**나의 문의 목록 총 게시물*/
+	public int getTotalCnt(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql =
+			"select count(*) from (select * from write where write_notice =0 and user_idx =? or write_ref in(select write_ref from write where user_idx=?))";	
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			ps.setInt(2, user_idx);
+			rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			
+			return count==0?1:count; // 0이라는 상황만들지않기 페이징은 하나라도 보여줘야함.
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 	/**내가 작성한 글 가져오기 관리자 답변까지*/
-	public ArrayList<WriteDTO> userWriteList(int user_idx) {
+	public ArrayList<WriteDTO> userWriteList(int user_idx,int ls,int cp) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			
+			int start = (cp-1)*ls+1;
+			int end = cp * ls;
 				String sql =
+
+"select * from "
++ "(select rownum as rnum,a.* from "
++ "(select * from write where write_notice =0 and user_idx =? or write_ref in(select write_ref from write where user_idx=?) "
++ "order by write_ref desc,write_step asc)a)b "
++ "where rnum>= ? and rnum<=? ";
 				
-				"select * from write where write_notice =0 and user_idx =? or write_ref in(select write_ref from write where user_idx=?) order by write_ref desc,write_step asc";	
-						
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, user_idx);
 				ps.setInt(2, user_idx);
+				ps.setInt(3, start);
+				ps.setInt(4, end);
 			
 				rs = ps.executeQuery();
 				ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();

@@ -74,12 +74,40 @@ int user_idx = session.getAttribute("user_idx") == null || session.getAttribute(
 int manager = session.getAttribute("manager") == null || session.getAttribute("manager").equals("") ? 0
 		: (Integer) session.getAttribute("manager");
 int write_idx = request.getParameter("write_idx")==null||request.getParameter("write_idx").equals("")?1:Integer.parseInt(request.getParameter("write_idx"));
+
+int totalCnt = qnadao.getTotalCnt(user_idx); 
+int listSize = 10; 
+int pageSize = 5; 
+
+String cp_s = request.getParameter("cp");
+if (cp_s == null || cp_s.equals("")) { 
+	cp_s = "1";
+}
+int cp = Integer.parseInt(cp_s); 
+
+// 1. 총페이지 수 구하기
+int totalPage = totalCnt / listSize + 1;
+if (totalCnt % listSize == 0)
+	totalPage--;
+
+//사용자가 어떤 그룹에 속해있는지 알기
+int userGroup = cp / pageSize;
+if (cp % pageSize == 0)
+	userGroup--;
 %>
 <body>
 	<%@include file="/header.jsp"%>
 
 	<section>
-		<article><br><br><br>
+		<article>
+			<div class = "submenu">
+	<br>
+	<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
+	<a href="/seesc/community/qna_list.jsp"><button class="rbutton"><span>QnA</span></button></a>
+	<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
+	</div>
+		
+		<br><br><br>
 			<h1 class ="h1">내문의내역</h1>
 			<br>
 			  <hr width="130px">
@@ -96,7 +124,7 @@ int write_idx = request.getParameter("write_idx")==null||request.getParameter("w
 				</thead>
 				<tbody class = "writelist">
 					<%
-					ArrayList<WriteDTO> arr = qnadao.userWriteList(user_idx);
+					ArrayList<WriteDTO> arr = qnadao.userWriteList(user_idx,listSize, cp);
 					if(user_idx==0){%>
 					
 					<tr><td colspan ="7">비회원은 조회할 수 없습니다.</td></tr>
@@ -168,7 +196,37 @@ int write_idx = request.getParameter("write_idx")==null||request.getParameter("w
 										<tr><td colspan="7"><br></td></tr>
 						
 										<tr><td colspan="7"><br></td></tr>
+										
+										
+						<tr>
+						<td colspan="7" align="center">
+						<input type = "button" onclick ="location.href = 'qna_mywriteList.jsp?cp=<%=1 %>'" value = "처음" class="onebutton">
+						<%if(userGroup != 0){
+							%>
+							<input type="button" onclick = "location.href = 'qna_mywriteList.jsp?cp=<%=(userGroup - 1)* pageSize + pageSize%>'" value = "이전" class="nextbutton">
+							<%} 	
 						
+						
+							for(int i = userGroup * pageSize + 1; i <= userGroup * pageSize + pageSize; i++){
+								%>
+									<%if(cp==i){
+		%>	<input type="button" onclick = "location.href='qna_mywriteList.jsp?cp=<%=i%>'"value = "<%=i%>" class = "prbutton"><%
+									}else{
+									%>	<input type="button" onclick = "location.href='qna_mywriteList.jsp?cp=<%=i%>'"value = "<%=i%>" class = "pagebutton"><%
+									} %>
+								<%
+								if(i==totalPage)break;
+							}
+							
+							if(userGroup != (totalPage / pageSize - (totalPage % pageSize == 0 ? 1 : 0))){
+								%>
+								<input type = "button" onclick ="location.href = 'qna_mywriteList.jsp?cp=<%=(userGroup+1)*pageSize+1%>'" value = "다음" class="nextbutton">
+								
+							<%}%>
+							<input type = "button" onclick ="location.href = 'qna_mywriteList.jsp?cp=<%=totalPage%>'" value ="끝" class="onebutton">
+						</td>
+						</tr>
+						<tr><td colspan = "7"><br></td></tr>
 						</tfoot>
 				</tbody>
 			</table>
