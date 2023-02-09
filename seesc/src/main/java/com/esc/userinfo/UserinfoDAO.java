@@ -194,6 +194,43 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	
+	
+	/**회원 정보 id로 불러오기*/
+	
+	public UserinfoDTO userInfo_Idx(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from userinfo where user_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			rs=ps.executeQuery();
+			UserinfoDTO dto=null;
+			if(rs.next()) {
+				String user_id=rs.getString("user_id");
+				int manager = rs.getInt("manager");
+				String user_pwd=rs.getString("user_pwd");
+				String user_nic=rs.getString("user_nic");
+				int user_se=rs.getInt("user_se");
+				String user_name=rs.getString("user_name"); 
+				Date user_birth=rs.getDate("user_birth"); 
+				String user_tel=rs.getString("user_tel"); 
+				String user_email=rs.getString("user_email"); 
+				Date user_date=rs.getDate("user_date");
+				dto=new UserinfoDTO(user_idx, manager, user_id, user_pwd, user_nic, user_se, user_name, user_birth, user_tel, user_email, user_date);
+			}
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 	/**내정보 업데이트*/
 	public int userUpdate(String user_id,String user_nic,String user_name,String tel,String user_email,String user_pwd) {
 		try {

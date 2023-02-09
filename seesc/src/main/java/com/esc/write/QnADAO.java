@@ -783,5 +783,59 @@ public class QnADAO {
 			}
 		}
 	}
+	/**ref구하기*/
+	public int refgroup(int write_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String spl="select write_ref from write where write_idx =?";
+			ps=conn.prepareStatement(spl);
+			ps.setInt(1, write_idx);
+			rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			
+			return count;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	
+	/**답글이 있으면 삭제 못하게 하는 기능*/
+	public boolean refcount(int write_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			int write_ref = refgroup(write_idx);
+			
+			String spl="select count(write_lev) from write where write_ref = ? and write_lev!=0";
+			
+			ps=conn.prepareStatement(spl);
+			ps.setInt(1, write_ref);
+			rs = ps.executeQuery();
+					
+			rs.next();
+		
+			return rs.getInt(1)>0?true:false;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 
 }

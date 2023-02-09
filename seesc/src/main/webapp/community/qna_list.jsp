@@ -232,13 +232,8 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					<tr>
 						<td><%=arr.get(i).getWrite_idx()%></td>
 						<td class="write_title" colspan="3">
-					<form  id = "open_pwd" action = "qnaOpen_pwd.jsp" method = "post">
-									<input type ="hidden" name = "write_pwd" value="<%=arr.get(i).getWrite_pwd()%>">
-									<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
-									</form>
+					
 						<%
-						
-						
 						for(int z=0; z<arr.get(i).getWrite_lev();z++){
 							out.println("&nbsp;&nbsp;");
 							}
@@ -251,7 +246,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 									<a href="qna_content.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>">
 									<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;<%=newicon %></a>
 								<%}else{%>
-									<a href="#" onclick="document.getElementById('open_pwd').submit();">
+									<a href="qnaOpen_pwd.jsp?write_idx=<%=arr.get(i).getWrite_idx()%>&write_pwd=<%=arr.get(i).getWrite_pwd()%>">
 								<img src="/seesc/img/ico_lock.gif" alt = "비밀글" class = "lock">&nbsp;<%=arr.get(i).getWrite_title()%>&nbsp;<%=newicon %></a>
 								<%}
 							}else{%>
@@ -264,9 +259,11 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							<td><%=arr.get(i).getWrite_wdate()%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>
 						</tr>
-
 					<%
-					}
+					}%>
+					
+					
+					<%
 
 					}
 					%>

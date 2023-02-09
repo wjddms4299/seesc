@@ -13,29 +13,59 @@
 <title>Insert title here</title>
 </head>
 <style>
-table{
-	margin:0px auto;
+table {
+width: 800px;
+margin: 0 auto;
+text-align: center;
+background-color: white;
+
 }
+      
+ th {
+font-size: 18px;
+padding: 10px;
+color :black;
+text-align : center;
+background-color: #4646CD;
+        
+
+      }
+ td{
+color : black;
+text-align : center;
+  background-color: white;
+}
+tfoot{
+
+	text-align: center;
+}  
 textarea{
-	text-align: left;	
+	text-align: left;
+	border-radius: 5px;	
 }
 #select{
 	text-align:right;
 }
-.communitybutton{
+.writedel{/*게시글삭제하기 버튼*/
+		
         height: 30px;
         border: none;
         border-radius: 5px;
-        background-color: #4CAF50;
+        background-color: #4646CD;
         color: white;
         font-size: 16px;
+      }
+.writedel:hover {
+    background-color: #3e8e41;
 }
-.communitybutton:hover{
-	background-color: #3e8e41;
-	
-
-}
-
+     input[type="text"],
+      input[type="password"]{
+        width: 200px;
+        padding: 7px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid black;
+      }
 </style>
 <%
 	String sid_s=(String)session.getAttribute("sid");
@@ -61,8 +91,9 @@ int manager=session.getAttribute("manager")==null || session.getAttribute("manag
 <body>
 <%@include file="/header.jsp" %>
 <section>
-	<h3> 자유게시판 글쓰기</h3>
+	<h2> 자유게시판 글쓰기</h2>
 	<article>
+		<fieldset>
 		<form name="community" action="community_write_ok.jsp" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="write_cate" value="free">
 			<table>
@@ -93,12 +124,12 @@ int manager=session.getAttribute("manager")==null || session.getAttribute("manag
 					</tr>
 			</table>
 				<div id="select">
-					<input type="button" value="취소하기" onclick="location.href='community.jsp'" class="communitybutton communitybutton:hover">
-					<input type="submit" value="글쓰기" class="communitybutton communitybutton:hover">
+					<input type="button" value="취소하기" onclick="location.href='community.jsp'" class="writedel">
+					<input type="submit" value="글쓰기" class="writedel">
 				</div>
 		</form>
+		</fieldset>
 	</article>
-	
 </section>
 <%@include file="/footer.jsp" %>
 </body>

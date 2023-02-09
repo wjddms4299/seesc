@@ -17,6 +17,7 @@ int comm_idx = request.getParameter("comm_idx")==null||request.getParameter("com
 
 
 WriteDTO dto = qnadao.writeQnAContent(write_idx);
+
 if (dto == null||dto.equals("")) {
 %>
 <script>
@@ -25,6 +26,14 @@ if (dto == null||dto.equals("")) {
 </script>
 <%
 return;
+}
+
+UserinfoDTO udto = userdao.userInfo_Idx(dto.getUser_idx());
+boolean writer_m;
+if(udto!=null&&!udto.equals("")){
+	writer_m = udto.getManager()!=0?true:false;
+}else{
+	writer_m = false;
 }
 
 //게시글 오늘 날짜일경우 표시하기
@@ -49,10 +58,6 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-<%
-	sid = (String) session.getAttribute("sid");
-	UserinfoDTO udto = userdao.userInfo(sid);
-%>
 	
 	<section>
 		<!-- ----------------------------본문 글보기--------------------------------------------- -->
@@ -103,13 +108,13 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 							<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 						</td>
 					</tr>
-				<% }else if(manager==1 && user_idx != dto.getUser_idx()&&user_idx!=0 && dto.getWrite_notice()==0){%> <!-- 관리자 또는 작성자 본인이면 바로 삭제 할 수 있는 기능  -->
+				<% }else if(manager==1 && user_idx != dto.getUser_idx()&&user_idx!=0 && dto.getWrite_notice()==0){%> <!-- 관리자면 답글 쓸 수 있음 -->
 				<tr>
 				<td colspan="4" style = "text-align : center;">
 					<form name = "qna_rewrite" action="qna_repWrite.jsp" method ="post">
-					<input type="button" value="삭제" onclick ="location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'">
-					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
+					<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}">
 					<input type="submit" value="답글">
+					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					<input type="hidden" name="write_idx" value="<%=write_idx%>">
 					<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
 					<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
@@ -126,12 +131,18 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 			<%}else if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%> <!-- 관리자 또는 작성자 본인이면 바로 삭제 할 수 있는 기능  -->
 				<tr>
 					<td colspan="4" style = "text-align : center;">
-						<input type="button" value="삭제" onclick ="location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'">
+						<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}">
 						<input type="button" value="수정" onclick="location.href = 'qna_update.jsp?flag=userUpdate&write_idx=<%=write_idx%>'">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					</td>
 				</tr>
-				<%}else {%> <!-- 비회원이면 비밀번호 입력후 수정과 삭제 가능하게 -->
+				<%}else if(manager==0&&writer_m){%> <!-- 관리자글은 수정 삭제 못함.-->
+				<tr>
+				<td colspan="4" style = "text-align : center;">
+					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
+				</td>
+			</tr>
+			<%}else {%> <!-- 비회원이면 비밀번호 입력후 수정과 삭제 가능하게 -->
 				<tr>
 				<td colspan="4" style = "text-align : center;">글을 삭제하거나 수정할 경우 작성시 입력했던 비밀번호를 입력해주세요.</td>
 				</tr>
@@ -141,7 +152,8 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
 						<input type="password" name="userinput_pwd" required="required">
-						<input type="submit" value="삭제" onclick="javascript:qna_wdu.action='qna_delete_ok.jsp';">
+						<input type="submit" value="삭제" 
+						onclick="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){qna_wdu.action='qna_delete_ok.jsp';}">
 						<input type="submit" value="수정" onclick="javascript:qna_wdu.action='qna_update.jsp';">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 						</form>
