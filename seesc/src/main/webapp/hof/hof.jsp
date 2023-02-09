@@ -17,17 +17,58 @@ left: 50px;
 bottom: 19px;
 z-index: 2;
 }
-	.rank{
+.rank{
 	width: 220px;
 	height: 415px;
 	text-align: center;
-	}
+}
+
+@keyframes sparkle {
+  	0% {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    color: yellow;
+    text-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+  }
+  100% {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+}
+@keyframes sparkle1 {
+  	0% {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    color: silver;
+    text-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+  }
+  100% {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+}
+@keyframes sparkle2 {
+  	0% {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    color: #803232;
+    text-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+  }
+  100% {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+}
  .rank:nth-child(1) {
     text-align: center;
-    border: 6px double gold;
-  }
-  .rank:nth-child(1):hover {
-    border: -6px double blue;
+    border: 10px solid gold;
+    animation: sparkle 1s ease-in-out infinite;
   }
   .rank:nth-child(1) span{
   color: gold;
@@ -37,7 +78,8 @@ z-index: 2;
   .rank:nth-child(2) {
     float: left;
     margin-right: 10px;
-    border: 6px double silver;
+    border: 10px solid silver;
+    animation: sparkle1 1s ease-in-out infinite;
   }
   .rank:nth-child(2) span{
   color: silver;
@@ -47,7 +89,8 @@ z-index: 2;
   .rank:nth-child(3) {
     float: right;
     margin-left: 10px;
-    border: 6px double brown;
+    border: 10px solid #803232;
+    animation: sparkle2 1s ease-in-out infinite;
   }
   .rank:nth-child(3) span{
   color: brown;
