@@ -113,8 +113,8 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 				<td colspan="4" style = "text-align : center;">
 					<form name = "qna_rewrite" action="qna_repWrite.jsp" method ="post">
 					<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}">
-					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					<input type="submit" value="답글">
+					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					<input type="hidden" name="write_idx" value="<%=write_idx%>">
 					<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
 					<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">

@@ -11,7 +11,19 @@ String write_idx = request.getParameter("write_idx");
 String write_pwd = request.getParameter("write_pwd");
 String flag = request.getParameter("flag");
 
+if(qnadao.refcount(Integer.parseInt(write_idx))){
+	%>
+	<script>
+			window.alert('답글이 있어 삭제할 수 없습니다. 관리자에게 연락주세요.');
+			history.back();
+	</script>
+<%
+return;
+}
+
+
 if(flag!=null && flag.equals("userDelete")){
+		
 		if(qnadao.qna_delete(Integer.parseInt(write_idx))>0){%>
 			<script>
 			window.alert('삭제 완료되었습니다.');
