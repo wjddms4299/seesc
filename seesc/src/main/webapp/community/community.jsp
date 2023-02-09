@@ -76,7 +76,7 @@ a {
 </style>
 </head>
 <%
-int totalCnt=wdao.getTotalCnt();//DB로 부터 가져올 정보
+int totalCnt=wdao.freegetTotalCnt();//DB로 부터 가져올 정보
 int listSize=5;//사용자 마음
 int pageSize=5;//사용자 마음
 

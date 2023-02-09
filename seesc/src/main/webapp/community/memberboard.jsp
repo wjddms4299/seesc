@@ -58,7 +58,7 @@ int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_
 
 int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
 
-int totalCnt=wdao.getTotalCnt();//DB로 부터 가져올 정보
+int totalCnt=wdao.membergetTotalCnt();//DB로 부터 가져올 정보
 int listSize=5;//사용자 마음
 int pageSize=5;//사용자 마음
 

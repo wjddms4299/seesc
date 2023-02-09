@@ -15,7 +15,7 @@ public class WriteDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	/** 커뮤니티 게시판 보이는 메서드 */
+	/** 자유게시판 보이는 메서드 */
 	public ArrayList<WriteDTO> selWrite(int ls, int cp, int option) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -293,7 +293,49 @@ public class WriteDAO {
 			} catch (Exception e2) {}
 		}
 	}
-
+	
+	/**자유게시판에 보여줄 게시물 수 */
+	public int freegetTotalCnt() {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select count(*) from write where write_cate='free'";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			return count==0?1:count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/***멤버게시판에 보여줄 게시물 수 관련 메서드*/
+	public int membergetTotalCnt() {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select count(*) from write where write_title like '[멤버모집]%'";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			rs.next();
+			int count=rs.getInt(1);
+			return count==0?1:count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 	/** 조회수 증가 관련 메서드 */
 	public int readnum(int idx, int readnum) {
 		try {
