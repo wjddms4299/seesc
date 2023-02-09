@@ -225,6 +225,15 @@ td {
 				<%
 				ArrayList<CommentDTO> arr = idao.event_commentList(write_idx);
 				String flag = request.getParameter("flag");
+				if (arr==null||arr.size()==0){
+			       %>
+					<tr>
+			           <td align="center">			    
+			           등록된 댓글이 없습니다.
+			           </td>
+			        </tr>
+			        <% 
+				}else
 				if (arr != null && arr.size() != 0) {
 					for (int i=0;i<arr.size();i++) {
 				%>
