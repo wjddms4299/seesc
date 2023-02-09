@@ -16,6 +16,8 @@
 
 
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +90,21 @@ color : black;
 	text-align: right;
 
 }
+tfoot{
 
+	text-align: center;
+}  
+
+
+.prbutton1{/*해당페이지 눌렀을때*/
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4646CD;
+        color: white;
+        font-size: 16px;
+      }
 </style>
 </head>
 
@@ -105,7 +121,29 @@ color : black;
 		
 		WriteDTO dto=wdao.contentWrite(idx);
 		int ref=dto.getWrite_ref();
+		
+		
+
+		int totalCnt=wdao.getUnderTotal(ref);//DB로 부터 가져올 정보
+		int listSize=5;//사용자 마음
+		int pageSize=5;//사용자 마음
+
+		String cp_s=request.getParameter("cp");
+		if(cp_s==null||cp_s.equals("")){
+			cp_s="1";
+		}
+		int cp=Integer.parseInt(cp_s);//핵심요소 사용자로부터 가져와야하는 정보
+
+		int totalPage=totalCnt/listSize+1;
+		if(totalCnt%listSize==0)totalPage--;
+
+		int userGroup=cp/pageSize;
+		if(cp%pageSize==0)userGroup--;
+
+
+
 		%>
+		
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -152,7 +190,7 @@ color : black;
 			</thead>
 			<tbody>
 			<%
-			ArrayList<WriteDTO> arr2=wdao.underList(ref);
+			ArrayList<WriteDTO> arr2=wdao.underList(ref,listSize,cp);
 			%>
 						<%
 			if(arr2==null || arr2.size()==0){
@@ -185,6 +223,32 @@ color : black;
 			}
 			%>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4"><!-- 페이징 들어갈 영역 -->
+										<%
+if(userGroup!=0){
+	%><a href="community_freecontent.jsp?idx=<%=idx %>&cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+}
+%>
+
+<%
+for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
+	%>&nbsp;&nbsp;<a href="community_freecontent.jsp?idx=<%=idx %>&cp=<%=i%>" class="prbutton1"><%=i %></a>&nbsp;&nbsp;<% 
+	if(i==totalPage)break;
+}
+%>
+<%
+if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
+	%><a href="community_freecontent.jsp?idx=<%=idx %>&cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
+}
+
+%>
+						
+						
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</fieldset>
 		</article>
