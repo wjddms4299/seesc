@@ -19,6 +19,15 @@ if(img_name==null || img_name.equals("")){
 	<%
 	return;
 }
+if(!img_name.substring(img_name.length()-4,img_name.length()).equals(".jpg") && !img_name.substring(img_name.length()-4,img_name.length()).equals(".png")){
+	%>
+	<script>
+	window.alert("이미지 파일(.jpg .png)만 업로드해주세요.");
+	history.back();
+	</script>
+	<%
+	return;
+}
 
 int result=thdao.imgInsert(mr);
 String msg=result>0?"이미지 업로드를 완료하였습니다.":"이미지 업로드에 실패하였습니다. 담당 개발자에게 문의바랍니다.";

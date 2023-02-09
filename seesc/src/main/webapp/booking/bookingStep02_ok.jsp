@@ -4,10 +4,7 @@
 <jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
 String user_idx_s=request.getParameter("user_idx");
-int user_idx=0;
-if(!user_idx_s.equals("")){
-	user_idx=Integer.parseInt(user_idx_s);
-}
+Integer user_idx=Integer.parseInt(user_idx_s);
 
 String booking_name=request.getParameter("booking_name");
 if(booking_name==null || booking_name.equals("")){
@@ -110,7 +107,7 @@ int booking_money_i=Integer.parseInt(booking_money_p)*1000;
 String booking_tel=booking_tel1+"-"+booking_tel2_s+"-"+booking_tel3_s;
 
 int coupon_idx=0;
-if(!user_idx_s.equals("")){
+if(user_idx!=0){
 	String coupon_idx_t=request.getParameter("coupon_idx");
 	
 	if(!coupon_idx_t.substring(0,1).equals("0")){
@@ -136,7 +133,7 @@ if(result==1){
 	int booking_idx=bdao.bookingIdx(thema_idx,time_date,time_ptime);%>
 	
 	<script>
-	location.href="bookingStep03.jsp?user_idx=<%=user_idx%>?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&booking_msg=<%=booking_msg%>&coupon_idx=<%=coupon_idx%>&booking_money=<%=booking_money%>";
+	location.href="bookingStep03.jsp?user_idx=<%=user_idx%>&booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&booking_name=<%=booking_name%>&booking_tel=<%=booking_tel%>&booking_pay=<%=booking_pay%>&booking_pwd=<%=booking_pwd%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date_t%>&time_ptime=<%=time_ptime%>&thema_name=<%=thema_name%>&thema_time=<%=thema_time%>&booking_num=<%=booking_num_t%>&coupon_idx=<%=coupon_idx%>&booking_money=<%=booking_money%>";
 	</script>
 <%}else{%>
 	<script>
