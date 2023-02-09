@@ -39,7 +39,7 @@ if(flag!=null && flag.equals("userDelete")){
 if(userinput_pwd!=null&&userinput_pwd.equals(write_pwd)){
 	if(qnadao.refcount(Integer.parseInt(write_idx))>0&& manager==0){%>
 	<script>
-	window.alert('답글이 있어 삭제할 수 없습니다. \n 관리자에게 문의하세요.');
+	window.alert('답글이 있어 삭제할 수 없습니다.\n 관리자에게 문의하세요.');
 	history.back();
 	</script>
 	
