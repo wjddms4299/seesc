@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="bdao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="cpdao" class="com.esc.coupon.CouponDAO" scope="session"></jsp:useBean>
 <%
-String user_idx=request.getParameter("user_idx");
+String user_idx_s=request.getParameter("user_idx");
+Integer user_idx=Integer.parseInt(user_idx_s);
 
 String thema_idx=request.getParameter("thema_idx");
 String time_date=request.getParameter("time_date");
@@ -16,13 +18,15 @@ String booking_pwd=request.getParameter("booking_pwd");
 String thema_name=request.getParameter("thema_name");
 String thema_time=request.getParameter("thema_time");
 String booking_num=request.getParameter("booking_num");
-String booking_msg=request.getParameter("booking_msg");
 
-String booking_idx=request.getParameter("booking_idx");
+String booking_idx_s=request.getParameter("booking_idx");
+int booking_idx=Integer.parseInt(booking_idx_s);
 String booking_pay_ok_s=request.getParameter("booking_pay_ok");
 int booking_pay_ok=Integer.parseInt(booking_pay_ok_s);
 
 String booking_money=request.getParameter("booking_money");
+
+String booking_msg=bdao.bookingMsg(booking_idx);
 %>
 <!DOCTYPE html>
 <html>
@@ -95,7 +99,7 @@ function popup_open(){
  	</tr>
  	<%
  	try{
-	 	if(user_idx!=null){%>
+	 	if(user_idx!=0){%>
 	 	<tr height="40">
 	 		<td align="center" class="a2"><b>쿠폰 사용</b></td>
 	 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<%
