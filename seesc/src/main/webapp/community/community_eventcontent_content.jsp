@@ -11,6 +11,21 @@ int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("use
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
 int comm_idx = request.getParameter("comm_idx")==null||request.getParameter("comm_idx").equals("")?0:Integer.parseInt(request.getParameter("comm_idx"));
 int write_idx= request.getParameter("write_idx")==null||request.getParameter("write_idx").equals("")?0:Integer.parseInt(request.getParameter("write_idx"));
+int totalCnt=idao.getTotalCnt();
+int listSize=10; 
+int pageSize=5; 
+String cp_s=request.getParameter("cp");
+if(cp_s==null || cp_s.equals("")){
+	cp_s="1";
+}
+int cp=Integer.parseInt(cp_s);
+
+int totalPage=totalCnt/listSize+1;
+if(totalCnt%listSize==0)totalPage--;
+
+int userGroup=cp/pageSize;
+if(cp%pageSize==0)userGroup--;
+
 WriteDTO dto = idao.writeEventContent(write_idx);
 if (dto == null || dto.equals("")) {
 %>
@@ -226,7 +241,7 @@ td {
 					<b style="color:orange;"><%=arr.get(i).getComm_writer()%></b>&nbsp;-&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%>
 					
 					<%if(manager==1){%>
-					<a href="event_comment_del.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=cd">
+					<a href="event_comment_del.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&manager=<%=manager%>&flag=cd">
 					<img src="/seesc/img/s_delete.gif" alt = "댓글삭제">
 					</a>
 					</td>
@@ -260,7 +275,7 @@ td {
 				<!-------대댓------->
 				<%
 				if (comm_idx == arr.get(i).getComm_idx()&&flag!=null&&flag.equals("cw")) {
-					if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
+					if(manager==1){%>
 						<tr>
 						<td>&#8627; re) <%=udto.getUser_nic()%></td>
 						</tr>

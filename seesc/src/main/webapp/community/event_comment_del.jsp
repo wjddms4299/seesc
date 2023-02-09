@@ -8,6 +8,11 @@ int comm_idx=0;
 String userinputpwd=request.getParameter("userinputpwd");
 String comm_pwd=request.getParameter("comm_pwd");
 String flag=request.getParameter("flag");
+String manager_s=request.getParameter("manager");
+if(manager_s==null || manager_s.equals("")){
+	manager_s="0";
+}
+int manager=Integer.parseInt(manager_s);
 if(request.getParameter("comm_idx")==null||request.getParameter("comm_idx").equals(""))
 {%>
 <script>
@@ -17,7 +22,7 @@ location.href='community_eventcontent_list';
 <%
 return;}
 
-if(userinputpwd!=null&&userinputpwd.equals(comm_pwd)){
+if((userinputpwd!=null&&userinputpwd.equals(comm_pwd))||manager==1){
 	comm_idx=Integer.parseInt(request.getParameter("comm_idx"));
 	int result=idao.comment_Del(comm_idx);
 	if(result<0){
