@@ -26,6 +26,7 @@
 <style>
 section{
 	width:1200px;
+	margin: 0px auto;
 }
  .select{ /*상단 select 박스*/
      	 width: 80px;
@@ -52,7 +53,7 @@ section{
         font-size: 16px;
       }
 .writedel:hover {
-    background-color: #3e8e41;
+    background-color: #0000CD;
 }
 
 .submenu{
@@ -62,17 +63,53 @@ height : 50px;
 margin : 0px auto;
 left :380px;
 }
-table{
-  width: 900px;
-  border-collapse: collapse;
-  table-layout:fixed;
-  word-break:break-all;
+
 }
 a {
 	text-decoration: none;
 }
 
+table {
+width: 800px;
+margin: 0 auto;
+text-align: center;
+background-color: white;
 
+}
+      
+ th {
+font-size: 18px;
+padding: 10px;
+color :black;
+text-align : center;
+background-color: #4646CD;
+        
+
+      }
+ td{
+color : black;
+text-align : center;
+  background-color: white;
+}
+tfoot{
+
+	text-align: center;
+}  
+
+
+.prbutton1{/*해당페이지 눌렀을때*/
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4646CD;
+        color: white;
+        font-size: 16px;
+      }
+#pageing{
+
+	margin-top: 10px;
+}
 </style>
 </head>
 <%
@@ -168,17 +205,17 @@ if(cp%pageSize==0)userGroup--;
 				%>
 			</tbody>
 			<tfoot>
-			<tr>
+			<tr> 
 				<%
 					if(manager==0){
 						%>
-						<td colspan="5" align="right">
-				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writebutton">
+						<td colspan="5">
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writebutton" >
 				</td>
 				<% 
 					}else if(manager==1){
 						%>
-						<td colspan="5" align="right">
+						<td colspan="5">
 				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"class="writebutton">
 				<input type="button" value="게시글삭제하기" class="writedel" onclick="location.href='content_del.jsp'">
 				</td>
@@ -189,7 +226,7 @@ if(cp%pageSize==0)userGroup--;
 				
 			</tr>
 			<tr>
-				<td colspan="5" align="center"><!-- 페이징 들어갈 영역 -->
+				<td colspan="5"  id="pageing"><!-- 페이징 들어갈 영역 -->
 				<%
 if(userGroup!=0){
 	%><a href="community.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>&sort=<%=sort%>">&lt;&lt;</a><%
@@ -198,7 +235,7 @@ if(userGroup!=0){
 
 <%
 for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-	%>&nbsp;&nbsp;<a href="community.jsp?cp=<%=i%>&sort=<%=sort%>"><%=i %></a>&nbsp;&nbsp;<% 
+	%>&nbsp;&nbsp;<a href="community.jsp?cp=<%=i%>&sort=<%=sort%>" class="prbutton1"><%=i %></a>&nbsp;&nbsp;<% 
 	if(i==totalPage)break;
 }
 %>

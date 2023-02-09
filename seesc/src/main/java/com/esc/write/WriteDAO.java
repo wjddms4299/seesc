@@ -584,9 +584,11 @@ public class WriteDAO {
 			conn=com.esc.db.EscDB.getConn();
 			String sql="insert into write values(write_write_idx.nextval,0,'comments','댓글',?,?,sysdate,0,?,0,?,?,?,?,0)";
 			setUpdatestep(Integer.parseInt(mr.getParameter("write_ref")), Integer.parseInt(mr.getParameter("write_step"))+1);
+			String under="ㄴ";
 			String writer=mr.getParameter("write_writer");
 			String pwd=mr.getParameter("write_pwd");
 			String content=mr.getParameter("write_content");
+			content=under+content;
 			String ref_s=mr.getParameter("write_ref");
 			int ref=Integer.parseInt(ref_s);
 			String lev_s=mr.getParameter("write_lev");

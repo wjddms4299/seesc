@@ -10,18 +10,69 @@
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 </head>
 <style>
-.communitybutton{
+.writedel{/*게시글삭제하기 버튼*/
+		
         height: 30px;
         border: none;
         border-radius: 5px;
-        background-color: #4CAF50;
+        background-color: #4646CD;
         color: white;
         font-size: 16px;
+      }
+.writedel:hover {
+    background-color: #0000CD;
 }
-.communitybutton:hover{
-	background-color: #3e8e41;
-	
+table {
+width: 800px;
+margin: 0 auto;
+text-align: center;
+background-color: white;
 
+}
+      
+ th {
+font-size: 18px;
+padding: 10px;
+color :black;
+text-align : center;
+background-color: #4646CD;
+        
+
+      }
+
+ td{
+color : black;
+text-align : center;
+  background-color: white;
+}
+tfoot{
+
+	text-align: center;
+} 
+.writer /**작성자 비밀번호*/{
+	width: 200px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid black;
+}
+.textarea/*댓글 입력창*/{
+		width: 400px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid black;
+
+}
+tbody{
+	font-size: 18px;
+
+}
+legend{
+	font-size: 20px;
+}
+#red{
+	color: red;
 }
 </style>
 <%
@@ -49,6 +100,8 @@ String lev_s=request.getParameter("lev");
 int lev=Integer.parseInt(lev_s);
 String step_s=request.getParameter("step");
 int step=Integer.parseInt(step_s);
+String idx=request.getParameter("idx");
+
 %>
 <body>
 <%@include file="/header.jsp" %>
@@ -56,29 +109,31 @@ int step=Integer.parseInt(step_s);
 	<article>
 		<form name="underwrite" action="community_under_ok.jsp" method="post" enctype="multipart/form-data">
 		<fieldset>
-			<legend>댓 글 달 기</legend>
+			<legend><a id="red">댓 글 달 기</a></legend>
 				<table>
 		<thead>
 			<tr>
 				<%
 				if(sid_s==null || sid_s.equals("")){
 					%>
-					<th>작성자 :<input type="text" name="write_writer"></th>
+					<th>작성자 :<input type="text" name="write_writer" class="writer"></th>
 					<% 
 				}else{
 					%>
-					<th>작성자 :<input type="text" name="write_writer" readonly  value="<%=nick %>"></th>
+					<th>작성자 :<input type="text" name="write_writer" readonly  value="<%=nick %>" class="writer"></th>
 					<%
 				}
 				%>
-				<th>비밀번호 : <input type="password" name="write_pwd"></th>
-				<th><input type="checkbox" name="write_open" value="0">비밀 글</th>
+				<th>비밀번호 : <input type="password" name="write_pwd" class="writer"></th>
+				<th colspan="2"><input type="checkbox" name="write_open" value="0">비밀 글</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" ></td>
-				<td><input type="submit" class="communitybutton communitybutton:hover " value="댓글 등록하기">	
+				<td colspan="2">댓글 : <input type="text" name="write_content" class="textarea"></td>
+				<td colspan="2"><input type="submit" class="writedel" value="댓글 등록하기">
+					<input type="button" class="writedel" value="돌아가기" onclick="location.href='community_freecontent.jsp?idx=<%=idx%>'">
+				</td>
 			</tr>
 		</tbody>	
 		</table>

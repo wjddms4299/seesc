@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
 </head>
 <style>
 section{
@@ -17,6 +20,7 @@ section{
 
 #div2{
 	text-align: right;
+	margin-bottom: 8px;
 	
 
 }
@@ -27,14 +31,32 @@ height : 50px;
 margin : 0px auto;
 left :380px;
 }
-table{
-  width: 900px;
-  border-collapse: collapse;
-  table-layout:fixed;
-  word-break:break-all;
+table {
+width: 800px;
+margin: 0 auto;
+text-align: center;
+background-color: white;
 
-  
 }
+      
+ th {
+font-size: 18px;
+padding: 10px;
+color :black;
+text-align : center;
+background-color: #4646CD;
+        
+
+      }
+ td{
+color : black;
+text-align : center;
+  background-color: white;
+}
+tfoot{
+
+	text-align: center;
+}  
 
 .writedel{/*게시글삭제하기 버튼*/
 		
@@ -46,11 +68,20 @@ table{
         font-size: 16px;
       }
 .writedel:hover {
-    background-color: #3e8e41;
+   background-color: #0000CD;
 }
 a {
 	text-decoration: none;
 }
+.prbutton1{/*해당페이지 눌렀을때*/
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4646CD;
+        color: white;
+        font-size: 16px;
+      }
 </style>
 <%
 
@@ -83,6 +114,7 @@ if(cp%pageSize==0)userGroup--;
 			<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
 			<a href="/seesc/community/qna_list.jsp"><button class="rbutton"><span>QnA</span></button></a>
 			<a href="/seesc/community/community.jsp"><button class="tbutton"><span>자유게시판</span></button></a>
+
 		</div>
 		<br><br><br>
 		<div id="div2">
@@ -143,28 +175,6 @@ if(cp%pageSize==0)userGroup--;
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="5" align="center">
-									<%
-				if(userGroup!=0){
-					%><a href="memberboard.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
-				}
-				%>
-				
-				<%
-				for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-					%>&nbsp;&nbsp;<a href="memberboard.jsp?cp=<%=i%>"><%=i %></a>&nbsp;&nbsp;<% 
-					if(i==totalPage)break;
-				}
-				%>
-				<%
-				if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-					%><a href="memberboard.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
-				}
-				
-				%>
-					<td>
-				</tr>
-				<tr>
 					<%
 					if(manager==0){
 						%>
@@ -182,6 +192,28 @@ if(cp%pageSize==0)userGroup--;
 					}
 				
 				%>
+				</tr>
+				<tr>
+					<td colspan="5" align="center">
+									<%
+				if(userGroup!=0){
+					%><a href="memberboard.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+				}
+				%>
+				
+				<%
+				for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
+					%>&nbsp;&nbsp;<a href="memberboard.jsp?cp=<%=i%>" class="prbutton1"><%=i %></a>&nbsp;&nbsp;<% 
+					if(i==totalPage)break;
+				}
+				%>
+				<%
+				if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
+					%><a href="memberboard.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
+				}
+				
+				%>
+					</td>
 				</tr>
 			</tfoot>
 		</table>

@@ -16,19 +16,56 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">  
 </head>
+<style>
+.writedel{/*게시글삭제하기 버튼*/
+		
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4646CD;
+        color: white;
+        font-size: 16px;
+      }
+.writedel:hover {
+    background-color: #0000CD;
+}
+legend{
+	font-size:25px;
+}
+      input[type="text"],
+      input[type="password"]{
+        width: 50px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid black;
+      }
+fieldset{
+
+	text-align: center;
+}
+#under{
+	color: red;
+}
+#password{
+	color: red;
+}
+</style>
 <body>
 <%@include file="/header.jsp" %>
 <section>
 	<article>
-		<h3>댓글 삭제하기</h3>
+		<fieldset>
+		<legend>댓글 삭제하기</legend>
 		<form name="writeDel" action="under_del_ok.jsp" method="post" enctype="multipart/form-data">
 		<div>
-		댓글을 삭제하기 위해서는 비밀번호가 필요합니다.<br>
-		<input type="password" name="pwd">
+		<a id="under">댓글</a>을 삭제하기 위해서는 <a id="password">비밀번호</a>가 필요합니다.<br>
+		<a id="password">비밀번호</a> : <input type="password" name="pwd">
 		<input type="hidden" name="idx" value="<%=idx%>">
-		<input type="submit" value="삭제하기">
+		<input type="submit" value="삭제하기" class="writedel">
  		</div>
  		</form>
+ 		</fieldset>
 	</article>
 </section>
 <%@include file="/footer.jsp" %>

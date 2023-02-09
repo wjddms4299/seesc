@@ -9,6 +9,72 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 </head>
+<style>
+.writedel{/*게시글삭제하기 버튼*/
+		
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4646CD;
+        color: white;
+        font-size: 16px;
+      }
+.writedel:hover {
+    background-color: #0000CD;
+}
+table {
+width: 800px;
+margin: 0 auto;
+text-align: center;
+background-color: white;
+
+}
+      
+ th {
+font-size: 18px;
+padding: 10px;
+color :black;
+text-align : center;
+background-color: #4646CD;
+        
+
+      }
+
+ td{
+color : black;
+text-align : center;
+  background-color: white;
+}
+tfoot{
+
+	text-align: center;
+} 
+.writer /**작성자 비밀번호*/{
+	width: 200px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid black;
+}
+.textarea/*댓글 입력창*/{
+		width: 400px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid black;
+
+}
+tbody{
+	font-size: 18px;
+
+}
+legend{
+	font-size: 20px;
+}
+#red{
+	color: red;
+}
+</style>
 <body>
 <%@include file="/header.jsp" %>
 <%
@@ -39,6 +105,7 @@ int lev=Integer.parseInt(lev_s);
 String step_s=request.getParameter("step");
 int step=Integer.parseInt(step_s);
 String content=request.getParameter("write_content");
+String write_idx=request.getParameter("write_idx");
 %>
 
 %>
@@ -47,29 +114,31 @@ String content=request.getParameter("write_content");
 		<h3>답글 작성하기</h3>
 		<form name="answer" action="under_answer_ok.jsp" method="post" enctype="multipart/form-data">
 		<fieldset>
-			<legend>답 글 달 기</legend>
+			<legend><a id="red">답 글 달 기</a></legend>
 				<table>
 		<thead>
 			<tr>
 				<%
 				if(sid_s==null || sid_s.equals("")){
 					%>
-					<th>작성자 :<input type="text" name="write_writer"></th>
+					<th>작성자 :<input type="text" name="write_writer" class="writer"></th>
 					<% 
 				}else{
 					%>
-					<th>작성자 :<input type="text" name="write_writer" readonly  value="<%=nick %>"></th>
+					<th>작성자 :<input type="text" name="write_writer" readonly  value="<%=nick %>" class="writer"></th>
 					<%
 				}
 				%>
-				<th>비밀번호 : <input type="password" name="write_pwd"></th>
-				<th><input type="checkbox" name="write_open" value="0">비밀 글</th>
+				<th>비밀번호 : <input type="password" name="write_pwd" class="writer"></th>
+				<th colspan="2"><input type="checkbox" name="write_open" value="0">비밀 글</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" value="RE:)<%=content %>" ></td>
-				<td><input type="submit" value="댓글 등록하기">	
+				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" class="textarea"></td><!--  value="RE:)"--> 
+				<td><input type="submit" value="댓글 등록하기" class="writedel">
+					<input type="button" value="돌아가기" class="writedel" onclick="location.href='community_freecontent.jsp?idx=<%=write_idx%>'">
+				</td>	
 			</tr>
 		</tbody>	
 		</table>
