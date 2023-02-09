@@ -394,5 +394,24 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**회원탈퇴*/
+	public int joinOut(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="delete from userinfo where user_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			int count =ps.executeUpdate();
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 
 }

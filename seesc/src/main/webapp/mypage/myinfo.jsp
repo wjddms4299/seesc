@@ -22,10 +22,13 @@ th, td {
 
 th {
   background-color: #f2f2f2;
+  color: black;
 }
-
+td{
+	display: inline-block;
+}
 input[type=text], input[type=password], select {
-  width: 100%;
+  width: 90%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -71,6 +74,28 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 }
+.form{
+width:60%
+}
+.outbt{
+  width: 10%;
+  background-color: #EB0000;
+  color: black;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+}
+.outbt:hover{
+	background-color: #CD0000;
+}
+.outdiv{
+display: inline-block;
+margin:0px 80%;
+float: left;
+}
 </style>
 <script>
 function open_nicCheck(){
@@ -84,6 +109,7 @@ function open_nicCheck(){
 <section>
 <h1>마이페이지</h1>
 <article>
+<div>
 	<a href="mypage.jsp"><button class="tbutton"><span>예약내역</span></button></a>
 	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
 	<a href="myinfo.jsp"><button class="rbutton"><span>내정보</span></button></a>
@@ -92,7 +118,7 @@ function open_nicCheck(){
 	int user_idx=(int)session.getAttribute("user_idx");
 	UserinfoDTO dto=userdao.userInfo(sid);
 	%>
-	<form name="memberJoin" action="myUpdate.jsp">
+	<form name="memberJoin" action="myUpdate.jsp" class="form">
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -142,6 +168,17 @@ function open_nicCheck(){
 	</table>
 	<input type="submit" value="저장하기">
 	</form>
+	<script>
+	function joinout(){
+	var result=window.confirm('탈퇴하시겠습니까?');
+	if(result){
+	location.href='/seesc/mypage/joinout_ok.jsp';
+	}
+		}
+</script>
+<div class="outdiv"><a><button onclick="joinout();" class="outbt"><span>회원탈퇴</span></button></a></div>
+<br><br><br><br><br>
+</div>
 </article>
 </section>
 <%@include file="/footer.jsp" %>

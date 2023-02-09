@@ -72,15 +72,10 @@ UserinfoDTO dto = userdao.userInfo(sid);
 			<tr>
 				<th>작성자 :</th>
 				<td><input type="text" size="33px" name="write_writer"
-								required="required" value="<%
-								String value = user_idx==0?"":dto.getUser_nic();
-								out.println(value);
-								%>"
-								<%
-								String readonly =user_idx==0?"":"readonly";
-								out.println(readonly);
-								%>
-								></td>
+				required="required" value="<%String value = user_idx==0?"":dto.getUser_nic();
+				out.println(value);%>"
+				<%String readonly=user_idx==0?"":"readonly"; out.println(readonly);%>>
+				</td>
 				<th>비밀번호 :</th>
 				<td><input type="password" placeholder="비밀번호입력" name="write_pwd" required></td>
 			</tr>

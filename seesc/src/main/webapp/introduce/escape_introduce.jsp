@@ -15,6 +15,7 @@ color : #FFA500;}
 h2{font-size:25px;}
 .d0{margin-bottom:20px;}
 .d1{margin-bottom:20px;margin-left:150px;}
+ul{margin:0px 50px;}
 </style>
 </head>
 <body>
@@ -32,7 +33,7 @@ h2{font-size:25px;}
 	 <div class="d0" align="center">"60분 안에 갇혀 있는 방에서 숨겨진 단서를 찾아 탈출하면 됩니다!"</div>
 	 <div class="d0" align="center">비디오 게임이 아닌, 실제로 체험하는 놀이문화입니다. 여러분은 어떠한 이유로 다양한 테마룸에 갇히게 됩니다.</div>
 	<br>
-	 <table align="center" border="1" cellspacing="0" cellpadding="5">
+	 <table align="center" border="1" cellspacing="1" cellpadding="5">
 		 <tr height="25">
 			 <td align="center"><b>Your Brain</b></td>
 			 <td align="center"><b>Community</b></td>
@@ -52,24 +53,23 @@ h2{font-size:25px;}
 	 		<td width="200" align="center">S2의 방탈출은 안전합니다!</td>
 	 	 </tr>
 	 </table>
-	 <br>
-  <br><br>
+  <br><br><br>
   <hr width="950">
   <br>
 	 <h2>누구를 위한 게임인가요?</h2><br><br>
-	 <table align="center" border="1" cellspacing="0" cellpadding="10">
-	 <tr height="150">
-			 <td align="center"><img src="/seesc/img/e_intro_005.png" alt="05" width="150" height="150"></td>
-			 <td align="center"><img src="/seesc/img/e_intro_006.png" alt="06" width="150" height="150"></td>
-			 <td align="center"><img src="/seesc/img/e_intro_007.png" alt="07" width="150" height="150"></td>
+	 <table align="center" border="1" cellspacing="1" cellpadding="10">
+	 	 <tr height="150">
+			 <td align="center"><img src="/seesc/img/e_intro_005.png" alt="05" width="200" height="200"></td>
+			 <td align="center"><img src="/seesc/img/e_intro_006.png" alt="06" width="200" height="200"></td>
+			 <td align="center"><img src="/seesc/img/e_intro_007.png" alt="07" width="200" height="200"></td>
 		 </tr>
 		 <tr height="25">
-			 <td align="center"><b>가족, 친구, 직장동료, 연인</b></td>
-			 <td align="center"><b>새로운 모험과 도전을 찾는 분</b></td>
-			 <td align="center"><b>회사와 작업그룹간 빠른 <br>Team Building이 필요하신 분들</b></td>
+			 <td width="250" align="center"><b>가족, 친구, 직장동료, 연인</b></td>
+			 <td width="250" align="center"><b>새로운 모험과 도전을 찾는 분</b></td>
+			 <td width="250" align="center"><b>회사와 작업그룹간 빠른 <br>Team Building이 필요하신 분들</b></td>
 		 </tr>
 	 </table>
-  <br><br>
+  <br><br><br>
   <hr width="950">
   <br>
 
@@ -82,7 +82,7 @@ h2{font-size:25px;}
 		 <li class="d1">10분이상 늦으실 경우 다음 팀의 플레이에 지장이 생기므로 예약은 자동으로 취소됩니다.</li>
 		 <li class="d1">반드시 정해진 시간을 지켜주시기 바랍니다.</li>
 	 </ul>
-  <br>
+  <br><br>
   <hr width="950">
   <br>
 	 <h2>주의사항</h2>
@@ -92,7 +92,7 @@ h2{font-size:25px;}
 		 <li class="d1">13세 미만 어린이는 성인 동반 시에만 입장 가능합니다.</li>
 		 <li class="d1">폐쇄공포증 환자, 임산부/노약자는 출입이 제한 될 수 있습니다.</li>
 	 </ul>
-  <br>
+  <br><br>
  </article>
 
 </section>

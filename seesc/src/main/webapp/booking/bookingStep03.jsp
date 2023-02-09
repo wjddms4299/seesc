@@ -103,14 +103,14 @@ function popup_open(){
 			String coupon_idx_s=request.getParameter("coupon_idx");
 			int coupon_idx=Integer.parseInt(coupon_idx_s);
 			
-	 		String coupon_name="0";
+	 		int coupon_dc=0;
 	 		if(coupon_idx!=0){
-	 			coupon_name=cpdao.bookingCouponName(coupon_idx);
+	 			coupon_dc=cpdao.bookingCouponDc(coupon_idx);
 	 		}
-	 		switch(coupon_name){
-		 		case "1,000":out.print("할인금액 1,000원");break;
-		 		case "2,000":out.print("할인금액 2,000원");break;
-		 		case "3,000":out.print("할인금액 3,000원");break;
+	 		switch(coupon_dc){
+		 		case 1000:out.print("할인금액 1,000원");break;
+		 		case 2000:out.print("할인금액 2,000원");break;
+		 		case 3000:out.print("할인금액 3,000원");break;
 		 		default:out.print("사용안함");
 	 		}%></td>
 	 	</tr>
@@ -156,7 +156,7 @@ function popup_open(){
  <table id="a2-1">
  	<tr>
  		<td>
- 			<input type="submit" value="예약 취소하기" onclick="popup_open();"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
+ 			<input type="button" value="예약 취소하기" onclick="popup_open();"> <a href="/seesc/booking/bookingStep01.jsp"><input type="button" value="돌아가기"></a>
  		</td>
  	</tr>
  </table>

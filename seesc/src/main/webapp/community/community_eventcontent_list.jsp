@@ -61,6 +61,7 @@ table{
 	
 }
 thead th{
+width : 251px;
 color:#FFA300;
 }
 </style>
