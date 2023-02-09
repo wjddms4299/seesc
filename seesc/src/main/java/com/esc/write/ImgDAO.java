@@ -703,5 +703,30 @@ public class ImgDAO {
 			}
 		}
 	}
+	/**댓글 갯수*/
+	public int getTotalCntComments(int write_idx) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "select count(*) from comments where write_idx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, write_idx);
+			rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			return count == 0 ? 1 : count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if(conn!=null)
+					conn.close();
+			} catch (Exception e2) {}
+		}
+	}
 }
 

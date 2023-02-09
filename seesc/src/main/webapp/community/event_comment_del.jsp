@@ -10,7 +10,9 @@ String comm_pwd=request.getParameter("comm_pwd");
 String flag=request.getParameter("flag");
 if(request.getParameter("comm_idx")==null||request.getParameter("comm_idx").equals(""))
 {%>
-	
+<script>
+window.alert('잘못된 접근');
+location.href='community_eventcontent_list';
 
 <%
 return;}

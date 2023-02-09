@@ -151,7 +151,7 @@ td {
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
 						[수정] [삭제]를 원하시면 비밀번호를 입력해주세요:
-						<input type="password" name="userinput_pwd" required>
+						<input type="password" name="userinput_pwd" required><br>
 						<input class="listbutton" type="submit" value="삭제" onclick="javascript:event_wdu.action='community_eventcontent_delete_ok.jsp';">
 						<input class="listbutton" type="submit" value="수정" onclick="javascript:event_wdu.action='community_eventcontent_update.jsp';">
 						<input class="listbutton" type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
@@ -220,7 +220,7 @@ td {
 						out.print("&nbsp;&nbsp;");
 					}
 					if (arr.get(i).getComm_lev() > 0) {
-						out.print("&nbsp;&nbsp;ㄴ");
+						out.print("&nbsp;&nbsp;&#8627;");
 					}
 					%>
 					<b style="color:orange;"><%=arr.get(i).getComm_writer()%></b>&nbsp;-&nbsp;<%=arr.get(i).getComm_content()%>&nbsp;|&nbsp;<%=arr.get(i).getComm_date()%>
@@ -262,7 +262,7 @@ td {
 				if (comm_idx == arr.get(i).getComm_idx()&&flag!=null&&flag.equals("cw")) {
 					if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
 						<tr>
-						<td>ㄴ re) <%=udto.getUser_nic()%></td>
+						<td>&#8627; re) <%=udto.getUser_nic()%></td>
 						</tr>
 								<form name="co_co" action="community_eventcontent_contentReRe.jsp" method="post">
 									<tr>
@@ -287,7 +287,7 @@ td {
 							<form name="co_co" action="community_eventcontent_contentReRe.jsp" method="post">
 							<tr>
 							<td>
-							ㄴ re)
+							&#8627; re)
 							<input type="text" name="comm_writer" placeholder="작성자" required>
 							<input type="password" name="comm_pwd" placeholder="비밀번호" required>
 							<input type="hidden" name="write_idx" value="<%=write_idx%>">
