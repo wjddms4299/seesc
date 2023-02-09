@@ -8,13 +8,13 @@
 </head>
 <style>
 body{
-background-color: black;
+background-color: #323232;
 }
 article{
 color: white;
 }
 input[type="text"] {
-  width: 80%;
+  width: 60%;
   height: 30px;
   font-size: 1em;
   padding: 5px;

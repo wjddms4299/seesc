@@ -77,7 +77,11 @@ select {
 <%@include file="/header.jsp" %>
 <section>
 <article class="article">
-<div><span>PWD찾기</span></div>
+<br><br>
+<h1 class ="h1">PWD 찾기</h1>
+         <br>
+           <hr width="130px">
+           <br>
 <form action="findPwd_ok.jsp">
 	<div>
 		<h2>이름</h2>
