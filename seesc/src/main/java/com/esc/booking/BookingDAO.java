@@ -187,6 +187,35 @@ public class BookingDAO {
 		}
 	}
 	
+	/**예약번호로 전달메시지 불러오기*/
+	public String bookingMsg(int booking_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			
+			String sql="select booking_msg from booking where booking_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, booking_idx);
+			rs=ps.executeQuery();
+			
+			String booking_msg="";
+			if(rs.next()) {
+				booking_msg=rs.getString("booking_msg");
+			}
+			return booking_msg;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	
 	/**모든 내역 불러오기 관리자*/
 	public ArrayList<BookingDTO> boomanage(){
 		try {
