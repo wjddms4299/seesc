@@ -10,6 +10,22 @@ request.setCharacterEncoding("utf-8");
 <title>Insert title here</title>
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 <style>
+.listbutton{
+		width: 50px;
+        height: 25px;
+        border: none;
+        border-radius: 10px;
+        background-color: #FFA300;
+        color: white;
+        font-size: 15px;
+      }
+.listbutton:hover {
+    background-color: #FF870C;
+
+}
+b {
+	color:red;
+}
 fieldset {
 	width:500px;
 	magin: 0px auto;
@@ -25,9 +41,12 @@ fieldset {
 <input type = "hidden" name = "write_idx" value = "<%=request.getParameter("write_idx")%>">
 
 <fieldset align="center">
-<h2>비밀글 입니다.
-<br>비밀번호를 입력하세요!</h2>
-<div>비밀번호 <input type = "password" name ="inputpwd" required><input type = "submit" value = " 확인 "></div>
+<br>
+<h2><b>비밀글</b> 입니다.
+<br><b>비밀번호</b>를 입력하세요!</h2>
+<br>
+<div><input type = "password" name ="inputpwd" required>&nbsp;<input type = "submit" class="listbutton" value = "확인 "></div>
+<br>
 </fieldset>
 </form>
 </article>
