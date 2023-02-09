@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <style>
-*{
+body{
 background-color: #828282;
 margin: 0px auto;
 text-align: center;
@@ -43,16 +43,17 @@ if(manager<1){
 	<%
 }
 %>
+<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
 <h1>쿠폰관리페이지</h1>
 <section>
-	<a href="/seesc/index.jsp"><button><span>홈</span></button></a>
-	<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
-	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
-	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
-	<a href="cancelmng.jsp"><button><span>예약취소관리</span></button></a>
-	<a href="coumng.jsp"><button><span>쿠폰관리</span></button></a>
-	<a href="/seesc/mypage/myinfo.jsp"><button><span>내정보</span></button></a>
+	<a href="/seesc/index.jsp"><button class="tbutton"><span>홈</span></button></a>
+	<a href="/seesc/mypage/manage/managepage.jsp"><button class="tbutton"><span>관리자페이지</span></button></a>
+	<a href="boomange.jsp"><button class="tbutton"><span>예약내역관리</span></button></a>
+	<a href="mng.jsp"><button class="tbutton"><span>관리권한부여</span></button></a>
+	<a href="cancelmng.jsp"><button class="tbutton"><span>예약취소관리</span></button></a>
+	<a href="coumng.jsp"><button class="rbutton"><span>쿠폰관리</span></button></a>
+	<a href="/seesc/mypage/myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
 	<table>
 		<tr>
 			<th>회원번호</th>
@@ -77,7 +78,7 @@ if(manager<1){
 				<td><%=arr.get(i).getUser_id() %></td>
 				<td><%=arr.get(i).getUser_nic() %></td>
 				<td><%=arr.get(i).getUser_name() %></td>
-				<td><a href="coumng_ok.jsp?idx=<%=arr.get(i).getUser_idx() %>&dc=1000"><button><span>1000</span></button></a><a href="coumng_ok.jsp?idx=<%=arr.get(i).getUser_idx() %>&dc=2000"><button><span>2000</span></button></a><a href="coumng_ok.jsp?idx=<%=arr.get(i).getUser_idx() %>&dc=3000"><button><span>3000</span></button></a></td>
+				<td><a href="coumng_ok.jsp?idx=<%=arr.get(i).getUser_idx() %>&dc=1000"><button class="tbutton"><span>1000</span></button></a><a href="coumng_ok.jsp?idx=<%=arr.get(i).getUser_idx() %>&dc=2000"><button class="tbutton"><span>2000</span></button></a><a href="coumng_ok.jsp?idx=<%=arr.get(i).getUser_idx() %>&dc=3000"><button class="tbutton"><span>3000</span></button></a></td>
 			</tr>
 			<%
 		}

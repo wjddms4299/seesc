@@ -379,5 +379,45 @@ public class ThemaDAO {
 			}
 		}
 	}
+	/**테마 정보 모두 불러오기*/
+	public ArrayList<ThemaDTO> allThema(){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from thema";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<ThemaDTO> arr=new ArrayList<ThemaDTO>();
+			while(rs.next()) {
+				int thema_idx=rs.getInt("thema_idx");
+				String thema_name=rs.getString("thema_name");
+				int img_idx=rs.getInt("img_idx");
+				int thema_level=rs.getInt("thema_level");
+				int thema_people_min=rs.getInt("thema_people_min");
+				int thema_people_max=rs.getInt("thema_people_max");
+				int thema_time=rs.getInt("thema_time");
+				int thema_price=rs.getInt("thema_price");
+				String thema_tag1=rs.getString("thema_tag1");
+				String thema_tag2=rs.getString("thema_tag2");
+				String thema_tag3=rs.getString("thema_tag3");
+				String thema_intro1=rs.getString("thema_intro1");
+				String thema_intro2=rs.getString("thema_intro2");
+				String thema_intro3=rs.getString("thema_intro3");
+				ThemaDTO dto=new ThemaDTO(thema_idx,img_idx,thema_name,thema_level,thema_people_min,thema_people_max,thema_time,thema_price,thema_tag1,thema_tag2,thema_tag3,thema_intro1,thema_intro2,thema_intro3);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 
 }

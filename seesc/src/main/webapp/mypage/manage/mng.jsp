@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <style>
-*{
+body{
 background-color: #828282;
 margin: 0px auto;
 text-align: center;
@@ -42,16 +42,17 @@ if(manager<1){
 	<%
 }
 %>
+<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
 <h1>권한관리페이지</h1>
 <section>
-	<a href="/seesc/index.jsp"><button><span>홈</span></button></a>
-	<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
-	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
-	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
-	<a href="cancelmng.jsp"><button><span>예약취소관리</span></button></a>
-	<a href="coumng.jsp"><button><span>쿠폰관리</span></button></a>
-	<a href="/seesc/mypage/myinfo.jsp"><button><span>내정보</span></button></a>
+	<a href="/seesc/index.jsp"><button class="tbutton"><span>홈</span></button></a>
+	<a href="/seesc/mypage/manage/managepage.jsp"><button class="tbutton"><span>관리자페이지</span></button></a>
+	<a href="boomange.jsp"><button class="tbutton"><span>예약내역관리</span></button></a>
+	<a href="mng.jsp"><button class="rbutton"><span>관리권한부여</span></button></a>
+	<a href="cancelmng.jsp"><button class="tbutton"><span>예약취소관리</span></button></a>
+	<a href="coumng.jsp"><button class="tbutton"><span>쿠폰관리</span></button></a>
+	<a href="/seesc/mypage/myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
 <table>
 <tr>
 	<th>회원번호</th>
@@ -100,7 +101,7 @@ for(int i=0;i<arr.size();i++){
 		<td><%=arr.get(i).getUser_email() %></td>
 		<td><%=arr.get(i).getUser_date() %></td>
 		<td>
-			<a href="/seesc/mypage/manage/mng_ok.jsp?idx=<%=arr.get(i).getUser_idx()%>&manager=<%=arr.get(i).getManager()%>"><button><span><%
+			<a href="/seesc/mypage/manage/mng_ok.jsp?idx=<%=arr.get(i).getUser_idx()%>&manager=<%=arr.get(i).getManager()%>"><button class="tbutton"><span><%
 		if(manage.equals("관리자")){
 			%>
 			권한철회

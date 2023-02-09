@@ -1,5 +1,10 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.*" %>
+    <%@page import="com.esc.thema.*" %>
+    <jsp:useBean id="thedto" class="com.esc.thema.ThemaDTO"></jsp:useBean>
+    <jsp:useBean id="thedao" class="com.esc.thema.ThemaDAO"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,6 +105,10 @@ ul.img li{
 	transition: 0.5s;
 	z-index:1;
 }
+.content{
+display:block;
+text-align:center;
+}
 </style>
 <body>
 <%@include file="header.jsp" %>
@@ -132,6 +141,40 @@ ul.img li{
 		<label for="slide3"></label>
 	</div>
 
+</div>
+<div class="content slider">
+<%
+ArrayList<ThemaDTO> arr=thedao.allThema();
+%>
+<ul>
+	<%
+	if(arr==null||arr.size()==0){
+		%><li></li><%
+	}else{
+		for(int i=0;i<arr.size();i++){
+			String star="";
+		%>
+		<li>
+		<div>
+			<a href="#">
+			<div>
+				<img src="/seesc/thema_img/00<%=i%>.jpg" width="450" height="500">
+			</div>
+			<div>
+				<h2><%=arr.get(i).getThema_name() %></h2>
+				<span><%
+				for(int j=0;j<arr.get(i).getThema_level();j++){
+					star+="★";
+					} %>난이도 : <%=star %></span>&nbsp;<span>#<%=arr.get(i).getThema_tag1() %>&nbsp;#<%=arr.get(i).getThema_tag2() %>&nbsp;#<%=arr.get(i).getThema_tag3() %></span>
+			</div>
+			</a>
+		</div>
+		</li>
+		<%
+	}
+	}
+	%>
+</ul>
 </div>
 </section>
 <%@include file="footer.jsp" %>

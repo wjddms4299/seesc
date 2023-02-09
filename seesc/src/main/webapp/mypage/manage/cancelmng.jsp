@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <style>
-*{
+body{
 background-color: #828282;
 margin: 0px auto;
 text-align: center;
@@ -36,17 +36,18 @@ color: blue;
 color: red;
 }
 </style>
+<link rel = "stylesheet" type = "text/css" href = "/seesc/css/subLayout.css">
 <body>
 <section>
 <h1>예약취소관리</h1>
 <article>
-	<a href="/seesc/index.jsp"><button><span>홈</span></button></a>
-	<a href="/seesc/mypage/manage/managepage.jsp"><button><span>관리자페이지</span></button></a>
-	<a href="boomange.jsp"><button><span>예약내역관리</span></button></a>
-	<a href="mng.jsp"><button><span>관리권한부여</span></button></a>
-	<a href="cancelmng.jsp"><button><span>예약취소관리</span></button></a>
-	<a href="coumng.jsp"><button><span>쿠폰관리</span></button></a>
-	<a href="/seesc/mypage/myinfo.jsp"><button><span>내정보</span></button></a>
+	<a href="/seesc/index.jsp"><button class="tbutton"><span>홈</span></button></a>
+	<a href="/seesc/mypage/manage/managepage.jsp"><button class="tbutton"><span>관리자페이지</span></button></a>
+	<a href="boomange.jsp"><button class="tbutton"><span>예약내역관리</span></button></a>
+	<a href="mng.jsp"><button class="tbutton"><span>관리권한부여</span></button></a>
+	<a href="cancelmng.jsp"><button class="rbutton"><span>예약취소관리</span></button></a>
+	<a href="coumng.jsp"><button class="tbutton"><span>쿠폰관리</span></button></a>
+	<a href="/seesc/mypage/myinfo.jsp"><button class="tbutton"><span>내정보</span></button></a>
 	<table>
 		<tr>
 			<th>취소번호</th>
@@ -123,7 +124,7 @@ color: red;
 				}
 				
 				if(cancel_ok.equals("환불안됨")){
-					%><td><a href="cancelmng_ok.jsp?booking_idx=<%=arr.get(i).getBooking_idx()%>"><input type="button" value="환불"></a></td><%
+					%><td><a href="cancelmng_ok.jsp?booking_idx=<%=arr.get(i).getBooking_idx()%>"><input type="button" value="환불" class="tbutton"></a></td><%
 				}else{
 					%><td></td><%
 				}
