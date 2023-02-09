@@ -12,8 +12,8 @@ int manager = session.getAttribute("manager") == null || session.getAttribute("m
 int write_idx = request.getParameter("write_idx") == null || request.getParameter("write_idx").equals("")
 		? 0
 		: Integer.parseInt(request.getParameter("write_idx"));
+
 String flag = request.getParameter("flag");
-String userinput_pwd = request.getParameter("userinput_pwd");
 
 WriteDTO dto = qnadao.writeQnAContent(write_idx);
 if (dto == null || dto.equals("")) {
@@ -24,8 +24,10 @@ if (dto == null || dto.equals("")) {
 <%
 return;
 }
-if (user_idx != dto.getUser_idx() || user_idx == 0) {
-if (!userinput_pwd.equals(dto.getWrite_pwd())) {
+  
+if (manager==0&&user_idx != dto.getUser_idx() || user_idx == 0) {
+String userinput_pwd = request.getParameter("userinput_pwd");
+	if (!userinput_pwd.equals(dto.getWrite_pwd())) {
 %>
 <script>
 	window.alert('비밀번호가 일치하지 않습니다.');

@@ -45,7 +45,7 @@ public class CouponDAO {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			
-			String sql="select coupon_idx,coupon_name,coupon_dc from coupon where user_idx=? and coupon_use=1";
+			String sql="select coupon_idx,coupon_name,coupon_dc from coupon where user_idx=? and coupon_use=1 order by coupon_dc desc";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, user_idx);
 			rs=ps.executeQuery();
@@ -96,24 +96,24 @@ public class CouponDAO {
 		}
 	}
 	
-	/**예약확인시 쿠폰번호로 쿠폰이름 불러오기*/
-	public String bookingCouponName(int coupon_idx){
+	/**예약확인시 쿠폰번호로 할인금액 불러오기*/
+	public int bookingCouponDc(int coupon_idx){
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			
-			String sql="select coupon_name from coupon where coupon_idx=?";
+			String sql="select coupon_dc from coupon where coupon_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, coupon_idx);
 			rs=ps.executeQuery();
 			
-			String coupon_name=null;
+			int coupon_dc=0;
 			if(rs.next()) {
-				coupon_name=rs.getString("coupon_name");
+				coupon_dc=rs.getInt("coupon_dc");
 			}
-			return coupon_name;
+			return coupon_dc;
 		}catch(Exception e) {
 			e.printStackTrace();
-			return null;
+			return 0;
 		}finally {
 			try {
 				if(rs!=null)rs.close();
