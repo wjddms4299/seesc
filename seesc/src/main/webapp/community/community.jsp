@@ -131,6 +131,15 @@ if(cp%pageSize==0)userGroup--;
 
 
 
+String sort_s=request.getParameter("sort");
+int sort=0;
+if(sort_s==null || sort_s.equals("")){
+	sort_s="0";
+	sort=Integer.parseInt(sort_s);	
+	
+}else{
+	 sort=Integer.parseInt(sort_s);
+} 
 %>
 <body>
 <%@include file="/header.jsp" %>
@@ -145,23 +154,6 @@ if(cp%pageSize==0)userGroup--;
 		<br><br><br>
 		<div id="div2">
 			<span><a href="/seesc/community/memberboard.jsp"><input type="button" value="멤버모집게시판" class="writedel"></a></span>
-			<select name="sort" class="select">
-				<option  value="0">번호순</option>
-				<option  value="1">조회수 순</option>
-				<option  value="2">작성일 순</option>
-				<%
-				String sort_s=request.getParameter("sort");
-				int sort=0;
-				if(sort_s==null || sort_s.equals("")){
-					sort_s="0";
-					sort=Integer.parseInt(sort_s);	
-					
-				}else{
-					 sort=Integer.parseInt(sort_s);
-				} %>
-				
-				
-			</select>
 			</div>
 		<br>
 		<table>
@@ -210,13 +202,13 @@ if(cp%pageSize==0)userGroup--;
 					if(manager==0){
 						%>
 						<td colspan="5">
-				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writebutton" >
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writedel" >
 				</td>
 				<% 
 					}else if(manager==1){
 						%>
 						<td colspan="5">
-				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"class="writebutton">
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"class="writedel">
 				<input type="button" value="게시글삭제하기" class="writedel" onclick="location.href='content_del.jsp'">
 				</td>
 						<% 

@@ -22,7 +22,6 @@ public class WriteDAO {
 			// String sql = "select * from write order by write_idx desc";
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			String free="free";
 			option=0;
 			String sql="";
 			switch(option) {
@@ -695,5 +694,64 @@ public class WriteDAO {
 				if(conn!=null)conn.close();
 			}catch(Exception e2) {}
 		}
+	
 	}
+	/**write_idx로 작성자 찾기*/
+	public String  nodel(int idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select write_writer from write where write_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			rs=ps.executeQuery();
+			rs.next();
+			String write_writer=rs.getString("write_writer");
+			
+			return write_writer;
+		}catch(Exception e) {
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**댓글의 가자 큰 lev를 판별*/
+	public int findlev(int ref) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select max(write_lev) from write where write_ref=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, ref);
+			rs=ps.executeQuery();
+			rs.next();
+				int lev=rs.getInt("write_lev");
+			return lev;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
+	/**게시물의 댓글 수량 알기 관련 메서드*/
+		public int findref() {
+			try {
+				conn=com.esc.db.EscDB.getConn();
+				String sql="";
+			}catch(Exception e) {
+				
+			}finally {
+				try {
+					
+				}catch(Exception e2) {}
+			}
+		}
+	
 }

@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO"></jsp:useBean>
 <!DOCTYPE html>
-<%
-	String idx=request.getParameter("idx");
+<%	
+	int idx=0;
+	String idx_s=request.getParameter("idx");
+	if(idx_s==null || idx_s.equals("")){
+		idx_s="";
+	}else{
+		idx=Integer.parseInt(idx_s);
+	}
+
+	
+	
+	
 %>
 <html>
 <head>
@@ -59,6 +71,27 @@ article{
     background-color: #0000CD;
 }
 </style>
+<%
+
+
+int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+
+int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+
+String sid_s=session.getAttribute("sid")==null || session.getAttribute("sid").equals("")?"":(String)session.getAttribute("sid");
+	
+
+String write_writer=wdao.nodel(idx);
+
+if(udao.manager(write_writer)==1 || manager==0){
+	%>
+	<script>
+	window.alert('관리자의 글은 삭제할 수 없습니다.');
+	location.href='community_freecontent.jsp?idx=<%=idx	%>';
+	</script>
+	<% 	
+}
+%>
 <body>
 <%@include file="/header.jsp" %>
 <section>
@@ -73,6 +106,7 @@ article{
 		<div>
 		<input type="submit" value="삭제하기" id="del" class="writedel">
 		<input type="button" value="취소하기" id="cancel" onclick="location.href='community.jsp'" class="writedel"	>
+		<input type="hidden" value="">
 		</div>
 		</form>
 	</article>
