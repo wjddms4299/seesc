@@ -10,7 +10,7 @@
 <body>
 <form name="thrmaImgUpload2" method="post" action="uploadImg2.jsp?thema_idx=<%=thema_idx%>" enctype="multipart/form-data">
 	<fieldset>
-	<legend>테마 이미지 올리기</legend>
+	<legend>테마 이미지 수정하기</legend>
 	<br><br><br>
 	&nbsp;&nbsp; <label>이미지 파일 찾기</label> &nbsp; <input type="file" name="upload">
 	<br><br><br>
