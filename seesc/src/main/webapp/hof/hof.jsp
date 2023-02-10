@@ -109,7 +109,7 @@ z-index: 2;
 </style>
 <script>
 function openhofUpload(){
-	window.open('hofUpload.jsp','upload','width=550,height=700');
+	window.open('hofUpload.jsp','upload','width=550,height=450');
 }
 </script>
 <%
