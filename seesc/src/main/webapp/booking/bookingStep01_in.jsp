@@ -35,6 +35,7 @@ function open_popup(){
 <body>
 <%@include file="/header.jsp"%>
 <section>
+<div>
 <form name="bookingStep01_in" action="bookingStep01_in_ok.jsp">
 <input type="hidden" name="img_idx" value="<%=img_idx%>">
 <article>
@@ -76,8 +77,8 @@ function open_popup(){
 				<input type="submit" value="추가하기"><br><br><br><br>
 </article>
 </form>
+</div>
 </section>
-<hr width="1200">
 <%@include file="/footer.jsp"%>
 </body>
 </html>
