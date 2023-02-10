@@ -75,7 +75,8 @@ int manager = session.getAttribute("manager") == null || session.getAttribute("m
 		: (Integer) session.getAttribute("manager");
 int write_idx = request.getParameter("write_idx")==null||request.getParameter("write_idx").equals("")?1:Integer.parseInt(request.getParameter("write_idx"));
 
-int totalCnt = qnadao.getTotalCnt(user_idx); 
+
+int totalCnt = user_idx==0?1:qnadao.getTotalCnt(user_idx); 
 int listSize = 10; 
 int pageSize = 5; 
 
