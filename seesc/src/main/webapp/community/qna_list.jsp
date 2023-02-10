@@ -57,7 +57,9 @@ table{
     word-break:break-all;
     background-color: #FFF064;
     color : black;
-    text-align:center;
+    text-align:center; 
+    
+
 
 }
 .noticelist{/*공지 리스트*/
@@ -74,17 +76,19 @@ color : red;
 border-bottom: 1px dotted #444444;
 color : red;
 font-weight: bold;
-
+    padding : 3px;
 }
 
 .writelist{/*일반글 리스트*/
 text-align : center;
 background-color: white;
 color : black;
-padding : 10px;
+padding :5px;
 }
 .writelist td{/*일반글 리스트*/
 border-bottom: 1px dotted #444444;
+    padding : 5px;
+
 }
 
 
@@ -96,6 +100,19 @@ text-align : left;
 background-color: white;
 text-align : center;
 padding : 5px;
+}
+#userqnalist{
+	width: 120px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: #464646;
+        color: white;
+        font-size: 16px;
+      }
+}
+#userqnalist :hover{
+  background-color: #8c8c8c;
 }
 </style>
 </head>
@@ -187,14 +204,16 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						String today = simpleDateFormat.format(nowDate); 
 						
 						String dbdate= simpleDateFormat.format(notice.get(n).getWrite_wdate());
+						String todayW = today.equals(dbdate)?qnadao.writetime(notice.get(n).getWrite_idx()):dbdate;
+						
 						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new' style = 'width:15px;height:15px;'>":"";
 					%>
 						<tr class = "td">
 						<td>공 지</td>
 						<td colspan="3">
 						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"class = "notice"><%=notice.get(n).getWrite_title()%><%=newicon %></a></td>
-						<td><%=notice.get(n).getWrite_writer()%></td>
-						<td><%=notice.get(n).getWrite_wdate()%></td>
+						<td>S2 방탈출</td>
+						<td><%=todayW%></td>
 						<td><%=notice.get(n).getWrite_readnum()%></td>
 					</tr>
 						<%}
@@ -216,22 +235,17 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 					} else {
 					for (int i = 0; i < arr.size(); i++) {
 						//게시글 오늘 날짜일경우  new 표시하기
-						Date nowDate = new Date();
+						java.util.Date nowDate = new java.util.Date();
 						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 						String today = simpleDateFormat.format(nowDate); 
 						String dbdate= simpleDateFormat.format(arr.get(i).getWrite_wdate());
 						String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new'style = 'width:15px;height:15px;' >":"";
 						
-						
-						Date nowTime = new Date();
-						SimpleDateFormat time = new SimpleDateFormat("HH:mm"); 
-						String writetime = time.format(arr.get(i).getWrite_wdate());
-						String todaytime = today.equals(dbdate)?writetime:dbdate;
-						
-						
+						String todayW = today.equals(dbdate)?qnadao.writetime(arr.get(i).getWrite_idx()):dbdate;
+
 						//내가쓴글 알려주기
 						String me = 
-						user_idx==arr.get(i).getUser_idx()&&user_idx!=0?"<img src='/seesc/img/meme.png' alt = 'me' style='width :25px; height:16px;'>":"";
+						user_idx==arr.get(i).getUser_idx()&&user_idx!=0?"<img src='/seesc/img/meme.png' alt = 'me' style='width :20px; height:20px;'>":"";
 					%>
 					<!-- a태그 post방식으로 보내기 -->
 					<tr>
@@ -261,14 +275,11 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							<%} %>
 							</td>
 							<td><%=me%><%=arr.get(i).getWrite_writer()%></td>
-							<td><%=arr.get(i).getWrite_wdate()%></td>
+							<td><%=todayW%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>
 						</tr>
 					<%
-					}%>
-					
-					<%
-
+					}
 					}
 					%>
 					
@@ -279,13 +290,14 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<tr><td colspan="7"><br></td></tr>
 					<tr>
 				<tr>
-						<td colspan ="7" align = "right">
+				<td colspan ="6"align = "left" >&nbsp; <input type = "button" id = "userqnalist" value ="나의 문의 목록" onclick = "location.href = '/seesc/community/qna_mywriteList.jsp'"></td>
+						<td colspan ="1" align = "right">
 						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
 						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'" class ="writebutton">
-						<input type="button" value="목록" onclick= "location.href ='qna_list.jsp'" class = "listbutton"></td>
+						<input type="button" value="전체글" onclick= "location.href ='qna_list.jsp'" class = "listbutton">&nbsp;</td>
 						</tr>
 				<tr>
-				<td colspan="7"><br></td>
+		
 				</tr>
 				
 					<form name = "search_list" action = "qna_list.jsp" method = "post">
@@ -342,7 +354,9 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 			</table>
 		</article>
 	</section>
-			<br><br><br>
-	<%@include file="/footer.jsp"%>
+		<br><br><br>
+	
+				<%@include file="/footer.jsp"%>
+
 </body>
 </html>

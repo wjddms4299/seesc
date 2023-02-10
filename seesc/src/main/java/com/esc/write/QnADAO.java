@@ -243,7 +243,7 @@ public class QnADAO {
 		}
 
 	}
-
+	
 	/** QnA 게시글 리스트 출력 메서드 */
 	public ArrayList<WriteDTO> writeQnAList(int userpage, int writeList, String Listname, String content) {
 		try {
@@ -782,32 +782,7 @@ public class QnADAO {
 			}
 		}
 	}
-	/**ref구하기*/
-	public int refgroup(int write_idx) {
-		try {
-			conn=com.esc.db.EscDB.getConn();
-			String spl="select write_ref from write where write_idx =?";
-			ps=conn.prepareStatement(spl);
-			ps.setInt(1, write_idx);
-			rs = ps.executeQuery();
-			rs.next();
-			int count = rs.getInt(1);
-			
-			return count;
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			return -1;
-		}finally {
-			try {
-				
-				if(rs!=null)rs.close();
-				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
-			}catch(Exception e2) {}
-		}
-	}
-	
+
 	/**답글이 있으면 삭제 못하게 하는 기능*/
 	public int refcount(int write_idx) {
 		try {
@@ -834,5 +809,128 @@ public class QnADAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**글 작성 시간 가져오기*/
+	public String writetime(int write_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql = "select to_char(write_wdate,'hh24:mm')from write where write_idx =?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, write_idx);
+			rs = ps.executeQuery();
+			String writetime="";
+			if(rs.next()) {
+			writetime = rs.getString(1);}
+			
+			 return writetime;
+			 
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 
+	
+	/**나의 문의 목록 총 게시물*/
+	public int getTotalCnt(int user_idx) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql =
+			"select count(*) from (select * from write where write_notice =0 and user_idx =? or write_ref in(select write_ref from write where user_idx=?))";	
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			ps.setInt(2, user_idx);
+			rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			
+			return count==0?1:count; // 0이라는 상황만들지않기 페이징은 하나라도 보여줘야함.
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
+	/**내가 작성한 글 가져오기 관리자 답변까지*/
+	public ArrayList<WriteDTO> userWriteList(int user_idx,int ls,int cp) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			int start = (cp-1)*ls+1;
+			int end = cp * ls;
+				String sql =
+
+"select * from "
++ "(select rownum as rnum,a.* from "
++ "(select * from write where write_notice =0 and user_idx =? or write_ref in(select write_ref from write where user_idx=?) "
++ "order by write_ref desc,write_step asc)a)b "
++ "where rnum>= ? and rnum<=? ";
+				
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, user_idx);
+				ps.setInt(2, user_idx);
+				ps.setInt(3, start);
+				ps.setInt(4, end);
+			
+				rs = ps.executeQuery();
+				ArrayList<WriteDTO> arr = new ArrayList<WriteDTO>();
+
+				while (rs.next()) {
+					user_idx = rs.getInt("user_idx");
+					int write_idx = rs.getInt("write_idx");
+				String write_cate = rs.getString("write_cate");
+				String write_title = rs.getString("write_title");
+				String write_writer = rs.getString("write_writer");
+				String write_pwd = rs.getString("write_pwd");
+				Date write_wdate = rs.getDate("write_wdate");
+				String write_filename = rs.getString("write_filename");
+				String write_content = rs.getString("write_content");
+				int write_readnum = rs.getInt("write_readnum");
+				int write_ref = rs.getInt("write_ref");
+				int write_lev = rs.getInt("write_lev");
+				int write_step = rs.getInt("write_step");
+				int write_open = rs.getInt("write_open");
+				int write_notice = rs.getInt("write_notice");
+
+				WriteDTO dto = new WriteDTO(write_idx, user_idx, write_cate, write_title, write_writer, write_pwd,
+						write_wdate, write_filename, write_content, write_readnum, write_ref, write_lev, write_step,
+						write_open, write_notice);
+
+				arr.add(dto);
+			}
+
+			return arr;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+
+			}
+		}
+	}
+	
 }

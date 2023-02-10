@@ -27,7 +27,7 @@ if (dto == null||dto.equals("")) {
 <%
 return;
 }
-
+/**답글있으면 삭제 못함*/
 UserinfoDTO udto = userdao.userInfo_Idx(dto.getUser_idx());
 boolean writer_m;
 if(udto!=null&&!udto.equals("")){
@@ -40,9 +40,9 @@ if(udto!=null&&!udto.equals("")){
 Date nowDate = new Date();
 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 String today = simpleDateFormat.format(nowDate); 
-
+						
 String dbdate= simpleDateFormat.format(dto.getWrite_wdate());
-String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new' style = 'width:15px;height:15px;'>":"";
+String todayW = today.equals(dbdate)?qnadao.writetime(write_idx):dbdate;
 
 
 
@@ -56,6 +56,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 <link rel="stylesheet" type="text/css" href="/seesc/css/write.css">
 
 </head>
+
 <body>
 	<%@include file="/header.jsp"%>
 	
@@ -78,9 +79,9 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 					
 					<tr>
 						<th>작성자</th>
-						<td class ="bottom"><%=dto.getWrite_writer()%></td>
-						<th style ="float :right;">작성시간</th>
-						<td class ="bottom"><%=dto.getWrite_wdate()%></td>
+						<td class ="bottom" style ="width :40%"><%=dto.getWrite_writer()%></td>
+						<th >등록일</th>
+						<td class ="bottom" ><%=todayW%></td>
 					</tr>
 					<tr>
 						<th>첨부파일</th>
@@ -97,10 +98,10 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 					</tr>
 			</tbody>
 			<!-- --------------------------본문 삭제,수정,답글--------------------------->
-			<tfoot>
-				<tr><td>&nbsp;</td></tr>
-					<tr><td>&nbsp;</td></tr>
-				<tr><td>&nbsp;</td></tr>
+			<tfoot class = "tfoot">
+				<tr><td colspan = "4">&nbsp;</td></tr>
+					<tr><td colspan = "4">&nbsp;</td></tr>
+				<tr><td colspan = "4">&nbsp;</td></tr>
 				<%
 				if(dto.getWrite_notice()==1 && manager!=1){%><!-- 공지글일경우 삭제 기능 없음 -->
 					<tr>
@@ -112,7 +113,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 				<tr>
 				<td colspan="4" style = "text-align : center;">
 					<form name = "qna_rewrite" action="qna_repWrite.jsp" method ="post">
-					<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}"style = "color : black; font-weight : bold;">
+					<input type="button" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}"style = "backgroud-color : black; font-weight : bold;">
 					<input type="submit" value="답글">
 					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					<input type="hidden" name="write_idx" value="<%=write_idx%>">
@@ -131,7 +132,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 			<%}else if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%> <!-- 관리자 또는 작성자 본인이면 바로 삭제 할 수 있는 기능  -->
 				<tr>
 					<td colspan="4" style = "text-align : center;">
-						<input type="submit" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}"style = "color : black; font-weight : bold;">
+						<input type="submit" value="삭제" onclick ="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){location.href ='qna_delete_ok.jsp?flag=userDelete&write_idx=<%=write_idx%>'}"style = "backgroud-color : black; font-weight : bold;">
 						<input type="button" value="수정" onclick="location.href = 'qna_update.jsp?flag=userUpdate&write_idx=<%=write_idx%>'">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					</td>
@@ -152,7 +153,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 						<input type="hidden" name="write_idx" value="<%=write_idx%>">
 						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
 						<input type="password" name="userinput_pwd" required="required">
-						<input type="submit" value="삭제" style = "color : black; font-weight : bold;"
+						<input type="submit" value="삭제"
 						onclick="javascript: var result =window.confirm('삭제하시겠습니까?');if(result){qna_wdu.action='qna_delete_ok.jsp';}" >
 						<input type="submit" value="수정" onclick="javascript:qna_wdu.action='qna_update.jsp';">
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
@@ -168,6 +169,7 @@ String newicon= today.equals(dbdate)?"<img src='/seesc/img/ico_n.png' alt = 'new
 			</table>
 		</article>
 	</section>
+	<br><br><br>
 	<%@include file="/footer.jsp"%>
 </body>
 </html>

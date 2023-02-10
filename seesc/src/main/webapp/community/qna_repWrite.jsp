@@ -25,7 +25,6 @@ String write_step = request.getParameter("write_step");
 String write_content = request.getParameter("write_content");
 String write_pwd = request.getParameter("write_pwd");
 
-write_content = write_content.replace("\r\n","<br>");
 %>
 <!DOCTYPE html>
 <html>
