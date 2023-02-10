@@ -4,6 +4,7 @@
 <%@ page import="com.esc.write.*" %>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="wdto" class="com.esc.write.WriteDTO" scope="session"></jsp:useBean>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO" scope="session"></jsp:useBean>
 <%
 	String idx_s=request.getParameter("idx");	
 	if(idx_s==null || idx_s.equals("")){
@@ -14,7 +15,13 @@
 	session.setAttribute("write_idx", idx_s);
 	
 
-
+	
+	int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
+	
+	int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+	
+	String sid_s=session.getAttribute("sid")==null || session.getAttribute("sid").equals("")?"":(String)session.getAttribute("sid");
+		
 %>
 
 
@@ -168,6 +175,7 @@ tfoot{
 				<tr>
 					<td colspan="4"  id="select">
 						<input type="hidden" name="idx"  value="<%=dto.getWrite_idx()%>">
+						<input type="hidden" name="write_writer" value=<%=dto.getWrite_writer() %>>
 						<input type="submit" value="수정하기" class="writedel">
 						<input type="button" value="목록으로" onclick="location.href='community.jsp'" class="writedel">
 						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'" class="writedel">
@@ -212,9 +220,20 @@ tfoot{
 							out.print("&nbsp;&nbsp;");
 						}
 						%>
-						<%=arr2.get(i).getWrite_content() %>
+						<% 
+						if(arr2.get(i).getWrite_open()==1){
+							%>
+							<%=arr2.get(i).getWrite_content() %>
+							<%
+						}else{
+							%>
+							<%out.print("비밀 댓글입니다"); %>
+							<%
+						}
+						
+						%>
 						</td>
-						<td><input type="button" value="삭제하기" class="writedel" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>'"></td>
+						<td><input type="button" value="삭제하기" class="writedel" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=arr2.get(i).getWrite_lev()%>&write_step<%=arr2.get(i).getWrite_step()%>'"></td>
 						<td><input type="button" value="답글하기" class="writedel" onclick="location.href='under_answer.jsp?ref=<%=arr2.get(i).getWrite_ref() %>&lev=<%=arr2.get(i).getWrite_lev() %>&step=<%=arr2.get(i).getWrite_step()%>&write_idx=<%=dto.getWrite_idx() %>&write_content=<%=arr2.get(i).getWrite_content()%>'"></td>
 						
 					</tr>

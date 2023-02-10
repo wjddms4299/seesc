@@ -14,8 +14,18 @@ new MultipartRequest(request,savePath,2097152,"utf-8");
 	String idx_s=mr.getParameter("idx");
 	int idx=Integer.parseInt(idx_s);
 	String pwd=mr.getParameter("pwd");
-
-	int result=wdao.underDel(idx, pwd);
+	String ref_s=mr.getParameter("ref");
+	int ref=Integer.parseInt(ref_s);
+	String lev_s=mr.getParameter("lev");
+	int lev=Integer.parseInt(lev_s);
+	String step_s=mr.getParameter("step");
+	int step=Integer.parseInt(step_s);
+	
+	
+		int	result=wdao.underDel(idx, pwd);
+	
+	
+	
 	
 	String msg=result>0?"삭제성공!":"삭제실패!";
 %>

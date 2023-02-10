@@ -450,5 +450,28 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
+	/**작성자로 관리자를 구별함*/
+	public int  manager(String nick) {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select manager from userinfo where user_nic=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, nick);
+			rs=ps.executeQuery();
+			rs.next();
+			int manager=rs.getInt("manager");
+			
+			return manager;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+	}
 
 }

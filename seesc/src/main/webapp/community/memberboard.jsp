@@ -66,6 +66,7 @@ tfoot{
         background-color: #4646CD;
         color: white;
         font-size: 16px;
+        text-align: right;
       }
 .writedel:hover {
    background-color: #0000CD;
@@ -119,23 +120,6 @@ if(cp%pageSize==0)userGroup--;
 		<br><br><br>
 		<div id="div2">
 			<span><a href="/seesc/community/memberboard.jsp"><input type="button" value="멤버모집게시판" class="writedel"></a></span>
-			<select name="sort" class="select">
-				<option  value="0">번호순</option>
-				<option  value="1">조회수 순</option>
-				<option  value="2">작성일 순</option>
-				<%
-				String sort_s=request.getParameter("sort");
-				int sort=0;
-				if(sort_s==null || sort_s.equals("")){
-					sort_s="0";
-					sort=Integer.parseInt(sort_s);	
-					
-				}else{
-					 sort=Integer.parseInt(sort_s);
-				} %>
-				
-				
-			</select>
 			</div>
 		<table>
 			<thead>
@@ -178,14 +162,14 @@ if(cp%pageSize==0)userGroup--;
 					<%
 					if(manager==0){
 						%>
-						<td colspan="5" align="right">
-				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writebutton">
+						<td colspan="5" >
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'" class="writedel">
 				</td>
 				<% 
 					}else if(manager==1){
 						%>
-						<td colspan="5" align="right">
-				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"class="writebutton">
+						<td colspan="5" >
+				<input type="button" value="글쓰기" onclick="location.href='community_write.jsp'"class="writedel">
 				<input type="button" value="게시글삭제하기" class="writedel">
 				</td>
 						<% 
