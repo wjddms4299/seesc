@@ -28,7 +28,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 	<section>
 		<article>
 			<br><br><br>
-			<h1 class ="h1">QnA 글쓰기</h1>
+			<h1 class ="h1">문의하기</h1>
 			<br>
 			  <hr width="130px">
 			  <br><br>

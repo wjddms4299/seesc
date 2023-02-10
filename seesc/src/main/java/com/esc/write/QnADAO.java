@@ -842,7 +842,7 @@ public class QnADAO {
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			String sql =
-			"select count(*) from (select * from write where write_notice =0 and user_idx =? or write_ref in(select write_ref from write where user_idx=?))";	
+			"select count(*) from (select * from write where write_notice =0 and (user_idx =? or write_ref in(select write_ref from write where user_idx=?)))";	
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, user_idx);
 			ps.setInt(2, user_idx);
