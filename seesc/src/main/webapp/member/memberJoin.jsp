@@ -195,7 +195,7 @@ function open_nicCheck(){
 					</tr>
 					<tr>
 						<td>
-						<select name="year">
+						<select name="year" required>
 						<option value="">--선택--</option>
 						<%
 						for(int i=1950;i<=2020;i++){
