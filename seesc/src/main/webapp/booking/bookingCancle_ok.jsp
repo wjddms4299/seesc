@@ -27,24 +27,24 @@ dto = boodao.one_bookingList(booking_idx);
 if (inputpwd.equals(booking_pwd)) {
 	int result = boodao.bookingDelete(booking_idx, dto, cancel_banknum);
 
-	if (result < 0) {
-%>
-<script>
-		window.alert('예약취소에 실패하였습니다.다시 시도해주세요.');
-		location.href = '/seesc/booking/b_bookingcheck.jsp';
-		</script>
-<%
-return;
-} else {
-	if(dto.getUser_idx()==0){
-%>
-<script>
+			if (result < 0) {
+		%>
+		<script>
+				window.alert('예약취소에 실패하였습니다.다시 시도해주세요.');
+				location.href = '/seesc/booking/b_bookingcheck.jsp';
+				</script>
+		<%
+				return;
+			} else {
+				if(dto.getUser_idx()==0){
+				%>
+				<script>
 			window.alert('예약 취소되었습니다.');
 			location.href = '/seesc/booking/b_bookingcheck.jsp';
 			</script>
 
-<%
-	}else{
+			<%
+}else{
 		%>
 		<script>
 					window.alert('예약 취소되었습니다.');

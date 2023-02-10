@@ -61,7 +61,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						</tr>
 						<tr>
 							<th>글제목</th>
-							<td><input type="text" name="write_title" maxlength="50"
+							<td><input type="text" name="write_title" maxlength="49"
 								required="required"placeholder=" 제목 50자이내로 작성"></td>
 						</tr>
 						<tr>
