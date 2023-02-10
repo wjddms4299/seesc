@@ -138,19 +138,19 @@ if(cp%pageSize==0)userGroup--;
       			<!-- -------------------------------------- -->
       			<%
 if(userGroup!=0){
-	%><a href="community_eventcontent_list.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><% 
+	%><a style="text-decoration:none;" href="community_eventcontent_list.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><% 
 	
 }
 %>
 <%
 for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-	%>&nbsp;&nbsp;<a style="text-decoration:none;" href="community_eventcontent_list.jsp?cp=<%=i%>"><b class="pagebutton"><%=i %></b>&nbsp;&nbsp;<%
+	%>&nbsp;&nbsp;<a style="text-decoration:none;" href="community_eventcontent_list.jsp?cp=<%=i%>"><b class="pagebutton"><%=i %></b>&nbsp;&nbsp;</a><%
 	if(i==totalPage)break;
 }
 %>
 <%
 if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-	%><a href="community_eventcontent_list.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
+	%><a style="text-decoration:none;" href="community_eventcontent_list.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a><%
 }
 %>
       		<br>

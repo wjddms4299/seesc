@@ -45,6 +45,18 @@ return;
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <style>
+.pagebutton{
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FFA300;
+        color: white;
+        font-size: 20px;
+  }
+.pagebutton:hover {
+    background-color: #FF870C;
+}
 .listbutton{
 		width: 80px;
         height: 40px;
@@ -223,7 +235,7 @@ td {
 				<legend>댓글</legend>
 				<table style="background-color: #f2f2f2;">
 				<%
-				ArrayList<CommentDTO> arr = idao.event_commentList(write_idx);
+				ArrayList<CommentDTO> arr = idao.event_commentList(write_idx,listSize,cp);
 				String flag = request.getParameter("flag");
 				if (arr==null||arr.size()==0){
 			       %>
@@ -280,7 +292,8 @@ td {
 							</td>
 							</tr>
 					<%}
-					}%>			
+					}%>
+								
 				<!-------대댓------->
 				<%
 				if (comm_idx == arr.get(i).getComm_idx()&&flag!=null&&flag.equals("cw")) {
@@ -330,7 +343,7 @@ td {
 							<input type="button"value="닫기" onclick="location.href = 'community_eventcontent_content.jsp?write_idx=<%=write_idx%>'">
 							</td>
 						</tr>
-							</form>
+						</form>
 
 				<%
 							}	
@@ -338,7 +351,30 @@ td {
 					}
 				}
 				%>
+			<tfoot>
+				<tr>
+					<td align="center">
+					<%
+					if(userGroup!=0){
+						%><a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=write_idx %>&cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+					}
+					%>
 
+					<%
+					for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
+						%>&nbsp;&nbsp;<a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=write_idx %>&cp=<%=i%>"><b class="pagebutton"><%=i %></b>&nbsp;&nbsp;</a><% 
+						if(i==totalPage)break;
+					}
+					%>
+					<%
+					if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
+						%><a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=write_idx %>&cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a>
+					<%
+					}
+					%>
+					</td>
+				</tr>
+			</tfoot>
 			</table>
 			</fieldset>
 			<br>

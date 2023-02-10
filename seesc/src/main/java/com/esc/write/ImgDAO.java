@@ -241,7 +241,7 @@ public class ImgDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	/** 공지글 출력 관련 메서드 */
+	/** 공지글 리스트출력 관련 메서드 */
 	public ArrayList<WriteDTO> event_noticelist() {
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -339,15 +339,20 @@ public class ImgDAO {
 	}
 }
 	/** 댓글 출력*/
-	public ArrayList<CommentDTO> event_commentList(int write_idx) {
+	public ArrayList<CommentDTO> event_commentList(int write_idx, int ls, int cp) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "select * from comments where write_idx = ? order by comm_ref desc,comm_step asc";
+			int start = (cp - 1) * ls + 1;
+			int end = cp * ls;
+			String sql = "select * from(select rownum r,a.* from (select * from comments where write_idx=? order by comm_ref desc,comm_step asc)a) where r >=? and r<=?";
 
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 
 			rs = ps.executeQuery();
+			
 			ArrayList<CommentDTO> arr = new ArrayList<CommentDTO>();
 			while (rs.next()) {
 				int comm_idx = rs.getInt("comm_idx");
