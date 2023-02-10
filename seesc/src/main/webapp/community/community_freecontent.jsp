@@ -18,7 +18,7 @@
 	
 	int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
 	
-	int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
+	int manager=session.getAttribute("manager")==null || session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");   //로그인한 회원의 정보
 	
 	String sid_s=session.getAttribute("sid")==null || session.getAttribute("sid").equals("")?"":(String)session.getAttribute("sid");
 		
