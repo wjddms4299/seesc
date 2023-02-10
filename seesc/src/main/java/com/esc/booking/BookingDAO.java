@@ -141,7 +141,6 @@ public class BookingDAO {
 	/**예약취소시 예약번호로 쿠폰번호 불러오기*/
 	public int bookingCouponIdx(int booking_idx){
 		try {
-			conn=com.esc.db.EscDB.getConn();
 			
 			String sql="select coupon_idx from booking where booking_idx=?";
 			ps=conn.prepareStatement(sql);
@@ -160,7 +159,6 @@ public class BookingDAO {
 			try {
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
 			}catch(Exception e2) {
 				
 			}
@@ -170,8 +168,6 @@ public class BookingDAO {
 	/**예약취소시 쿠폰 사용여부 변경하기*/
 	public void bookingCouponUse_R(int coupon_idx){
 		try {
-			conn=com.esc.db.EscDB.getConn();
-			
 			String sql="update coupon set coupon_use=1 where coupon_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, coupon_idx);
@@ -182,7 +178,7 @@ public class BookingDAO {
 		}finally {
 			try {
 				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
+			
 			}catch(Exception e2) {
 				
 			}
@@ -306,7 +302,6 @@ public class BookingDAO {
 	public void input_CancelList(int booking_idx,BookingDTO dto,String cancel_banknum) {
 		try {
 			String sql = "insert into cancel values(cancel_cancel_idx.nextval,?,?,?,?,?,?,?,sysdate,?,?)";
-			
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, dto.getBooking_idx());
 			ps.setInt(2, dto.getUser_idx());
@@ -328,8 +323,6 @@ public class BookingDAO {
 				
 			}
 		}
-		
-		
 	}
 	
 	/**예약 취소 관련 메서드 */
@@ -347,15 +340,15 @@ public class BookingDAO {
 			
 			int count = ps.executeUpdate();
 			return count;
-					
-					
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}finally {
 			try {
-				
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
 			}catch(Exception e2) {
 				
 			}

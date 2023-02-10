@@ -35,15 +35,13 @@ UserinfoDTO dto = userdao.userInfo(sid);
 			  
 			  
 			<form name="qna_upload" action="qna_upload_ok.jsp" method="post"
-				enctype="multipart/form-data" accept=".jpg,.jpeg,.png,.gif,.bmp">
+				enctype="multipart/form-data">
 					<table>
 					<tbody class = "writelist" cellspacing ="0px">
-						<input type="hidden" name="user_idx" value="<%=user_idx%>">
+					
+						<tr><td><input type="hidden" name="user_idx" value="<%=user_idx%>">
 						<input type="hidden" name="write_notice"
-							value="<%=write_notice%>">
-						
-						
-						<tr><td><br></td></tr>
+							value="<%=write_notice%>"></td></tr>
 	
 						
 						<tr>
@@ -72,7 +70,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						</tr>
 						<tr>
 							<th>파일첨부</th>
-							<td><input type="file" name="write_filename"><label style = "color :red;">* jpg, jpeg, png, gif, bmp 파일만 첨부 가능합니다.</label></td>
+							<td><input type="file" name="write_filename" accept="image/gif,image/jpeg,image/png"><label style = "color :red;">* jpg, jpeg, png, gif, bmp 파일만 첨부 가능합니다.</label></td>
 						</tr>
 						<tr>
 							<th>글내용</th>

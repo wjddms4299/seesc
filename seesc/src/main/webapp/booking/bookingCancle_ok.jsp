@@ -30,8 +30,8 @@ if (inputpwd.equals(booking_pwd)) {
 			if (result < 0) {
 		%>
 		<script>
-				window.alert('예약취소에 실패하였습니다.다시 시도해주세요.');
-				location.href = '/seesc/booking/b_bookingcheck.jsp';
+				window.alert('예약취소에 실패하였습니다.');
+				history.back();
 				</script>
 		<%
 				return;
@@ -58,8 +58,8 @@ if (inputpwd.equals(booking_pwd)) {
 %>
 <script>
 	window.alert('비밀번호가 일치하지 않습니다.');
-	location.href = 'b_bookingCheck_ok.jsp?booking_idx=<%=booking_idx%>
-	.jsp';
+	history.back();
+
 </script>
 
 <%
