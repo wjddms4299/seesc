@@ -144,23 +144,8 @@ public class WriteDAO {
 				int notice=rs.getInt("write_notice");
 				readnum(idx, readnum + 1);
 
-				dto = new WriteDTO();
-				dto.setWrite_idx(idx);
-				dto.setWrite_content(content);
-				dto.setWrite_title(title);
-				dto.setWrite_wdate(date);
-				dto.setWrite_writer(writer);
-				dto.setWrite_readnum(readnum);
-				dto.setWrite_ref(readnum);
-				dto.setUser_idx(userid);
-				dto.setWrite_cate(cate);
-				dto.setWrite_pwd(pwd);
-				dto.setWrite_filename(filename);
-				dto.setWrite_ref(ref);
-				dto.setWrite_lev(lev);
-				dto.setWrite_step(step);
-				dto.setWrite_open(open);
-				dto.setWrite_notice(notice);
+				
+				dto=new WriteDTO(idx, userid, cate, title, writer, pwd, date, filename, content, readnum, ref, lev, step, open, notice);
 			}
 			return dto;
 		} catch (Exception e) {

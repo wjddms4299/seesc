@@ -120,7 +120,7 @@ tfoot{
 <%@include file="/header.jsp" %>
 <section>
 	<article>
-		<h3>자유게시판 본문</h3>
+		<h3>본문</h3>
 		<form name="update2" action="community_freecontent_update.jsp" method="post" enctype="multipart/form-data">
 		<table>
 		
