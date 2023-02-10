@@ -273,8 +273,24 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								<%=arr.get(i).getWrite_title()%>&nbsp;<%=newicon %></a>
 							
 							<%} %>
-							</td>
-							<td><%=me%><%=arr.get(i).getWrite_writer()%></td>
+							</td><!-- 작성자 회원일경우 관리자가 예약내역 확인후 예약 취소할 수 있음.-->
+							<%
+							int writeUser_idx = arr.get(i).getUser_idx();
+							int userM = userdao.mngnum(writeUser_idx);
+							String memberCh = "";
+							if(userM!=0){
+							}else if(writeUser_idx==0&&userdao.mngnum(writeUser_idx)==0){
+								memberCh = "<img src='/seesc/img/login_no.png' alt = '비회원' style='width :20px; height:20px;'>";
+							}else{
+								memberCh ="<img src='/seesc/img/login_main.png' alt = '회원' style='width :20px; height:20px;'>";
+							}
+								
+							String mcolor = userM!=0?"style = 'color:red;'":"";
+							if(arr.get(i).getUser_idx()!=0&&manager!=0&&userM==0){%>
+								<td><a href ="/seesc/booking/member_bookingcheck.jsp?user_idx=<%=arr.get(i).getUser_idx()%>" target="_blank"><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></a></td>
+							<%}else{%> 
+							<td <%=mcolor%>><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></td>
+							<%} %>
 							<td><%=todayW%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>
 						</tr>
@@ -290,7 +306,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<tr><td colspan="7"><br></td></tr>
 					<tr>
 				<tr>
-				<td colspan ="6"align = "left" >&nbsp; <input type = "button" id = "userqnalist" value ="나의 문의 목록" onclick = "location.href = '/seesc/community/qna_mywriteList.jsp'"></td>
+				<td colspan ="6"align = "left" >&nbsp;<%if(manager==0){%> <input type = "button" id = "userqnalist" value ="나의 문의 목록" onclick = "location.href = '/seesc/community/qna_mywriteList.jsp'"><%}%></td>
 						<td colspan ="1" align = "right">
 						<% String wbutton = manager==0?"qna_upload.jsp":"qna_noticeUpload.jsp"; %>
 						<input type="button" value="글작성" onclick= "location.href ='<%=wbutton%>'" class ="writebutton">

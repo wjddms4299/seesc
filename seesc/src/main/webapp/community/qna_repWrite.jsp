@@ -86,7 +86,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 						</tr>
 						<tr>
 							<th>파일첨부</th>
-							<td><input type="file" name="write_filename"><label style = "color :red;">* jpg, jpeg, png, gif, bmp 파일만 첨부 가능합니다.</label></td>
+							<td><input type="file" name="write_filename" accept="image/gif,image/jpeg,image/png"><label style = "color :red;">* jpg, jpeg, png, gif, bmp 파일만 첨부 가능합니다.</label></td>
 						</tr>
 						<tr>
 							<th>글내용</th>

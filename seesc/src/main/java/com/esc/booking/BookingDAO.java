@@ -280,7 +280,7 @@ public class BookingDAO {
 				String booking_msg=rs.getString("booking_msg");
 				int booking_num=rs.getInt("booking_num");
 				int booking_money=rs.getInt("booking_money");
-				BookingDTO dto=new BookingDTO(booking_idx, thema_idx, coupon_idx, user_idx, booking_name, booking_tel, booking_tel, booking_time, time_date, time_ptime, booking_pay, booking_pay_ok, booking_msg, booking_num, booking_money);
+				BookingDTO dto=new BookingDTO(booking_idx, thema_idx, coupon_idx, user_idx, booking_name, booking_tel, booking_pwd, booking_time, time_date, time_ptime, booking_pay, booking_pay_ok, booking_msg, booking_num, booking_money);
 			arr.add(dto);
 			}
 			return arr;
@@ -453,4 +453,46 @@ public class BookingDAO {
 			}catch(Exception e2){}
 		}
 	}
+	
+	/**관리자 특정 회원 예약내역 조회*/
+	public ArrayList<BookingDTO> boomanage(int user_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from booking where user_idx = ?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,user_idx);
+			rs=ps.executeQuery();
+			ArrayList<BookingDTO> arr=new ArrayList<BookingDTO>();
+			while(rs.next()) {
+				int booking_idx=rs.getInt("booking_idx");
+				int thema_idx=rs.getInt("thema_idx");
+				String booking_name=rs.getString("booking_name");
+				String booking_tel=rs.getString("booking_tel");
+				Date booking_time=rs.getDate("booking_time");
+				Date time_date=rs.getDate("time_date");
+				int time_ptime=rs.getInt("time_ptime");
+				int booking_pay=rs.getInt("booking_pay");
+				int booking_pay_ok=rs.getInt("booking_pay_ok");
+				String booking_msg=rs.getString("booking_msg");
+				int booking_num=rs.getInt("booking_num");
+				int booking_money=rs.getInt("booking_money");
+				BookingDTO dto=new BookingDTO(booking_idx, thema_idx, user_idx, booking_name, booking_tel, booking_time, time_date, time_ptime, booking_pay, booking_pay_ok, booking_msg, booking_num, booking_money);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+		
+	}
+	
+
 }

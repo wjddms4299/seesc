@@ -346,8 +346,12 @@ public class UserinfoDAO {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, user_idx);
 			rs=ps.executeQuery();
-			rs.next();
-			int manager=rs.getInt("manager");
+			int manager =0;
+			while(rs.next()) {
+				
+				manager=rs.getInt("manager");
+			}
+
 			return manager;
 		}catch(Exception e) {
 			e.printStackTrace();
