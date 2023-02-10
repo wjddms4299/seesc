@@ -6,6 +6,37 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+input[type=submit] {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+input[type=text], select {
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+ul{
+list-style: none;
+}
+legend{
+text-align: center;
+}
+</style>
 <body>
 <form name="hofUpload" method="post" action="hofUpload_ok.jsp" enctype="multipart/form-data">
 	<fieldset>

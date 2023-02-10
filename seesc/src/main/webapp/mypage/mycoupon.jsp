@@ -31,7 +31,11 @@ th {
 <body>
 <%@include file="/header.jsp" %>
 <section>
-<h1>마이페이지</h1>
+<br><br>
+<h1 class ="h1">마이 페이지</h1>
+         <br>
+           <hr width="130px">
+           <br>
 <article>
 	<a href="mypage.jsp"><button class="tbutton"><span>예약내역</span></button></a>
 	<a href="payment.jsp"><button class="tbutton"><span>결제내역</span></button></a>
