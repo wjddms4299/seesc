@@ -178,7 +178,7 @@ tfoot{
 						<input type="hidden" name="write_writer" value=<%=dto.getWrite_writer() %>>
 						<input type="submit" value="수정하기" class="writedel">
 						<input type="button" value="목록으로" onclick="location.href='community.jsp'" class="writedel">
-						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>'" class="writedel">
+						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>&writer=<%=dto.getWrite_writer() %>'" class="writedel">
 						<input type="button" value="댓글작성하기" onclick="location.href='community_under.jsp?ref=<%=dto.getWrite_ref() %>&lev=<%=dto.getWrite_lev() %>&step=<%=dto.getWrite_step() %>&idx=<%=dto.getWrite_idx() %>'" class="writedel">						
 					</td>
 				</tr>
