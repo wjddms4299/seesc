@@ -31,8 +31,8 @@ if(booking_tel1==null || booking_tel2_s==null || booking_tel3_s==null || booking
 }
 
 try{
-	int booking_tel2=Integer.parseInt(booking_tel2_s);
-	int booking_tel3=Integer.parseInt(booking_tel3_s);
+	long booking_tel2=Long.parseLong(booking_tel2_s);
+	long booking_tel3=Long.parseLong(booking_tel3_s);
 }catch(NumberFormatException e){
 	%>
 	<script>
