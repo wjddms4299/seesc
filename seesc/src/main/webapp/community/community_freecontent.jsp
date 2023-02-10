@@ -166,10 +166,23 @@ tfoot{
 				</tr>
 			</thead>
 			<tbody id="content">
-				<tr>
+				
+				<%
+				if(dto.getWrite_filename()==null || dto.getWrite_filename().equals("")){
+					%>
+					<tr>
+					<td colspan="4"><textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
+					</tr>
+					<%
+				}else{
+					%>
+					<tr>
 					<td><img alt="등록 이미지" id="img" src="/seesc/community/userFile/writeImg/<%=dto.getWrite_filename() %>"></td>
 					<td colspan="3"  ><textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
-				</tr>
+					</tr>
+					<%
+				}
+				%>	
 			</tbody>
 			<tfoot>
 				<tr>

@@ -54,7 +54,7 @@ td {
 <body>
 <%@include file="/header.jsp" %>
 <%
-sid= (String) session.getAttribute("sid");
+sid= (String) session.getAttribute("sid"); 
 UserinfoDTO dto = userdao.userInfo(sid);
 %>
 <section>

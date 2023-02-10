@@ -89,7 +89,7 @@ String write_writer=wdao.nodel(idx);
 if(udao.manager(write_writer)==1 && manager==0){
 	%>
 	<script>
-	window.alert('관리자의 글은 삭제할 수 있습니다.');
+	window.alert('관리자의 글은 삭제할 수 없습니다.');
 	location.href='community_freecontent.jsp?idx=<%=idx	%>';
 	</script>
 	
