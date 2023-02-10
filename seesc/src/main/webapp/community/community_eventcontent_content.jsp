@@ -11,6 +11,7 @@ int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("use
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
 int comm_idx = request.getParameter("comm_idx")==null||request.getParameter("comm_idx").equals("")?0:Integer.parseInt(request.getParameter("comm_idx"));
 int write_idx= request.getParameter("write_idx")==null||request.getParameter("write_idx").equals("")?0:Integer.parseInt(request.getParameter("write_idx"));
+int write_notice= request.getParameter("write_notice")==null||request.getParameter("write_notice").equals("")?0:Integer.parseInt(request.getParameter("write_notice"));
 int totalCnt=idao.getTotalCntComments(write_idx);
 int listSize=10; 
 int pageSize=5; 
@@ -106,7 +107,12 @@ td {
 	<section>
 		<article>
 			<br><br><br>
+		<% 	if(dto.getWrite_notice()==1){%>
+			<h1 class ="h1">Event 공지사항</h1>
+		<%}else{%>
 			<h1 class ="h1">Event 본문</h1>
+		<%}
+		%>	
 			<br>
 			  <hr width="130px">
 			  <br><br>
