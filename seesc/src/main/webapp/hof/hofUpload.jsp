@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="com.esc.hof.HofDTO" %>
+    <%@page import="java.util.*" %>
+    <%@page import="com.esc.thema.*" %>
+    <jsp:useBean id="hofdao" class="com.esc.hof.HofDAO" scope="session"></jsp:useBean>
+    <jsp:useBean id="thedao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,17 +47,20 @@ text-align: center;
 	<fieldset>
 		<legend>기록 올리기</legend>
 		<ul>
-			<li>
-			<select name="thema" size="1" id="thema">
-					<option value="이젠401">이젠401</option>
-					<option value="이젠402">이젠402</option>
-					<option value="이젠403">이젠403</option>
-					<option value="이젠404">이젠404</option>
-					<option value="이젠405">이젠405</option>
-					<option value="이젠406">이젠406</option>
-					<option value="이젠407">이젠407</option>
-			</select>
-			</li>
+			<%
+			ArrayList<ThemaDTO> arr=thedao.allThema();
+			if(arr==null||arr.size()==0){
+				%><li>등록된 테마가 없습니다.</li><%
+			}else{
+				%><li><select name="thema" size="1" id="thema"><%
+				for(int i=0;i<arr.size();i++){
+					%><option value="<%=arr.get(i).getThema_name()%>"><%=arr.get(i).getThema_name()%></option><%
+				}
+				%></select></li><%
+			}
+			%>
+			
+			
 			<li><label>이름</label>
 				<input type="text" name="name">
 			</li>

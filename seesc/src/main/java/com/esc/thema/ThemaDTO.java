@@ -15,6 +15,11 @@ public class ThemaDTO {
 	private String thema_tag3;
 	private String thema_intro1;
 	private String thema_intro2;
+	public ThemaDTO(String thema_name) {
+		super();
+		this.thema_name = thema_name;
+	}
+
 	private String thema_intro3;
 	
 	public ThemaDTO(int thema_idx, int img_idx, String thema_name, int thema_level, int thema_people_min, int thema_people_max,int thema_time, int thema_price,
