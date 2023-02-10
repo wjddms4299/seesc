@@ -11,7 +11,7 @@ int user_idx = session.getAttribute("user_idx")==null||session.getAttribute("use
 int manager = session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(int)session.getAttribute("manager");
 int comm_idx = request.getParameter("comm_idx")==null||request.getParameter("comm_idx").equals("")?0:Integer.parseInt(request.getParameter("comm_idx"));
 int write_idx= request.getParameter("write_idx")==null||request.getParameter("write_idx").equals("")?0:Integer.parseInt(request.getParameter("write_idx"));
-int totalCnt=idao.getTotalCnt();
+int totalCnt=idao.getTotalCntComments(write_idx);
 int listSize=10; 
 int pageSize=5; 
 String cp_s=request.getParameter("cp");

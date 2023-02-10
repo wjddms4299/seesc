@@ -650,7 +650,7 @@ public class ImgDAO {
 			} catch (Exception e2) {}
 		}
 	}
-	//idx 순서 출력
+	//게시글idx 순서 출력
 	public ArrayList<WriteDTO> writeEventList(int ls, int cp) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
@@ -724,12 +724,9 @@ public class ImgDAO {
 			return 1;
 		} finally {
 			try {
-				if (rs != null)
-					rs.close();
-				if (ps != null)
-					ps.close();
-				if(conn!=null)
-					conn.close();
+				if (rs != null)rs.close();
+				if (ps != null)ps.close();
+				if(conn!=null)conn.close();
 			} catch (Exception e2) {}
 		}
 	}
