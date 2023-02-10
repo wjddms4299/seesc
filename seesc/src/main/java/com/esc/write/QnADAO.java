@@ -813,7 +813,7 @@ public class QnADAO {
 	public String writetime(int write_idx) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql = "select to_char(write_wdate,'hh24:mm')from write where write_idx =?";
+			String sql = "select to_char(write_wdate,'hh24:MI')from write where write_idx =?";
 			
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);
