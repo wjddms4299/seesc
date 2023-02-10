@@ -286,6 +286,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 							}
 								
 							String mcolor = userM!=0?"style = 'color:red;'":"";
+							
 							if(arr.get(i).getUser_idx()!=0&&manager!=0&&userM==0){%>
 								<td><a href ="/seesc/booking/member_bookingcheck.jsp?user_idx=<%=arr.get(i).getUser_idx()%>" target="_blank"><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></a></td>
 							<%}else{%> 
