@@ -124,8 +124,8 @@ int manager=session.getAttribute("manager")==null || session.getAttribute("manag
 					</tr>
 			</table>
 				<div id="select">
-					<input type="button" value="취소하기" onclick="location.href='community.jsp'" class="writedel">
 					<input type="submit" value="글쓰기" class="writedel">
+					<input type="button" value="취소하기" onclick="location.href='community.jsp'" class="writedel">
 				</div>
 		</form>
 		</fieldset>

@@ -135,7 +135,7 @@ if(cp%pageSize==0)userGroup--;
 				
 					<% 
 					 ArrayList<WriteDTO> arr=wdao.member(listSize, cp);
-					for(int i=0;i<arr.size();i++){
+					
 						if(arr==null || arr.size()==0){
 							%>
 							<tr>
@@ -143,10 +143,11 @@ if(cp%pageSize==0)userGroup--;
 							</tr>
 							<%
 						}else{
+							for(int i=0;i<arr.size();i++){
 							%>
 							<tr>
 								<td><%=arr.get(i).getWrite_idx() %></td>
-								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title() %></a></td>
+								<td><a href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title() %>[<%=wdao.findref(arr.get(i).getWrite_ref())%>]</a></td>
 								<td><%=arr.get(i).getWrite_writer() %></td>
 								<td><%=arr.get(i).getWrite_wdate() %></td>
 								<td><%=arr.get(i).getWrite_readnum() %></td>

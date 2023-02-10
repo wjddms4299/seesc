@@ -16,24 +16,15 @@ public class WriteDAO {
 	}
 
 	/** 자유게시판 보이는 메서드 */
-	public ArrayList<WriteDTO> selWrite(int ls, int cp, int option) {
+	public ArrayList<WriteDTO> selWrite(int ls, int cp) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			// String sql = "select * from write order by write_idx desc";
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			option=0;
-			String sql="";
-			switch(option) {
-			case 0 : sql = "select * from (select rownum as rnum, a.* from  "
-					+ " (select * from write where write_cate='free' order by write_ref desc)a)  where rnum>=? and rnum<=? ";
-					break;
-			case 1 : sql = "select * from (select rownum as rnum, a.* from  "
-					+ " (select * from write where write_cate='free' order by write_readnum desc)a) where rnum>=? and rnum<=? ";
-					break;
-			case 2 : sql = "select * from (select rownum as rnum, a.* from  "
-					+ " (select * from write where write_cate='free' order by write_wdate desc)a) where rnum>=? and rnum<=? ";
-			}
+			
+			String	sql = "select * from (select rownum as rnum, a.* from  "
+					+ " (select * from write where write_cate='free' order by write_idx desc)a)  where rnum>=? and rnum<=? ";
 			
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, start);
@@ -741,15 +732,25 @@ public class WriteDAO {
 		}
 	}
 	/**게시물의 댓글 수량 알기 관련 메서드*/
-		public int findref() {
+		public int findref(int ref) {
 			try {
 				conn=com.esc.db.EscDB.getConn();
-				String sql="";
-			}catch(Exception e) {
+				String sql="select count(write_ref) from write  where write_ref=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, ref);
+				rs=ps.executeQuery();
+				rs.next();
+				int countref=rs.getInt(1);
 				
+				return countref-1;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return -1;
 			}finally {
 				try {
-					
+					if(rs!=null)rs.close();
+					if(ps!=null)ps.close();
+					if(conn!=null)conn.close();
 				}catch(Exception e2) {}
 			}
 		}
