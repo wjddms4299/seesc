@@ -50,7 +50,6 @@ th {
 		<th>예약자전화번호</th>
 		<th>예약접수시간</th>
 		<th>예약날짜</th>
-		<th>예약게임시간대</th>
 		<th>결제수단</th>
 		<th>결제여부</th>
 		<th>메세지</th>
@@ -63,7 +62,7 @@ th {
 	if(arr==null||arr.size()==0){
 		%>
 		<tr>
-			<td colspan="12">예약내역이 없습니다.</td>
+			<td colspan="11">예약내역이 없습니다.</td>
 		</tr>
 		<%
 	}
@@ -78,21 +77,11 @@ th {
 				<td><%=arr.get(i).getBooking_time() %></td>
 				<td><%=arr.get(i).getTime_date() %></td>
 				<%
-				String ptime=null;
-				if(arr.get(i).getTime_ptime()==1){ptime="10:00";}
-				else if(arr.get(i).getTime_ptime()==2){ptime="12:00";}
-				else if(arr.get(i).getTime_ptime()==3){ptime="14:00";}
-				else if(arr.get(i).getTime_ptime()==4){ptime="16:00";}
-				else if(arr.get(i).getTime_ptime()==5){ptime="18:00";}
-				else if(arr.get(i).getTime_ptime()==6){ptime="20:00";}
-				%>
-				<td><%=ptime %></td>
-				<%
 				String pay=null;
 				if(arr.get(i).getBooking_pay()>0){
-					pay="무통장";
-				}else{
 					pay="현장결제";
+				}else{
+					pay="무통장";
 				}
 				%>
 				<td><%=pay %></td>
