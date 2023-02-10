@@ -23,6 +23,7 @@ input[type="text"]{width: 70px;padding: 10px;font-size: 16px;border-radius: 5px;
 input[type="submit"]{width: 100px;height: 40px;border: none;border-radius: 5px;background-color: #4CAF50;color: white;font-size: 16px;margin-left: 5px;}   
 input[type="submit"]:hover {background-color: #3e8e41;}
 section{margin:0px auto;text-align : center;}
+body{background-color:black;color:white;}
 </style>
 </head>
 <body>
@@ -30,6 +31,7 @@ section{margin:0px auto;text-align : center;}
 <input type="hidden" name="booking_idx" value="<%=booking_idx%>">
 <input type="hidden" name="booking_pay_ok" value="<%=booking_pay_ok%>">
 <section>
+<fieldset>
 	<%if(booking_pay_ok==0){%>
 		<h2 align="center">환불 정보 입력</h2><br>
 			<div style = "font-size:18px;">
@@ -48,7 +50,7 @@ section{margin:0px auto;text-align : center;}
 			<option value = "하나">하나
 			<option value = "토스">토스
 			</select>
-			<input type ="text" name = "cacle_banknum" onclick="this.value=''" placeholder="-를 제외하고 입력" style="width: 180px;">
+			<input type ="text" name = "cacle_banknum" onclick="this.value=''" maxlength="13" placeholder="-를 제외하고 입력" style="width: 180px;">
 			<input type = "text" name = "depositor" placeholder="예금주명">
 			</div><br>
 			<hr width ="500px;">
@@ -69,7 +71,8 @@ section{margin:0px auto;text-align : center;}
 	<%}%>
 	<br>
 	정말 <label style ="color:red;">취소</label>하시겠습니까? &nbsp; <input type="submit" value="확인"></div>
-	<br>
+	<br><br>
+</fieldset>
 </section>
 </form>
 </body>
