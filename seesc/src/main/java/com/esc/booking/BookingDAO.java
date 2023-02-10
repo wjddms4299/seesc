@@ -51,7 +51,9 @@ public class BookingDAO {
 				java.sql.Date booking_time=rs.getDate("booking_time");
 				int booking_pay_ok=rs.getInt("booking_pay_ok");
 				int booking_num=rs.getInt("booking_num");
-				BookingDTO dto=new BookingDTO(booking_idx, booking_time, booking_pay_ok, booking_num);
+				int booking_money=rs.getInt("booking_money");
+				int booking_pay=rs.getInt("booking_pay");
+				BookingDTO dto=new BookingDTO(booking_idx, booking_time, booking_pay_ok, booking_num,booking_money,booking_pay);
 				arr.add(dto);
 			}
 			return arr;
