@@ -138,10 +138,10 @@ td {
 					if (dto.getWrite_notice()==1 && manager!=1) {%>
 						<tr>
 						<td colspan="4">
-							<input type="button" value="목록으로 돌아가기" onclick="location.href = 'community_eventcontent_list.jsp'">
+							<input type="button" class="listbutton" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
 						</td>
 					</tr>
-				<% }else if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
+				<% }else if(manager==1){%>
 				<tr>
 					<td colspan="4">
 						<input type="button" class="listbutton" value="삭제" onclick ="location.href ='community_eventcontent_delete_ok.jsp?flag=uDelete&write_idx=<%=write_idx%>'">
@@ -200,8 +200,8 @@ td {
 				<table style="background-color: #f2f2f2;">
 				<%if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
 					<tr>
-					<td><input type="hidden" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
-					<%=udto.getUser_nic()%></td>
+					<td><input type="text" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
+					</td>
 					
 					
 				<%}else{%>
