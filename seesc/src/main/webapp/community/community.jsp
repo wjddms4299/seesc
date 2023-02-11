@@ -13,7 +13,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
-<link rel="stylesheet" type="text/css" href="/seesc/css/button.css">
 <%
 int user_idx = session.getAttribute("user_idx") == null || session.getAttribute("user_idx").equals("") ? 0
 		: (Integer) session.getAttribute("user_idx");
@@ -46,13 +45,13 @@ section {
 	height: 30px;
 	border: none;
 	border-radius: 5px;
-	background-color: #4646CD;
+	background-color: #ff8200;
 	color: white;
 	font-size: 16px;
 }
 
 .writedel:hover {
-	background-color: #0000CD;
+	background-color: #FACC2E	
 }
 
 .submenu {
@@ -61,11 +60,6 @@ section {
 	height: 50px;
 	margin: 0px auto;
 	left: 380px;
-}
-
-}
-a {
-	text-decoration: none;
 }
 
 table {
@@ -81,7 +75,7 @@ th {
 	padding: 10px;
 	color: black;
 	text-align: center;
-	background-color: #4646CD;
+	background-color: #FF8200;
 }
 
 td {
@@ -92,6 +86,7 @@ td {
 
 tfoot {
 	text-align: center;
+	height: 10px;
 }
 
 .prbutton1 { /*해당페이지 눌렀을때*/
@@ -99,13 +94,65 @@ tfoot {
 	height: 20px;
 	border: none;
 	border-radius: 5px;
-	background-color: #4646CD;
+	background-color: #ff8200;
 	color: white;
 	font-size: 16px;
 }
 
 #pageing {
 	margin-top: 10px;
+	color: #FF8200;
+}
+.onebutton{/*처음,끝*/
+		width: 40px;
+        height: 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff8200;
+        color: white;
+        font-size: 20px;
+      }
+.onebutton:hover {
+    background-color: #FACC2E
+            color: white;
+  }
+  .nextbutton{/*다음*/
+		width: 40px;
+        height: 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff8200;
+        color: white;
+        font-size: 20px;
+      }
+.nextbutton:hover {
+    background-color: #FACC2E
+       color: white;
+}  
+.prbutton{/*해당페이지 눌렀을때*/
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff8200;
+        color: white;
+        font-size: 20px;
+      }
+.pagebutton{/*페이지 버튼*/
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #dcdcdc;
+        color: black;
+        font-size: 20px;
+      }
+.pagebutton:hover {
+    background-color: #828282;
+
+}	
+a{
+	text-decoration: none;
 }
 </style>
 </head>
@@ -142,8 +189,8 @@ if (sort_s == null || sort_s.equals("")) {
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
-			<h2>커뮤니티</h2>
 			<div class="submenu">
+			<br>
 				<a href="/seesc/community/community_eventcontent_list.jsp"><button
 						class="tbutton">
 						<span>이벤트</span>
@@ -155,7 +202,10 @@ if (sort_s == null || sort_s.equals("")) {
 						<span>자유게시판</span>
 					</button></a>
 			</div>
+			<br><br><br>
+			<h1 class="h1">커뮤니티</h1>
 			<br>
+			<hr width="130px">
 			<br>
 			<br>
 			<div id="div2">
@@ -220,30 +270,33 @@ if (sort_s == null || sort_s.equals("")) {
 						<td colspan="5"><input type="button" value="글쓰기"
 							onclick="location.href='community_write.jsp'" class="writedel">
 							<input type="button" value="게시글삭제하기" class="writedel"
-							onclick="location.href='content_del.jsp'"></td>
+							onclick="location.href='content_del.jsp'">
+							<br>
+							<br>
+							</td>
 						<%
 						}
 						%>
-
+					
 					</tr>
 					<tr>
-						<td colspan="5" id="pageing">
+						<td colspan="5" id="onebutton">
 							<!-- 페이징 들어갈 영역 --> <%
  if (userGroup != 0) {
  %><a
-							href="community.jsp?cp=<%=(userGroup - 1) * pageSize + pageSize%>&sort=<%=sort%>">&lt;&lt;</a>
+							href="community.jsp?cp=<%=(userGroup - 1) * pageSize + pageSize%>&sort=<%=sort%>" class="onebutton">&lt;&lt;</a>
 							<%
 							}
 							%> <%
  for (int i = userGroup * pageSize + 1; i <= userGroup * pageSize + pageSize; i++) {
  %>&nbsp;&nbsp;<a href="community.jsp?cp=<%=i%>&sort=<%=sort%>"
-							class="prbutton1"><%=i%></a>&nbsp;&nbsp;<%
+							class="prbutton"><%=i%></a>&nbsp;&nbsp;<%
  if (i == totalPage)
  	break;
  }
  %> <%
  if (userGroup != (totalPage / pageSize - (totalPage % pageSize == 0 ? 1 : 0))) {
- %><a
+ %><a class="onebutton"
 							href="community.jsp?cp=<%=(userGroup + 1) * pageSize + 1%>&sort=<%=sort%>">&gt;&gt;</a>
 							<%
 							}
@@ -252,6 +305,7 @@ if (sort_s == null || sort_s.equals("")) {
 					</tr>
 				</tfoot>
 			</table>
+			<br>
 		</article>
 	</section>
 	<%@include file="/footer.jsp"%>

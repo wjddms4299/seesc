@@ -31,13 +31,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
+<link rel="stylesheet" type="text/css" href="/seesc/css/write.css">
 <style>
 h3{
  text-align: center;
 }
 
 table {
-width: 800px;
+width: 1000px;
 margin: 0 auto;
 text-align: center;
 background-color: white;
@@ -49,28 +50,19 @@ font-size: 18px;
 padding: 10px;
 color :black;
 text-align : center;
-background-color: #4646CD;
+background-color: #ff8200;
         
 
       }
  td{
 color : black;
   background-color: white;
+  text-align: center;	
 }
-.writebutton{/*글쓰기 버튼*/
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: white;
-        font-size: 16px;
-      }
-.writebutton:hover {
-    background-color: #3e8e41;
-}
+
 #undercontent{
-	text-align: left;
-}
+		text-align: CENTER;	
+	}
 
 .prbutton1{/*해당페이지 눌렀을때*/
 		width: 25px;
@@ -79,7 +71,7 @@ color : black;
         border-radius: 5px;
         background-color: #4646CD;
         color: white;
-        font-size: 16px;
+        font-size: 20px;
       }
 .writedel{/*게시글삭제하기 버튼*/
 		
@@ -88,13 +80,13 @@ color : black;
         border-radius: 5px;
         background-color: #4646CD;
         color: white;
-        font-size: 16px;
+        font-size: 20px;
       }
 .writedel:hover {
     background-color: #0000CD;
 }
 #select{
-	text-align: right;
+	text-align: center;
 
 }
 tfoot{
@@ -108,14 +100,46 @@ tfoot{
         height: 20px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color: #ff8200;
         color: white;
-        font-size: 16px;
+        font-size: 20px;
       }
+#img{
+
+	margin-top: 10px;
+
+}
+#next{
+	text-align: center;
+	width:40%;
+}
+.pagebutton{/*페이지 버튼*/
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff8200;
+        color: black;
+        font-size: 20px;
+      }
+.pagebutton:hover {
+    background-color: #FACC2E
+}
+
+	      textarea {
+          width: 600px;
+    	  height: 250px;
+   	      border: none;
+    	  resize: none;
+    	  border-radius: 5px;
+    	  padding: 10px;
+          border: 2px solid #FF8200;
+          text-align: center;
+  }
+  
+  
 </style>
 </head>
-
-
 <body>
 <%@include file="/header.jsp" %>
 <section>
@@ -177,8 +201,8 @@ tfoot{
 				}else{
 					%>
 					<tr>
-					<td><img alt="등록 이미지" id="img" src="/seesc/community/userFile/writeImg/<%=dto.getWrite_filename() %>"></td>
-					<td colspan="3"  ><textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
+					<td colspan="4"><img alt="등록 이미지" id="img" src="/seesc/community/userFile/writeImg/<%=dto.getWrite_filename() %>">
+					<textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
 					</tr>
 					<%
 				}
@@ -189,7 +213,7 @@ tfoot{
 					<td colspan="4"  id="select">
 						<input type="hidden" name="idx"  value="<%=dto.getWrite_idx()%>">
 						<input type="hidden" name="write_writer" value=<%=dto.getWrite_writer() %>>
-						<input type="submit" value="수정하기" class="writedel">
+						<input type="button" value="수정하기" class="writedel" onclick="location.href='community_freecontent_update2.jsp'">
 						<input type="button" value="목록으로" onclick="location.href='community.jsp'" class="writedel">
 						<input type="button" value="삭제하기" onclick="location.href='community_del.jsp?idx=<%=dto.getWrite_idx() %>&writer=<%=dto.getWrite_writer() %>'" class="writedel">
 						<input type="button" value="댓글작성하기" onclick="location.href='community_under.jsp?ref=<%=dto.getWrite_ref() %>&lev=<%=dto.getWrite_lev() %>&step=<%=dto.getWrite_step() %>&idx=<%=dto.getWrite_idx() %>'" class="writedel">						
@@ -197,7 +221,7 @@ tfoot{
 				</tr>
 			</tfoot>
 		</table>
-		</form>
+		</form>	
 		<hr>
 		<fieldset>
 			<legend>댓글 보이는곳</legend>
@@ -205,8 +229,8 @@ tfoot{
 			<thead>
 				<tr>
 					<th>작성자</th>
-					<th>댓글 내용</th>
-					<th colspan="4">선택지</th>
+					<th colspan="2">댓글 내용</th>
+					<th>선택지</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -227,7 +251,7 @@ tfoot{
 						<td align="left">
 						<%=arr2.get(i).getWrite_writer() %>
 						</td>
-						<td id="undercontent">
+						<td id="undercontent" colspan="2">
 						<%
 						for(int z=0;z<arr2.get(i).getWrite_lev();z++){
 							out.print("&nbsp;&nbsp;");
@@ -240,15 +264,14 @@ tfoot{
 							<%
 						}else{
 							%>
-							<%out.print("비밀 댓글입니다"); %>
+							<a href="under_open.jsp?idx=<%=arr2.get(i).getWrite_idx()%>">비밀 댓글입니다</a>
 							<%
 						}
 						
 						%>
-						</td>
-						<td><input type="button" value="삭제하기" class="writedel" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=arr2.get(i).getWrite_lev()%>&write_step<%=arr2.get(i).getWrite_step()%>'"></td>
-						<td><input type="button" value="답글하기" class="writedel" onclick="location.href='under_answer.jsp?ref=<%=arr2.get(i).getWrite_ref() %>&lev=<%=arr2.get(i).getWrite_lev() %>&step=<%=arr2.get(i).getWrite_step()%>&write_idx=<%=dto.getWrite_idx() %>&write_content=<%=arr2.get(i).getWrite_content()%>'"></td>
-						
+						</td >
+						<td id="next"><input type="button" value="삭제하기" class="writedel" onclick="location.href='under_del.jsp?idx=<%=arr2.get(i).getWrite_idx()%>&write_idx=<%=(String)session.getAttribute("write_idx")%>&write_ref=<%=dto.getWrite_ref()%>&write_lev=<%=arr2.get(i).getWrite_lev()%>&write_step<%=arr2.get(i).getWrite_step()%>'">
+							<input type="button" value="답글하기" class="writedel" onclick="location.href='under_answer.jsp?ref=<%=arr2.get(i).getWrite_ref() %>&lev=<%=arr2.get(i).getWrite_lev() %>&step=<%=arr2.get(i).getWrite_step()%>&write_idx=<%=dto.getWrite_idx() %>&write_content=<%=arr2.get(i).getWrite_content()%>'">
 					</tr>
 					<% 
 				}
@@ -257,7 +280,7 @@ tfoot{
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="4"><!-- 페이징 들어갈 영역 -->
+						<td colspan="4" ><!-- 페이징 들어갈 영역 -->
 										<%
 if(userGroup!=0){
 	%><a href="community_freecontent.jsp?idx=<%=idx %>&cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%

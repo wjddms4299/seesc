@@ -6,9 +6,7 @@
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
 <%
 
-	String savePath=request.getRealPath("/community/userFile/writeImg");
-	MultipartRequest mr=
-	new MultipartRequest(request,savePath,2097152,"utf-8");
+
 	
 	String idx_s=(String)session.getAttribute("write_idx");
 	int idx=Integer.parseInt(idx_s);
@@ -58,7 +56,7 @@ font-size: 18px;
 padding: 10px;
 color :black;
 text-align : center;
-background-color: #4646CD;
+background-color: #ff8200;
         
 
       }
@@ -77,23 +75,27 @@ tfoot{
         height: 30px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color: #ff8200;
         color: white;
         font-size: 16px;
       }
 .writedel:hover {
-    background-color: #0000CD;
+    background-color: #FACC2E;
 }
+.red{
+	color: red;
+}
+  
+
 </style>
 <link rel="stylesheet" type="text/css" href="/seesc/css/mainLayout.css">
 <body>
 <%@include file="/header.jsp" %>
 <section>
 	<article>
-		
-		<fieldset>
-		<legend>수정하기</legend>
 		<form name="writeupdate2" action="community_freecontent_update_ok.jsp" method="post" enctype="multipart/form-data">
+		<fieldset>
+		<legend><a class="red">수정하기</a></legend>
 		<table>
 		<%
 		WriteDTO dto=wdao.contentWrite(idx);
@@ -122,8 +124,8 @@ tfoot{
 			</tfoot>
 		</table>
 			<input type="hidden" name="idx" value="<%=idx %>">
-		</form>
 		</fieldset>
+	</form>
 	</article>
 </section>
 <%@include file="/footer.jsp" %>

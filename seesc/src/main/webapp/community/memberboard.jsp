@@ -13,76 +13,139 @@
 <link rel="stylesheet" type="text/css" href="/seesc/css/subLayout.css">
 </head>
 <style>
-section{
-	width:1200px;
+section {
+	width: 1200px;
+	margin: 0px auto;
 }
 
+.select { /*상단 select 박스*/
+	width: 80px;
+	height: 30px;
+	border: none;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+	font-size: 15px;
+	margin-left: 20px;
+}
 
-#div2{
+#div2 {
 	text-align: right;
-	margin-bottom: 8px;
-	
+}
 
+.writedel { /*게시글삭제하기 버튼*/
+	height: 30px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ff8200;
+	color: white;
+	font-size: 16px;
 }
-.submenu{
-position: relative;
-width : 1200px;
-height : 50px;
-margin : 0px auto;
-left :380px;
+
+.writedel:hover {
+	background-color: #FACC2E	
 }
+
+.submenu {
+	position: relative;
+	width: 1200px;
+	height: 50px;
+	margin: 0px auto;
+	left: 380px;
+}
+
 table {
-width: 800px;
-margin: 0 auto;
-text-align: center;
-background-color: white;
-
-}
-      
- th {
-font-size: 18px;
-padding: 10px;
-color :black;
-text-align : center;
-background-color: #4646CD;
-        
-
-      }
- td{
-color : black;
-text-align : center;
-  background-color: white;
-}
-tfoot{
-
+	width: 800px;
+	margin: 0 auto;
 	text-align: center;
-}  
+	background-color: white;
+	
+}
 
-.writedel{/*게시글삭제하기 버튼*/
-		
-        height: 30px;
+th {
+	font-size: 18px;
+	padding: 10px;
+	color: black;
+	text-align: center;
+	background-color: #FF8200;
+}
+
+td {
+	color: black;
+	text-align: center;
+	background-color: white;
+}
+
+tfoot {
+	text-align: center;
+	height: 10px;
+}
+
+.prbutton1 { /*해당페이지 눌렀을때*/
+	width: 25px;
+	height: 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ff8200;
+	color: white;
+	font-size: 20px;
+}
+
+#pageing {
+	margin-top: 10px;
+	color: #FF8200;
+}
+.onebutton{/*처음,끝*/
+		width: 40px;
+        height: 25px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color: #ff8200;
         color: white;
-        font-size: 16px;
-        text-align: right;
+        font-size: 20px;
       }
-.writedel:hover {
-   background-color: #0000CD;
-}
-a {
-	text-decoration: none;
-}
-.prbutton1{/*해당페이지 눌렀을때*/
+.onebutton:hover {
+    background-color: #FACC2E
+            color: white;
+  }
+  .nextbutton{/*다음*/
+		width: 40px;
+        height: 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff8200;
+        color: white;
+        font-size: 20px;
+      }
+.nextbutton:hover {
+    background-color: #FACC2E
+       color: white;
+}  
+.prbutton{/*해당페이지 눌렀을때*/
 		width: 25px;
         height: 20px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color: #ff8200;
         color: white;
-        font-size: 16px;
+        font-size: 20px;
       }
+.pagebutton{/*페이지 버튼*/
+		width: 25px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #dcdcdc;
+        color: black;
+        font-size: 20px;
+      }
+.pagebutton:hover {
+    background-color: #828282;
+
+}	
+a{
+	text-decoration: none;
+}
 </style>
 <%
 

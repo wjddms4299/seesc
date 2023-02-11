@@ -44,12 +44,12 @@
         height: 30px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color: #ff8200;
         color: white;
         font-size: 16px;
       }
 .writedel:hover {
-    background-color: #0000CD;
+    background-color: #FACC2E
 }
 legend{
 	font-size:25px;
@@ -72,13 +72,16 @@ fieldset{
 #password{
 	color: red;
 }
+.yellow{
+	color: yellow;
+}
 </style>
 <body>
 <%@include file="/header.jsp" %>
 <section>
 	<article>
 		<fieldset>
-		<legend>댓글 삭제하기</legend>
+		<legend><A class="yellow">댓글 삭제하기</A></legend>
 		<form name="writeDel" action="under_del_ok.jsp" method="post" enctype="multipart/form-data">
 		<div>
 		<a id="under">댓글</a>을 삭제하기 위해서는 <a id="password">비밀번호</a>가 필요합니다.<br>

@@ -26,7 +26,7 @@ font-size: 18px;
 padding: 10px;
 color :black;
 text-align : center;
-background-color: #4646CD;
+background-color: #ff8200;
         
 
       }
@@ -51,12 +51,12 @@ textarea{
         height: 30px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color: #ff8200;	
         color: white;
         font-size: 16px;
       }
 .writedel:hover {
-    background-color: #3e8e41;
+    background-color: #FACC2E
 }
      input[type="text"],
       input[type="password"]{
@@ -105,7 +105,7 @@ int manager=session.getAttribute("manager")==null || session.getAttribute("manag
 							<% 
 						}else{
 							%>
-							<th>작성자<input type="text" name="write_writer" readonly placeholder="<%=nick%>" value="<%=nick%>"></th>
+							<th>작성자<input type="text" name="write_writer" readonly placeholder="<%=nick%>" value="<%=nick%>" ></th>
 							<% 
 						}
 					%>

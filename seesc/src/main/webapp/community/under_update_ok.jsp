@@ -9,7 +9,8 @@
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO" scope="session"></jsp:useBean>
 <%
 	
-
+	
+	
 	String savePath=request.getRealPath("/community/userFile/writeImg");
 	MultipartRequest mr=
 			new MultipartRequest(request,savePath,2097152,"utf-8");

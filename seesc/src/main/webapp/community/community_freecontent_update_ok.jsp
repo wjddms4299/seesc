@@ -11,13 +11,28 @@
 	MultipartRequest mr=
 	new MultipartRequest(request,savePath,2097152,"utf-8");
 
-
-	int result=wdao.updateWrite(mr);
+	String title=mr.getParameter("title");
+	String content=mr.getParameter("content");
 	
-	String msg=result>0?"수정에 성공하셨습니다":"수정에 실패하셨습니다.";
+	if(title==null || title.equals("") || content==null || content.equals("")){
+		%>
+		<script>
+	window.alert('빈칸을 입력해주세요');
+	location.href='community_freecontent_update.jsp'
+	</script>
+		<% 
+	}else{
+		int result=wdao.updateWrite(mr);
+		String msg=result>0?"수정에 성공하셨습니다":"수정에 실패하셨습니다.";
+		%>
+		<script>
+		window.alert('<%=msg%>')
+		location.href='community_freecontent.jsp?idx=<%=write_idx%>'
+		</script>
+		<%
+	}
+	
+	
+	
 
 %>
-<script>
-	window.alert('<%=msg%>');
-	location.href='community_freecontent.jsp?idx=<%=write_idx%>';
-</script>
