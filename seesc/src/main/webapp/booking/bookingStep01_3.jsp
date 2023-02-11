@@ -43,7 +43,7 @@ a{text-decoration:none;color:white;}
 #a1{margin:0px 100px;}
 #a1-1{margin:20px auto;}
 #a1-2{color:red;}
-#a1-3{color:blue;}
+#a1-3{color:#327FFA;}
 select{margin:0px 960px;}
 #a2{width:500px;float:left;}
 #a3{width:580px;float:left;}
@@ -58,13 +58,15 @@ select{margin:0px 960px;}
 <body>
 <%@include file="/header.jsp"%>
 <section>
+<div>
  <article>
  <br><br>
- <h2 id="a1">테마 예약하기</h2>
+ <h2 class="h1">테마 예약하기</h2>
+ <br><hr width="200px" align="center">
+ <br><br>
+ <h4 align="center"><img src="/seesc/thema_img/Step01_1.png" alt="STEP 01" height="110"> &nbsp; <img src="/seesc/thema_img/Step02_2.png" alt="STEP 02" height="100"> &nbsp; <img src="/seesc/thema_img/Step03_2.png" alt="STEP 03" height="100"></h4>
  <br>
- <h4 align="center"><img src="/seesc/thema_img/Step01_1.png" alt="STEP 01" height="105"> &nbsp; <img src="/seesc/thema_img/Step02_2.png" alt="STEP 02" height="100"> &nbsp; <img src="/seesc/thema_img/Step03_2.png" alt="STEP 03" height="100"></h4>
- <br>
- <table id="a1-1">
+ <table id="a1-1" cellspacing="10">
  	<tr align="center" height="20">
  	<%
  	Calendar now=Calendar.getInstance();
@@ -92,15 +94,15 @@ select{margin:0px 960px;}
  		
  		if(w_i[z]==1){
  			%>
- 			<td width="30" id="a1-2"><%out.print(w[z]);%></td>
+ 			<td width="30" id="a1-2"><h3><%out.print(w[z]);%></h3></td>
  			<%
  		}else if(w_i[z]==7){
  			%>
- 			<td width="30" id="a1-3"><%out.print(w[z]);%></td>
+ 			<td width="30" id="a1-3"><h3><%out.print(w[z]);%></h3></td>
  			<%
  		}else{
  			%>
- 			<td width="30"><%out.print(w[z]);%></td>
+ 			<td width="30"><h3><%out.print(w[z]);%></h3></td>
  			<%
  		}
  		
@@ -132,15 +134,15 @@ select{margin:0px 960px;}
  		
  		if(w_i[z]==1){
  			%>
- 			<td id="a1-2"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>" style="color:red;"><%out.print(d[z]);%></a></td>
+ 			<td id="a1-2"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>" style="color:red;"><h3><%out.print(d[z]);%></h3></a></td>
  			<%
  		}else if(w_i[z]==7){
  			%>
- 			<td id="a1-3"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>" style="color:blue;"><%out.print(d[z]);%></a></td>
+ 			<td id="a1-3"><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>" style="color:#327FFA;"><h3><%out.print(d[z]);%></h3></a></td>
  			<%
  		}else{
  			%>
- 			<td><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>"><%out.print(d[z]);%></a></td>
+ 			<td><a href="bookingStep01.jsp?time_date=<%=ymd[z]%>"><h3><%out.print(d[z]);%></h3></a></td>
  			<%
  		}
  		
@@ -316,8 +318,8 @@ for(int j=0;j<idx_booking.size();j++){%>
  	 <%}%>
  <%}%>
 </article>
+</div>
 </section>
-<hr width="1200">
 <%@include file="/footer.jsp"%>
 </body>
 </html>

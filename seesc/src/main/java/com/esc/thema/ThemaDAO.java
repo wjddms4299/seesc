@@ -379,6 +379,34 @@ public class ThemaDAO {
 			}
 		}
 	}
+	/**모든 테마 불러오기*/
+	public ArrayList<ThemaDTO> allThema() {
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select thema_name from thema";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			ArrayList<ThemaDTO> arr=new ArrayList<ThemaDTO>();
+			while(rs.next()) {
+				String thema_name=rs.getString("thema_name");	
+				ThemaDTO dto=new ThemaDTO(thema_name);
+				arr.add(dto);
+			}
+			return arr;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {
+				
+			}
+		}
+	}
 	/**테마 정보 불러오기*/
 	public ArrayList<ThemaDTO> themaread(){
 		try {

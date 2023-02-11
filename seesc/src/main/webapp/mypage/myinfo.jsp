@@ -135,12 +135,12 @@ function open_nicCheck(){
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><input type="password" name="user_pwd"></td>
+			<td><input type="password" name="user_pwd" required></td>
 			
 		</tr>
 		<tr>
 			<th>비밀번호 확인</th>
-			<td><input type="password" name="user_pwd_ok"></td>
+			<td><input type="password" name="user_pwd_ok" required></td>
 		</tr>
 		<tr>
 			<th>성별</th>

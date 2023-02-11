@@ -47,7 +47,7 @@ section{width:1200px;margin:0px auto;}
 </style>
 <script>
 function popup_open(){
-	window.open('/seesc/booking/cancle_popup.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>','cancle_popup.jsp','width=550,height=300,top=100,left=300');
+	window.open('/seesc/booking/cancle_popup.jsp?booking_idx=<%=booking_idx%>&booking_pay_ok=<%=booking_pay_ok%>&thema_idx=<%=thema_idx%>&time_date=<%=time_date%>&time_ptime=<%=time_ptime%>','cancle_popup.jsp','width=600,height=470,top=100,left=300');
 }
 </script>
 </head>
@@ -57,9 +57,10 @@ function popup_open(){
 <div>
  <article>
  <br><br>
- <h2 id="a1">예약완료</h2>
- <br>
- <h4 align="center"><img src="/seesc/thema_img/Step01_2.png" alt="STEP 01" height="100"> &nbsp; <img src="/seesc/thema_img/Step02_2.png" alt="STEP 02" height="100"> &nbsp; <img src="/seesc/thema_img/Step03_1.png" alt="STEP 03" height="110"></h4>
+ <h2 class="h1">예약완료</h2>
+ <br><hr width="130px" align="center">
+ <br><br>
+ <h4 align="center"><img src="/seesc/thema_img/Step01_2.png" alt="STEP 01" height="100"> &nbsp; <img src="/seesc/thema_img/Step02_2.png" alt="STEP 02" height="100"> &nbsp; <img src="/seesc/thema_img/Step03_1.png" alt="STEP 03" height="85"></h4>
  <br><br>
  </article>
  <article>

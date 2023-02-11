@@ -6,6 +6,7 @@
 	scope="session"></jsp:useBean>
 	
 <%
+int manager = session.getAttribute("manager") == null || session.getAttribute("manager").equals("")? 0: (Integer) session.getAttribute("manager");
 String booking_idx_s = request.getParameter("booking_idx");
 if(booking_idx_s==null||booking_idx_s.equals("")){
 	booking_idx_s ="0";
@@ -22,6 +23,12 @@ if(dto==null){
 	<%
 	return;
 }
+
+if(manager!=0){%>
+	<script>
+	location.href = 'bookingCancle_ok.jsp?booking_idx=<%=booking_idx%>';
+	</script>
+<%}
 %>
 
 <!DOCTYPE html>

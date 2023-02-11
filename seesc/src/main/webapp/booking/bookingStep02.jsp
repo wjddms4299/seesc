@@ -90,9 +90,10 @@ function applyCoupon(o){
 <input type="hidden" name="time_ptime" value="<%=time_ptime%>">
  <article>
  <br><br>
- <h2 id="a1">예약하기</h2>
- <br>
- <h4 align="center"><img src="/seesc/thema_img/Step01_2.png" alt="STEP 01" height="100"> &nbsp; <img src="/seesc/thema_img/Step02_1.png" alt="STEP 02" height="90"> &nbsp; <img src="/seesc/thema_img/Step03_2.png" alt="STEP 03" height="100"></h4>
+ <h2 class="h1">예약하기</h2>
+ <br><hr width="130px" align="center">
+ <br><br>
+ <h4 align="center"><img src="/seesc/thema_img/Step01_2.png" alt="STEP 01" height="100"> &nbsp; <img src="/seesc/thema_img/Step02_1.png" alt="STEP 02" height="100"> &nbsp; <img src="/seesc/thema_img/Step03_2.png" alt="STEP 03" height="100"></h4>
  <br><br>
  </article>
  <article>
@@ -152,8 +153,8 @@ function applyCoupon(o){
  					<option value = "018">018
  					<option value = "019">019
  				</select>
- 					- <input type="text" name="booking_tel2" value="<%=user_tel2%>" placeholder="숫자 4자리만 입력해주세요." style="height:25px;width:120px;">
- 					- <input type="text" name="booking_tel3" value="<%=user_tel3%>" placeholder="숫자 4자리만 입력해주세요." style="height:25px;width:120px;">
+ 					- <input type="text" name="booking_tel2" value="<%=user_tel2%>" maxlength="4" placeholder="숫자 4자리만 입력해주세요." style="height:25px;width:120px;">
+ 					- <input type="text" name="booking_tel3" value="<%=user_tel3%>" maxlength="4" placeholder="숫자 4자리만 입력해주세요." style="height:25px;width:120px;">
  		</td>
  	</tr>
  	<%if(user_idx!=0){%>

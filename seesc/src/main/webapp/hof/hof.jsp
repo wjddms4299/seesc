@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
     <%@page import="com.esc.hof.HofDTO" %>
     <%@page import="java.util.*" %>
+    <%@page import="com.esc.thema.*" %>
     <jsp:useBean id="hofdao" class="com.esc.hof.HofDAO" scope="session"></jsp:useBean>
+    <jsp:useBean id="thedao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,41 +132,20 @@ if(thema==null||thema==""){
            <br>
 <article  class="themabt">
 	<div>
-		<%if(thema.equals("이젠401")){
-			%><a href="hof.jsp?thema=이젠401"><button class="rbutton"><span>이젠401</span></button></a><%
+		<%
+		ArrayList<ThemaDTO> arr1=thedao.allThema();
+		if(arr1==null||arr1.size()==0){
+			%><span>등록된 테마가 없습니다.</span><%
 		}else{
-			%><a href="hof.jsp?thema=이젠401"><button class="tbutton"><span>이젠401</span></button></a><%
-		} %>
-		<%if(thema.equals("이젠402")){
-			%><a href="hof.jsp?thema=이젠402"><button class="rbutton"><span>이젠402</span></button></a><%
-		}else{
-			%><a href="hof.jsp?thema=이젠402"><button class="tbutton"><span>이젠402</span></button></a><%
-		} %>
-		<%if(thema.equals("이젠403")){
-			%><a href="hof.jsp?thema=이젠403"><button class="rbutton"><span>이젠403</span></button></a><%
-		}else{
-			%><a href="hof.jsp?thema=이젠403"><button class="tbutton"><span>이젠403</span></button></a><%
-		} %>
-		<%if(thema.equals("이젠404")){
-			%><a href="hof.jsp?thema=이젠404"><button class="rbutton"><span>이젠404</span></button></a><%
-		}else{
-			%><a href="hof.jsp?thema=이젠404"><button class="tbutton"><span>이젠404</span></button></a><%
-		} %>
-		<%if(thema.equals("이젠405")){
-			%><a href="hof.jsp?thema=이젠405"><button class="rbutton"><span>이젠405</span></button></a><%
-		}else{
-			%><a href="hof.jsp?thema=이젠405"><button class="tbutton"><span>이젠405</span></button></a><%
-		} %>
-		<%if(thema.equals("이젠406")){
-			%><a href="hof.jsp?thema=이젠406"><button class="rbutton"><span>이젠406</span></button></a><%
-		}else{
-			%><a href="hof.jsp?thema=이젠406"><button class="tbutton"><span>이젠406</span></button></a><%
-		} %>
-		<%if(thema.equals("이젠407")){
-			%><a href="hof.jsp?thema=이젠407"><button class="rbutton"><span>이젠407</span></button></a><%
-		}else{
-			%><a href="hof.jsp?thema=이젠407"><button class="tbutton"><span>이젠407</span></button></a><%
-		} %>
+			for(int i=0;i<arr1.size();i++){
+				if(thema.equals(arr1.get(i).getThema_name())){
+					%><a href="hof.jsp?thema=<%=arr1.get(i).getThema_name()%>"><button class="rbutton"><span><%=arr1.get(i).getThema_name()%></span></button></a><%
+				}else{
+					%><a href="hof.jsp?thema=<%=arr1.get(i).getThema_name()%>"><button class="tbutton"><span><%=arr1.get(i).getThema_name()%></span></button></a><%
+				}
+			}
+		}
+		%>
 		
 		
 		

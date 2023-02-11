@@ -261,28 +261,28 @@ public class QnADAO {
 				ps.setInt(2, end);
 				break;
 			case 1://제목
-				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_title like ? order by write_idx desc)a) where r >=? and r<=?";
+				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_title like ? order by write_ref desc,write_step asc)a) where r >=? and r<=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setInt(2, start);
 				ps.setInt(3, end);
 				break;
 			case 2://본문
-				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_content like ? order by write_idx desc)a) where r >=? and r<=?";
+				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_content like ? order by write_ref desc,write_step asc)a) where r >=? and r<=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setInt(2, start);
 				ps.setInt(3, end);
 				break;
 			case 3://작성자
-				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_writer like ? order by write_idx desc)a) where r >=? and r<=?";
+				sql = "select * from(select rownum r,a.* from (select * from write where write_cate = 'qna' and write_notice = 0 and write_writer like ? order by write_ref desc,write_step asc)a) where r >=? and r<=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setInt(2, start);
 				ps.setInt(3, end);
 				break;
 			case 4://제목+본문
-				sql = "select * from(select rownum r,a.* from (select * from write where write_notice = 0 and write_cate = 'qna' and write_title like ? or write_content like ? order by write_idx desc)a) where r >=? and r<=? and write_notice = 0";
+				sql = "select * from(select rownum r,a.* from (select * from write where write_notice = 0 and write_cate = 'qna' and write_title like ? or write_content like ?order by write_ref desc,write_step asc)a) where r >=? and r<=? and write_notice = 0";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + content + "%");
 				ps.setString(2, "%" + content + "%");
@@ -813,7 +813,7 @@ public class QnADAO {
 	public String writetime(int write_idx) {
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql = "select to_char(write_wdate,'hh24:mm')from write where write_idx =?";
+			String sql = "select to_char(write_wdate,'hh24:MI')from write where write_idx =?";
 			
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);

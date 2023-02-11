@@ -3,6 +3,7 @@
     <%@page import="java.util.*" %>
     <%@page import="com.esc.booking.*" %>
     <jsp:useBean id="boodao" class="com.esc.booking.BookingDAO" scope="session"></jsp:useBean>
+    <jsp:useBean id="thdao" class="com.esc.thema.ThemaDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@ th {
 <table>
 	<tr>
 		<th>예약번호</th>
-		<th>테마번호</th>
+		<th>테마이름</th>
 		<th>예약자이름</th>
 		<th>예약자전화번호</th>
 		<th>예약접수시간</th>
@@ -55,6 +56,7 @@ th {
 		<th>메세지</th>
 		<th>예약인원수</th>
 		<th>금액</th>
+		<th>비고</th>
 	</tr>
 	<%
 	ArrayList<BookingDTO> arr=boodao.boomanage();
@@ -71,7 +73,7 @@ th {
 			%>
 			<tr>
 				<td><%=arr.get(i).getBooking_idx() %></td>
-				<td><%=arr.get(i).getThema_idx() %></td>
+				<td><%= thdao.themaName(arr.get(i).getThema_idx())%></td>
 				<td><%=arr.get(i).getBooking_name() %></td>
 				<td><%=arr.get(i).getBooking_tel() %></td>
 				<td><%=arr.get(i).getBooking_time() %></td>
@@ -103,6 +105,7 @@ th {
 				<td><%=msg %></td>
 				<td><%=arr.get(i).getBooking_num() %>명</td>
 				<td><%=arr.get(i).getBooking_money() %>원</td>
+				<td><input type = "button" value = "취소" onclick ="javascript: var result =window.confirm('에약을 취소하시겠습니까?');if(result){location.href ='/seesc/booking/bookingCancle_ok.jsp?booking_idx=<%=arr.get(i).getBooking_idx() %>'}"></td>
 			</tr>
 			<%
 		}

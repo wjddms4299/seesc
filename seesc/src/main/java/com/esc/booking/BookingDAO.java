@@ -141,7 +141,6 @@ public class BookingDAO {
 	/**예약취소시 예약번호로 쿠폰번호 불러오기*/
 	public int bookingCouponIdx(int booking_idx){
 		try {
-			conn=com.esc.db.EscDB.getConn();
 			
 			String sql="select coupon_idx from booking where booking_idx=?";
 			ps=conn.prepareStatement(sql);
@@ -160,7 +159,6 @@ public class BookingDAO {
 			try {
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
 			}catch(Exception e2) {
 				
 			}
@@ -170,8 +168,6 @@ public class BookingDAO {
 	/**예약취소시 쿠폰 사용여부 변경하기*/
 	public void bookingCouponUse_R(int coupon_idx){
 		try {
-			conn=com.esc.db.EscDB.getConn();
-			
 			String sql="update coupon set coupon_use=1 where coupon_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, coupon_idx);
@@ -182,7 +178,7 @@ public class BookingDAO {
 		}finally {
 			try {
 				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
+			
 			}catch(Exception e2) {
 				
 			}
@@ -284,7 +280,7 @@ public class BookingDAO {
 				String booking_msg=rs.getString("booking_msg");
 				int booking_num=rs.getInt("booking_num");
 				int booking_money=rs.getInt("booking_money");
-				BookingDTO dto=new BookingDTO(booking_idx, thema_idx, coupon_idx, user_idx, booking_name, booking_tel, booking_tel, booking_time, time_date, time_ptime, booking_pay, booking_pay_ok, booking_msg, booking_num, booking_money);
+				BookingDTO dto=new BookingDTO(booking_idx, thema_idx, coupon_idx, user_idx, booking_name, booking_tel, booking_pwd, booking_time, time_date, time_ptime, booking_pay, booking_pay_ok, booking_msg, booking_num, booking_money);
 			arr.add(dto);
 			}
 			return arr;
@@ -306,7 +302,6 @@ public class BookingDAO {
 	public void input_CancelList(int booking_idx,BookingDTO dto,String cancel_banknum) {
 		try {
 			String sql = "insert into cancel values(cancel_cancel_idx.nextval,?,?,?,?,?,?,?,sysdate,?,?)";
-			
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, dto.getBooking_idx());
 			ps.setInt(2, dto.getUser_idx());
@@ -328,8 +323,6 @@ public class BookingDAO {
 				
 			}
 		}
-		
-		
 	}
 	
 	/**예약 취소 관련 메서드 */
@@ -337,21 +330,25 @@ public class BookingDAO {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			input_CancelList(booking_idx, dto, cancel_banknum);
+			int couidx=bookingCouponIdx(booking_idx);
+			if(couidx!=0) {
+			bookingCouponUse_R(couidx);
+			}
 			String sql = "delete from booking where booking_idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, booking_idx);
 			
 			int count = ps.executeUpdate();
 			return count;
-					
-					
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}finally {
 			try {
-				
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
 			}catch(Exception e2) {
 				
 			}
@@ -456,4 +453,46 @@ public class BookingDAO {
 			}catch(Exception e2){}
 		}
 	}
+	
+	/**관리자 특정 회원 예약내역 조회*/
+	public ArrayList<BookingDTO> boomanage(int user_idx){
+		try {
+			conn=com.esc.db.EscDB.getConn();
+			String sql="select * from booking where user_idx = ?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1,user_idx);
+			rs=ps.executeQuery();
+			ArrayList<BookingDTO> arr=new ArrayList<BookingDTO>();
+			while(rs.next()) {
+				int booking_idx=rs.getInt("booking_idx");
+				int thema_idx=rs.getInt("thema_idx");
+				String booking_name=rs.getString("booking_name");
+				String booking_tel=rs.getString("booking_tel");
+				Date booking_time=rs.getDate("booking_time");
+				Date time_date=rs.getDate("time_date");
+				int time_ptime=rs.getInt("time_ptime");
+				int booking_pay=rs.getInt("booking_pay");
+				int booking_pay_ok=rs.getInt("booking_pay_ok");
+				String booking_msg=rs.getString("booking_msg");
+				int booking_num=rs.getInt("booking_num");
+				int booking_money=rs.getInt("booking_money");
+				BookingDTO dto=new BookingDTO(booking_idx, thema_idx, user_idx, booking_name, booking_tel, booking_time, time_date, time_ptime, booking_pay, booking_pay_ok, booking_msg, booking_num, booking_money);
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e2) {}
+		}
+		
+	}
+	
+
 }

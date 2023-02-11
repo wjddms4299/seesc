@@ -7,7 +7,21 @@
 
 String savepath = request.getRealPath("/community/userFile");
 MultipartRequest mr = new MultipartRequest(request,savepath,2097152,"UTF-8");
-
+String img_name = mr.getFilesystemName("write_filename");
+if(img_name!=null&&!img_name.equals("")){
+	if(!img_name.substring(img_name.length()-4,img_name.length()).equals(".jpg") && !img_name.substring(img_name.length()-4,img_name.length()).equals(".png")&&
+		!img_name.substring(img_name.length()-4,img_name.length()).equals(".gif")&&!img_name.substring(img_name.length()-4,img_name.length()).equals(".bmp")&&
+		!img_name.substring(img_name.length()-5,img_name.length()).equals(".jpeg")){
+	%>
+	<script>
+	window.alert("이미지 파일만 업로드 가능합니다. \n  (.jpg, .jpeg, .png, .gif, .bmp) ");
+	history.back();
+	</script>
+	<%
+	
+}
+	return;
+}
 
 int result = qnadao.qna_repwrite(mr);
 if(result>0){
