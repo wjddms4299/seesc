@@ -107,10 +107,7 @@ td {
 								name="write_content"><%=dto.getWrite_content()%></textarea></td>
 					</tr>
 					<tr>
-						<td>비밀번호</td>
-						<td><input type="password" name="userinput_pwd"
-							required="required"></td>
-						<td colspan="2"><input type="submit" class="listbutton"  value="수정"> 
+						<td colspan="4"><input type="submit" class="listbutton"  value="수정"> 
 						<input type="button"  class="listbutton" value="목록" onclick="location.href = 'community_eventcontent_list.jsp';"></td>
 					</tr>
 				</tbody>

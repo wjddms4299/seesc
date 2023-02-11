@@ -6,9 +6,6 @@
 <jsp:useBean id="idao" class="com.esc.write.ImgDAO" scope="session"></jsp:useBean>
 
 <%
-
-String userinput_pwd = request.getParameter("userinput_pwd");
-if(userinput_pwd.equals(wdto.getWrite_pwd())){
 	int result = idao.event_update(wdto);
 
 		if(result<0){
@@ -28,13 +25,4 @@ if(userinput_pwd.equals(wdto.getWrite_pwd())){
 			<%
 
 		}
-}else{
-	%>
-	<script>
-	window.alert('비밀번호가 일치하지 않습니다.');
-	location.href = 'community_eventcontent_update.jsp?write_idx=<%=wdto.getWrite_idx()%>';
-	</script>
-	
-	<%
-}
 %>

@@ -127,7 +127,7 @@ td {
 						<th>작성자:</td>
 						<td><%=dto.getWrite_writer()%></td>
 						<th>조회수:</th>
-						<td><%=dto.getWrite_readnum() %></td>
+						<td><%=dto.getWrite_readnum()%></td>
 					</tr>
 					<tr>
 						<th>파일이름:</th>
@@ -179,26 +179,8 @@ td {
 				</tr>
 				<%}else {%> <!--비회원 비밀번호 입력후 수정과 삭제-->
 				<tr>
-					<td colspan="4">
-						<form name="event_wdu" method="post">
-						<input type="hidden" name="write_idx" value="<%=write_idx%>">
-						<input type="hidden" name="write_pwd" value="<%=dto.getWrite_pwd()%>"> 
-						[수정] [삭제]를 원하시면 비밀번호를 입력해주세요:
-						<input type="password" name="userinput_pwd" required><br>
-						<input class="listbutton" type="submit" value="삭제" onclick="javascript:event_wdu.action='community_eventcontent_delete_ok.jsp';">
-						<input class="listbutton" type="submit" value="수정" onclick="javascript:event_wdu.action='community_eventcontent_update.jsp';">
-						<input class="listbutton" type="button" value="목록" onclick="location.href = 'community_eventcontent_list.jsp'">
-						</form>
-						
-						<form name = "event_re" action="community_eventcontent_re.jsp" method ="post">
-						<input type="hidden" name="write_idx" value="<%=write_idx%>">
-						<input type = "hidden" name = "user_idx" value = "<%=user_idx %>">
-						<input type = "hidden" name = "write_title" value = "<%=dto.getWrite_title()%>">
-						<input type ="hidden" name = "write_ref" value = "<%=dto.getWrite_ref()%>">
-						<input type = "hidden" name = "write_lev" value = "<%=dto.getWrite_lev()%>">
-						<input type = "hidden" name = "write_step" value = "<%=dto.getWrite_step()%>">
-				<!-- 	<input type = "submit" value ="답글"> -->
-						</form>
+					<td colspan="4">	
+						[수정] [삭제]는 <b style="color:red;">관리자</b>만 가능합니다.
 					</td>
 				</tr>
 				<%} %>
@@ -216,12 +198,16 @@ td {
 				<fieldset>
 				<legend>댓글작성</legend>
 				<table style="background-color: #f2f2f2;">
-				<%if(manager==1 || user_idx == dto.getUser_idx()&&user_idx!=0){%>
+				<%if(manager==1){%>
 					<tr>
 					<td><input type="text" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
 					</td>
-					
-					
+				
+				<%}else if(user_idx!=0){%>
+					<tr>
+					<td><input type="text" name="comm_writer" value = "<%=udto.getUser_nic()%>" readonly>
+					<input type="password" name="comm_pwd" placeholder="비밀번호" required>
+					</td>	
 				<%}else{%>
 					<tr>
 						<td>

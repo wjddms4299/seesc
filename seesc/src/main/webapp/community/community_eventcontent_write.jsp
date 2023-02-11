@@ -76,8 +76,6 @@ UserinfoDTO dto = userdao.userInfo(sid);
 				out.println(value);%>"
 				<%String readonly=user_idx==0?"":"readonly"; out.println(readonly);%>>
 				</td>
-				<th>비밀번호 :</th>
-				<td><input type="password" placeholder="비밀번호입력" name="write_pwd" required></td>
 			</tr>
 			<tr>
 				<th>파일첨부 : 

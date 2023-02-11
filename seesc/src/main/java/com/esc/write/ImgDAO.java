@@ -19,7 +19,7 @@ public class ImgDAO {
 	public int eventwriteupload(MultipartRequest mr) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql = "insert into write values(write_write_idx.nextval,?,'event',?,?,?,sysdate,?,?,0,0,0,0,?,0)";
+			String sql = "insert into write values(write_write_idx.nextval,?,'event',?,?,'',sysdate,?,?,0,0,0,0,?,0)";
 			ps = conn.prepareStatement(sql);
 
 			String filename = mr.getFilesystemName("write_filename");
@@ -34,10 +34,9 @@ public class ImgDAO {
 			ps.setInt(1, user_idx);
 			ps.setString(2, mr.getParameter("write_title"));
 			ps.setString(3, mr.getParameter("write_writer"));
-			ps.setString(4, mr.getParameter("write_pwd"));
-			ps.setString(5, filename);
-			ps.setString(6, mr.getParameter("write_content"));
-			ps.setInt(7, write_open);
+			ps.setString(4, filename);
+			ps.setString(5, mr.getParameter("write_content"));
+			ps.setInt(6, write_open);
 
 			int count = ps.executeUpdate();
 			return count;
@@ -344,7 +343,7 @@ public class ImgDAO {
 			conn = com.esc.db.EscDB.getConn();
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			String sql = "select * from(select rownum r,a.* from (select * from comments where write_idx=? order by comm_ref desc,comm_step asc)a) where r >=? and r<=?";
+			String sql = "select * from(select rownum r,a.* from (select * from comments where write_idx=? order by comm_ref asc,comm_lev asc,comm_step desc)a) where r >=? and r<=?";
 
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);
@@ -391,54 +390,6 @@ public class ImgDAO {
 		}
 
 	}
-	/** 답변 글쓰기*/
-	public int event_rewrite(MultipartRequest mr) {
-		try {
-			conn = com.esc.db.EscDB.getConn();
-
-			int user_idx = mr.getParameter("user_idx") == null || mr.getParameter("user_idx").equals("") ? 0: Integer.parseInt(mr.getParameter("user_idx"));
-			int write_ref = mr.getParameter("write_ref") == null || mr.getParameter("write_ref").equals("") ? 0: Integer.parseInt(mr.getParameter("write_ref"));
-			String write_step_s = mr.getParameter("write_step");
-			if (write_step_s == null || write_step_s.equals("")) {
-				write_step_s = "0";
-			}
-			int write_step = Integer.parseInt(write_step_s);
-			int write_lev = mr.getParameter("write_lev") == null || mr.getParameter("write_lev").equals("") ? 0: Integer.parseInt(mr.getParameter("write_lev"));
-			int write_open = mr.getParameter("write_open") == null || mr.getParameter("write_open").equals("") ? 0: Integer.parseInt(mr.getParameter("write_open"));
-			setUpdate_step(write_ref, write_step + 1);
-
-			String sql = "insert into write values(write_write_idx.nextval,?,'event',?,?,?,sysdate,?,?,0,?,?,?,?,0)";
-			ps = conn.prepareStatement(sql);
-
-			ps.setInt(1, user_idx);
-			ps.setString(2, mr.getParameter("write_title"));
-			ps.setString(3, mr.getParameter("write_writer"));
-			ps.setString(4, mr.getParameter("write_pwd"));
-			ps.setString(5, mr.getFilesystemName("write_filename"));
-			ps.setString(6, mr.getParameter("write_content"));
-			ps.setInt(7, write_ref);
-			ps.setInt(8, write_lev + 1);
-			ps.setInt(9, write_step + 1);
-			ps.setInt(10, write_open);
-
-			int count = ps.executeUpdate();
-			return count;
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return -1;
-		} finally {
-			try {
-				if (ps != null)
-					ps.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e2) {
-
-			}
-		}
-	}	
 	/** 순서 변경 */
 
 	public void setUpdate_step(int write_ref, int write_step) {

@@ -38,8 +38,8 @@
 
 }
 .listimg{
-  		width:250px;
-   		height:250px;
+  		width:275px;
+   		height:275px;
         background-color: #FFA300;
       }
 .listimg:hover {
@@ -61,7 +61,6 @@ table{
 	
 }
 thead th{
-width : 251px;
 color:#FFA300;
 }
 </style>
@@ -70,7 +69,7 @@ color:#FFA300;
 int user_idx=session.getAttribute("user_idx")==null||session.getAttribute("user_idx").equals("")?0:(Integer)session.getAttribute("user_idx");
 int manager=session.getAttribute("manager")==null||session.getAttribute("manager").equals("")?0:(Integer)session.getAttribute("manager");
 int totalCnt=idao.getTotalCnt();
-int listSize=10; 
+int listSize=8; 
 int pageSize=5; 
 
 String cp_s=request.getParameter("cp");
@@ -103,16 +102,32 @@ if(cp%pageSize==0)userGroup--;
 			  <hr width="130px">
 			  <br><br>
 		<table>
+		<tr>
 			<thead>
-				<tr>
-					<th>No</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>날짜</th>
-					<th>조회수</th>
-				</tr>
-      		</thead>
-      		
+				<th width="50px">No</th>
+				<th width="200px">제목</th>
+				<th width="50px">작성자</th>
+				<th width="80px">날짜</th>
+				<th width="50px">조회수</th>
+			</thead>
+		</tr>
+		      <%
+		ArrayList<WriteDTO> notice = idao.event_noticelist();
+		if(notice!=null&&notice.size()!=0){
+			for(int i=0;i<notice.size();i++){
+		%>
+		<tr align="center">
+		<td style="color:red;background-color:#FFA300;"><b>-공 지-</b></td>
+		<td style="background-color:#FFA300;">
+		<a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=notice.get(i).getWrite_idx()%>"><b style="color:black;"><%=notice.get(i).getWrite_title()%></b></a></td>
+		<td style="color:red;background-color:#FFA300;"><%=notice.get(i).getWrite_writer()%></td>
+		<td style="color:black;background-color:#FFA300;"><%=notice.get(i).getWrite_wdate()%></td>
+		<td style="color:black;background-color:#FFA300;"><%=notice.get(i).getWrite_readnum()%></td>
+		</tr>
+		<%}
+			}%>
+		</table>	  
+		<table>    		
       <tfoot>
       <tr>
       <%
@@ -126,7 +141,6 @@ if(cp%pageSize==0)userGroup--;
       </td>
       <%}else{ %>
       <td><br></td> <!--공간만들기-->
-      	
   <%//}else{ %> <!-- 일반유저 글쓰기 버튼  --> 
   <!--	<td colspan="5" align="right"><input class="listbutton" style=font-size:15px; type="button" value=" 글쓰기 " onclick="location.href='community_eventcontent_write.jsp'"></td>
   --> <%
@@ -156,29 +170,14 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
       		<br>
       		<br>
       		<br>
-      		
-      		
       		</td>
       	</tr>
       </tfoot>
       <tbody>
-      <%
-		ArrayList<WriteDTO> notice = idao.event_noticelist();
-		if(notice!=null&&notice.size()!=0){
-			for(int i=0;i<notice.size();i++){
-		%>
-		<tr align="center">
-		<td style="color:red;background-color:#FFA300;"><b>-공 지-</b></td>
-		<td style="background-color:#FFA300;">
-		<a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=notice.get(i).getWrite_idx()%>"><b style="color:black;"><%=notice.get(i).getWrite_title()%></b></a></td>
-		<td style="color:red;background-color:#FFA300;"><%=notice.get(i).getWrite_writer()%></td>
-		<td style="color:black;background-color:#FFA300;"><%=notice.get(i).getWrite_wdate()%></td>
-		<td style="color:black;background-color:#FFA300;"><%=notice.get(i).getWrite_readnum()%></td>
-		</tr>
-		<%}
-			}%>
+
      <%
      ArrayList<WriteDTO> arr=idao.writeEventList(listSize,cp);
+    	 
      if(arr==null||arr.size()==0){  
         %>
         <tr>
@@ -197,7 +196,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
 		<input type ="hidden" name = "write_idx" value="<%=arr.get(i).getWrite_idx()%>">
 		</form>
         <%
-        if(i%5==0){
+        if(i%4==0){
     		 %>
     		</tr>
     		<tr>
@@ -212,9 +211,11 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
            if(arr.get(i).getWrite_lev()>0){
         	   out.println("&#8627;");
            }
+
            	if(arr.get(i).getWrite_open()==0){
-        	   if(manager==1||user_idx==arr.get(i).getUser_idx()&&user_idx!=0){%>
+        	   if(manager==1){%>
         	   		<br><a href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><img class="listimg" src="img/<%=arr.get(i).getWrite_filename()%>"></a>
+        	   
         	   <%}else{%>
            			<br><a href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><img class="listimg" src="img/lock.png"></a>
            		<%} 
