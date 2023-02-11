@@ -173,7 +173,7 @@ if(cp%pageSize==0)userGroup--;
 <%@include file="/header.jsp" %>
 <section>
 	<article>
-		<h2>커뮤니티</h2>
+		<br>
 		<div  class="submenu">
 			<a href="/seesc/community/community_eventcontent_list.jsp"><button class="tbutton"><span>이벤트</span></button></a>
 			<a href="/seesc/community/qna_list.jsp"><button class="tbutton"><span>QnA</span></button></a>
@@ -181,6 +181,11 @@ if(cp%pageSize==0)userGroup--;
 
 		</div>
 		<br><br><br>
+		<h2 class="h1">커뮤니티</h2>
+		<br>
+		<hr>
+		<Br>
+		<Br>
 		<div id="div2">
 			<span><a href="/seesc/community/memberboard.jsp"><input type="button" value="멤버모집게시판" class="writedel"></a></span>
 			</div>
@@ -265,6 +270,7 @@ if(cp%pageSize==0)userGroup--;
 				</tr>
 			</tfoot>
 		</table>
+		<br>
 	</article>
 </section>
 <%@include file="/footer.jsp" %>
