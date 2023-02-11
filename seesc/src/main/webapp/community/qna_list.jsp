@@ -212,7 +212,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 						<td>공 지</td>
 						<td colspan="3">
 						<a href="qna_content.jsp?write_idx=<%=notice.get(n).getWrite_idx()%>"class = "notice"><%=notice.get(n).getWrite_title()%><%=newicon %></a></td>
-						<td>S2 방탈출</td>
+						<td align = "left">S2 방탈출</td>
 						<td><%=todayW%></td>
 						<td><%=notice.get(n).getWrite_readnum()%></td>
 					</tr>
@@ -273,24 +273,26 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 								<%=arr.get(i).getWrite_title()%>&nbsp;<%=newicon %></a>
 							
 							<%} %>
-							</td><!-- 작성자 회원일경우 관리자가 예약내역 확인후 예약 취소할 수 있음.-->
+							</td>
+							<!-- 작성자 회원일경우 관리자가 예약내역 확인후 예약 취소할 수 있음.-->
 							<%
 							int writeUser_idx = arr.get(i).getUser_idx();
 							int userM = userdao.mngnum(writeUser_idx);
 							String memberCh = "";
 							if(userM!=0){
+								memberCh = "<img src='/seesc/img/login_manager.png' alt = '관리자' style='width :20px; height:20px;'>";
 							}else if(writeUser_idx==0&&userdao.mngnum(writeUser_idx)==0){
 								memberCh = "<img src='/seesc/img/login_no.png' alt = '비회원' style='width :20px; height:20px;'>";
 							}else{
 								memberCh ="<img src='/seesc/img/login_main.png' alt = '회원' style='width :20px; height:20px;'>";
 							}
 								
-							String mcolor = userM!=0?"style = 'color:red;'":"";
+						
 							
 							if(arr.get(i).getUser_idx()!=0&&manager!=0&&userM==0){%>
-								<td><a href ="/seesc/booking/member_bookingcheck.jsp?user_idx=<%=arr.get(i).getUser_idx()%>" target="_blank"><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></a></td>
+								<td align = "left"><a href ="/seesc/booking/member_bookingcheck.jsp?user_idx=<%=arr.get(i).getUser_idx()%>" target="_blank"><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></a></td>
 							<%}else{%> 
-							<td <%=mcolor%>><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></td>
+							<td align = "left"><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></td>
 							<%} %>
 							<td><%=todayW%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>

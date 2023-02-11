@@ -177,7 +177,26 @@ if (cp % pageSize == 0)
 							
 							<%} %>
 							</td>
-							<td><%=me%><%=arr.get(i).getWrite_writer()%></td>
+							<!-- 작성자 회원일경우 관리자가 예약내역 확인후 예약 취소할 수 있음.-->
+							<%
+							int writeUser_idx = arr.get(i).getUser_idx();
+							int userM = userdao.mngnum(writeUser_idx);
+							String memberCh = "";
+							if(userM!=0){
+								memberCh = "<img src='/seesc/img/login_manager.png' alt = '관리자' style='width :20px; height:20px;'>";
+							}else if(writeUser_idx==0&&userdao.mngnum(writeUser_idx)==0){
+								memberCh = "<img src='/seesc/img/login_no.png' alt = '비회원' style='width :20px; height:20px;'>";
+							}else{
+								memberCh ="<img src='/seesc/img/login_main.png' alt = '회원' style='width :20px; height:20px;'>";
+							}
+								
+						
+							
+							if(arr.get(i).getUser_idx()!=0&&manager!=0&&userM==0){%>
+								<td align = "left"><a href ="/seesc/booking/member_bookingcheck.jsp?user_idx=<%=arr.get(i).getUser_idx()%>" target="_blank"><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></a></td>
+							<%}else{%> 
+							<td  align = "left"><%=me%><%=memberCh%><%=arr.get(i).getWrite_writer()%></td>
+							<%} %>
 							<td><%=todayW%></td>
 							<td><%=arr.get(i).getWrite_readnum()%></td>
 						</tr>

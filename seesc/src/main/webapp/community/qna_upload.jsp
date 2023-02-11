@@ -50,7 +50,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 								required="required" value="<%
 								String value = user_idx==0?"":dto.getUser_nic();
 								out.println(value);
-								%> "
+								%>"
 								<%
 								String readonly =user_idx==0?"":"readonly";
 								out.println(readonly);

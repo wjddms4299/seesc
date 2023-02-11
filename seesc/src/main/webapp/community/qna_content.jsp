@@ -85,7 +85,7 @@ String todayW = today.equals(dbdate)?qnadao.writetime(write_idx):dbdate;
 							int userM = userdao.mngnum(writeUser_idx);
 							String memberCh = "";
 							if(userM!=0){
-								memberCh = "S2";
+								memberCh = "<img src='/seesc/img/login_manager.png' alt = '관리자' style='width :20px; height:20px;'>";
 							}else if(writeUser_idx==0&&userdao.mngnum(writeUser_idx)==0){
 								memberCh = "<img src='/seesc/img/login_no.png' alt = '비회원' style='width :20px; height:20px;'>";
 							}else{
