@@ -218,7 +218,7 @@ public class BookingDAO {
 	public ArrayList<BookingDTO> boomanage(){
 		try {
 			conn=com.esc.db.EscDB.getConn();
-			String sql="select * from booking";
+			String sql="select * from booking order by booking_idx desc";
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			ArrayList<BookingDTO> arr=new ArrayList<BookingDTO>();
@@ -402,7 +402,7 @@ public class BookingDAO {
 	public ArrayList<CancelDTO> cancelmng(){
 		try {
 			conn = com.esc.db.EscDB.getConn();
-			String sql="select * from cancel order by cancel_ok desc, cancel_idx desc";
+			String sql="select * from cancel order by cancel_ok asc, cancel_idx desc";
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			ArrayList<CancelDTO> arr=new ArrayList<CancelDTO>();
