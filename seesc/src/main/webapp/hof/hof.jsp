@@ -115,9 +115,10 @@ function openhofUpload(){
 }
 </script>
 <%
+ArrayList<ThemaDTO> arr1=thedao.allThema();
 String thema=request.getParameter("thema");
-if(thema==null||thema==""){
-	thema="이젠401";
+if(thema==null||thema==""||arr1!=null||arr1.size()!=0){
+	thema=arr1.get(0).getThema_name();
 }
 %>
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
@@ -133,7 +134,6 @@ if(thema==null||thema==""){
 <article  class="themabt">
 	<div>
 		<%
-		ArrayList<ThemaDTO> arr1=thedao.allThema();
 		if(arr1==null||arr1.size()==0){
 			%><span>등록된 테마가 없습니다.</span><%
 		}else{
