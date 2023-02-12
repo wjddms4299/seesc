@@ -230,18 +230,18 @@ if (sort_s == null || sort_s.equals("")) {
 						if (arr == null || arr.size() == 0) {
 						%>
 						<tr>
-							<td colspan="5">등록된 게시물이 없습니다.</td>
+							<td >등록된 게시물이 없습니다.</td>
 						</tr>
 						<%
 						} else {
 							for (int i = 0; i < arr.size(); i++) {
 						%>
 						<tr>
-							<td><%=arr.get(i).getWrite_idx()%></td>
+							<td align="left"><%=arr.get(i).getWrite_idx()%></td>
 							<%
 	
 							%>
-							<td><a
+							<td><a 
 								href="community_freecontent.jsp?idx=<%=arr.get(i).getWrite_idx()%>"><%=arr.get(i).getWrite_title()%>
 									[<%=wdao.findref(arr.get(i).getWrite_ref())%>]</a></td>
 							<%
