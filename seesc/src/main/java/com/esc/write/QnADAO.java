@@ -244,6 +244,82 @@ public class QnADAO {
 
 	}
 	
+	/**보여지는 총 게시물수 구하기*/
+	public int totalFind(String Listname, String content) {
+		try {
+			conn = com.esc.db.EscDB.getConn();
+			String sql = "";
+			int count = 0;
+			switch (Listname) {
+			case "0":
+				sql = "select count(*) from write where write_cate = 'qna' and write_notice = 0";
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
+				rs.next();
+				count = rs.getInt(1);
+				break;
+			case "1"://제목
+				sql = "select count(*) from write where write_cate = 'qna' and write_title like ? and write_notice = 0";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+				rs = ps.executeQuery();
+				rs.next();
+				count = rs.getInt(1);
+				break;
+			case "2"://내용
+				sql = "select count(*) from write where write_cate = 'qna' and write_content like ? and write_notice = 0";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+
+				rs = ps.executeQuery();
+				rs.next();
+				count = rs.getInt(1);
+				break;
+			case "3"://작성자
+				sql = "select count(*) from write where write_cate = 'qna' and write_writer like ? and write_notice = 0";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+
+				rs = ps.executeQuery();
+				rs.next();
+				count = rs.getInt(1);
+				break;
+
+			case "4"://제목 본문
+				sql = "select count(*) from write where write_cate = 'qna' and write_notice = 0 and (write_title like ? or write_content like ?) ";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, "%" + content + "%");
+				ps.setString(2, "%" + content + "%");
+
+				rs = ps.executeQuery();
+				rs.next();
+				
+				count = rs.getInt(1);
+				break;
+			}
+
+			return count;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+
+			}
+		}
+
+	}
+	
+	
 	/** QnA 게시글 리스트 출력 메서드 */
 	public ArrayList<WriteDTO> writeQnAList(int userpage, int writeList, String Listname, String content) {
 		try {

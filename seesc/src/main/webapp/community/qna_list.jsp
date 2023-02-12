@@ -168,7 +168,7 @@ UserinfoDTO udto = userdao.userInfo(sid); %>
 				<thead>
 					<tr>
 						<td colspan="6" style = "text-align:left;">
-						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.getTotalCnt(listname,content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+(qnadao.getTotalCnt(listname,content)==1?1:qnadao.getTotalCnt(listname,content))+"개");%>
+						<%String searchmsg = listname.equals("0")?("전체글 : "+qnadao.totalFind(listname, content)+"개 "):("검색 내용 : "+content+" / 검색 결과 : "+qnadao.totalFind(listname,content)+"개");%>
 					
 					
 						<%=searchmsg %>
