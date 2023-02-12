@@ -40,10 +40,10 @@
 .listimg{
   		width:275px;
    		height:275px;
-        background-color: #FFA300;
+        background-color: black;
       }
 .listimg:hover {
-    background-color: #FF870C;
+    background-color: black;
     border: 5px solid #FFA300;
 
 }
