@@ -105,7 +105,7 @@ th {
 				<td><%=msg %></td>
 				<td><%=arr.get(i).getBooking_num() %>명</td>
 				<td><%=arr.get(i).getBooking_money() %>원</td>
-				<td><input type = "button" value = "취소" onclick ="javascript: var result =window.confirm('에약을 취소하시겠습니까?');if(result){location.href ='/seesc/booking/bookingCancle_ok.jsp?booking_idx=<%=arr.get(i).getBooking_idx() %>'}"></td>
+				<td><input type = "button" value = "취소" onclick ="javascript: var result =window.confirm('에약을 취소하시겠습니까?');if(result){location.href ='/seesc/booking/bookingCancle_ok.jsp?booking_idx=<%=arr.get(i).getBooking_idx() %>'}" class="tbutton"></td>
 			</tr>
 			<%
 		}

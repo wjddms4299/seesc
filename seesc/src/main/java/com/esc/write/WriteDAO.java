@@ -739,5 +739,91 @@ public class WriteDAO {
 				}catch(Exception e2) {}
 			}
 		}
-	
+	/**비밀글 확인하기*/
+		public WriteDTO showopen(int idx) {
+			try {
+				conn=com.esc.db.EscDB.getConn();
+				String sql="select * from write where write_idx=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, idx);
+				rs=ps.executeQuery();
+				WriteDTO dto=null;
+				if(rs.next()) {
+					int uidx = rs.getInt("user_idx");
+					String pwd=rs.getString("write_pwd");
+					String cate = rs.getString("write_cate");
+					String title = rs.getString("write_title");
+					String writer = rs.getString("write_writer");
+					java.sql.Date wdate = rs.getDate("write_wdate");
+					String filename = rs.getString("write_filename");
+					String content = rs.getString("write_content");
+					int readnum = rs.getInt("write_readnum");
+					int ref = rs.getInt("write_ref");
+					int lev = rs.getInt("write_lev");
+					int step = rs.getInt("write_step");
+					int open = rs.getInt("write_open");
+					int notice = rs.getInt("write_notice");
+					
+					dto=new WriteDTO(idx, uidx, cate, title, writer, pwd, wdate, filename, content, readnum, ref, lev, step, open, notice);
+				}
+					return dto;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return null;
+			}finally {
+				try {
+					if(rs!=null)rs.close();
+					if(ps!=null)ps.close();
+					if(conn!=null)conn.close();
+				}catch(Exception e2) {}
+			}
+		}
+		/**비밀글 들어가기*/
+		public boolean underright(int idx, String pwd) {
+			try{
+				conn=com.esc.db.EscDB.getConn();
+				String sql="select write_idx  from write where write_idx=? and write_pwd=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, idx);
+				ps.setString(2, pwd);
+				rs=ps.executeQuery();
+				rs.next();
+				
+				return true;
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}finally {
+				try {
+					if(rs!=null)rs.close();
+					if(ps!=null)ps.close();
+					if(conn!=null)conn.close();
+				}catch(Exception e2) {}
+			}
+		}
+		/**게시물 번호로 수정할려고하는 게시물 들어가기*/
+		public boolean idxcheck(int idx, String pwd) {
+			try {
+				conn=com.esc.db.EscDB.getConn();
+				String sql="select write_idx from write where write_idx=? and write_pwd=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, idx);
+				ps.setString(2, pwd);
+				rs=ps.executeQuery();
+				rs.next();
+				
+				return true;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}finally {
+				try {
+					if(rs!=null)rs.close();
+					if(ps!=null)ps.close();
+					if(conn!=null)conn.close();
+				}catch(Exception e2) {}
+			}
+			
+		}
 }

@@ -13,6 +13,9 @@
 <link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
 </head>
 <style>
+.divh1{
+font-size: 32px;
+}
 h1{
 text-align: center;
 }
@@ -112,10 +115,12 @@ text-align:center;
 </style>
 <body>
 <%@include file="header.jsp" %>
-<br><br><br>
 <br>
+<br>
+<div class="divh1">
 <h1 style = "color :#FF0000;">"숨겨진 단서를 찾아라!"</h1>
 <h1>탄탄한 스토리! 재방문 많은 방탈출!</h1>
+</div>
 <section>
 <!-- ----------------------공지사항 부분--------------- -->
 <div class = "notice">

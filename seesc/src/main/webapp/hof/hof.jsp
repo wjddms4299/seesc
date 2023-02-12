@@ -117,8 +117,12 @@ function openhofUpload(){
 <%
 ArrayList<ThemaDTO> arr1=thedao.allThema();
 String thema=request.getParameter("thema");
-if(thema==null||thema==""||arr1!=null||arr1.size()!=0){
+if(thema==null||thema==""){
+	if(arr1!=null||arr1.size()!=0){
 	thema=arr1.get(0).getThema_name();
+	}else{
+		thema="";
+	}
 }
 %>
 	<link rel = "stylesheet" type = "text/css" href = "/seesc/css/mainLayout.css">
