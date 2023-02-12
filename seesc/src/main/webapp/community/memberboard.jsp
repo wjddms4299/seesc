@@ -19,7 +19,7 @@ section {
 }
 
 .select { /*상단 select 박스*/
-	width: 80px;
+	width: 100px;
 	height: 30px;
 	border: none;
 	border-radius: 5px;
@@ -187,6 +187,22 @@ if(cp%pageSize==0)userGroup--;
 		<Br>
 		<Br>
 		<div id="div2">
+		<%
+				String sort_s = request.getParameter("sort");
+				int sort = 0;
+				if (sort_s == null || sort_s.equals("")) {
+					sort_s = "0";
+					sort = Integer.parseInt(sort_s);
+
+				} else {
+					sort = Integer.parseInt(sort_s);
+				}
+				%>
+					<select name="sort" onchange="window.location.href=this.value" class="select">
+						<option value="memberboard.jsp?cp=<%=cp%>&sort=0" <% out.println(sort==0?"selected":"");%>>번호순</option>
+						<option value="memberboard.jsp?cp=<%=cp%>&sort=1" <% out.println(sort==1?"selected":""); %>>조회수 순</option>
+						
+					</select>
 			<span><a href="/seesc/community/memberboard.jsp"><input type="button" value="멤버모집게시판" class="writedel"></a></span>
 			</div>
 		<table>
@@ -202,7 +218,7 @@ if(cp%pageSize==0)userGroup--;
 			<tbody>
 				
 					<% 
-					 ArrayList<WriteDTO> arr=wdao.member(listSize, cp);
+					 ArrayList<WriteDTO> arr=wdao.member(listSize, cp, sort);
 					
 						if(arr==null || arr.size()==0){
 							%>
@@ -250,19 +266,19 @@ if(cp%pageSize==0)userGroup--;
 					<td colspan="5" align="center">
 									<%
 				if(userGroup!=0){
-					%><a href="memberboard.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>">&lt;&lt;</a><%
+					%><a href="memberboard.jsp?cp=<%=(userGroup-1)*pageSize+pageSize%>&sort=<%=sort%>">&lt;&lt;</a><%
 				}
 				%>
 				
 				<%
 				for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
-					%>&nbsp;&nbsp;<a href="memberboard.jsp?cp=<%=i%>" class="prbutton1"><%=i %></a>&nbsp;&nbsp;<% 
+					%>&nbsp;&nbsp;<a href="memberboard.jsp?cp=<%=i%>&sort=<%=sort%>" class="prbutton1"><%=i %></a>&nbsp;&nbsp;<% 
 					if(i==totalPage)break;
 				}
 				%>
 				<%
 				if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-					%><a href="memberboard.jsp?cp=<%=(userGroup+1)*pageSize+1%>">&gt;&gt;</a> <%
+					%><a href="memberboard.jsp?cp=<%=(userGroup+1)*pageSize+1%>&sort=<%=sort%>">&gt;&gt;</a> <%
 				}
 				
 				%>

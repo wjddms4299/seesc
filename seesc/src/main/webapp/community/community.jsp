@@ -27,7 +27,7 @@ section {
 }
 
 .select { /*상단 select 박스*/
-	width: 80px;
+	width: 100px;
 	height: 30px;
 	border: none;
 	border-radius: 5px;
@@ -175,15 +175,7 @@ int userGroup = cp / pageSize;
 if (cp % pageSize == 0)
 	userGroup--;
 
-String sort_s = request.getParameter("sort");
-int sort = 0;
-if (sort_s == null || sort_s.equals("")) {
-	sort_s = "0";
-	sort = Integer.parseInt(sort_s);
 
-} else {
-	sort = Integer.parseInt(sort_s);
-}
 %>
 <body>
 	<%@include file="/header.jsp"%>
@@ -209,7 +201,25 @@ if (sort_s == null || sort_s.equals("")) {
 			<br>
 			<br>
 			<div id="div2">
-				<span><a href="/seesc/community/memberboard.jsp"><input
+				<span>
+				<%
+				String sort_s = request.getParameter("sort");
+				int sort = 0;
+				if (sort_s == null || sort_s.equals("")) {
+					sort_s = "0";
+					sort = Integer.parseInt(sort_s);
+
+				} else {
+					sort = Integer.parseInt(sort_s);
+				}
+				%>
+					<select name="sort" onchange="window.location.href=this.value" class="select">
+						<option value="community.jsp?cp=<%=cp%>&sort=0" <% out.println(sort==0?"selected":"");%>>번호순</option>
+						<option value="community.jsp?cp=<%=cp%>&sort=1" <% out.println(sort==1?"selected":""); %>>조회수 순</option>
+						
+					</select>
+				</span>
+				<span><a href="/seesc/community/memberboard.jsp"><input	
 						type="button" value="멤버모집게시판" class="writedel"></a></span>
 			</div>
 			<br>
@@ -225,7 +235,7 @@ if (sort_s == null || sort_s.equals("")) {
 				</thead>
 				<tbody>
 					<%
-					ArrayList<WriteDTO> arr = wdao.selWrite(listSize, cp);
+					ArrayList<WriteDTO> arr = wdao.selWrite(listSize, cp, sort);
 					
 						if (arr == null || arr.size() == 0) {
 						%>

@@ -16,17 +16,28 @@ public class WriteDAO {
 	}
 
 	/** 자유게시판 보이는 메서드 */
-	public ArrayList<WriteDTO> selWrite(int ls, int cp) {
+	public ArrayList<WriteDTO> selWrite(int ls, int cp, int sort) {
 		try {
 			conn = com.esc.db.EscDB.getConn();
 			// String sql = "select * from write order by write_idx desc";
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			
-			String	sql = "select * from (select rownum as rnum, a.* from  "
+			String sql="";
+			switch(sort) {
+			case 0: sql = "select * from (select rownum as rnum, a.* from  "
 					+ " (select * from write where write_cate='free' order by write_idx desc)a)  where rnum>=? and rnum<=? ";
+					ps=conn.prepareStatement(sql);
+					break;
+			case 1: sql = "select * from (select rownum as rnum, a.* from  "
+					+ " (select * from write where write_cate='free' order by write_readnum desc)a)  where rnum>=? and rnum<=? ";
+					ps=conn.prepareStatement(sql);
+					break;
+			default : sql = "select * from (select rownum as rnum, a.* from  "
+						+ " (select * from write where write_cate='free' order by write_idx desc)a)  where rnum>=? and rnum<=? ";
+						ps=conn.prepareStatement(sql);
+			}
 			
-			ps=conn.prepareStatement(sql);
+			
 			ps.setInt(1, start);
 			ps.setInt(2, end);
 			rs = ps.executeQuery();
@@ -276,8 +287,11 @@ public class WriteDAO {
 			String sql="select count(*) from write where write_cate='free'";
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
-			rs.next();
-			int count = rs.getInt(1);
+			int count=0;
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
 			return count==0?1:count;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -358,15 +372,26 @@ public class WriteDAO {
 		}
 	}
 	/**멤버모집만 보여주는 게시판 관련 메서드*/
-	public ArrayList<WriteDTO> member(int ls, int cp){
+	public ArrayList<WriteDTO> member(int ls, int cp, int sort){
 		try {
 			conn=com.esc.db.EscDB.getConn();
 			String mem="[멤버모집]%";
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			String sql = "select * from (select rownum as rnum, a.* from  "
-					+ "(select * from write where  write_title like ? order by write_idx desc)a)b  " + "where rnum>=? and rnum<=? ";
-			ps=conn.prepareStatement(sql);
+			String sql="";
+			switch(sort) {
+			case 0 : sql = "select * from (select rownum as rnum, a.* from  "
+						+ "(select * from write where  write_title like ? order by write_idx desc)a)b  " + "where rnum>=? and rnum<=? ";
+					break;
+				
+			case 1 : sql= "select * from (select rownum as rnum, a.* from  "
+						+ "(select * from write where  write_title like ? order by write_readnum desc)a)b  " + "where rnum>=? and rnum<=? ";
+					break;
+			default : sql= "select * from (select rownum as rnum, a.* from "
+						+ "(select * from write where  write_title like ? order by write_idx desc)a)b "
+						+ "where rnum>=? and rnum<=?";
+			}
+						ps=conn.prepareStatement(sql);
 			ps.setString(1, mem);
 			ps.setInt(2, start);
 			ps.setInt(3, end);
