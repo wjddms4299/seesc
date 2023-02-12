@@ -343,7 +343,7 @@ public class ImgDAO {
 			conn = com.esc.db.EscDB.getConn();
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			String sql = "select * from(select rownum r,a.* from (select * from comments where write_idx=? order by comm_ref asc,comm_lev asc,comm_step desc)a) where r >=? and r<=?";
+			String sql = "select * from(select rownum r,a.* from (select * from comments where write_idx=? order by comm_ref asc ,comm_lev asc,comm_step desc)a) where r >=? and r<=?";
 
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, write_idx);

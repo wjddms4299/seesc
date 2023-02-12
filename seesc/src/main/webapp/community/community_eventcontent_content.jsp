@@ -240,9 +240,19 @@ td {
 				}else
 				if (arr != null && arr.size() != 0) {
 					for (int i=0;i<arr.size();i++) {
+						if(arr.get(i).getComm_lev() == 0){
+							%>
+							<tr>
+							<td onclick="location.href = 'community_eventcontent_content.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=cw&cp=<%=cp%>'">
+							<%
+						}else{
+							%>
+							<tr>
+							<td>
+							<%
+						}
 				%>
-				<tr>
-				<td onclick="location.href = 'community_eventcontent_content.jsp?comm_idx=<%=arr.get(i).getComm_idx()%>&write_idx=<%=write_idx%>&flag=cw'">
+				
 					<%
 					for (int j=0;j<arr.get(i).getComm_lev();j++) {
 						out.print("&nbsp;&nbsp;");
