@@ -243,7 +243,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
            <br>작성자: <%=arr.get(i).getWrite_writer() %>
            <br><%=arr.get(i).getWrite_wdate() %>
            <br>조회수: <%=arr.get(i).getWrite_readnum() %></td>
-        
+      
         <%
      }
   }
