@@ -74,6 +74,7 @@ legend{
 #red{
 	color: red;
 }
+
 </style>
 <body>
 <%@include file="/header.jsp" %>
@@ -108,10 +109,9 @@ String content=request.getParameter("write_content");
 String write_idx=request.getParameter("write_idx");
 %>
 
-%>
+
 <section>
 	<article>
-		<h3>답글 작성하기</h3>
 		<form name="answer" action="under_answer_ok.jsp" method="post" enctype="multipart/form-data">
 		<fieldset>
 			<legend><a id="red">답 글 달 기</a></legend>
@@ -135,7 +135,7 @@ String write_idx=request.getParameter("write_idx");
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" class="textarea"></td><!--  value="RE:)"--> 
+				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" class="textarea" value="Re:)"></td><!--  value="RE:)"--> 
 				<td><input type="submit" value="댓글 등록하기" class="writedel">
 					<input type="button" value="돌아가기" class="writedel" onclick="location.href='community_freecontent.jsp?idx=<%=write_idx%>'">
 				</td>	
