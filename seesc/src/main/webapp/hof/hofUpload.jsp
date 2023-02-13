@@ -68,7 +68,7 @@ text-align: center;
 				<input type="text" name="record">
 			</li>
 			<li><label>이미지</label>
-				<input type="file" name="img">
+				<input type="file" name="img" accept="image/gif,image/jpeg,image/png">
 			</li>
 		</ul>
 		<div><input type="submit" value="기록 올리기"></div>
