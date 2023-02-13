@@ -100,7 +100,13 @@ color: red;
 				}
 				%>
 				<td><%=pay_ok %></td>
-				<td><%=arr.get(i).getCancel_banknum() %></td>
+				<%
+				if(arr.get(i).getCancel_banknum()==null||arr.get(i).getCancel_banknum().equals("null-null-null")){
+				%><td>현장결제 or 계좌x</td><%
+				}else{
+					%><td><%=arr.get(i).getCancel_banknum() %></td><%
+				}
+				%>
 				<td><%=arr.get(i).getCancel_time() %></td>
 				<%
 				if(pay.equals("현장결제")){
