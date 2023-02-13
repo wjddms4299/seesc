@@ -9,7 +9,9 @@ request.setCharacterEncoding("utf-8");
 <%
 String cancel_banknum = request.getParameter("bank") + "-" + request.getParameter("cacle_banknum") + "-"
 		+ request.getParameter("depositor");
-
+if(cancel_banknum.equals("null-null-null")){
+	cancel_banknum = "현장 결제 or 계좌 X";
+}
 	
 String booking_idx_s = request.getParameter("booking_idx");
 if (booking_idx_s == null || booking_idx_s.equals("")) {
