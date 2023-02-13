@@ -4,12 +4,14 @@
 <%@ page import="com.esc.write.*" %>
 <%@ page import="com.oreilly.servlet.multipart.*" %>
 <jsp:useBean id="wdao" class="com.esc.write.WriteDAO"></jsp:useBean>
+<jsp:useBean id="udao" class="com.esc.userinfo.UserinfoDAO"></jsp:useBean>
 <%
 
 
 	
 	String idx_s=(String)session.getAttribute("write_idx");
 	int idx=Integer.parseInt(idx_s);
+	
 %>
 <!DOCTYPE html>
 <html>
