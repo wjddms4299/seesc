@@ -65,7 +65,7 @@ text-align: center;
 				<input type="text" name="name">
 			</li>
 			<li><label>기록</label>
-				<input type="number" name="record" pattern="[0-9]">
+				<input type="number" name="record" pattern="[0-9]" placeholder="숫자만 초단위로 입력해주세요.		ex)10분00초=600">
 			</li>
 			<li><label>이미지</label>
 				<input type="file" name="img" accept="image/gif,image/jpeg,image/png">
