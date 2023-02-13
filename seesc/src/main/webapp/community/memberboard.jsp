@@ -183,7 +183,7 @@ if(cp%pageSize==0)userGroup--;
 		<br><br><br>
 		<h2 class="h1">커뮤니티</h2>
 		<br>
-		<hr>
+		<hr width="130px">
 		<Br>
 		<Br>
 		<div id="div2">

@@ -154,7 +154,7 @@ String todayW = today.equals(dbdate)?qnadao.writetime(write_idx):dbdate;
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					</td>
 				</tr>
-				<%}else if(manager==0&&writer_m==false){%> <!-- 관리자글은 수정 삭제 못함.-->
+				<%}else if(manager==0&&writer_m){%> <!-- 관리자글은 수정 삭제 못함.-->
 				<tr>
 				<td colspan="4" style = "text-align : center;">
 					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
