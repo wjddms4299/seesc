@@ -238,8 +238,7 @@ if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
            			<b style="color:red;">[Close]</b><br><a  style="text-decoration:none;" href="#" onclick="document.getElementById('community_eventcontent_openPwd').submit();"><b style="color:#FFA300;">&nbsp;공개 예정&nbsp;</b></a>
            		<%} 
            	}else{%>
-           		<b style="color:blue;">[Open]</b><br><a  style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;
-           		<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>	
+           		<b style="color:blue;">[Open]</b><br><a style="text-decoration:none;" href="community_eventcontent_content.jsp?write_idx=<%=arr.get(i).getWrite_idx() %>"><b style="color:#FFA300;">제목:&nbsp;<%=arr.get(i).getWrite_title() %>&nbsp;[<%=idao.commentNum(arr.get(i).getWrite_idx()) %>]</b></a>	
            	<%} %>	
            <br>작성자: <%=arr.get(i).getWrite_writer() %>
            <br><%=arr.get(i).getWrite_wdate() %>
