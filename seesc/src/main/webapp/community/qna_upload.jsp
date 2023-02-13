@@ -37,7 +37,7 @@ UserinfoDTO dto = userdao.userInfo(sid);
 			<form name="qna_upload" action="qna_upload_ok.jsp" method="post"
 				enctype="multipart/form-data">
 					<table>
-					<tbody class = "writelist" cellspacing ="0px">
+					<tbody class = "writelist" >
 					
 						<tr><td><input type="hidden" name="user_idx" value="<%=user_idx%>">
 						<input type="hidden" name="write_notice"
