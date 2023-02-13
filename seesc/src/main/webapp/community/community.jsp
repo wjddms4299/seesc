@@ -240,7 +240,7 @@ if (cp % pageSize == 0)
 						if (arr == null || arr.size() == 0) {
 						%>
 						<tr>
-							<td >등록된 게시물이 없습니다.</td>
+							<td  align="center" colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
 						<%
 						} else {
