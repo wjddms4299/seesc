@@ -38,12 +38,12 @@ article{
         height: 30px;
         border: none;
         border-radius: 5px;
-        background-color: #4646CD;
+        background-color:#ff8200;
         color: white;
         font-size: 16px;
       }
 .writedel:hover {
-    background-color: #0000CD;
+    background-color: #FACC2E	
 }
       input[type="text"],
       input[type="password"]{
