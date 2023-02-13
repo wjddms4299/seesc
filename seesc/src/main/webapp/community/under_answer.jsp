@@ -74,6 +74,7 @@ legend{
 #red{
 	color: red;
 }
+
 </style>
 <body>
 <%@include file="/header.jsp" %>
@@ -108,10 +109,9 @@ String content=request.getParameter("write_content");
 String write_idx=request.getParameter("write_idx");
 %>
 
-%>
+
 <section>
 	<article>
-		<h3>답글 작성하기</h3>
 		<form name="answer" action="under_answer_ok.jsp" method="post" enctype="multipart/form-data">
 		<fieldset>
 			<legend><a id="red">답 글 달 기</a></legend>
