@@ -63,12 +63,6 @@ if(booking_pay_ok==0){
 
 String cancel_banknum=bank+"-"+cacle_banknum_s+"-"+depositor;
 
-int coupon_idx=bdao.bookingCouponIdx(booking_idx);
-
-if(coupon_idx!=0) {
-	bdao.bookingCouponUse_R(coupon_idx);
-}
-
 int result=bdao.bookingDelete(booking_idx,dto,cancel_banknum);
 
 if (result==1) {%>
