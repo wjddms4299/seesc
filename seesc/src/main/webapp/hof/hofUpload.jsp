@@ -26,7 +26,7 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 }
-input[type=text], select {
+input[type=text],input[type=number], select {
   width: 90%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -65,7 +65,7 @@ text-align: center;
 				<input type="text" name="name">
 			</li>
 			<li><label>기록</label>
-				<input type="text" name="record">
+				<input type="number" name="record" pattern="[0-9]">
 			</li>
 			<li><label>이미지</label>
 				<input type="file" name="img" accept="image/gif,image/jpeg,image/png">
