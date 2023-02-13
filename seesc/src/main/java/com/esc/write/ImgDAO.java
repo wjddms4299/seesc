@@ -182,7 +182,7 @@ public class ImgDAO {
 		}
 
 	}
-	/**ref*/
+	/**ref의 최대를 구하기*/
 	public int getMaxWrite_Ref() {
 		try {
 			String sql = "select max(write_ref) from write";
