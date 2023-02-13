@@ -34,6 +34,7 @@ th {
 </style>
 <%
 int manager=(int)session.getAttribute("manager");
+int user_idx=(int)session.getAttribute("user_idx");
 if(manager<1){
 	%>
 	<script>
@@ -72,6 +73,7 @@ if(manager<1){
 			<%
 		}
 		for(int i=0;i<arr.size();i++){
+			if(user_idx==arr.get(i).getUser_idx())continue;
 			%>
 			<tr>
 				<td><%=arr.get(i).getUser_idx() %></td>
