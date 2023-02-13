@@ -135,7 +135,7 @@ String write_idx=request.getParameter("write_idx");
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" class="textarea"></td><!--  value="RE:)"--> 
+				<td colspan="3">댓글 : <input type="text" name="write_content" size="60" class="textarea" value="Re:)"></td><!--  value="RE:)"--> 
 				<td><input type="submit" value="댓글 등록하기" class="writedel">
 					<input type="button" value="돌아가기" class="writedel" onclick="location.href='community_freecontent.jsp?idx=<%=write_idx%>'">
 				</td>	
