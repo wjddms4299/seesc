@@ -107,6 +107,8 @@ tfoot{
 #img{
 
 	margin-top: 10px;
+	width: 250px;
+	height: 250px;
 
 }
 #next{
@@ -201,7 +203,7 @@ tfoot{
 				}else{
 					%>
 					<tr>
-					<td colspan="4"><img alt="등록 이미지" id="img" src="/seesc/community/userFile/writeImg/<%=dto.getWrite_filename() %>">
+					<td colspan="4" id="img"><img alt="등록 이미지" id="img" src="/seesc/community/userFile/writeImg/<%=dto.getWrite_filename() %>">
 					<textarea cols="50" rows="20" readonly><%=dto.getWrite_content() %></textarea></td>
 					</tr>
 					<%
