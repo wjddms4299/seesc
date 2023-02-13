@@ -289,7 +289,7 @@ public class UserinfoDAO {
 			}catch(Exception e2) {}
 		}
 	}
-	/**회원권한 관리*/
+	/**회원권한 관리 */
 	public int managepower(int manager,int user_idx) {
 		try {
 			conn=com.esc.db.EscDB.getConn();

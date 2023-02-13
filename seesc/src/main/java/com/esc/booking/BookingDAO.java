@@ -138,7 +138,7 @@ public class BookingDAO {
 		}
 	}
 	
-	/**예약취소시 예약번호로 쿠폰번호 불러오기*/
+	/**예약취소시 예약번호로 쿠폰번호 불러오기 */
 	public int bookingCouponIdx(int booking_idx){
 		try {
 			

@@ -61,7 +61,7 @@ color : black;
 }
 
 #undercontent{
-		text-align: CENTER;	
+		text-align: left;
 	}
 
 .prbutton1{/*해당페이지 눌렀을때*/
@@ -266,7 +266,7 @@ tfoot{
 							<%
 						}else{
 							%>
-							<a href="under_open.jsp?idx=<%=arr2.get(i).getWrite_idx()%>">ㄴ비밀 댓글입니다</a>
+							<a href="under_open.jsp?idx=<%=arr2.get(i).getWrite_idx()%>">비밀 댓글입니다</a>
 							<%
 						}
 						
