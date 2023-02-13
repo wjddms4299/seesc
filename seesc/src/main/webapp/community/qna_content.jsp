@@ -178,10 +178,10 @@ String todayW = today.equals(dbdate)?qnadao.writetime(write_idx):dbdate;
 					</td>
 				</tr>
 				<%} %>
-				<tr><td>&nbsp;</td></tr>
-				<tr><td>&nbsp;</td></tr>
-				<tr><td>&nbsp;</td></tr>
-				<tr><td>&nbsp;</td></tr>
+				<tr><td>&nbsp; </td></tr>
+				<tr><td>&nbsp; </td></tr>
+				<tr><td>&nbsp; </td></tr>
+				<tr><td>&nbsp; </td></tr>
 			<tfoot>
 			</table>
 		</article>
