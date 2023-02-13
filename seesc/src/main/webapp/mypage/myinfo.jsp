@@ -96,6 +96,15 @@ display: inline-block;
 margin:0px 80%;
 float: left;
 }
+.telsel{
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 </style>
 <script>
 function open_nicCheck(){
@@ -163,7 +172,13 @@ function open_nicCheck(){
 			String tel2=tel.substring(4, 8);
 			String tel3=tel.substring(9, tel.length());
 			%>
-			<td><input type="tel" value="<%=tel1%>" name="tel1" maxlength="3" pattern="[0-9]{3}" onclick="this.value=''">-<input type="tel" value="<%=tel2%>" name="tel2" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''">-<input type="tel" value="<%=tel3%>" name="tel3" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''"></td>
+			<td><select name="tel1" value="<%=tel1%>" class="telsel">
+			<option value = "010">010
+			<option value = "016">016
+			<option value = "017">017
+			<option value = "018">018
+			<option value = "019">019
+		</select>-<input type="tel" value="<%=tel2%>" name="tel2" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''">-<input type="tel" value="<%=tel3%>" name="tel3" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''"></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
