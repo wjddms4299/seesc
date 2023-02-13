@@ -143,7 +143,7 @@ function open_nicCheck(){
 						<th>아이디</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="user_id" placeholder="아이디를 입력해주세요." readonly></td>
+						<td><input type="text" name="user_id" placeholder="중복확인버튼을 눌러주세요." readonly></td>
 						<td><input type="button" name="idCheck" value="중복확인" onclick="open_idCheck()"></td>
 					</tr>
 					<tr>
@@ -168,7 +168,7 @@ function open_nicCheck(){
 						<th>닉네임</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="user_nic" placeholder="닉네임을 입력해주세요." readonly></td>
+						<td><input type="text" name="user_nic" placeholder="중복확인 버튼을 눌러주세요." readonly></td>
 						<td><input type="button" name="nicCheck" value="중복확인" onclick="open_nicCheck()"></td>
 					</tr>
 					<tr>
@@ -188,7 +188,13 @@ function open_nicCheck(){
 						<th>휴대전화</th>
 					</tr>
 					<tr>
-						<td><input type="tel" name="user_tel1" placeholder="핸드폰 번호를 입력해주세요." maxlength="3" pattern="[0-9]{3}" onclick="this.value=''" required class="tel1">-<input type="tel" name="user_tel2" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''" required class="tel">-<input type="tel" name="user_tel3" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''" required class="tel"></td>
+						<td><select name="user_tel1">
+			<option value = "010">010
+			<option value = "016">016
+			<option value = "017">017
+			<option value = "018">018
+			<option value = "019">019
+		</select>-&nbsp;<input type="tel" name="user_tel2" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''" required class="tel">-<input type="tel" name="user_tel3" maxlength="4" pattern="[0-9]{4}" onclick="this.value=''" required class="tel"></td>
 					</tr>
 					<tr>
 						<th>생년월일
@@ -198,7 +204,7 @@ function open_nicCheck(){
 						<select name="year" required>
 						<option value="">--선택--</option>
 						<%
-						for(int i=1950;i<=2020;i++){
+						for(int i=2020;i>=1950;i--){
 							%>
 						<option value="<%=i%>"><%=i %></option>
 							<%
