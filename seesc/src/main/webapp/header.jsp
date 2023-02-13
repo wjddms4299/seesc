@@ -32,6 +32,7 @@ function login_open(){
 </script>
 <%
     String sid=(String)session.getAttribute("sid");
+	int mana = session.getAttribute("manager") == null || session.getAttribute("manager").equals("")? 0: (int) session.getAttribute("manager");
 %>
 <div class="headerback">
 <header>
@@ -41,10 +42,16 @@ function login_open(){
 <!-- ------------------------------------------------------ -->
 		<span id="mainlogo"> <a href = "/seesc/index.jsp"><img src="/seesc/img/logo_y.png" alt="로고" style ="width : 170px; height : 120px;"></a></span> 
 		<%
+		
 		if(sid==null||sid==""){
 			%>
 			<span id="mainlogin"><a href="javascript:login_open();">로그인</a> <a href="javascript:login_open();"><img src="/seesc/img/login_no.png" alt="로그인"></a> </span>
 			<%
+		}else if(sid!=null&&sid!=""&&mana==1){
+			%>
+			<span id="mainlogin"><a href="/seesc/member/logout.jsp">로그아웃</a> <a href="/seesc/mypage/mypage.jsp"><img src="/seesc/img/login_manager.png" alt="관리자페이지"></a> </span>
+			<%
+			
 		}else{
 			%>
 			<span id="mainlogin"><a href="/seesc/member/logout.jsp">로그아웃</a> <a href="/seesc/mypage/mypage.jsp"><img src="/seesc/img/login_main.png" alt="마이페이지"></a> </span>
