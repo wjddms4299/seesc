@@ -27,7 +27,7 @@ if (dto == null||dto.equals("")) {
 <%
 return;
 }
-/**답글있으면 삭제 못함*/
+/**답글있으면 삭제 못함 */
 UserinfoDTO udto = userdao.userInfo_Idx(dto.getUser_idx());
 boolean writer_m;
 if(udto!=null&&!udto.equals("")){
