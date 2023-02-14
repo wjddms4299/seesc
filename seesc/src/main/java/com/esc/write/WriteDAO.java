@@ -262,9 +262,11 @@ public class WriteDAO {
 			String sql = "select count(*) from write";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			rs.next();
-			int count = rs.getInt(1);
-			return count == 0 ? 1 : count;
+			if(rs.next()) {
+				int count = rs.getInt(1);
+				return count == 0 ? 1 : count;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 1;
