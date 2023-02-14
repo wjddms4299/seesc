@@ -118,7 +118,7 @@ String todayW = today.equals(dbdate)?qnadao.writetime(write_idx):dbdate;
 					<tr><td colspan = "4">&nbsp;</td></tr>
 				<tr><td colspan = "4">&nbsp;</td></tr>
 				<%
-				if(dto.getWrite_notice()==1 && manager!=1 || writer_m &&manager!=1){%><!-- 공지글일경우 삭제 기능 없음 -->
+				if((dto.getWrite_notice()==1 && manager!=1) || (writer_m &&manager!=1)){%><!-- 공지글일경우 삭제 기능 없음 -->
 					<tr>
 						<td colspan="4" style = "text-align : center;">
 							<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
