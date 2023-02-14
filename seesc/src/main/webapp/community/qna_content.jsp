@@ -118,7 +118,7 @@ String todayW = today.equals(dbdate)?qnadao.writetime(write_idx):dbdate;
 					<tr><td colspan = "4">&nbsp;</td></tr>
 				<tr><td colspan = "4">&nbsp;</td></tr>
 				<%
-				if(dto.getWrite_notice()==1 && manager!=1){%><!-- 공지글일경우 삭제 기능 없음 -->
+				if(dto.getWrite_notice()==1 && manager!=1 || writer_m &&manager!=1){%><!-- 공지글일경우 삭제 기능 없음 -->
 					<tr>
 						<td colspan="4" style = "text-align : center;">
 							<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
@@ -152,13 +152,7 @@ String todayW = today.equals(dbdate)?qnadao.writetime(write_idx):dbdate;
 						<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
 					</td>
 				</tr>
-				<%}else if(manager==0&&writer_m){%> <!-- 관리자글은 수정 삭제 못함.-->
-				<tr>
-				<td colspan="4" style = "text-align : center;">
-					<input type="button" value="목록" onclick="location.href = 'qna_list.jsp'">
-				</td>
-			</tr>
-			<%}else {%> <!-- 비회원이면 비밀번호 입력후 수정과 삭제 가능하게 -->
+				<%}else {%> <!-- 비회원이면 비밀번호 입력후 수정과 삭제 가능하게 -->
 				<tr>
 				<td colspan="4" style = "text-align : center;">글을 삭제하거나 수정할 경우 작성시 입력했던 비밀번호를 입력해주세요.</td>
 				</tr>
