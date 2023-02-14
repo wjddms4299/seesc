@@ -29,11 +29,9 @@ return;
 }
 /**답글있으면 삭제 못함 */
 UserinfoDTO udto = userdao.userInfo_Idx(dto.getUser_idx());
-boolean writer_m;
+boolean writer_m = false;
 if(udto!=null&&!udto.equals("")){
 	writer_m = udto.getManager()!=0?true:false;
-}else{
-	writer_m = false;
 }
 
 //게시글 오늘 날짜일경우 표시하기
