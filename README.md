@@ -1,4 +1,4 @@
-# seescrew
+# seesc
 <h1>S2방탈출(세미프로젝트)</h1>
 
 팀장 : <a href = "https://github.com/sjyoo0123" >유승준</a>
